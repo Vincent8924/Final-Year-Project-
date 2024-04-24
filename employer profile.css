@@ -1,0 +1,109 @@
+body
+{
+    width: 90%; /* setting width */
+    margin: 0 auto; /* make content in middle */
+}
+
+#line {
+
+    
+    padding-right: 15px;
+    padding-left: 15px;
+
+    
+    background-color: black;
+    background-repeat: repeat-x;
+    height: 100px;
+}
+
+.choice a{
+    font-size: 30px;
+    text-decoration: none;
+    color: white;
+    margin-left: 35px;
+    position: relative;
+    display: inline-block; 
+    top: 25px;
+}
+
+.left 
+{
+    float: left; /* 元素右浮动 */
+    margin-right: 65px;
+    
+}
+
+
+
+.right  
+{
+    float: right; /* 元素右浮动 */
+    margin-right: 65px;
+}
+
+#page_logo
+{
+    height: 45px;
+    top: 0px;
+}
+
+.center 
+{
+    text-align: center; /* make text keep center */
+}
+
+.formbox{
+    position: relative;
+    max-width: max-content;
+    max-height: max-content;
+    
+   
+    
+    box-shadow: 0 2px 5px black;
+    padding:30px 40px;
+
+    border-radius: 10px;
+}
+
+button {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+   
+  }
+
+  .centerButton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#profile_photo_space {
+    border: 5px solid rgb(0, 0, 0);
+    width:  20%; /* 宽度设为固定的百分比 */
+    margin: 0 auto;
+    display: flex; /* 使用 Flex 布局 */
+    justify-content: center; /* 水平居中 */
+}
+
+#profile_photo {
+    max-width: 100%; /* 图像最大宽度为容器宽度 */
+    max-height: 100%; /* 图像最大高度为容器高度 */
+    object-fit: contain; /* 图像保持原始比例缩放以适应容器 */
+    align-self: center; /* 图像垂直居中 */
+}
+
+.mid
+{
+    text-align: center;
+}
+
+.profile
+{
+    text-align: center;
+}

@@ -1,0 +1,97 @@
+body
+{
+    width: 90%; /* setting width */
+    margin: 0 auto; /* make content in middle */
+}
+
+#line {
+
+    
+    padding-right: 15px;
+    padding-left: 15px;
+
+    
+    background-color: black;
+    background-repeat: repeat-x;
+    height: 100px;
+}
+
+.choice a{
+    font-size: 30px;
+    text-decoration: none;
+    color: white;
+    margin-left: 35px;
+    position: relative;
+    display: inline-block; 
+    top: 25px;
+}
+
+.left 
+{
+    float: left; /* 元素右浮动 */
+    margin-right: 65px;
+    
+}
+
+
+
+.right  
+{
+    float: right; /* 元素右浮动 */
+    margin-right: 65px;
+}
+
+#page_logo
+{
+    height: 45px;
+    top: 0px;
+}
+
+.formBox{
+  
+    max-width: 800px;
+    max-height: max-content;
+    width: 80%;
+   
+    
+    box-shadow: 0 2px 5px black;
+    padding:30px 40px;
+
+    border-radius: 10px;
+}
+
+.center 
+{
+    text-align: center; /* make text keep center */
+}
+
+.center span
+{
+    display: inline-block; /* make span same like div, otherwise span can't keep center */
+}
+
+.field
+{
+    height: 50px;
+    width: 80%;
+}
+
+button {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    
+   
+  }
+
+  
+
+  .white
+    {
+        color: white;
+        text-decoration: none;
+    }

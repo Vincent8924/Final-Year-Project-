@@ -1,0 +1,31 @@
+body
+{
+    
+    width: 90%; /* setting width */
+    margin: 0 auto; /* make content in middle */
+    
+}
+
+.formBox{
+  
+    width: 120px;
+   
+    
+    box-shadow: 0 2px 5px black;
+    padding:30px 40px;
+
+    border-radius: 10px;
+}
+
+.center 
+{
+    text-align: center; /* make text keep center */
+}
+
+.center span
+{
+    display: inline-block; /* make span same like div, otherwise span can't keep center */
+}
+
+
+

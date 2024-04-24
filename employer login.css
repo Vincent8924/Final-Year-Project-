@@ -1,0 +1,95 @@
+body
+{
+    background-image: url('img/black_background.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#form_container
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form
+{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #171717;
+    border-radius: 25px;
+}
+
+
+
+#heading
+{
+    text-align: center;
+    margin: 2em;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+}
+
+.field
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-field
+{
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #d3d3d3;
+}
+
+.half_button {
+    width: 49%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    
+   
+  }
+
+  
+.full_button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    
+   
+  }
+
+  a
+  {
+    color: white;
+  }

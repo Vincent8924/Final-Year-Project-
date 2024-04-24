@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2e2d2d;
+    color: #fff;
+    padding: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+
+.AdminAcc {
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 20px; /* 添加间距 */
+
+}
+
+.AdminAcc:hover{
+    color: orange;
+    font-size: 22px;
+}
+
+
+/* Container Styles */
+.container {
+    display: flex;
+}
+
+/* Sidebar Styles */
+aside {
+    width: 200px;
+    background-color: #a8a8a8;
+    color: #fff;
+}
+
+aside h2 {
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+aside nav ul {
+    list-style-type: none;
+}
+
+aside nav ul li {
+    padding: 10px 20px;
+    border: #fff;
+    border-bottom: 2px solid ;
+}
+aside nav ul li a#now{
+    color: black;
+    font-size: 20px;
+}
+aside nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+aside nav ul li a:hover
+{
+    color: #56549b;
+    font-size: 18px;
+}
+/* Main Content Styles */
+main {
+    flex: 1;
+}
+
+section {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.Acontainer{
+    border: #9e9e9e solid 2px;
+    margin: 20px;
+    border-style: dotted;
+    border-width: thick;
+    border-radius: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    width: auto;
+    margin-bottom: 50px;
+    background-color: #d4d4db;
+}
+.Aheader{
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+    border-bottom: dotted 2px #9e9e9e;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.Bcontainer{
+    margin: 10px;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}
+.Ccontainer{
+    border-radius: 50%;
+    background-color: #ccc;
+    width: 150px; 
+    height: 150px;
+    text-align: center;
+    margin: 20PX;
+    color: white;
+    background-color: #2e2d2d;
+    font-size: 15px;
+}
+h4
+{
+    margin-top: 40px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+h5 
+{
+    font-size: 25px;
+}
+

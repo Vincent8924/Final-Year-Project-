@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>reset</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
     <style>
          body {
@@ -196,13 +196,13 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
 
-        <button type="button" onclick="sendResetLink('<?php echo $email; ?>')" id="confirmButton">Confirm</button> <!-- Added id to the button -->
+        <button type="button" onclick="sendResetLink()" id="confirmButton">Confirm</button> <!-- Added id to the button -->
     </form>
 </div>
 <script src="https://smtpjs.com/v3/smtp.js"></script>
 <script>
-    function sendResetLink(email) {
-        var userEmail = email;
+    function sendResetLink() {
+        var userEmail = document.getElementById("email").value;
 
         if (validateEmail(userEmail)) {
             document.getElementById("confirmButton").classList.add("button-clicked"); // Add class for hover effect
@@ -213,7 +213,7 @@
                 To: userEmail,
                 From: "1211202786@student.mmu.edu.my",
                 Subject: "Password Reset Link",
-                Body: "Your account is requesting to change the password. Please verify whether this is your own operation. If so, please click <a href='http://localhost/f/reset2.php?email=" + userEmail + "'>here</a> to complete the password change."
+                Body: "Your account is requesting to change the password. Please verify whether this is your own operation. If so, please click <a href='http://localhost/f/reset2.php'>here</a> to complete the password change."
             }).then(
                 function (message) {
                     if (message === "OK") {

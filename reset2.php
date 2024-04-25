@@ -14,19 +14,15 @@ if ($mysqli->connect_error) {
 }
 
 // Initialize variables for form input and errors
-$new_password = $confirm_password = $email = "";
-$new_password_err = $confirm_password_err = $email_err = "";
+$new_password = $confirm_password = "";
+$new_password_err = $confirm_password_err = "";
 $reset_success = false;
+
+// Get the email from the URL parameter
+$email = $_GET['email'];
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate email
-    if (empty(trim($_POST["gmail"]))) {
-        $email_err = "Please enter your email.";
-    } else {
-        $email = trim($_POST["gmail"]);
-    }
-
     // Validate new password
     if (empty(trim($_POST["new-password"]))) {
         $new_password_err = "Please enter the new password.";     
@@ -45,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check input errors before updating the database
-    if (empty($email_err) && empty($new_password_err) && empty($confirm_password_err)) {
+    if (empty($new_password_err) && empty($confirm_password_err)) {
         // Hash the new password
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
@@ -58,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Set parameters
             $param_password = $hashed_password; // Use hashed password
-            $param_email = $email;
+            $param_email = $email; // Use the email received from URL parameter
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
@@ -72,9 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
         }
     }
-
-    // Close database connection
-    $mysqli->close();
 }
 ?>
 
@@ -245,16 +238,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <form class="form-container" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <h2>Reset Password</h2>
-
-    <?php
-    // Display email error message
-    if (!empty($email_err)) {
-        echo "<p class='error'>$email_err</p>";
-    }
-    ?>
-
-    <label for="gmail">Gmail:</label>
-    <input type="email" id="gmail" name="gmail" required>
 
     <?php
     // Display new password error message

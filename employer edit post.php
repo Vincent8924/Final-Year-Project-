@@ -36,6 +36,48 @@
             
                
         <?php
+     
+     if (isset($_POST['edit']))
+     {
+         $email = $_REQUEST['email'];
+         $id = $_REQUEST['id'];
+         $job = $_POST['job_name'];
+         $type = $_POST['job_type'];
+         $location = $_POST['location'];
+         
+         $et = $_POST['employment_type'];
+         $salary = $_POST['salary'];
+         $des = $_POST['description'];
+
+
+             mysqli_query($connect, "UPDATE `post` SET
+             job_name = '$job',
+             job_type = '$type',
+             `location` = '$location',
+             employment_type = '$et',
+             salary = '$salary',
+             `description` = '$des'
+             WHERE post_id = '$id'");
+
+        
+
+             ?>
+             <script type="text/javascript">
+                 alert("Post Edit successfully!");
+                 window.location = "employer drafts.php?edit&email=<?php echo urlencode($email);?>";
+                 
+             </script>
+
+             <?php
+             
+             
+         }
+     
+ 
+     ?>
+
+
+        <?php
 		    if(isset($_REQUEST["id"]))
 			{
 			$id = $_REQUEST["id"];
@@ -58,8 +100,44 @@
                 
 
                 <h2>Job name?</h2>
-                
                 <input type="text" class="field" placeholder="<?php echo $row['job_name']?>" name="job_name" value="<?php echo $row['job_name']?>">
+
+                <h2>Job type?</h2>
+                
+                <select class="field" name="job_type">
+                            <option value="<?php echo $row['job_type'] ?>"><?php echo $row['job_type'] ?></option>
+                            <option value="Accounting">Accounting</option>
+                            <option value="Administration & Office Support">Administration & Office Support</option>
+                            <option value="Advertising, Atrs & Media">Advertising, Atrs & Media</option>
+                            <option value="Banking & financial Services">Banking & financial Services</option>
+                            <option value="Call Centre & Customer Service">Call Centre & Customer Service</option>
+                            <option value="CEO & General Management">CEO & General Management</option>
+                            <option value="Community Services & Development">Community Services & Development</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Consulting & Strategy">Consulting & Strategy</option>
+                            <option value="Design & Architecture">Design & Architecture</option>
+                            <option value="Education & Traning">Education & Traning</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Farming, Animals & Conservation">Farming, Animals & Conservation</option>
+                            <option value="Government & Defence">Government & Defence</option>
+                            <option value="Healthcare & Medical">Healthcare & Medical</option>
+                            <option value="Hospitality & Tourism">Hospitality & Tourism</option>
+                            <option value="Human Resources &Recruitment">Human Resources &Recruitment</option>
+                            <option value="Information & Communication Technology">Information & Communication Technology</option>
+                            <option value="Insurance & Superannuation">Insurance & Superannuation</option>
+                            <option value="Legal">Legal</option>
+                            <option value="Manufacturing, Transport & Logistics">Manufacturing, Transport &Logistics</option>
+                            <option value="Marketing & Communications">Marketing & Communications</option>
+                            <option value="Mining, Resources & Energy">Mining, Resources & Energy</option>
+                            <option value="Real Estate & Property">Real Estate & Property</option>
+                            <option value="Retail & Consumer Products">Retail & Consumer Products</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Science & Technology">Science & Technology</option>
+                            <option value="Self Employment">Self Employment</option>
+                            <option value="Sport & Recreation">Sport & Recreation</option>
+                            <option value="Trades & Services">Trades & Services</option>
+
+                        </select>
                 
 
                 <h2>Location?</h2>
@@ -89,44 +167,7 @@
 
 
 
-        <?php
-     
-        if (isset($_POST['edit']))
-        {
-            $email = $_REQUEST['email'];
-            $id = $_REQUEST['id'];
-            $job = $_POST['job_name'];
-            
-            $location = $_POST['location'];
-            
-            $et = $_POST['employment_type'];
-            $salary = $_POST['salary'];
-            $des = $_POST['description'];
-
-
-                mysqli_query($connect, "UPDATE `post` SET
-                job_name = '$job',
-                `location` = '$location',
-                employment_type = '$et',
-                salary = '$salary',
-                `description` = '$des'
-                WHERE post_id = '$id'");
-   
-           
-
-                ?>
-                <script type="text/javascript">
-                    alert("Post Edit successfully!");
-                    
-                </script>
-
-                <?php
-                header("Location:employer drafts.php?edit&email=" . urlencode($email));
-                
-            }
         
-    
-        ?>
 
 
 

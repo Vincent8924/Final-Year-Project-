@@ -35,7 +35,11 @@
                 <?php
             } else {
                 mysqli_query($connect, "INSERT INTO employer(employer_email,`password`,`balance`) VALUES ('$email', '$password','0')");
+                
+                mysqli_query($connect, "INSERT INTO employer_profile(`employer_email`,`photo_name`,`photo_data`) SELECT text_data,file_name,photo_data FROM website_file");
 
+                                                                                
+                mysqli_query($connect, "UPDATE employer_profile SET employer_email = '$email' WHERE employer_email = 'none'");
                 ?>
                 <script type="text/javascript">
                     alert("Registration successful. You can now proceed to log in.");
@@ -55,7 +59,7 @@
             <p id="heading">Sign up</p>
             <div class="field">
                 <span class="material-symbols-outlined"> Email </span>
-                <input name="email" autocomplete="off" placeholder="Username" class="input-field" type="text"/>
+                <input name="email" autocomplete="off" placeholder="Please enter your Email" class="input-field" type="text"/>
             </div>
             <div class="field">
                 <span class="material-symbols-outlined"> Password </span>
@@ -99,7 +103,7 @@
         }
         function checkPasswordLength() {
             var password = document.getElementById("password").value;
-            var message = document.getElementById("password-length-message"); // 请替换为实际的元素 ID
+            var message = document.getElementById("password-length-message"); 
 
             if (password.length < 8) {
                 message.textContent = "Password must be at least 8 characters long!";

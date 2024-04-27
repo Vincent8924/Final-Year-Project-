@@ -58,16 +58,26 @@
             
             <h2>Post ID</h2>
             <?php echo $row['post_id']?>
+
             <h2>Job name</h2>
-            <td><?php echo $row['job_name']?>
+            <?php echo $row['job_name']?>
+
+            <h2>Job type?</h2>
+            <?php echo $row['job_type']?>    
+                
+
             <h2>Location</h2>
             <?php echo $row['location']?>
+
             <h2>Employment type</h2>
             <?php echo $row['employment_type']?>
+
             <h2>Salary</h2>
-            <?php echo $row['salary']?></td>
+            <?php echo $row['salary']?>
+
             <h2>Description</h2>
             <?php echo $row['description']?>
+
             <br/><br/><br/><br/>
             <form method="post" action="">
                   
@@ -102,12 +112,12 @@
               
               <script type="text/javascript">
                   alert("Post has been deleted!");
-                 
+                  window.location = "employer drafts.php?post&email=<?php echo urlencode($email);?>";
               </script> 
             
             
           <?php
-           header("Location:employer drafts.php?delete&email=" . urlencode($email));
+           
               }
           ?>
 
@@ -116,7 +126,7 @@
               if (isset($_POST['post'])) 
               {
                 $email = $_REQUEST['email'];
-                $result = mysqli_query($connect, "SELECT balance FROM balance WHERE employer_email = '$email'");
+                $result = mysqli_query($connect, "SELECT balance FROM employer WHERE employer_email = '$email'");
                 
                 if ($result) 
                 {
@@ -133,6 +143,7 @@
                     if(balance <= 0)
                     {
                         alert("You have not enough balance to post");
+                        window.location = "employer drafts.php?post&email=<?php echo urlencode($email);?>";
                         
                     }
                     else if(balance > 0)
@@ -156,9 +167,10 @@
                 if($balance != 0)
                 {
                     $balance--;
+
+                    mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE employer_email = '$email'");
                 }
                 
-                mysqli_query($connect, "UPDATE `balance` SET balance = '$balance' WHERE employer_email = '$email'");
               }
           ?>
 

@@ -19,7 +19,7 @@
                 <div class="field">
                 <span class="material-symbols-outlined"> Email </span>
 
-                <input name="email" autocomplete="off" placeholder="Username" class="input-field" type="text"/>
+                <input name="email" autocomplete="off" placeholder="Please enter your Email" class="input-field" type="text"/>
                 </div>
 
                 <div class="field">

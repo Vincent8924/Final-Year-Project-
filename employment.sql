@@ -2,21 +2,12 @@ CREATE TABLE `post` (
     `post_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `employer_email` varchar(200) NOT NULL,
     `job_name` varchar(200) NOT NULL,
+    `job_type` varchar(200) NOT NULL,
     `location` varchar(500) NOT NULL,
     `employment_type` varchar(200) NOT NULL,
     `description` varchar(9999) ,
     `salary` varchar(200) NOT NULL
 ) 
-
-
-INSERT INTO `balance`(`employer_email`,`balance`)
-VALUES 
-('jk@gmail.com',2);
-上面这个是实验用的罢了
-
-
-UPDATE `balance` SET balance = 2 WHERE employer_email = 'jk@gmail.com';
-上面这个是实验用的罢了
 
 CREATE TABLE photos (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

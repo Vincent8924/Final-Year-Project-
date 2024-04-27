@@ -21,7 +21,7 @@
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                        <a href='employer home.php'><img src="img/page logo2.png" id="page_logo"/></a>
+                        <a href="employer home.php?home&email=<?php echo urlencode($email);?>"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 

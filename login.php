@@ -2,12 +2,6 @@
 // Start session
 session_start();
 
-// Check if user is already logged in, if yes, redirect to homepage
-if(isset($_SESSION['email'])){
-    header("Location: homepage.php");
-    exit();
-}
-
 // Check if form is submitted
 if(isset($_POST['submit'])){
     // Database connection
@@ -34,7 +28,11 @@ if(isset($_POST['submit'])){
     // If user exists, redirect to homepage and store email in session
     if ($result->num_rows > 0) {
         // Start session
-        $_SESSION['email'] = $email;
+        $_SESSION['email'] = $email; // Store user's email in session
+        // Check if user logged in with Gmail
+        if(strpos($email, '@gmail.com') !== false) {
+            $_SESSION['gmail'] = $email; // Store user's Gmail in session
+        }
         header("Location: homepage.php"); // Redirect to homepage
         exit();
     } else {
@@ -46,6 +44,7 @@ if(isset($_POST['submit'])){
     $conn->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

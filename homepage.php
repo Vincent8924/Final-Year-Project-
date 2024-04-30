@@ -2,12 +2,6 @@
 // Start session
 session_start();
 
-// Check if user is logged in
-if(isset($_SESSION['email'])){
-    // If user is logged in, get their email
-    $user_email = $_SESSION['email'];
-}
-
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -19,6 +13,17 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to fetch user's first name from the database based on their email
+if(isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_email = '$email'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
 }
 
 // Query to fetch job posts from the database
@@ -39,188 +44,198 @@ $result = $conn->query($sql);
             padding: 0;
         }
 
-        /* CSS styles for the header */
         header {
-            background-color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .navigation {
-            display: inline-block;
-            margin-left: 3%;
-        }
+.navigation {
+    display: inline-block;
+    margin-left: 3%;
+}
 
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
+.navigation ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
 
-        .navigation ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+.navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
 
-        .navigation ul li a:hover {
-            color: #555;
-        }
+.navigation ul li a:hover {
+    color: #555;
+}
 
-        .sign-in,
-        .employer-site,
-        .user-email { /* Added styling for user email */
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid blue;
-            border-radius: 5px;
-            margin-left: 20px; /* Adjust spacing */
-        }
+.employer-site { 
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-left: 20px; 
+}
 
-        .user-email a, /* Adjusted anchor tag styling */
-        .sign-in a,
-        .employer-site a { /* Added styling for anchor tag */
-            text-decoration: none;
-            color: rgb(12, 12, 191);
-        }
+.employer-site a { 
+    text-decoration: none;
+    color: rgb(12, 12, 191);
+}
 
-        .sign-in:hover,
-        .employer-site:hover,
-        .user-email:hover { /* Adjusted hover effect */
-            background-color: blue;
-        }
+.employer-site:hover { 
+    background-color: blue;
+}
 
-        .sign-in:hover a,
-        .employer-site:hover a,
-        .user-email:hover a { /* Adjusted hover effect for anchor tag */
-            color: white;
-        }
+.employer-site:hover a { 
+    color: white;
+}
 
-        .logo {
-            display: inline-block;
-        }
+.logo {
+    display: inline-block;
+}
 
-        .logo img {
-            height: 50px;
-        }
+.logo img {
+    height: 50px;
+}
 
-        .navigation {
-            display: inline-block;
-            margin-right: 45%;
-        }
+.navigation {
+    display: inline-block;
+    margin-right: 45%;
+}
 
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
+.navigation ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
 
-        .sign-in {
-            display: inline-block;
-            margin-left: auto;
-            margin-right: 30px;
-        }
+.employer-site {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 30px;
+}
 
-        .employer-site {
-            display: inline-block;
-        }
+/* Container for job posts */
+#jobPosts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 20px;
+    margin-top: 20px;
+}
 
-        /* Container for job posts */
-        #jobPosts {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            padding: 20px;
-            margin-top: 20px;
-        }
+.jobPost {
+    position: relative;
+    width: calc(30% - 20px);
+    margin-bottom: 20px;
+    margin-right: 10px;
+    background-color: #f9f9f9;
+    border: 2px solid purple;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        .jobPost {
-            position: relative;
-            width: calc(30% - 20px);
-            margin-bottom: 20px;
-            margin-right: 10px;
-            background-color: #f9f9f9;
-            border: 2px solid purple;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+.jobPost:last-child {
+    margin-right: 0;
+}
 
-        .jobPost:last-child {
-            margin-right: 0;
-        }
+.jobPost:hover {
+    background-color: #e0e0e0;
+}
 
-        .jobPost:hover {
-            background-color: #e0e0e0;
-        }
+.jobPost img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
 
-        .jobPost img {
-            width: 100%;
-            border-radius: 5px 5px 0 0;
-        }
+.jobPost h2 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
 
-        .jobPost h2 {
-            font-size: 18px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
+.jobPost p {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
-        .jobPost p {
-            font-size: 14px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
+/* Ensure second row starts from the left */
+@media (max-width: 1000px) {
+    .jobPost {
+        width: calc(45% - 20px);
+    }
+}
 
-        /* Ensure second row starts from the left */
-        @media (max-width: 1000px) {
-            .jobPost {
-                width: calc(45% - 20px);
-            }
-        }
+@media (max-width: 600px) {
+    .jobPost {
+        width: calc(100% - 20px);
+    }
+}
 
-        @media (max-width: 600px) {
-            .jobPost {
-                width: calc(100% - 20px);
-            }
-        }
+/* Search bar styles */
+#searchBar {
+    width: 80%;
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 80px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
 
-        /* Search bar styles */
-        #searchBar {
-            width: 80%;
-            padding: 10px;
-            margin-top: 20px;
-            margin-left: 80px;
-            border: 1px solid black;
-            border-radius: 5px;
-        }
+/* Love icon styles */
+.saveIcon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+}
 
-        /* Love icon styles */
-        .saveIcon {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            font-size: 20px;
-            color: black;
-            cursor: pointer;
-        }
+.saved {
+    color: red; 
+}
 
-        .saved {
-            color: red; /* Change color to indicate saved state */
-        }
+/* Styles for the welcome message */
+.user-info {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid green; /* Change the border color */
+    border-radius: 5px;
+    margin-left: 50px; 
+}
+
+.user-info p {
+    margin: 0;
+    font-weight: bold;
+    color: green; /* Change the text color */
+}
+
+.user-info:hover {
+    background-color: green; /* Change the background color on hover */
+}
+
+.user-info:hover p {
+    color: white; /* Change the text color on hover */
+}
     </style>
 </head>
 <body>
@@ -230,23 +245,21 @@ $result = $conn->query($sql);
         </div>
 
         <nav class="navigation">
-    <ul>
-        <li><a href="jobsave.php">Job Save</a></li>
-        <li><a href="profile.php">Profile</a></li> <!-- Update the href attribute -->
-        <li><a href="#">Company Profile</a></li>
-    </ul>
-</nav>
+            <ul>
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['email']); ?>">Job Save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['email']); ?>">Profile</a></li> <!-- Update the href attribute -->
+                <li><a href="#">Company Profile</a></li>
+            </ul>
+        </nav>
 
-        <?php
-    // If user is logged in, display their email
-    if(isset($user_email)) {
-        echo '<div class="user-email"><a href="#">' . $user_email . '</a></div>';
-    } else {
-        echo '<div class="sign-in">';
-        echo '<a href="#">Sign In</a>';
-        echo '</div>';
-    }
-    ?>
+        <!-- Display user's first name -->
+        <div class="user-info">
+            <?php 
+            if(isset($firstName)) {
+                echo '<p>Welcome, ' . $firstName . '</p>';
+            }
+            ?>
+        </div>
 
         <div class="employer-site">
             <a href="#">Employer Site</a>

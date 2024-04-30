@@ -1,5 +1,5 @@
 <?php 
-    include("dataconnection.php"); 
+    include("vdataconnection.php"); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,8 @@
             }
         ?>
         <?php
-            /*$result = mysqli_query($connect,"SELECT count(*) AS total_employer FROM **");
+            /*
+            $result = mysqli_query($connect,"SELECT count(*) AS total_employer FROM **");
             if($result)
             {
                 $row = mysqli_fetch_assoc($result);
@@ -89,12 +90,14 @@
                 </div>
             </div>
             <?php
+                /*
                 $result = mysqli_query($connect,"SELECT count(*) AS total_post FROM post");
                 if($result)
                 {
                     $row = mysqli_fetch_assoc($result);
                     $total_post = $row["total_post"];
                 }
+                */
             ?>
             <div class="Acontainer">
                 <div class="Aheader">
@@ -104,7 +107,7 @@
                     <div class="amount">
                         <h3>
                             <?php
-                                echo $total_post
+                                //echo $total_post
                             ?>
                         </h3>
                     </div>

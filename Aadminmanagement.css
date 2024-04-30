@@ -189,3 +189,24 @@ main {
     border-radius: 5px;
     margin-top: 10px;
 }
+.x button
+{
+    float: right;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 15px;
+}
+.x button:hover
+{
+    background-color: red;
+}
+.alert
+{
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}

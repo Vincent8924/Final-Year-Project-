@@ -47,7 +47,7 @@
 
         <?php
     $email = $_REQUEST["email"];
-    $result = mysqli_query($connect, "SELECT * FROM drafts where `employer_email` = '$email'");	
+    $result = mysqli_query($connect, "SELECT * FROM post where `employer_email` = '$email'");	
    while($row = mysqli_fetch_assoc($result))
       {
       
@@ -56,8 +56,8 @@
           
         <div class="formbox">
             
-            <h2>Drafts ID</h2>
-            <?php echo $row['drafts_id']?>
+            <h2>Post ID</h2>
+            <?php echo $row['post_id']?>
 
             <h2>Job name</h2>
             <?php echo $row['job_name']?>
@@ -81,11 +81,11 @@
             <br/><br/><br/><br/>
             <form method="post" action="">
                   
-                  <button><a href="employer edit post.php?id&id=<?php echo $row['drafts_id'];?> &email=<?php echo urlencode($email);?>" class="white">Edit</a></button>
+                  <button><a href="employer edit post.php?id&id=<?php echo $row['post_id'];?> &email=<?php echo urlencode($email);?>" class="white">Edit</a></button>
                      
                     <button type="submit" name="delete_id" onclick="return confirmation();">Delete</button>
                     
-                    <input type="hidden" name="delete" value="<?php echo $row['drafts_id']; ?>">
+                    <input type="hidden" name="delete" value="<?php echo $row['post_id']; ?>">
 
                     <button type="submit" name="post">Post</button>
 
@@ -106,13 +106,13 @@
               if (isset($_POST['delete_id'])) 
               {
                   $delete = $_POST['delete'];
-                  mysqli_query($connect, "DELETE FROM drafts WHERE drafts_id = '$delete'");
+                  mysqli_query($connect, "DELETE FROM post WHERE post_id = '$delete'");
               
               ?>
               
               <script type="text/javascript">
-                  alert("Drafts has been deleted!");
-                  window.location = "employer drafts.php?delete&email=<?php echo urlencode($email);?>";
+                  alert("Post has been deleted!");
+                  window.location = "employer drafts.php?post&email=<?php echo urlencode($email);?>";
               </script> 
             
             
@@ -152,11 +152,10 @@
                         if(answer == true)
                         {
                             alert("Your post is successfully posted.");
+                            
 
-                        }
-                        else if(answer != true)
-                        {
-                            window.location = "employer drafts.php?post&email=<?php echo urlencode($email);?>";
+
+                            
                         }
                     }
                     

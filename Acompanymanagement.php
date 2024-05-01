@@ -53,6 +53,7 @@
                             <th>Campany Name</th>
                             <th>Email</th>
                             <th>Post balance</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,10 +68,26 @@
                             <td><?php echo $row["employer_name"] ?></td>
                             <td><?php echo $row["employer_email"] ?></td>
                             <td><?php echo $row["balance"] ?></td>
+                            <td>
+                                <form method="POST" onsubmit="return confirmdelete(<?php echo $row['id']; ?>)" class="delete">
+                                   <button type="submit" name="delete" value="<?php echo $row['id']; ?>" >Delete</button>
+                                </form>
+                            </td>
                         </tr>
-
+                        <?php
+                            if (isset($_POST['delete'])) 
+                            {
+                                $delete = $_POST['delete'];
+                                mysqli_query($connect, "DELETE FROM employer WHERE id = '$delete'");
+                            ?>
+                            
+                            <script>
+                                alert("The admin has been deleted!");
+                                window.location.href = "Acompanymanagement.php";
+                                </script>
                         <?php
                             }
+                        }
                         ?>
                     </tbody>
                     
@@ -200,6 +217,18 @@
         }
         else {
             message.textContent = "";
+        }
+    }
+    function confirmdelete(id)
+    {
+        var confirmed = confirm("Are you sure you want to delete company/employer with ID " + id + "?");
+
+        if(confirmed){
+            return true;
+        }
+        else{
+            return false;
+            history.go(-1);
         }
     }
 </script>

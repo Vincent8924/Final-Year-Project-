@@ -214,3 +214,21 @@ main {
 {
     float: right;
 }
+.delete
+{
+    float: right;
+}
+.delete button
+{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4b4a4d; 
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+.delete button:hover
+{
+    background-color: #2e2d2d;
+}

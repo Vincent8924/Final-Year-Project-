@@ -53,30 +53,51 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         <?php
                             $result = mysqli_query($connect, "SELECT * FROM admin;");
                             $count = mysqli_num_rows($result);
                             while($row = mysqli_fetch_assoc($result))
                             {
                         ?>
-                        <tr>
-                            <td><?php echo $row["admin_id"] ?></td>
-                            <td><?php echo $row["admin_fname"] ?></td>
-                            <td><?php echo $row["admin_lname"] ?></td>
-                            <td><?php echo $row["admin_email"] ?></td>
-                        </tr>
-
+                            <tr>
+                                <td><?php echo $row["admin_id"] ?></td>
+                                <td><?php echo $row["admin_fname"] ?></td>
+                                <td><?php echo $row["admin_lname"] ?></td>
+                                <td><?php echo $row["admin_email"] ?></td>
+                                <td>
+                                    <form method="POST" onsubmit="return confirmdelete(<?php echo $row['admin_id']; ?>)" class="delete">
+                                        <button type="submit" name="delete" value="<?php echo $row['admin_id']; ?>" >Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
                         <?php
+                                if (isset($_POST['delete'])) 
+                                {
+                                    $delete = $_POST['delete'];
+                                    mysqli_query($connect, "DELETE FROM admin WHERE admin_id = '$delete'");
+                                ?>
+                                
+                                <script>
+                                    alert("The admin has been deleted!");
+                                    window.location.href = "Aadminmanagement.php";
+                                </script>
+                        <?php
+                                }
                             }
                         ?>
+                        
                     </tbody>
                     
+                    
+                    
                 </table>
-                <button onclick="display()" class="addbtn">Add Admin</button>
             </div>
+            <button onclick="display()" class="addbtn">Add Admin</button>
+
             <div id="addadmin">
                 <form action="" method="POST">
                     <div class="aform">
@@ -207,6 +228,18 @@
         }
         else {
             message.textContent = "";
+        }
+    }
+    function confirmdelete(id)
+    {
+        var confirmed = confirm("Are you sure you want to delete admin with ID " + id + "?");
+
+        if(confirmed){
+            return true;
+        }
+        else{
+            return false;
+            history.go(-1);
         }
     }
 </script>

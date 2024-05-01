@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seeker Management</title>
+    <title>Admin Management</title>
     <link rel="stylesheet" href="Aadminmanagement.css">
 </head>
 <body>
@@ -31,6 +31,19 @@
             </nav>
         </aside>
         <main>
+            <?php
+                $result = mysqli_query($connect,"SELECT count(*) AS total_admin FROM admin");
+                if($result)
+                {
+                    $row = mysqli_fetch_assoc($result);
+                    $total_admin = $row["total_admin"];
+                }
+            ?>
+            <div class="amount">
+                <h1>
+                    <?php echo $total_admin?>
+                </h1>
+            </div>
             <h1>Admin</h1>
             <div class="Acontainer">
                 <table>

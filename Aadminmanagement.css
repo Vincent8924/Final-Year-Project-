@@ -210,3 +210,7 @@ main {
     font-size: 12px;
     font-weight: bold;
 }
+.amount
+{
+    float: right;
+}

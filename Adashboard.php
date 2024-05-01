@@ -42,14 +42,12 @@
             }
         ?>
         <?php
-            /*
-            $result = mysqli_query($connect,"SELECT count(*) AS total_employer FROM **");
+            $result = mysqli_query($connect,"SELECT count(*) AS total_employer FROM employer");
             if($result)
             {
                 $row = mysqli_fetch_assoc($result);
                 $total_employer = $row["total_employer"];
             }
-            */
         ?>
         <?php
         $result = mysqli_query($connect,"SELECT count(*) AS total_admin FROM admin");
@@ -66,7 +64,7 @@
                     </div>
                     <div class="amount">
                         <h3>
-                            <?php echo $total_seeker+$total_admin?>
+                            <?php echo $total_seeker+$total_admin+$total_employer?>
                         </h3>
                     </div>
                 </div>
@@ -79,7 +77,9 @@
                     </div>
                     <div class="Ccontainer">
                         <h4>Companies</h4>
-                        amount
+                        <h5>
+                            <?php echo $total_employer?>
+                        </h5>
                     </div>
                     <div class="Ccontainer">
                         <h4>Admin</h4>

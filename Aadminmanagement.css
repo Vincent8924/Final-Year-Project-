@@ -135,7 +135,7 @@ h1
     width: auto;
     margin-bottom: 50px;
     background-color: #d4d4db;
-    height: 60vh;
+    max-height: 60vh;
     overflow-y: auto;
 }
 main {

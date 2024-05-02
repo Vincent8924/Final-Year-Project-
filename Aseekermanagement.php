@@ -98,9 +98,9 @@
                         ?>
                     </tbody>
                 </table>
-                <button onclick="display()" class="addbtn">Add Seeker</button>
+                
             </div>
-
+            <button onclick="display()" class="addbtn">Add Seeker</button>
             <div id="addseeker">
                 <form action="" method="POST">
                     <div class="aform">

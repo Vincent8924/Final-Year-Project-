@@ -92,8 +92,8 @@
                     </tbody>
                     
                 </table>
-                <button onclick="display()" class="addbtn">Add Employer</button>
             </div>
+            <button onclick="display()" class="addbtn">Add Employer</button>
             <div id="addemployer">
                 <form action="" method="POST">
                     <div class="aform">

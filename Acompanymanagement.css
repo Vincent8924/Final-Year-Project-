@@ -95,7 +95,16 @@ table {
 }
 thead
 {
+    position: sticky;
+    top: 0;
+}
+thead::after
+{
     border-bottom: solid 2px;
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
 }
 th, td {
     padding: 10px;
@@ -125,6 +134,8 @@ h1
     width: auto;
     margin-bottom: 50px;
     background-color: #d4d4db;
+    max-height: 60vh;
+    overflow-y: auto;
 }
 main {
     flex: 1;
@@ -172,6 +183,7 @@ main {
     text-align: center;
     margin-top: 10px;
     float: right;
+    margin-right: 20px;
 }
 .addbtn:hover,.formbtn:hover
 {

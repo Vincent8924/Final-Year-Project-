@@ -135,7 +135,7 @@ h1
     width: auto;
     margin-bottom: 50px;
     background-color: #d4d4db;
-    max-height: 60vh;
+    max-height : 60vh;
     overflow-y: auto;
 }
 main {
@@ -158,6 +158,7 @@ main {
 .bform input
 {
     border-radius: 5px;
+    text-align: center;
 }
 .label
 {
@@ -240,6 +241,7 @@ main {
     font-size: 12px;
     font-weight: bold;
     text-align: center;
+    width: 75px;
 }
 .delete button:hover
 {

@@ -73,6 +73,7 @@
                                         <button type="submit" name="delete" value="<?php echo $row['admin_id']; ?>" >Delete</button>
                                     </form>
                                 </td>
+                                
                             </tr>
                         <?php
                                 if (isset($_POST['delete'])) 
@@ -176,9 +177,10 @@
                             </script>
                             <?php
                         }
-                        else if($result)
+                        else
                         {
-                            $resuslt=mysqli_query($connect,"INSERT INTO admin(admin_fname, admin_lname, admin_email, admin_password) VALUES ('$fname','$lname','$email','$hashpassword')");
+                            $resuslt=mysqli_query($connect,"INSERT INTO admin(admin_fname, admin_lname, admin_email,
+                             admin_password) VALUES ('$fname','$lname','$email','$hashpassword')");
                             ?>
                             <script>
                                 alert("Admin has been successfully added!");

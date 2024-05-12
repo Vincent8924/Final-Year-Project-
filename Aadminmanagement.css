@@ -95,11 +95,21 @@ table {
 }
 thead
 {
+    position: sticky;
+    top: 0;
+}
+thead::after
+{
     border-bottom: solid 2px;
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
 }
 th, td {
     padding: 10px;
     text-align: center;
+    
 }
 th {
     background-color: #f2f2f2;
@@ -125,10 +135,12 @@ h1
     width: auto;
     margin-bottom: 50px;
     background-color: #d4d4db;
+    max-height : 60vh;
+    overflow-y: auto;
 }
 main {
     flex: 1;
-    height: 90vh;
+    min-height: 90vh;
 }
 .aform
 {
@@ -146,6 +158,7 @@ main {
 .bform input
 {
     border-radius: 5px;
+    text-align: center;
 }
 .label
 {
@@ -172,6 +185,7 @@ main {
     text-align: center;
     margin-top: 10px;
     float: right;
+    margin-right: 20px;
 }
 .addbtn:hover,.formbtn:hover
 {
@@ -188,4 +202,48 @@ main {
     margin-bottom: 20px;
     border-radius: 5px;
     margin-top: 10px;
+}
+.x button
+{
+    float: right;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 15px;
+}
+.x button:hover
+{
+    background-color: red;
+}
+.alert
+{
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}
+.amount
+{
+    float: right;
+}
+.delete
+{
+    float: right;
+}
+.delete button
+{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4b4a4d; 
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    width: 75px;
+}
+.delete button:hover
+{
+    background-color: #2e2d2d;
 }

@@ -138,7 +138,7 @@
            
             else
             {
-            mysqli_query($connect, "INSERT INTO `post` (`employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary) 
+            mysqli_query($connect, "INSERT INTO `drafts` (`employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary) 
             VALUES('$email','$job','$type','$location','$et','$des', '$salary')");
        
 

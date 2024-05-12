@@ -15,7 +15,7 @@
             <br/><br/>
             <div class="center" ><a href="employer login.php"><span class="formBox">Employer</span></div>
             <br/><br/>
-            <div class="center" ><a href="admin login.php"><span class="formBox">Admin</span></div>
+            <div class="center" ><a href="Alogin.php"><span class="formBox">Admin</span></div>
 
 
 

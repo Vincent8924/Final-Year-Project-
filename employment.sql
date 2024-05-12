@@ -9,6 +9,17 @@ CREATE TABLE `post` (
     `salary` varchar(200) NOT NULL
 ) 
 
+CREATE TABLE `drafts` (
+    `drafts_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `employer_email` varchar(200) NOT NULL,
+    `job_name` varchar(200) NOT NULL,
+    `job_type` varchar(200) NOT NULL,
+    `location` varchar(500) NOT NULL,
+    `employment_type` varchar(200) NOT NULL,
+    `description` varchar(9999) ,
+    `salary` varchar(200) NOT NULL
+) 
+
 CREATE TABLE photos (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `employer_email` varchar(500) NOT NULL ,

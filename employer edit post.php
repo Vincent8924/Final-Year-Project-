@@ -50,14 +50,14 @@
          $des = $_POST['description'];
 
 
-             mysqli_query($connect, "UPDATE `post` SET
+             mysqli_query($connect, "UPDATE `drafts` SET
              job_name = '$job',
              job_type = '$type',
              `location` = '$location',
              employment_type = '$et',
              salary = '$salary',
              `description` = '$des'
-             WHERE post_id = '$id'");
+             WHERE drafts_id = '$id'");
 
         
 
@@ -91,7 +91,7 @@
 
                 <?php
     
-                $result = mysqli_query($connect, "SELECT * FROM post where post_id = '$id'");	
+                $result = mysqli_query($connect, "SELECT * FROM drafts where drafts_id = '$id'");	
                 $row = mysqli_fetch_assoc($result);
                 
                 

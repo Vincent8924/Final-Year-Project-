@@ -51,23 +51,19 @@
         </div>
 
 
-
-
-
-
-
         <?php
         if(isset($_POST['login'])) {
             $email = $_POST["email"];
             $result = mysqli_query($connect,"SELECT * FROM employer WHERE employer_email='$email'");
             $row = mysqli_fetch_assoc($result);
+            $id = $row['id'];
             if($row)
             {
                 if(password_verify($_POST["password"],$row["password"]))
                 {
                     echo'<script>alert("Login successful!");';
             
-                    header("Location:employer home.php?login&email=" . urlencode($email));
+                    header("Location:employer home.php?id=" . urlencode($id));
                 }
                 else
                 {

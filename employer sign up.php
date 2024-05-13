@@ -39,8 +39,19 @@
                 
                 mysqli_query($connect, "INSERT INTO employer_profile(`employer_email`,`photo_name`,`photo_data`) SELECT text_data,file_name,photo_data FROM website_file");
 
+
+                $result = mysqli_query($connect, "SELECT * FROM employer WHERE employer_email = '$email'");
+                                
+
+                    if ($result) 
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $id = $row['id'];
+                        mysqli_free_result($result);
+                    }
+
                                                                                 
-                mysqli_query($connect, "UPDATE employer_profile SET employer_email = '$email',name = '$name' WHERE employer_email = 'none'");
+                mysqli_query($connect, "UPDATE employer_profile SET profile_id = $id, employer_email = '$email',name = '$name' WHERE employer_email = 'none'");
                 ?>
                 <script type="text/javascript">
                     alert("Registration successful. You can now proceed to log in.");

@@ -42,7 +42,8 @@ CREATE TABLE employer (
 );
 
 CREATE TABLE employer_profile (
-    `employer_email` varchar(200) NOT NULL PRIMARY KEY,
+    `profile_id` INT NOT NULL PRIMARY KEY ,
+    `employer_email` varchar(200) NOT NULL ,
     `name` varchar(500),
     `photo_name` VARCHAR(500),
     `photo_data` LONGBLOB,

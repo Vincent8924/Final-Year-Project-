@@ -14,21 +14,21 @@
     <br/> <br/>
     <?php
                         {
-                        $email = $_REQUEST["email"];
+                        $id = $_REQUEST["id"];
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                    <a href="employer home.php?home&email=<?php echo urlencode($email);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?home&email=<?php echo urlencode($email);?>">HOME</a>
-                        <a href="employer drafts.php?draft&email=<?php echo urlencode($email);?>">Drafts</a>
-                        <a href="employer packages.php?packages&email=<?php echo urlencode($email);?>">Package</a>
-                        <a href="employer profile.php?profile&email=<?php echo urlencode($email);?>">Profile</a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
+                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
+                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
                     </span>
                     <span class="right" >
@@ -143,8 +143,8 @@
               if (isset($_POST['buy_package'])) 
               {
                 $pt = $_POST['post_number'];
-                $email = $_REQUEST['email'];
-                $result = mysqli_query($connect, "SELECT balance FROM employer WHERE employer_email = '$email'");
+                $id = $_REQUEST['id'];
+                $result = mysqli_query($connect, "SELECT balance FROM employer WHERE id = '$id'");
                 //select the row first
 
 
@@ -160,14 +160,14 @@
                     $balance += $pt ;
                     
             
-                    mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE employer_email = '$email'");
+                    mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
                     
                     
                     ?>
                     
                     <script>
                        
-                        window.location = "employer packages.php?email=<?php echo urlencode($email);?>";
+                        window.location = "employer packages.php?id=<?php echo urlencode($id);?>";
 
                     </script>
 

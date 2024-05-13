@@ -12,21 +12,21 @@
     <br/> <br/>
     <?php
                         {
-                        $email = $_REQUEST["email"];
+                        $id = $_REQUEST["id"];
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                    <a href="employer home.php?home&email=<?php echo urlencode($email);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?home&email=<?php echo urlencode($email);?>">HOME</a>
-                        <a href="employer drafts.php?draft&email=<?php echo urlencode($email);?>">Drafts</a>
-                        <a href="employer packages.php?packages&email=<?php echo urlencode($email);?>">Package</a>
-                        <a href="employer profile.php?profile&email=<?php echo urlencode($email);?>">Profile</a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
+                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
+                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
                     </span>
                     <span class="right" >
@@ -42,23 +42,25 @@
     <br/><hr/><br/>
 
     <?php 
-            $email = $_REQUEST['email'];
+            $id = $_REQUEST['id'];
 
             if(isset($_POST['edit']))
             {
-                header("Location:employer profile edit.php?edit&email=" . urlencode($email));
+                header("Location:employer profile edit.php?id=" . urlencode($id));
                 
             }
         ?>
 
     <?php
    
-        $email = $_REQUEST["email"];
+        $id = $_REQUEST["id"];
         
 
 
         
-        $result = mysqli_query($connect, "SELECT * FROM employer_profile where employer_email = '$email'");	
+        $result = mysqli_query($connect, "SELECT * FROM employer_profile where profile_id = '$id'");	
+
+
         if ($result) {
         while($row = mysqli_fetch_assoc($result))
         {

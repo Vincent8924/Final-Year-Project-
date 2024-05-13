@@ -7,7 +7,7 @@ CREATE TABLE `post` (
     `employment_type` varchar(200) NOT NULL,
     `description` varchar(9999) ,
     `salary` varchar(200) NOT NULL
-) 
+);
 
 CREATE TABLE `drafts` (
     `drafts_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -18,7 +18,7 @@ CREATE TABLE `drafts` (
     `employment_type` varchar(200) NOT NULL,
     `description` varchar(9999) ,
     `salary` varchar(200) NOT NULL
-) 
+);
 
 CREATE TABLE photos (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

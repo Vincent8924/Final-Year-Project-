@@ -55,17 +55,7 @@ CREATE TABLE employer_profile (
 );
 
 
-CREATE TABLE admin (
-  `admin_id` int(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `admin_fname` varchar(500) NOT NULL ,
-  `admin_lname` varchar(500) NOT NULL ,
-  `admin_password` varchar(500) NOT NULL ,
-  `admin_email` varchar(255) NOT NULL,
-  `superadmin` tinyint(1)
-);
 
-INSERT INTO admin(admin_fname, admin_lname, admin_email,admin_password,superadmin) 
-VALUES ('Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1')
 =======
 CREATE TABLE `post` (
     `post_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -130,4 +120,16 @@ CREATE TABLE admin (
   `admin_password` varchar(500) NOT NULL ,
   `admin_email` varchar(255) NOT NULL
 );
+
+CREATE TABLE admin (
+  `admin_id` int(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `admin_fname` varchar(500) NOT NULL ,
+  `admin_lname` varchar(500) NOT NULL ,
+  `admin_password` varchar(500) NOT NULL ,
+  `admin_email` varchar(255) NOT NULL,
+  `superadmin` tinyint(1)
+);
+
+INSERT INTO admin(admin_fname, admin_lname, admin_email,admin_password,superadmin) 
+VALUES ('Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1')
 >>>>>>> 2039a2ac6af099c23f05df8c6873d9d8ba256428:employer.sql

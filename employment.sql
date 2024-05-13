@@ -7,7 +7,7 @@ CREATE TABLE `post` (
     `employment_type` varchar(200) NOT NULL,
     `description` varchar(9999) ,
     `salary` varchar(200) NOT NULL
-) 
+);
 
 CREATE TABLE `drafts` (
     `drafts_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -18,7 +18,7 @@ CREATE TABLE `drafts` (
     `employment_type` varchar(200) NOT NULL,
     `description` varchar(9999) ,
     `salary` varchar(200) NOT NULL
-) 
+);
 
 CREATE TABLE photos (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -36,6 +36,7 @@ CREATE TABLE website_file (
 CREATE TABLE employer (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `employer_email` varchar(200) NOT NULL,
+    `employer_name` varchar(500) NOT NULL,
     `password` varchar(500) NOT NULL,
     `balance` int NOT NULL
 );
@@ -52,10 +53,15 @@ CREATE TABLE employer_profile (
     `description` varchar(9999)
 );
 
+
 CREATE TABLE admin (
   `admin_id` int(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `admin_fname` varchar(500) NOT NULL ,
   `admin_lname` varchar(500) NOT NULL ,
   `admin_password` varchar(500) NOT NULL ,
-  `admin_email` varchar(255) NOT NULL
+  `admin_email` varchar(255) NOT NULL,
+  `superadmin` tinyint(1)
 );
+
+INSERT INTO admin(admin_fname, admin_lname, admin_email,admin_password,superadmin) 
+VALUES ('Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1')

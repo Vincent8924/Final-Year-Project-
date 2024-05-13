@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* Body Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -12,7 +11,6 @@ body {
     line-height: 1.6;
 }
 
-/* Header Styles */
 .header {
     display: flex;
     justify-content: space-between;
@@ -26,15 +24,14 @@ body {
     margin: 0;
 }
 
-
 .AdminAcc {
     color: white;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     font-size: 20px;
-    margin-left: 20px; /* 添加间距 */
-
+    margin-left: 20px;
+    cursor: pointer;
 }
 
 .AdminAcc:hover{
@@ -42,13 +39,48 @@ body {
     font-size: 22px;
 }
 
+.aAccBar
+{
+    display: none;
+    position: absolute;
+    width: 125px;
+    top: 65px; 
+    right: 35px; 
+    background-color:  #2e2d2d; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.aAccBar a
+{
+    color: #fff;
+    text-decoration: none;
+}
+.aAccBar a:hover
+{
+    color: #a8a8a8;
+}
+.aAccBar input
+{
+    width: 90px;
+    height: 25px;
+    color: #fff;
+    background-color:  #2e2d2d; 
+    font-weight: bold;
+    border: none;
+}
+.aAccBar input:hover
+{
+    color: #a8a8a8;
+    background-color:  #2e2d2d; 
+}
 
-/* Container Styles */
 .container {
     display: flex;
 }
 
-/* Sidebar Styles */
 aside {
     width: 200px;
     background-color: #a8a8a8;
@@ -82,9 +114,10 @@ aside nav ul li a:hover
     color: #56549b;
     font-size: 18px;
 }
-/* Main Content Styles */
+
 main {
     flex: 1;
+    height: 90vh;
 }
 
 section {
@@ -93,7 +126,6 @@ section {
     padding: 20px;
 }
 
-/* Footer Styles */
 footer {
     background-color: #333;
     color: #fff;

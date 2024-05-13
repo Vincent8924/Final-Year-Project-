@@ -146,7 +146,6 @@
                     {
                         alert("You have not enough balance to post");
                         window.location = "employer drafts.php?post&email=<?php echo urlencode($email);?>";
-                        
                     }
                     else if(balance > 0)
                     {

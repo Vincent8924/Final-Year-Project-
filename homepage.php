@@ -190,16 +190,32 @@ $result = $conn->query($sql);
     }
 }
 
-/* Search bar styles */
-#searchBar {
+#searchContainer {
+    display: flex;
+    align-items: center;
     width: 80%;
-    padding: 10px;
-    margin-top: 20px;
-    margin-left: 80px;
-    border: 1px solid black;
-    border-radius: 5px;
+    margin: 20px auto 0;
 }
 
+#searchBar {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px 0 0 5px;
+}
+
+#categorySelector {
+    padding: 10px;
+    border: 1px solid black;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#categorySelector:focus {
+    outline: none;
+}
 /* Love icon styles */
 .saveIcon {
     position: absolute;
@@ -266,8 +282,14 @@ $result = $conn->query($sql);
         </div>
     </header>
 
-    <!-- Search bar -->
+    <!-- Combined search bar and category selector -->
+<div id="searchContainer">
     <input type="text" id="searchBar" placeholder="Search...">
+    <select id="categorySelector">
+        <option value="company">Company</option>
+        <option value="category">Category</option>
+    </select>
+</div>
 
     <div id="jobPosts">
         <?php
@@ -278,6 +300,7 @@ $result = $conn->query($sql);
                 echo '<div class="jobPost" id="' . $row["company_name"] . '">';
                 echo '<img src="' . $row["logo_url"] . '" alt="Company Logo">';
                 echo '<h2>' . $row["company_name"] . '</h2>';
+                echo '<p class="category">Category: ' . $row["category"] . '</p>'; // Added class="category"
                 echo '<p>Salary: ' . $row["salary_range"] . '</p>';
                 echo '<p>' . $row["job_description"] . '</p>';
                 echo '<span class="saveIcon">&#10084;</span>'; // Love icon
@@ -290,42 +313,51 @@ $result = $conn->query($sql);
     </div>
 
     <script>
-        const searchBar = document.getElementById('searchBar');
-        const jobPosts = document.getElementById('jobPosts');
+    const searchBar = document.getElementById('searchBar');
+    const categorySelector = document.getElementById('categorySelector');
+    const jobPosts = document.getElementById('jobPosts');
 
-        searchBar.addEventListener('input', function() {
-            const searchText = searchBar.value.trim().toLowerCase();
-            const posts = jobPosts.querySelectorAll('.jobPost');
+    searchBar.addEventListener('input', function() {
+        const searchText = searchBar.value.trim().toLowerCase();
+        const posts = jobPosts.querySelectorAll('.jobPost');
 
-            posts.forEach(post => {
-                const companyName = post.querySelector('h2').textContent.trim().toLowerCase();
-                if (companyName.includes(searchText)) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
+        posts.forEach(post => {
+            const companyName = post.querySelector('h2').textContent.trim().toLowerCase();
+            const category = post.querySelector('p.category').textContent.trim().toLowerCase();
+            if (categorySelector.value === 'company' && companyName.includes(searchText)) {
+                post.style.display = 'block';
+            } else if (categorySelector.value === 'category' && category.includes(searchText)) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
         });
+    });
 
-        // Function to handle saving/un-saving job posts
-        function toggleSaveJobPost(icon) {
-            const post = icon.parentNode;
-            const postId = post.id;
-            // Toggle the saved state of the job post
-            icon.classList.toggle('saved');
-        }
+    // Function to handle saving/un-saving job posts
+    function toggleSaveJobPost(icon) {
+        const post = icon.parentNode;
+        const postId = post.id;
+        // Toggle the saved state of the job post
+        icon.classList.toggle('saved');
+    }
 
-        // Add click event listener to each love icon
-        const saveIcons = document.querySelectorAll('.saveIcon');
-        saveIcons.forEach(icon => {
-            icon.addEventListener('click', function(event) {
-                // Prevent default action (e.g., following a link)
-                event.preventDefault();
-                // Call the toggleSaveJobPost function
-                toggleSaveJobPost(icon);
-            });
+    // Add click event listener to each love icon
+    const saveIcons = document.querySelectorAll('.saveIcon');
+    saveIcons.forEach(icon => {
+        icon.addEventListener('click', function(event) {
+            // Prevent default action (e.g., following a link)
+            event.preventDefault();
+            // Call the toggleSaveJobPost function
+            toggleSaveJobPost(icon);
         });
-    </script>
+    });
+
+    // Event listener for category selector change
+    categorySelector.addEventListener('change', function() {
+        searchBar.dispatchEvent(new Event('input'));
+    });
+</script>
 </body>
 </html>
 <?php

@@ -33,9 +33,8 @@
                 session_start();
                 if(password_verify($password, $row["admin_password"]))
                 {
-                    
-                    mysqli_query($connect, "UPDATE admin SET token='$token' WHERE admin_email='$email'");
                     $_SESSION['id'] = $row["admin_id"];
+                    echo'<script>alert("Login successful!");window.location.href="Adashboard.php";</script>';
                 }
                 else
                 {

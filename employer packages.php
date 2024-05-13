@@ -9,6 +9,8 @@
         <link rel="icon" href="img/logo.png">
     </head>
     <body>
+
+    
     <br/> <br/>
     <?php
                         {
@@ -45,23 +47,23 @@
 
     <h1 class="center">Our packages</h1>
 
+    
 
-    <table>
+    <table class="mid_table">
         <tr>
             <td>
                 <form class="formbox" method="post">
                     <div class="center">
-                        <h2>Single Job Posting</h2>
+                        <h1><u>1 Post Package</u></h1>
                         
-                        One 30-day posting
-                        <br/>
-                        Company Logo included with job posting
-                        <br/>
+                        <h2>
+                            allow post one post
+                            <br/><br/>
+                            without time limited
+                        </h2>
 
-                        # of Jobs: 1 | Job Posting Length: 30 Days
-                        <br/><br/>
-
-                        <h1>RM20.00</h1>
+                        <h1>RM8.00</h1>
+                        <input type="hidden" name="post_number" value="1">
                     </div>
 
 
@@ -72,6 +74,66 @@
 
                 </form>
             </td>
+
+            <td>
+                <form class="formbox" method="post">
+                        <div class="center">
+                            <h1><u>5 Post Package</u></h1>
+                            
+
+                            <h2>
+                                allow post two post
+                            <br/><br/>
+                                without time limited
+                            </h2>
+
+                          
+                        
+
+                            <h1>RM35.00</h1>
+                            <input type="hidden" name="post_number" value="5">
+                        </div>
+
+
+                    
+                    <button class="centerButton" type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
+                    
+                    <br/><br/>
+
+                </form>
+            
+            </td>
+
+            <td>
+                <form class="formbox" method="post">
+                        <div class="center">
+                            <h1><u>10 post package</u></h1>
+                            
+
+                            <h2>
+                                allow post two post
+                            <br/><br/>
+                                without time limited
+                            </h2>
+
+                          
+                        
+
+                            <h1>RM60.00</h1>
+                            <input type="hidden" name="post_number" value="10">
+
+
+                        </div>
+
+
+                    
+                    <button class="centerButton" type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
+                    
+                    <br/><br/>
+
+                </form>
+            
+            </td>
                     
         </tr>
     </table>
@@ -80,6 +142,7 @@
     <?php
               if (isset($_POST['buy_package'])) 
               {
+                $pt = $_POST['post_number'];
                 $email = $_REQUEST['email'];
                 $result = mysqli_query($connect, "SELECT balance FROM employer WHERE employer_email = '$email'");
                 //select the row first
@@ -94,16 +157,24 @@
                 //declare the $balance is the $row['balance']
                 
                 //after above step then can add number to balance 
-                    $balance++;
+                    $balance += $pt ;
                     
             
                     mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE employer_email = '$email'");
-                    header("Location:employer packages.php?buy&email=" . urlencode($email));
                     
-                }
+                    
+                    ?>
+                    
+                    <script>
+                       
+                        window.location = "employer packages.php?email=<?php echo urlencode($email);?>";
 
-              
-          ?>
+                    </script>
+
+
+                    <?php
+                } 
+                ?>
           
 
        

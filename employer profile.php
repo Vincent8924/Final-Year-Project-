@@ -73,12 +73,8 @@
     <br/><br/><br/>
     
 
-    
-    
 
 
-
-    <br/><br/><br/><br/>
 
     <div class="profile">
     <b>Employer/Company name</b> 

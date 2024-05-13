@@ -88,7 +88,7 @@
                     <input type="hidden" name="delete" value="<?php echo $row['drafts_id']; ?>">
 
                     <button type="submit" name="post">Post</button>
-
+                    <input type="hidden" name="post_id" value="<?php echo $row['drafts_id']; ?>">
                     
                     
 
@@ -125,7 +125,9 @@
             <?php
               if (isset($_POST['post'])) 
               {
-                $email = $_REQUEST['email'];
+                $p = $_POST['post'];
+                $email = $_REQUEST["email"];
+                
                 $result = mysqli_query($connect, "SELECT balance FROM employer WHERE employer_email = '$email'");
                 
                 if ($result) 
@@ -170,8 +172,21 @@
                     $balance--;
 
                     mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE employer_email = '$email'");
+                    mysqli_query($connect, "INSERT INTO post(`employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary) 
+                    SELECT `employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary FROM drafts WHERE employer_email = '$email' ");
                 }
                 
+                ?>
+                    
+                <script>
+                   
+                    window.location = "employer drafts.php?email=<?php echo urlencode($email);?>";
+
+                </script>
+
+
+                <?php
+
               }
           ?>
 

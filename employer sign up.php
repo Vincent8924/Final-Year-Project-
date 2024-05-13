@@ -16,6 +16,7 @@
         if (isset($_POST['submit'])) {
            
             $email = $_POST["email"];
+            $name = $_POST["name"];
             $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
             $confirmPassword = $_POST["confirmPassword"];
 
@@ -34,12 +35,12 @@
                 </script>
                 <?php
             } else {
-                mysqli_query($connect, "INSERT INTO employer(employer_email,`password`,`balance`) VALUES ('$email', '$password','0')");
+                mysqli_query($connect, "INSERT INTO employer(employer_email,employer_name,`password`,`balance`) VALUES ('$email', '$name','$password','0')");
                 
                 mysqli_query($connect, "INSERT INTO employer_profile(`employer_email`,`photo_name`,`photo_data`) SELECT text_data,file_name,photo_data FROM website_file");
 
                                                                                 
-                mysqli_query($connect, "UPDATE employer_profile SET employer_email = '$email' WHERE employer_email = 'none'");
+                mysqli_query($connect, "UPDATE employer_profile SET employer_email = '$email',name = '$name' WHERE employer_email = 'none'");
                 ?>
                 <script type="text/javascript">
                     alert("Registration successful. You can now proceed to log in.");
@@ -57,10 +58,18 @@
             <form class="form" method="post">
 
             <p id="heading">Sign up</p>
+
+
             <div class="field">
                 <span class="material-symbols-outlined"> Email </span>
                 <input name="email" autocomplete="off" placeholder="Please enter your Email" class="input-field" type="text"/>
             </div>
+
+            <div class="field">
+                <span class="material-symbols-outlined"> Name </span>
+                <input name="name" autocomplete="off" placeholder="Account name" class="input-field" type="text"/>
+            </div>
+
             <div class="field">
                 <span class="material-symbols-outlined"> Password </span>
                 <input name="password" placeholder="At least 8 number" class="input-field" type="password" required oninput="checkPasswordLength()"/>
@@ -70,6 +79,9 @@
                 <span class="material-symbols-outlined">Confirm Password</span>
                 <input name="confirmPassword" placeholder="Please enter password again" class="input-field" type="password" required oninput="checkPasswordMatch()"/>
             </div>
+
+            
+
 
         <div  class="alert">
             <p id="password-length-message"></p>

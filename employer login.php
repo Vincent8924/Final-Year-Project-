@@ -25,7 +25,7 @@
                 <div class="field">
                     <span class="material-symbols-outlined"> Password </span>
 
-                    <input name="password" autocomplete="off" placeholder="At least 8 number" class="input-field" type="password"/>
+                    <input name="password" autocomplete="off" placeholder="Password" class="input-field" type="password"/>
                 </div>
 
                 <div>

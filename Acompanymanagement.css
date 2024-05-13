@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* Body Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -12,7 +11,7 @@ body {
     line-height: 1.6;
 }
 
-/* Header Styles */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -33,7 +32,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 20px;
-    margin-left: 20px; /* 添加间距 */
+    margin-left: 20px; 
 
 }
 
@@ -42,13 +41,48 @@ body {
     font-size: 22px;
 }
 
+.aAccBar
+{
+    display: none;
+    position: absolute;
+    width: 125px;
+    top: 65px; 
+    right: 35px; 
+    background-color:  #2e2d2d; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.aAccBar a
+{
+    color: #fff;
+    text-decoration: none;
+}
+.aAccBar a:hover
+{
+    color: #a8a8a8;
+}
+.aAccBar input
+{
+    width: 90px;
+    height: 25px;
+    color: #fff;
+    background-color:  #2e2d2d; 
+    font-weight: bold;
+    border: none;
+}
+.aAccBar input:hover
+{
+    color: #a8a8a8;
+    background-color:  #2e2d2d; 
+}
 
-/* Container Styles */
 .container {
     display: flex;
 }
 
-/* Sidebar Styles */
 aside {
     width: 200px;
     background-color: #a8a8a8;

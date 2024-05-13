@@ -12,21 +12,21 @@
     <br/> <br/>
     <?php
                         {
-                        $email = $_REQUEST["email"];
+                        $id = $_REQUEST["id"];
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                    <a href="employer home.php?home&email=<?php echo urlencode($email);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?home&email=<?php echo urlencode($email);?>">HOME</a>
-                        <a href="employer drafts.php?draft&email=<?php echo urlencode($email);?>">Drafts</a>
-                        <a href="employer packages.php?packages&email=<?php echo urlencode($email);?>">Package</a>
-                        <a href="employer profile.php?profile&email=<?php echo urlencode($email);?>">Profile</a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
+                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
+                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
                     </span>
                     <span class="right" >
@@ -42,12 +42,12 @@
     <br/><hr/><br/>
     <?php
    
-        $email = $_REQUEST["email"];
+        $id = $_REQUEST["id"];
         
 
 
         
-        $result = mysqli_query($connect, "SELECT * FROM employer_profile where employer_email = '$email'");	
+        $result = mysqli_query($connect, "SELECT * FROM employer_profile where profile_id = '$id'");	
         if ($result) {
         while($data = mysqli_fetch_assoc($result))
         {
@@ -161,7 +161,7 @@ if(isset($_POST['submit'])) {
     {
         
 
-        $stmt = mysqli_prepare($connect, "UPDATE employer_profile SET `name` = ?,website = ?,industry = ?,company_size = ?,primary_location = ?,`description` = ? WHERE employer_email = '$email'");
+        $stmt = mysqli_prepare($connect, "UPDATE employer_profile SET `name` = ?,website = ?,industry = ?,company_size = ?,primary_location = ?,`description` = ? WHERE profile_id = '$id'");
 
         mysqli_stmt_bind_param($stmt, "ssssss", $name, $website,$industry,$size,$location,$des);
     }
@@ -169,7 +169,7 @@ if(isset($_POST['submit'])) {
     {
         $pname = 'profile_photo';
         $fileData = file_get_contents($fileTmpName);
-        $stmt = mysqli_prepare($connect, "UPDATE employer_profile SET `name` = ?,photo_name = ?,photo_data = ?,website = ?,industry = ?,company_size = ?,primary_location = ?,`description` = ? WHERE employer_email = '$email'");
+        $stmt = mysqli_prepare($connect, "UPDATE employer_profile SET `name` = ?,photo_name = ?,photo_data = ?,website = ?,industry = ?,company_size = ?,primary_location = ?,`description` = ? WHERE profile_id = '$id'");
 
         mysqli_stmt_bind_param($stmt, "ssssssss", $name, $pname, $fileData, $website,$industry,$size,$location,$des);
     }
@@ -187,7 +187,7 @@ if(isset($_POST['submit'])) {
         ?>
         <script>
             alert("Photo uploaded successfully.");
-            window.location = "employer profile.php?upload&email=<?php echo urlencode($email);?>";
+            window.location = "employer profile.php?id=<?php echo urlencode($id);?>";
         </script>
         
         <?php

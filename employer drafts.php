@@ -10,23 +10,24 @@
     </head>
     <body>
     <br/> <br/>
+
     <?php
                         {
-                        $email = $_REQUEST["email"];
+                        $id = $_REQUEST["id"];
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                    <a href="employer home.php?home&email=<?php echo urlencode($email);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?home&email=<?php echo urlencode($email);?>">HOME</a>
-                        <a href="employer drafts.php?draft&email=<?php echo urlencode($email);?>">Drafts</a>
-                        <a href="employer packages.php?packages&email=<?php echo urlencode($email);?>">Package</a>
-                        <a href="employer profile.php?profile&email=<?php echo urlencode($email);?>">Profile</a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
+                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
+                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
                     </span>
                     <span class="right" >
@@ -46,9 +47,23 @@
 
 
         <?php
-    $email = $_REQUEST["email"];
+    $id = $_REQUEST["id"];
+
+    $em = mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
+                
+
+    if ($em) 
+    {
+        $row = mysqli_fetch_assoc($em);
+        $email = $row['employer_email'];
+        mysqli_free_result($em);
+    }
+                
+    $result = mysqli_query($connect, "SELECT balance FROM employer WHERE employer_email = '$email'");
+
+    
     $result = mysqli_query($connect, "SELECT * FROM drafts where `employer_email` = '$email'");	
-   while($row = mysqli_fetch_assoc($result))
+    while($row = mysqli_fetch_assoc($result))
       {
       
       ?>	
@@ -81,14 +96,14 @@
             <br/><br/><br/><br/>
             <form method="post" action="">
                   
-                  <button><a href="employer edit post.php?id&id=<?php echo $row['drafts_id'];?> &email=<?php echo urlencode($email);?>" class="white">Edit</a></button>
+                  <button><a href="employer edit post.php?did=<?php echo $row['drafts_id'];?> &id=<?php echo $id ?>" class="white">Edit</a></button>
                      
                     <button type="submit" name="delete_id" onclick="return confirmation();">Delete</button>
                     
                     <input type="hidden" name="delete" value="<?php echo $row['drafts_id']; ?>">
 
                     <button type="submit" name="post">Post</button>
-
+                    <input type="hidden" name="post_id" value="<?php echo $row['drafts_id']; ?>">
                     
                     
 
@@ -112,7 +127,7 @@
               
               <script type="text/javascript">
                   alert("Drafts has been deleted!");
-                  window.location = "employer drafts.php?delete&email=<?php echo urlencode($email);?>";
+                  window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
               </script> 
             
             
@@ -125,8 +140,19 @@
             <?php
               if (isset($_POST['post'])) 
               {
-                $email = $_REQUEST['email'];
-                $result = mysqli_query($connect, "SELECT balance FROM employer WHERE employer_email = '$email'");
+                $p = $_POST['post'];
+                $id = $_REQUEST["id"];
+
+                $em = mysqli_query($connect, "SELECT employer_email FROM employer WHERE id = '$id'");
+                            
+                if ($em) 
+                {
+                    $row = mysqli_fetch_assoc($em);
+                    $email = $row['employer_email'];
+                    mysqli_free_result($em);
+                }
+                            
+                $result = mysqli_query($connect, "SELECT balance FROM employer WHERE id = '$id'");
                 
                 if ($result) 
                 {
@@ -143,7 +169,7 @@
                     if(balance <= 0)
                     {
                         alert("You have not enough balance to post");
-                        window.location = "employer drafts.php?post&email=<?php echo urlencode($email);?>";
+                        window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
                     }
                     else if(balance > 0)
                     {
@@ -156,7 +182,7 @@
                         }
                         else if(answer != true)
                         {
-                            window.location = "employer drafts.php?post&email=<?php echo urlencode($email);?>";
+                            window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
                         }
                     }
                     
@@ -169,8 +195,21 @@
                     $balance--;
 
                     mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE employer_email = '$email'");
+                    mysqli_query($connect, "INSERT INTO post(`employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary) 
+                    SELECT `employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary FROM drafts WHERE employer_email = '$email' ");
                 }
                 
+                ?>
+                    
+                <script>
+                   
+                    window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+
+                </script>
+
+
+                <?php
+
               }
           ?>
 

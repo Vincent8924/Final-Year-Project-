@@ -59,14 +59,6 @@ CREATE TABLE admin (
   `admin_fname` varchar(500) NOT NULL ,
   `admin_lname` varchar(500) NOT NULL ,
   `admin_password` varchar(500) NOT NULL ,
-  `admin_email` varchar(255) NOT NULL
-);
-
-CREATE TABLE admin (
-  `admin_id` int(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `admin_fname` varchar(500) NOT NULL ,
-  `admin_lname` varchar(500) NOT NULL ,
-  `admin_password` varchar(500) NOT NULL ,
   `admin_email` varchar(255) NOT NULL,
   `superadmin` tinyint(1)
 );

@@ -173,6 +173,7 @@
  
                 </form>
                 <?php
+                
                     if(isset($_POST['Submit']))
                     {
                         $fname = $_POST['fname'];
@@ -182,6 +183,7 @@
                         $hashpassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
                         $confirm_password = $_POST['confirm_password'];
 
+                        
                         if (strlen($password) < 8)
                         {
                             ?>

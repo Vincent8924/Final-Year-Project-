@@ -59,5 +59,9 @@ CREATE TABLE admin (
   `admin_fname` varchar(500) NOT NULL ,
   `admin_lname` varchar(500) NOT NULL ,
   `admin_password` varchar(500) NOT NULL ,
-  `admin_email` varchar(255) NOT NULL
+  `admin_email` varchar(255) NOT NULL,
+  `superadmin` tinyint(1)
 );
+
+INSERT INTO admin(admin_fname, admin_lname, admin_email,admin_password,superadmin) 
+VALUES ('Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1')

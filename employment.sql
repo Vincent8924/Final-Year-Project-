@@ -45,6 +45,7 @@ CREATE DATABASE employment;
       `balance` int NOT NULL
   );
 
+
   CREATE TABLE employer_profile (
       `profile_id` INT NOT NULL PRIMARY KEY ,
       `employer_email` varchar(200) NOT NULL ,

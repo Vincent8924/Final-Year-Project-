@@ -47,7 +47,7 @@ CREATE DATABASE employment;
 
 INSERT INTO admin(admin_fname, admin_lname, admin_email,admin_password,superadmin) 
 VALUES ('Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1')
-=======
+
   CREATE TABLE employer_profile (
       `profile_id` INT NOT NULL PRIMARY KEY ,
       `employer_email` varchar(200) NOT NULL ,

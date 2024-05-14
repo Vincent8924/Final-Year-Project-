@@ -1,6 +1,6 @@
 <?php 
     include("vdataconnection.php"); 
-    include("session.php");
+    include("Asession.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,14 +11,21 @@
     <link rel="stylesheet" href="Aadminmanagement.css">
 </head>
 <body>
-    <header class="header">
+<header class="header">
         <h1>JobHelper</h1>
         <div>
             <a class="AdminAcc" onclick="displaybar()">
                 <?php
                     $id = $_SESSION['id'];
+
+                    $result = mysqli_query($connect,"SELECT * FROM admin where admin_id='$id'");
+                    if($result)
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $fname = $row["admin_fname"];
+                    }
                 ?>
-                Admin ID: <?php echo"$id"; ?>            
+                <?php echo"$fname"; ?>            
             </a>
         </div>
     </header>
@@ -82,7 +89,6 @@
                     <tbody >
                         <?php
                             $result = mysqli_query($connect, "SELECT * FROM admin;");
-                            $count = mysqli_num_rows($result);
                             while($row = mysqli_fetch_assoc($result))
                             {
                         ?>

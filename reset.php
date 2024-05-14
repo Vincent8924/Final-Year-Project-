@@ -18,7 +18,7 @@
         }
 
         header {
-            background-color: white; /* Set background color to white */
+            background-color: white; 
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -43,37 +43,37 @@
 
         .navigation ul li a {
             text-decoration: none;
-            color: #333; /* Set the color of the links */
-            font-weight: bold; /* Make the links bold */
-            transition: color 0.3s; /* Add transition effect for color change */
+            color: #333; 
+            font-weight: bold; 
+            transition: color 0.3s; /
         }
 
         .navigation ul li a:hover {
-            color: #555; /* Change the color on hover */
+            color: #555; 
         }
 
         .sign-in,
         .employer-site {
             display: inline-block;
-            padding: 8px 16px; /* Adjust padding as needed */
-            border: 2px solid blue; /* Set border to blue */
-            border-radius: 5px; /* Add border radius for rounded corners */
+            padding: 8px 16px; 
+            border: 2px solid blue; 
+            border-radius: 5px; 
         }
 
         .sign-in a,
         .employer-site a {
             text-decoration: none;
-            color: rgb(12, 12, 191); /* Set link color to blue */
+            color: rgb(12, 12, 191); 
         }
 
         .sign-in:hover,
         .employer-site:hover {
-            background-color: blue; /* Change background color on hover */
+            background-color: blue; 
         }
 
         .sign-in:hover a,
         .employer-site:hover a {
-            color: white; /* Change link color on hover */
+            color: white; 
         }
 
         .logo {
@@ -81,12 +81,12 @@
         }
 
         .logo img {
-            height: 50px; /* Adjust height as needed */
+            height: 50px; 
         }
 
         .navigation {
             display: inline-block;
-            margin-left: 20px; /* Add space between logo and navigation */
+            margin-left: 20px;
         }
 
         .navigation ul {
@@ -102,8 +102,8 @@
 
         .sign-in {
             display: inline-block;
-            margin-left: auto; /* Moves to the right */
-            margin-right: 20px; /* Provides spacing between "Sign In" and "Employer Site" */
+            margin-left: auto; 
+            margin-right: 20px; 
         }
 
         .employer-site {
@@ -117,7 +117,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px); 
-            margin: 100px auto; /* Adjusted margin to move the form down */
+            margin: 100px auto; 
         }
 
         h2 {
@@ -152,8 +152,8 @@
             width: 100%;
         }
 
-        button:hover, /* Add hover effect */
-        .button-clicked { /* Class for when button is clicked */
+        button:hover, 
+        .button-clicked { 
             background-color: #a4d3ff;
         }
 
@@ -196,7 +196,7 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
 
-        <button type="button" onclick="sendResetLink()" id="confirmButton">Confirm</button> <!-- Added id to the button -->
+        <button type="button" onclick="sendResetLink()" id="confirmButton">Confirm</button>
     </form>
 </div>
 <script src="https://smtpjs.com/v3/smtp.js"></script>
@@ -205,7 +205,7 @@
         var userEmail = document.getElementById("email").value;
 
         if (validateEmail(userEmail)) {
-            document.getElementById("confirmButton").classList.add("button-clicked"); // Add class for hover effect
+            document.getElementById("confirmButton").classList.add("button-clicked"); 
             Email.send({
                 Host: "smtp.elasticemail.com",
                 Username: "1211202786@student.mmu.edu.my",

@@ -89,7 +89,7 @@
         }
         ?>
             <div class="Acontainer">
-                <div class="Aheader" onclick="displaybar()">
+                <div class="Aheader">
                     <div>
                         <h3>User</h3>
                     </div>
@@ -121,30 +121,50 @@
                 </div>
             </div>
             <?php
-                /*
                 $result = mysqli_query($connect,"SELECT count(*) AS total_post FROM post");
                 if($result)
                 {
                     $row = mysqli_fetch_assoc($result);
                     $total_post = $row["total_post"];
                 }
-                */
             ?>
-            <div class="Acontainer">
-                <div class="Aheader">
+            <div class="Apost">
+                <div class="postheader">
                     <div>
                         <h3>Post</h3>
                     </div>
                     <div class="amount">
                         <h3>
                             <?php
-                                //echo $total_post
+                                echo $total_post
                             ?>
                         </h3>
                     </div>
                 </div>
-                <div class="Bcontainer">
-                    
+                <div class="Bpost">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="category">Job Category</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $result = mysqli_query($connect, "SELECT job_type, COUNT(*) as num FROM post GROUP BY job_type");
+                                while($row = mysqli_fetch_assoc($result))
+                                {
+                            ?>
+                                <tr>
+                                    <td class="category"><?php echo $row["job_type"] ?></td>
+                                    <td><?php echo $row["num"] ?></td>
+                                </tr>
+                            <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </main>

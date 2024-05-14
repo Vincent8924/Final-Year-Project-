@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="Atemplate.css">
+    <link rel="stylesheet" href="Aprofile.css">
 </head>
 
 <body>
@@ -53,12 +53,12 @@
         <aside>
             <nav class="Menu">
                 <ul>
-                    <li><a href="Adashboard.php" id="now">Dashboard</a></li>
+                    <li><a href="Adashboard.php" >Dashboard</a></li>
                     <li><a href="Aseekermanagement.php">Seeker</a></li>
                     <li><a href="Acompanymanagement.php">Companies</a></li>
                     <li><a href="Aadminmanagement.php">Admin</a></li>
                     <li><a href="Apost.php">Post</a></li>
-                    <li><a href="Aprofile.php">Profile</a></li>
+                    <li><a href="Aprofile.php" id="now">Profile</a></li>
                 </ul>
             </nav>
         </aside>

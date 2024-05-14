@@ -32,7 +32,7 @@
     
     <div class="aAccBar" id="aAccBar">
         <div class="bAccBar">
-            <a href="">Profile</a>
+            <a href="Aprofile.php" >Profile</a>
         </div>
         <div class="bAccBar">
             <form action="" method="POST" id="logout">

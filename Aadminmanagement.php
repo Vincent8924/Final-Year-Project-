@@ -14,7 +14,7 @@
 <header class="header">
         <h1>JobHelper</h1>
         <div>
-            <a class="AdminAcc" onclick="displaybar()">
+            <a  class="AdminAcc" onclick="displaybar()">
                 <?php
                     $id = $_SESSION['id'];
 
@@ -32,7 +32,7 @@
     
     <div class="aAccBar" id="aAccBar">
         <div class="bAccBar">
-            <a href="">Profile</a>
+            <a href="Aprofile.php">Profile</a>
         </div>
         <div class="bAccBar">
             <form action="" method="POST" id="logout">
@@ -105,17 +105,17 @@
                                 
                             </tr>
                         <?php
+                    
                                 if (isset($_POST['delete'])) 
                                 {
                                     $delete = $_POST['delete'];
                                     mysqli_query($connect, "DELETE FROM admin WHERE admin_id = '$delete'");
-                                ?>
-                                
+                            ?>
                                 <script>
                                     alert("The admin has been deleted!");
                                     window.location.href = "Aadminmanagement.php";
                                 </script>
-                        <?php
+                            <?php
                                 }
                             }
                         ?>
@@ -167,6 +167,12 @@
                             </div>
                             <input type="password" placeholder="  Confirm password" name="confirm_password" id="confirm_password" required oninput="checkPasswordMatch()"><br>
                         </div>
+                        <div class="bform">
+                            <div class="label">
+                                <label for="superadmin">Super Admin</label>
+                            </div>
+                            <input class="checkbox" type="checkbox" name="superadmin" value="1"><br>
+                        </div>
                         <br>
                         <div class="alert">
                             <p id="password-length-message"></p>
@@ -210,8 +216,16 @@
                         }
                         else
                         {
+                            if(isset($_POST['superadmin']))
+                            {
+                                $superadmin = 1;
+                            }
+                            else
+                            {
+                                $superadmin = 0;
+                            }
                             $resuslt=mysqli_query($connect,"INSERT INTO admin(admin_fname, admin_lname, admin_email,
-                             admin_password) VALUES ('$fname','$lname','$email','$hashpassword')");
+                             admin_password, superadmin) VALUES ('$fname','$lname','$email','$hashpassword','$superadmin')");
                             ?>
                             <script>
                                 alert("Admin has been successfully added!");
@@ -232,10 +246,28 @@
 </body>
 </html>
 
+<?php        
+    $getsuperadmin = mysqli_query($connect, "SELECT superadmin FROM admin where admin_id = $id;");
+    if($getsuperadmin)
+    {
+        $row = mysqli_fetch_assoc($getsuperadmin);
+        $sa = $row["superadmin"];
+        echo "<script>var sa = $sa;</script>";
+    }
+?>
+
 <script>
     function display(){
         var div = document.getElementById("addadmin");
-        div.style.display = "block";  
+        if(sa===1)
+        {
+            div.style.display = "block";  
+        }
+        else
+        {
+            alert("Only superadmin can add admin.");
+        }
+        
     }
     function closeFrom(){
         var div = document.getElementById("addadmin");
@@ -265,15 +297,24 @@
     }
     function confirmdelete(id)
     {
-        var confirmed = confirm("Are you sure you want to delete admin with ID " + id + "?");
+        if(sa===1)
+        {
+            var confirmed = confirm("Are you sure you want to delete admin with ID " + id + "?");
 
-        if(confirmed){
-            return true;
+            if(confirmed){
+                return true;
+            }
+            else{
+                return false;
+                history.go(-1);
+            }
         }
-        else{
+        else
+        {
+            alert("Only superadmin can detele admin.");
             return false;
-            history.go(-1);
         }
+
     }
     function displaybar()
     {

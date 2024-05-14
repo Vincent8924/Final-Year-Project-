@@ -7,14 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subject = mysqli_real_escape_string($connect, $_POST['subject']);
     $message = mysqli_real_escape_string($connect, $_POST['message']);
 
-    // Check if the provided email or name exists in the database
-    $checkQuery = "SELECT * FROM contact WHERE name = '$name' OR email = '$email'";
+    $checkQuery = "SELECT * FROM jobseeker WHERE jobseeker_email = '$email'";
     $result = mysqli_query($connect, $checkQuery);
 
     if ($result && mysqli_num_rows($result) > 0) {
-        // Insert data into the database
         $insertQuery = "INSERT INTO contact (name, email, subject, message) VALUES ('$name', '$email', '$subject', '$message')";
-
         if (mysqli_query($connect, $insertQuery)) {
             echo '<script>alert("Comment submitted successfully!");</script>';
         } else {
@@ -26,8 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     mysqli_free_result($result);
 }
-
-mysqli_close($connect);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +33,9 @@ mysqli_close($connect);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         
-        /* CSS styles for the header */
+       
         header {
-            background-color: white; /* Set background color to white */
+            background-color: white; 
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -64,36 +59,36 @@ mysqli_close($connect);
 
         .navigation ul li a {
             text-decoration: none;
-            color: #333; /* Set the color of the links */
-            font-weight: bold; /* Make the links bold */
-            transition: color 0.3s; /* Add transition effect for color change */
+            color: #333; 
+            font-weight: bold;
+            transition: color 0.3s; 
         }
 
         .navigation ul li a:hover {
-            color: #555; /* Change the color on hover */
+            color: #555; 
         }
         .sign-in,
         .employer-site {
             display: inline-block;
-            padding: 8px 16px; /* Adjust padding as needed */
-            border: 2px solid blue; /* Set border to blue */
-            border-radius: 5px; /* Add border radius for rounded corners */
+            padding: 8px 16px;
+            border: 2px solid blue; 
+            border-radius: 5px; 
         }
 
         .sign-in a,
         .employer-site a {
             text-decoration: none;
-            color: rgb(12, 12, 191); /* Set link color to blue */
+            color: rgb(12, 12, 191); 
         }
 
         .sign-in:hover,
         .employer-site:hover {
-            background-color: blue; /* Change background color on hover */
+            background-color: blue; 
         }
 
         .sign-in:hover a,
         .employer-site:hover a {
-            color: white; /* Change link color on hover */
+            color: white; 
         }
 
         .logo {
@@ -101,12 +96,12 @@ mysqli_close($connect);
         }
 
         .logo img {
-            height: 50px; /* Adjust height as needed */
+            height: 50px; 
         }
 
         .navigation {
             display: inline-block;
-            margin-left: 20px; /* Add space between logo and navigation */
+            margin-left: 20px; 
         }
 
         .navigation ul {
@@ -122,17 +117,14 @@ mysqli_close($connect);
 
         .sign-in {
             display: inline-block;
-            margin-left: auto; /* Moves to the right */
-            margin-right: 20px; /* Provides spacing between "Sign In" and "Employer Site" */
+            margin-left: auto; 
+            margin-right: 20px; 
         }
 
         .employer-site {
             display: inline-block;
         }
 
-        /* End of header CSS styles */
-        
-        /* CSS styles for the rest of the page */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -146,7 +138,7 @@ mysqli_close($connect);
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Ensures map iframe doesn't overflow container */
+            overflow: hidden; 
         }
         h2 {
             margin-bottom: 20px;
@@ -167,7 +159,7 @@ mysqli_close($connect);
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 30px; /* Long oval shape */
+            border-radius: 30px; 
             outline: none;
         }
         .message-form textarea {
@@ -175,7 +167,7 @@ mysqli_close($connect);
     height: 300px;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #000; /* Add border with black color */
+    border: 1px solid #000; 
     border-radius: 30px;
     outline: none;
 }
@@ -192,13 +184,13 @@ mysqli_close($connect);
         }
         .address-map img {
             width: 100%;
-            border: none; /* Remove image border */
+            border: none; 
         }
     </style>
 </head>
 <body>
 
-<!-- Header section -->
+
 <header>
     <div class="logo">
         <img src="logo.png" alt="Company Logo">
@@ -220,9 +212,7 @@ mysqli_close($connect);
         <a href="#">Employer Site</a>
     </div>
 </header>
-<!-- End of Header section -->
 
-<!-- Contact Us section -->
 <div class="container">
     <h2>Contact Us</h2>
     
@@ -241,7 +231,7 @@ mysqli_close($connect);
 
     <div class="address-map">
         <h3>Location</h3>
-        <!-- Replace the map with an image -->
+        
         <img src="melaka.jpg" alt="Location Map">
     </div>
 
@@ -255,17 +245,15 @@ mysqli_close($connect);
         <button type="submit">Submit</button>
     </form>
 </div>
-<!-- End of Contact Us section -->
+
 
 <script>
     document.getElementById("contactForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
-        // Show success message
+       
         alert("Your message has been successfully sent!");
         
-        // You can also perform additional actions here, such as clearing the form fields
-        // Example: document.getElementById("contactForm").reset();
     });
 </script>
 

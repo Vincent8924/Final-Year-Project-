@@ -1,4 +1,4 @@
-CREATE TABLE `post` (
+CREATE TABLE post (
     `post_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `employer_email` varchar(200) NOT NULL,
     `job_name` varchar(200) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `post` (
     `salary` varchar(200) NOT NULL
 );
 
-CREATE TABLE `drafts` (
+CREATE TABLE drafts (
     `drafts_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `employer_email` varchar(200) NOT NULL,
     `job_name` varchar(200) NOT NULL,
@@ -64,4 +64,44 @@ CREATE TABLE admin (
 );
 
 INSERT INTO admin(admin_fname, admin_lname, admin_email,admin_password,superadmin) 
-VALUES ('Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1')
+VALUES ('Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1');
+
+CREATE TABLE contact (
+  `contact_id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL
+);
+
+CREATE TABLE homepage 
+(
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `company_name` varchar(255) NOT NULL,
+  `logo_url` varchar(255) DEFAULT NULL,
+  `salary_range` varchar(100) DEFAULT NULL,
+  `job_description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `category` varchar(50) DEFAULT NULL
+);
+ 
+CREATE TABLE jobseeker 
+(
+  `jobseeker_id` INT(6) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `jobseeker_firstname` varchar(100) NOT NULL,
+  `jobseeker_lastname` varchar(100) NOT NULL,
+  `jobseeker_email` varchar(60) NOT NULL,
+  `jobseeker_password` varchar(50) NOT NULL
+);
+CREATE TABLE userprofile
+(
+  `UserID` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `ProfilePic` varchar(255) DEFAULT NULL,
+  `FullName` varchar(100) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `PersonalSummary` text DEFAULT NULL,
+  `Skill` varchar(100) DEFAULT NULL,
+  `WorkExperience` text DEFAULT NULL,
+  `Education` text DEFAULT NULL,
+  `Language` varchar(50) DEFAULT NULL
+) ;

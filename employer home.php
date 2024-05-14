@@ -15,21 +15,21 @@
         <br/><br/>
         <?php
                         {
-                        $email = $_REQUEST["email"];
+                        $id = $_REQUEST["id"];
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                        <a href="employer home.php?home&email=<?php echo urlencode($email);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?home&email=<?php echo urlencode($email);?>">HOME</a>
-                        <a href="employer drafts.php?draft&email=<?php echo urlencode($email);?>">Drafts</a>
-                        <a href="employer packages.php?packages&email=<?php echo urlencode($email);?>">Package</a>
-                        <a href="employer profile.php?profile&email=<?php echo urlencode($email);?>">Profile</a>
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
+                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
+                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
                     </span>
                     <span class="right" >
@@ -116,7 +116,7 @@
      
         if (isset($_POST['post']))
         {
-            $email = $_REQUEST["email"];
+            $id = $_REQUEST["id"];
             $job = $_POST['job_name'];
             $type = $_POST['job_type'];
             $location = $_POST['location'];
@@ -124,6 +124,15 @@
             $et = $_POST['employment_type'];
             $salary = $_POST['salary'];
             $des = $_POST['description'];
+
+            $result = mysqli_query($connect, "SELECT employer_email FROM employer WHERE id = '$id'");
+                
+                if ($result) 
+                {
+                    $row = mysqli_fetch_assoc($result);
+                    $email = $row['employer_email'];
+                    mysqli_free_result($result);
+                }
         
 
            
@@ -145,7 +154,7 @@
                 ?>
                 <script type="text/javascript">
                     alert("Your post is be save to the drafts page now.");
-                    
+                    window.location = "employer home.php?id=<?php echo urlencode($id);?>";
                 </script>
 
                 <?php

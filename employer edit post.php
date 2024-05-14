@@ -9,25 +9,36 @@
         <link rel="icon" href="img/logo.png">
     </head>
     <body>
-    <nav>
-        <div id="line">
-            <div class="choice">
-                <span class="left">
-                <a href="employer home.php?home&email=<?php echo urlencode($email);?>"><img src="img/page logo2.png" id="page_logo"/></a>
-                </span>    
-                <span class="mid"> 
-                    <a href='employer home.php'>HOME</a>
-                    <a href='employer drafts.php'>Drafts</a>
-                    <a href='employer packages.php'>Package</a>
-                    <a href='employer profile.php'>Profile</a>
-                   
-                </span>
-                <span class="right" >
-                <a href='index.php' onclick='return userconfirmation();'><img src='img/logout.png' style='width: 20px; height: 20px;'>LOG OUT</a></span> 
-                
+    <?php
+                        {
+                        $did = $_REQUEST["did"];
+                        $id = $_REQUEST["id"];
+                    ?>
+        <nav>
+            <div id="line">
+                <div class="choice">
+                    <span class="left">
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                    </span>    
+                    <span class="mid"> 
+
+                    
+                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
+                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
+                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
+                    
+                    </span>
+                    <span class="right" >
+                    <a href='index.php' onclick='return userconfirmation();'><img src='img/logout.png' style='width: 20px; height: 20px;'>LOG OUT</a></span> 
+                    
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+
+        <?php
+                        }
+                    ?>
     <br/><hr/><br/>
 
     <h1>Edit your post</h1>
@@ -39,7 +50,8 @@
      
      if (isset($_POST['edit']))
      {
-         $email = $_REQUEST['email'];
+         
+         $did = $_REQUEST['did'];
          $id = $_REQUEST['id'];
          $job = $_POST['job_name'];
          $type = $_POST['job_type'];
@@ -57,14 +69,14 @@
              employment_type = '$et',
              salary = '$salary',
              `description` = '$des'
-             WHERE drafts_id = '$id'");
+             WHERE drafts_id = '$did'");
 
         
 
              ?>
              <script type="text/javascript">
                  alert("Post Edit successfully!");
-                 window.location = "employer drafts.php?edit&email=<?php echo urlencode($email);?>";
+                 window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
                  
              </script>
 
@@ -78,20 +90,19 @@
 
 
         <?php
-		    if(isset($_REQUEST["id"]))
+		    if(isset($_REQUEST["did"]))
 			{
-			$id = $_REQUEST["id"];
-            $email = $_REQUEST['email'];
- 
+			$did = $_REQUEST["did"];
+
 			
 		?>
                 <h2>Job ID</h2>
-                <?php echo $_REQUEST['id']?>
+                <?php echo $did ?>
                 <br/><br/>
 
                 <?php
     
-                $result = mysqli_query($connect, "SELECT * FROM drafts where drafts_id = '$id'");	
+                $result = mysqli_query($connect, "SELECT * FROM drafts where drafts_id = '$did'");	
                 $row = mysqli_fetch_assoc($result);
                 
                 

@@ -1,6 +1,8 @@
 <?php 
     include("vdataconnection.php"); 
+    include("session.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +15,33 @@
 <body>
     <header class="header">
         <h1>JobHelper</h1>
-        <div class="header-buttons">
-            <a href="#" class="AdminAcc">AdminAcc</a>
+        <div>
+            <a class="AdminAcc" onclick="displaybar()">
+                <?php
+                    $id = $_SESSION['id'];
+                ?>
+                Admin ID: <?php echo"$id"; ?>            
+            </a>
         </div>
     </header>
-
+    
+    <div class="aAccBar" id="aAccBar">
+        <div class="bAccBar">
+            <a href="">Profile</a>
+        </div>
+        <div class="bAccBar">
+            <form action="" method="POST" id="logout">
+                <input type="submit" name="logout" value="Log-Out">
+            </form>
+        </div>
+    </div>
+    <?php
+        if(isset($_POST['logout']))
+        {
+            session_destroy();
+            echo'<script>alert("Log-Out successful!");window.location.href="Alogin.php";</script>';
+        }
+    ?>
     <div class="container">
         <aside>
             <nav class="Menu">
@@ -58,7 +82,7 @@
         }
         ?>
             <div class="Acontainer">
-                <div class="Aheader">
+                <div class="Aheader" onclick="displaybar()">
                     <div>
                         <h3>User</h3>
                     </div>
@@ -125,3 +149,20 @@
 
 </body>
 </html>
+
+<SCript>
+    function displaybar()
+    {
+        var div = document.getElementById("aAccBar");
+        var divdisplay = window.getComputedStyle(div);
+
+        if(divdisplay.display === "block" )
+        {
+            div.style.display = "none";  
+        }
+        else 
+        {
+            div.style.display = "block"; 
+        }
+    }
+</SCript>

@@ -30,9 +30,11 @@
             $row = mysqli_fetch_assoc($result);
             if($row)
             {
+                session_start();
                 if(password_verify($password, $row["admin_password"]))
                 {
-                    echo'<script>alert("Login successful!");window.location.href="Adashboard.php"</script>;';
+                    $_SESSION['id'] = $row["admin_id"];
+                    echo'<script>alert("Login successful!");window.location.href="Adashboard.php";</script>';
                 }
                 else
                 {

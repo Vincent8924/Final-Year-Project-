@@ -1,40 +1,29 @@
 <?php
-// Database configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobstreet";
+session_start();
+include("dataconnection.php");
 
-// Create connection
-$mysqli = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
-
-// Initialize variables for form input and errors
 $new_password = $confirm_password = $email = "";
 $new_password_err = $confirm_password_err = $email_err = "";
 $reset_success = false;
 
-// Check if the form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate email
+ 
     if (empty(trim($_POST["gmail"]))) {
         $email_err = "Please enter your email.";
     } else {
         $email = trim($_POST["gmail"]);
     }
 
-    // Validate new password
+   
     if (empty(trim($_POST["new-password"]))) {
         $new_password_err = "Please enter the new password.";     
     } else {
         $new_password = trim($_POST["new-password"]);
     }
 
-    // Validate confirm password
+   
     if (empty(trim($_POST["confirm-new-password"]))) {
         $confirm_password_err = "Please confirm the new password.";     
     } else {
@@ -44,38 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Check input errors before updating the database
+    
     if (empty($email_err) && empty($new_password_err) && empty($confirm_password_err)) {
-        // Hash the new password
+       
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-        // Prepare an update statement
+        
         $sql = "UPDATE jobseeker SET jobseeker_password = ? WHERE jobseeker_email = ?";
 
-        if ($stmt = $mysqli->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ss", $param_password, $param_email);
-
-            // Set parameters
-            $param_password = $hashed_password; // Use hashed password
-            $param_email = $email;
-
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                // Password updated successfully, set reset_success to true
-                $reset_success = true;
-            } else {
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-
-            // Close statement
-            $stmt->close();
         }
     }
 
-    // Close database connection
-    $mysqli->close();
-}
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset password2</title>
+    <title>Reset Password</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -94,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         header {
-            background-color: white; /* Set background color to white */
+            background-color: white; 
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -119,37 +87,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .navigation ul li a {
             text-decoration: none;
-            color: #333; /* Set the color of the links */
-            font-weight: bold; /* Make the links bold */
-            transition: color 0.3s; /* Add transition effect for color change */
+            color: #333; 
+            font-weight: bold; 
+            transition: color 0.3s; 
         }
 
         .navigation ul li a:hover {
-            color: #555; /* Change the color on hover */
+            color: #555; 
         }
 
         .sign-in,
         .employer-site {
             display: inline-block;
-            padding: 8px 16px; /* Adjust padding as needed */
-            border: 2px solid blue; /* Set border to blue */
-            border-radius: 5px; /* Add border radius for rounded corners */
+            padding: 8px 16px; 
+            border: 2px solid blue;
+            border-radius: 5px; 
         }
 
         .sign-in a,
         .employer-site a {
             text-decoration: none;
-            color: rgb(12, 12, 191); /* Set link color to blue */
+            color: rgb(12, 12, 191); 
         }
 
         .sign-in:hover,
         .employer-site:hover {
-            background-color: blue; /* Change background color on hover */
+            background-color: blue; 
         }
 
         .sign-in:hover a,
         .employer-site:hover a {
-            color: white; /* Change link color on hover */
+            color: white; 
         }
 
         .logo {
@@ -157,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .logo img {
-            height: 50px; /* Adjust height as needed */
+            height: 50px; 
         }
 
         .form-container {
@@ -167,8 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 20px;
             max-width: 400px;
             width: 100%;
-            margin: 0 auto; /* Center the form horizontally */
-            margin-top: 50px; /* Add space from the top */
+            margin: 0 auto; 
+            margin-top: 50px; 
         }
 
         .form-container h2 {
@@ -209,7 +177,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 10px;
         }
 
-        /* Success message style */
         .success-message {
             background-color: lightgreen;
             color: green;
@@ -247,7 +214,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2>Reset Password</h2>
 
     <?php
-    // Display email error message
     if (!empty($email_err)) {
         echo "<p class='error'>$email_err</p>";
     }
@@ -257,7 +223,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="email" id="gmail" name="gmail" required>
 
     <?php
-    // Display new password error message
     if (!empty($new_password_err)) {
         echo "<p class='error'>$new_password_err</p>";
     }
@@ -267,7 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="password" id="new-password" name="new-password" required>
 
     <?php
-    // Display confirm password error message
+
     if (!empty($confirm_password_err)) {
         echo "<p class='error'>$confirm_password_err</p>";
     }
@@ -277,18 +242,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="password" id="confirm-new-password" name="confirm-new-password" required>
 
     <button type="submit">Reset Password</button>
-</form>
 
-
-<script>
-    // JavaScript code to display a pop-up window on successful password reset
-    <?php if ($reset_success): ?>
-    window.onload = function() {
-        alert("Password reset successful!");
+    <?php
+  
+    if ($reset_success) {
+        echo "<p class='success-message'>Password reset successful!</p>";
     }
-    <?php endif; ?>
-</script>
-
+    ?>
+</form>
 
 </body>
 </html>

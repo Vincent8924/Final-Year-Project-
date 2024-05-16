@@ -1,6 +1,6 @@
 <?php 
     include("vdataconnection.php"); 
-    include("session.php");
+    include("Asession.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,15 +17,22 @@
             <a class="AdminAcc" onclick="displaybar()">
                 <?php
                     $id = $_SESSION['id'];
+
+                    $result = mysqli_query($connect,"SELECT * FROM admin where admin_id='$id'");
+                    if($result)
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $fname = $row["admin_fname"];
+                    }
                 ?>
-                Admin ID: <?php echo"$id"; ?>            
+                <?php echo"$fname"; ?>            
             </a>
         </div>
     </header>
     
     <div class="aAccBar" id="aAccBar">
         <div class="bAccBar">
-            <a href="">Profile</a>
+            <a href="Aprofile.php" >Profile</a>
         </div>
         <div class="bAccBar">
             <form action="" method="POST" id="logout">
@@ -82,7 +89,6 @@
                     <tbody>
                         <?php
                             $result = mysqli_query($connect, "SELECT * FROM employer;");
-                            $count = mysqli_num_rows($result);
                             while($row = mysqli_fetch_assoc($result))
                             {
                         ?>

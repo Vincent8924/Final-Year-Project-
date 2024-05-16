@@ -302,6 +302,8 @@ $result = $connect->query($sql);
         categorySelector.addEventListener('change', function() {
             searchBar.dispatchEvent(new Event('input'));
         });
+
+        
     </script>
 </body>
 </html>

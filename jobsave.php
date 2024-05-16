@@ -1,5 +1,5 @@
 <?php
-// Start session
+
 session_start();
 
 // Check if user is logged in
@@ -22,12 +22,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $connect->connect_error);
 }
 
 // Query to fetch saved job posts for the user
 $sql = "SELECT * FROM saved_jobs WHERE user_email='$user_email'";
-$result = $conn->query($sql);
+$result = $connect->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">

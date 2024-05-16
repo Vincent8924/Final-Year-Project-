@@ -1,79 +1,13 @@
 <?php
 session_start();
+include("dataconnection.php");
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobstreet";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$firstName = "";
-$lastName = "";
-$email = "";
-
-if (isset($_GET['email'])) {
-    $email = $_GET['email'];
-
-    $query = $conn->prepare("SELECT jobseeker_firstname, jobseeker_lastname FROM jobseeker WHERE jobseeker_email = ?");
-    $query->bind_param("s", $email);
-    $query->execute();
-    $query->store_result();
-    
-    if ($query->num_rows > 0) {
-        $query->bind_result($firstName, $lastName);
-        $query->fetch();
-    }
-}
-
-if (isset($_POST['submit'])) {
-    $personalSummary = $_POST['personal_summary'] ?? '';
-    $education = $_POST['education'] ?? '';
-    $skills = $_POST['skills'] ?? '';
-    $workExperience = $_POST['work_experience'] ?? '';
-
-    if (!empty($personalSummary)) {
-        $updateQuery = $conn->prepare("UPDATE userprofile SET PersonalSummary = ? WHERE Email = ?");
-        $updateQuery->bind_param("ss", $personalSummary, $email);
-        if ($updateQuery->execute()) {
-            echo "Personal summary saved successfully.";
-        } else {
-            echo "Error saving personal summary.";
-        }
-    }
-    if (!empty($education)) {
-        $updateQuery = $conn->prepare("UPDATE userprofile SET Education = ? WHERE Email = ?");
-        $updateQuery->bind_param("ss", $education, $email);
-        if ($updateQuery->execute()) {
-            echo "Education saved successfully.";
-        } else {
-            echo "Error saving education.";
-        }
-    }
-    if (!empty($skills)) {
-        $updateQuery = $conn->prepare("UPDATE userprofile SET Skill = ? WHERE Email = ?");
-        $updateQuery->bind_param("ss", $skills, $email);
-        if ($updateQuery->execute()) {
-            echo "Skills saved successfully.";
-        } else {
-            echo "Error saving skills.";
-        }
-    }
-    if (!empty($workExperience)) {
-        $updateQuery = $conn->prepare("UPDATE userprofile SET WorkExperience = ? WHERE Email = ?");
-        $updateQuery->bind_param("ss", $workExperience, $email);
-        if ($updateQuery->execute()) {
-            echo "Work experience saved successfully.";
-        } else {
-            echo "Error saving work experience.";
-        }
-    }
-}
+$firstName = $_SESSION['firstName'];
+$lastName = $_SESSION['lastName'];
+$email = $_SESSION['email'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,28 +148,7 @@ if (isset($_POST['submit'])) {
             color: white; /* Change text color on hover */
         }
 
-        .edit-icon {
-            font-size: 20px;
-            color: #999; /* Change pen icon color to grey */
-            cursor: pointer;
-            right: 10px; /* Adjust the position of the icon */
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        /* Circle hover effect */
-        .edit-icon:hover::after {
-            content: "";
-            width: 30px;
-            height: 30px;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1; /* Ensure the circle is behind the pen icon */
-        }
-
+        
         /* Increase font size for specific sections */
         .section-title {
             font-size: 24px;

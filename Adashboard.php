@@ -145,7 +145,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="category">Job Category</th>
+                                <th class="category">Job Category</th> 
                                 <th>Amount</th>
                             </tr>
                         </thead>

@@ -2,30 +2,57 @@
 session_start();
 include("dataconnection.php");
 
+$firstName = "";
+$lastName = "";
+$email = "";
 
-$firstName = $_SESSION['firstName'];
-$lastName = $_SESSION['lastName'];
-$email = $_SESSION['email'];
+if (isset($_GET['email'])) {
+    $email = $_GET['email'];
+
+    $query = $connect->prepare("SELECT jobseeker_firstname, jobseeker_lastname FROM jobseeker WHERE jobseeker_email = ?");
+    $query->bind_param("s", $email);
+    $query->execute();
+    $query->store_result();
+    
+    if ($query->num_rows > 0) {
+        $query->bind_result($firstName, $lastName);
+        $query->fetch();
+    }
+}
+
+if (isset($_POST['submit'])) {
+    $personalSummary = $_POST['personal_summary'] ?? '';
+    $education = $_POST['education'] ?? '';
+    $skills = $_POST['skills'] ?? '';
+    $workExperience = $_POST['work_experience'] ?? '';
+
+    // Update user profile in the database
+    $updateQuery = $connect->prepare("UPDATE userprofile SET PersonalSummary = ?, Education = ?, Skill = ?, WorkExperience = ? WHERE Email = ?");
+    $updateQuery->bind_param("sssss", $personalSummary, $education, $skills, $workExperience, $email);
+
+    if ($updateQuery->execute()) {
+        echo "Profile information saved successfully.";
+    } else {
+        echo "Error saving profile information: " . $updateQuery->error;
+    }
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <!-- Add Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Your CSS styles */
-        /* Header styles */
+        
         header {
             background-color: white;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ccc; /* Add underline to the header */
+            border-bottom: 1px solid #ccc;
         }
 
         .logo {
@@ -57,7 +84,7 @@ $email = $_SESSION['email'];
             color: #333;
             font-weight: bold;
             transition: color 0.3s;
-            font-family: Arial, sans-serif; /* Change font style to Arial */
+            font-family: Arial, sans-serif; 
         }
 
         .navigation ul li a:hover {
@@ -76,7 +103,7 @@ $email = $_SESSION['email'];
         .employer-site a { 
             text-decoration: none;
             color: blue;
-            font-family: Arial, sans-serif; /* Change font style to Arial */
+            font-family: Arial, sans-serif; 
         }
 
         .employer-site:hover { 
@@ -88,7 +115,7 @@ $email = $_SESSION['email'];
         }
 
         .container {
-            max-width: 1200px; /* Increased max-width for the container */
+            max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -104,29 +131,29 @@ $email = $_SESSION['email'];
 
         .profile-info p {
             margin: 5px 0;
-            font-family: Arial, sans-serif; /* Change font style to Arial */
-            font-size: 18px; /* Increase font size */
+            font-family: Arial, sans-serif; 
+            font-size: 18px; 
         }
 
         .form-group {
             margin-bottom: 20px;
-            position: relative; /* Add relative positioning */
-            margin-left: 13%; /* Move the form group to the right */
+            position: relative; 
+            margin-left: 13%; 
         }
 
         input[type="text"],
         textarea {
-            width: 70%;
-            height: 180px;
-            padding: 12px 12px 12px 30px; /* Adjust padding */
-            border: 1px solid #ccc;
-            border-radius: 20px; /* Rounded rectangle */
-            box-sizing: border-box;
-            margin-top: 5px;
-            font-family: Arial, sans-serif; /* Change font style to Arial */
-            font-size: 16px; /* Increase font size */
-            position: relative; /* Add relative positioning */
-        }
+    width: 70%;
+    height: 180px;
+    padding: 12px 12px 12px 30px; 
+    border: 1px solid black; /* Change border color to black */
+    border-radius: 20px; 
+    box-sizing: border-box;
+    margin-top: 5px;
+    font-family: Arial, sans-serif; 
+    font-size: 16px; 
+    position: relative; 
+}
 
         .add-skill-btn,
         .select-language-btn {
@@ -137,35 +164,55 @@ $email = $_SESSION['email'];
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            font-family: Arial, sans-serif; /* Change font style to Arial */
-            transition: background-color 0.3s, color 0.3s; /* Add transition effect for both background and color */
+            font-family: Arial, sans-serif; 
+            transition: background-color 0.3s, color 0.3s; 
             margin-left: 10px;
         }
 
         .add-skill-btn:hover,
         .select-language-btn:hover {
-            background-color: darkblue; /* Change background color on hover */
-            color: white; /* Change text color on hover */
+            background-color: darkblue; 
+            color: white; 
         }
 
-        
-        /* Increase font size for specific sections */
+        .edit-icon {
+            font-size: 20px;
+            color: #999; 
+            cursor: pointer;
+            right: 10px; 
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .edit-icon:hover::after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1; 
+        }
+
+       
         .section-title {
             font-size: 24px;
             margin-bottom: 10px;
-            margin-left: 20px; /* Adjust the left margin */
+            margin-left: 20px;
         }
 
         body {
-            font-family: Arial, sans-serif; /* Change font style to Arial for the whole document */
+            font-family: Arial, sans-serif; 
         }
 
-        /* Style for icon */
+        
         .icon {
             margin-right: 120px;
         }
 
-        /* Additional styles for sliding animation */
+       
         @keyframes slideFromRight {
             0% {
                 opacity: 0;
@@ -179,25 +226,25 @@ $email = $_SESSION['email'];
 
         .slide-from-right {
             animation: slideFromRight 0.5s ease forwards;
-            width: 40%; /* Adjust width to occupy 2/5 of the page */
+            width: 40%; 
             height: 100%;
             position: fixed;
             top: 0;
             right: 0;
             background-color: #fff;
-            z-index: 999; /* Ensure it appears above other elements */
-            overflow-y: auto; /* Allow scrolling if content exceeds height */
+            z-index: 999; 
+            overflow-y: auto; 
             padding: 20px;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); /* Add box shadow */
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); 
         }
 
-        /* CSS for profile picture container */
+        
         .profile-picture-container {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        /* Style for the circular container */
+        
         .profile-picture-container input[type="file"] {
             display: none;
         }
@@ -210,7 +257,7 @@ $email = $_SESSION['email'];
             cursor: pointer;
         }
 
-        /* Style for the upload icon */
+        
         .upload-icon {
             position: absolute;
             bottom: 5px;
@@ -226,7 +273,7 @@ $email = $_SESSION['email'];
             color: #555;
         }
 
-        /* Hover effect for the upload icon */
+        
         .upload-icon:hover {
             background-color: #eee;
         }
@@ -236,17 +283,17 @@ $email = $_SESSION['email'];
             position: fixed;
             top: 0;
             right: 0;
-            width: 40%; /* Adjust width to occupy 2/5 of the page */
+            width: 40%; 
             height: 100%;
             background-color: #fff;
-            z-index: 999; /* Ensure it appears above other elements */
-            overflow-y: auto; /* Allow scrolling if content exceeds height */
+            z-index: 999; 
+            overflow-y: auto; 
             padding: 20px;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); /* Add box shadow */
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); 
             animation: slideFromRight 0.5s ease forwards;
         }
 
-        /* Animation for sliding from right to left */
+        
         @keyframes slideFromRight {
             0% {
                 opacity: 0;
@@ -286,7 +333,7 @@ $email = $_SESSION['email'];
     padding: 5px;
 }
 
-/* Hide the dropdown arrow for select box */
+
 #languageSelect::-ms-expand {
     display: none;
 }
@@ -302,8 +349,8 @@ $email = $_SESSION['email'];
     padding: 8px 16px;
     border: 2px solid blue;
     border-radius: 5px;
-    margin-left: 10px; /* Adjust margin */
-    margin-bottom: 10px; /* Adjust margin */
+    margin-left: 10px; 
+    margin-bottom: 10px; 
     background-color: white;
     text-decoration: none;
     color: blue;
@@ -336,17 +383,17 @@ $email = $_SESSION['email'];
         <div class="profile-info">
             <h1>Jobseeker Profile</h1>
             <p>
-                <i class="icon fas fa-user"></i> <!-- Icon for name -->
+                <i class="icon fas fa-user"></i> 
                 <strong>:</strong> <?php echo $firstName . ' ' . $lastName; ?>
             </p>
             <p>
-                <i class="icon fas fa-envelope"></i> <!-- Icon for email -->
+                <i class="icon fas fa-envelope"></i> 
                 <strong>:</strong> <?php echo $email; ?>
             </p>
         </div>
     </div>
 
-    <!-- Profile Picture Upload Section -->
+    
     <div class="container">
         <h2>Upload Profile Picture</h2>
         <form action="" method="POST" enctype="multipart/form-data">
@@ -360,9 +407,7 @@ $email = $_SESSION['email'];
             <button type="submit">Upload</button>
         </form>
     </div>
-    <!-- End of Profile Picture Upload Section -->
 
-    <!-- Removed containers, keeping content intact -->
 
     <div class="profile-info">
     <div class="form-group">
@@ -370,7 +415,6 @@ $email = $_SESSION['email'];
         <div style="position: relative;">
             <textarea id="personalSummaryDisplay" name="Personal Summary" readonly></textarea>
             <span class="edit-icon" onclick="toggleEditForm('editPersonalSummaryForm')">&#9998;</span>
-            <input name="name" type="text"  >
         </div>
     </div>
 
@@ -379,7 +423,7 @@ $email = $_SESSION['email'];
             <h1>Edit Personal Summary</h1>
             <input type="text" id="editedPersonalSummary" name="editedPersonalSummary" placeholder="Enter your personal summary">
             <div>
-            <button type="submit" name="submit" class="add-skill-btn">Save</butto>
+            <button type="submit" name="submit" class="add-skill-btn">Save PersonalSummary</butto>
                 <button type="button" class="add-skill-btn" onclick="toggleEditForm('editPersonalSummaryForm')">Cancel</button>
             </div>
         </form>
@@ -388,7 +432,7 @@ $email = $_SESSION['email'];
 
 <div class="form-group">
     <h1 class="section-title">Skills</h1>
-    <input type="text" id="skillsDisplay" name="skills">
+    <textarea id="SkillsDisplay" name="Skills" readonly></textarea>
     <span class="edit-icon" onclick="toggleEditForm('editSkillsFormContainer')">&#9998;</span>
 </div>
 
@@ -397,15 +441,15 @@ $email = $_SESSION['email'];
         <h1>Edit Skills</h1>
         <input type="text" id="editedSkills" name="editedSkills" placeholder="Enter your skills" >
         <div>
-        <button type="submit" name="submit" class="add-skill-btn">Save</button>
+        <button type="submit" name="submit" class="add-skill-btn">Save skills</button>
             <button type="button" class="add-skill-btn" onclick="toggleEditForm('editSkillsFormContainer')">Cancel</button>
         </div>
     </form>
 </div>
-      <!-- Education Form -->
+   
 <div class="form-group">
     <h1 class="section-title">Education</h1>
-    <input type="text" id="educationDisplay" name="education" >
+    <textarea id="educationDisplay" name="education" readonly></textarea>
     <span class="edit-icon" onclick="toggleEditForm('editEducationForm')">&#9998;</span>
 </div>
 
@@ -414,16 +458,15 @@ $email = $_SESSION['email'];
         <h1>Edit Education</h1>
         <input type="text" id="editedEducation" name="editedEducation" placeholder="Enter your education">
         <div>
-        <button type="submit" name="submit" class="add-skill-btn">Save</button>
+        <button type="submit" name="submit" class="add-skill-btn">Save Education</button>
             <button type="button" class="add-skill-btn" onclick="toggleEditForm('editEducationForm')">Cancel</button>
         </div>
     </form>
 </div>
 
-<!-- Work Experience Form -->
 <div class="form-group">
     <h1 class="section-title">Work Experience</h1>
-    <input type="text" id="workExperienceDisplay" name="workExperience" >
+    <textarea id="workExperienceDisplay" name="experience" readonly></textarea>
     <span class="edit-icon" onclick="toggleEditForm('editWorkExperienceForm')">&#9998;</span>
 </div>
 
@@ -432,7 +475,7 @@ $email = $_SESSION['email'];
         <h1>Edit Work Experience</h1>
         <input type="text" id="editedWorkExperience" name="editedWorkExperience" placeholder="Enter your work experience">
         <div>
-        <button type="submit" name="submit" class="add-skill-btn">Save</button>
+        <button type="submit" name="submit" class="add-skill-btn">Save Workaeaxperience</button>
             <button type="button" class="add-skill-btn" onclick="toggleEditForm('editWorkExperienceForm')">Cancel</button>
         </div>
     </form>
@@ -441,14 +484,14 @@ $email = $_SESSION['email'];
     
         <div class="form-group">
     <h1 class="section-title">Language</h1>
-    <!-- Language display box -->
+    
     <div id="selectedLanguageBox" class="language-box" style="display: none;"></div>
     <button class="add-skill-btn" onclick="toggleLanguageSelectForm()">Add Language</button>
-    <!-- Language select form -->
+    
     <form id="languageSelectForm">
         <input type="text" id="languageSearch" onkeyup="filterLanguages()" placeholder="Search for a language...">
         <select id="languageSelect" multiple>
-            <!-- Language options will be dynamically added here -->
+          
             <option value="English">English</option>
             <option value="Spanish">Spanish</option>
             <option value="French">French</option>
@@ -462,7 +505,7 @@ $email = $_SESSION['email'];
             <option value="Korean">Korean</option>
             <option value="Dutch">Dutch</option>
             <option value="Swedish">Swedish</option>
-            <!-- Add more options as needed -->
+          
         </select>
         <button type="button" onclick="toggleLanguageSelectForm()">Cancel</button>
         <button type="button" onclick="saveLanguage()">Save</button>
@@ -473,9 +516,7 @@ $email = $_SESSION['email'];
 
 
     <script>
-        // JavaScript to handle the functionality
-
-        // Array of world languages
+      
         const languages = [
             "English",
     "Spanish",
@@ -497,28 +538,25 @@ $email = $_SESSION['email'];
     "Turkish",
     "Polish",
     
-            // Add more languages as needed
+          
         ];
 
-        // Function to dynamically generate and display language options
         function showLanguageOptions() {
             const languageSelect = document.getElementById('languageSelect');
 
-            // Clear previous options
+            
             languageSelect.innerHTML = '';
 
-            // Generate options for each language in the array
+            
             languages.forEach(language => {
                 const option = document.createElement('option');
                 option.text = language;
                 languageSelect.add(option);
             });
 
-            // Display the select dropdown
             languageSelect.style.display = 'block';
         }
-        // Function to save selected language(s)
-// Function to save selected language(s)
+       
 function saveLanguage() {
     const select = document.getElementById('languageSelect');
     const selectedLanguages = [];
@@ -527,20 +565,33 @@ function saveLanguage() {
             selectedLanguages.push(select.options[i].value);
         }
     }
-    // Append selected languages to the existing content in the languageBox div
+   
     const languageBox = document.getElementById('selectedLanguageBox');
     selectedLanguages.forEach(language => {
         const languageElement = document.createElement('div');
         languageElement.textContent = language;
         languageBox.appendChild(languageElement);
     });
-    // Show the language box
+    
     languageBox.style.display = 'block';
-    // Hide the language select form
+    
     toggleLanguageSelectForm();
 }
 
-        /// Function to toggle edit form visibility
+function filterLanguages() {
+    const input = document.getElementById('languageSearch').value.toLowerCase();
+    const options = document.getElementById('languageSelect').options;
+    for (let i = 0; i < options.length; i++) {
+        const text = options[i].text.toLowerCase();
+        if (text.startsWith(input)) {
+            options[i].style.display = '';
+        } else {
+            options[i].style.display = 'none';
+        }
+    }
+}
+
+        
         function toggleEditForm() {
             var editForm = document.querySelector('.edit-form');
             if (editForm.style.display === 'none' || editForm.style.display === '') {
@@ -549,53 +600,7 @@ function saveLanguage() {
                 editForm.style.display = 'none';
             }
         }
-
-
-        // Function to save the edited personal summary
-        function savePersonalSummary() {
-            const editedSummary = document.getElementById('editedPersonalSummary').value;
-            document.getElementById('personalSummaryDisplay').value = editedSummary;
-            toggleEditForm('editPersonalSummaryForm');
-            return false; // To prevent form submission
-        }
-
-         // Function to toggle the visibility of the edit form with sliding animation
-    function toggleEditForm(formId) {
-        const form = document.getElementById(formId);
-        if (form.style.display === 'none' || form.style.display === '') {
-            form.classList.add('slide-from-right');
-            form.style.display = 'block';
-        } else {
-            form.style.display = 'none';
-        }
-    }
-
-    // Function to save the edited education
-function saveEducation() {
-    const editedEducation = document.getElementById('editedEducation').value;
-    document.getElementById('educationDisplay').value = editedEducation;
-    toggleEditForm('editEducationForm');
-    return false; // To prevent form submission
-}
-
-// Function to save the edited work experience
-function saveWorkExperience() {
-    const editedWorkExperience = document.getElementById('editedWorkExperience').value;
-    document.getElementById('workExperienceDisplay').value = editedWorkExperience;
-    toggleEditForm('editWorkExperienceForm');
-    return false; // To prevent form submission
-}
-
-// Function to save the edited skills
-function saveSkills() {
-    const editedSkills = document.getElementById('editedSkills').value;
-    document.getElementById('skillsDisplay').value = editedSkills;
-    toggleEditForm('editSkillsFormContainer');
-    // You may also want to send the editedSkills to the server using AJAX if necessary
-    return false; // To prevent form submission
-}
-
-        // Function to display selected profile picture
+       
         function displayProfilePicture(event) {
             const input = event.target;
             const reader = new FileReader();
@@ -613,7 +618,7 @@ function saveSkills() {
             form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
         }
 
-        // Function to display selected profile picture
+     
         function displayProfilePicture(event) {
             const input = event.target;
             const reader = new FileReader();
@@ -626,17 +631,131 @@ function saveSkills() {
             reader.readAsDataURL(input.files[0]);
         }
 
-        function filterLanguages() {
-    const input = document.getElementById('languageSearch').value.toLowerCase();
-    const options = document.getElementById('languageSelect').options;
-    for (let i = 0; i < options.length; i++) {
-        const text = options[i].text.toLowerCase();
-        if (text.startsWith(input)) {
-            options[i].style.display = '';
-        } else {
-            options[i].style.display = 'none';
+        function toggleEditForm(formId) {
+            var editForm = document.getElementById(formId);
+            if (editForm.style.display === 'none' || editForm.style.display === '') {
+                editForm.style.display = 'block';
+            } else {
+                editForm.style.display = 'none';
+            }
         }
-    }
+
+        function savePersonalSummary() {
+    const editedSummary = document.getElementById('editedPersonalSummary').value;
+    document.getElementById('personalSummaryDisplay').value = editedSummary;
+    toggleEditForm('editPersonalSummaryForm');
+
+    // Prepare data for submission
+    const email = "<?php echo $email; ?>";
+    const formData = new FormData();
+    formData.append('personal_summary', editedSummary);
+    formData.append('email', email);
+    formData.append('submit', 'submit'); // Add submit button value
+
+    // Send data to the server via AJAX
+    fetch('save_personal_summary.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Personal summary saved successfully.');
+        } else {
+            console.error('Error saving personal summary.');
+        }
+    })
+    .catch(error => {
+        console.error('Error saving personal summary:', error);
+    });
+
+    return false; // Prevent default form submission
+}
+
+function saveEducation() {
+    const editedEducation = document.getElementById('editedEducation').value;
+    document.getElementById('educationDisplay').value = editedEducation;
+    toggleEditForm('editEducationForm');
+
+    // Update education in the database via AJAX
+    const email = "<?php echo $email; ?>";
+    const formData = new FormData();
+    formData.append('education', editedEducation);
+    formData.append('email', email);
+
+    fetch('save_education.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Education saved successfully.');
+        } else {
+            console.error('Error saving education.');
+        }
+    })
+    .catch(error => {
+        console.error('Error saving education:', error);
+    });
+
+    return false;
+}
+
+function saveSkills() {
+    const editedSkills = document.getElementById('editedSkills').value;
+    document.getElementById('skillsDisplay').value = editedSkills;
+    toggleEditForm('editSkillsFormContainer');
+
+    // Update skills in the database via AJAX
+    const email = "<?php echo $email; ?>";
+    const formData = new FormData();
+    formData.append('skills', editedSkills);
+    formData.append('email', email);
+
+    fetch('save_skills.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Skills saved successfully.');
+        } else {
+            console.error('Error saving skills.');
+        }
+    })
+    .catch(error => {
+        console.error('Error saving skills:', error);
+    });
+
+    return false;
+}
+
+function saveWorkExperience() {
+    const editedWorkExperience = document.getElementById('editedWorkExperience').value;
+    document.getElementById('workExperienceDisplay').value = editedWorkExperience;
+    toggleEditForm('editWorkExperienceForm');
+
+    // Update work experience in the database via AJAX
+    const email = "<?php echo $email; ?>";
+    const formData = new FormData();
+    formData.append('work_experience', editedWorkExperience);
+    formData.append('email', email);
+
+    fetch('save_work_experience.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Work experience saved successfully.');
+        } else {
+            console.error('Error saving work experience.');
+        }
+    })
+    .catch(error => {
+        console.error('Error saving work experience:', error);
+    });
+
+    return false;
 }
 
 

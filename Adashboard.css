@@ -118,6 +118,7 @@ aside nav ul li a:hover
 main {
     flex: 1;
     height: 90vh;
+    overflow-y: auto;
 }
 
 section {

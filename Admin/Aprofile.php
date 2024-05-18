@@ -1,6 +1,6 @@
 <?php 
-    include("vdataconnection.php"); 
-    include("Asession.php");
+    include(__DIR__ . "/../Admin/Adataconnection.php");
+    include(__DIR__ . "/../Admin/Asession.php");
 ?>
 
 <!DOCTYPE html>

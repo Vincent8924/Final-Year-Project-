@@ -1,4 +1,6 @@
-<?php include("vdataconnection.php"); ?> 
+<?php 
+    include(__DIR__ . "/../Admin/Adataconnection.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>

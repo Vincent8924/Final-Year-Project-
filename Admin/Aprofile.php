@@ -60,7 +60,7 @@
                     <li><a href="Acompanymanagement.php">Companies</a></li>
                     <li><a href="Aadminmanagement.php">Admin</a></li>
                     <li><a href="Apost.php">Post</a></li>
-                    <li><a href="Apackage.php">package</a></li>
+                    <li><a href="Apackage.php">Package</a></li>
                     <li><a href="Asell.php">Sell</a></li>
                     <li><a href="Aprofile.php" id="now">Profile</a></li>
                 </ul>

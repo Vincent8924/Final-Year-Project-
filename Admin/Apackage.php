@@ -2,13 +2,14 @@
     include(__DIR__ . "/../Admin/Adataconnection.php");
     include(__DIR__ . "/../Admin/Asession.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="Apost.css">
+    <link rel="stylesheet" href="Apackage.css">
 </head>
 
 <body>
@@ -56,8 +57,8 @@
                     <li><a href="Aseekermanagement.php">Seeker</a></li>
                     <li><a href="Acompanymanagement.php">Companies</a></li>
                     <li><a href="Aadminmanagement.php">Admin</a></li>
-                    <li><a href="Apost.php" id="now">Post</a></li>
-                    <li><a href="Apackage.php">Package</a></li>
+                    <li><a href="Apost.php">Post</a></li>
+                    <li><a href="Apackage.php" id="now">Package</a></li>
                     <li><a href="Asell.php">Sell</a></li>
                     <li><a href="Aprofile.php">Profile</a></li>
                 </ul>

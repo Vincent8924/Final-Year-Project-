@@ -275,3 +275,8 @@ main {
 {
     background-color: #2e2d2d;
 }
+
+#addseeker input
+{
+    padding: 5px 10px 5px 10px;
+}

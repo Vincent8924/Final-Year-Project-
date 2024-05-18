@@ -138,7 +138,7 @@
                     <div class="label">
                         <label >First Name </label>
                     </div>
-                        <input type="text" value="  <?php echo"$fname"?>" name="fname" required><br>
+                        <input type="text" value="<?php echo"$fname"?>" name="fname" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editfname">   
@@ -158,7 +158,7 @@
                     <div class="label">
                         <label >Last Name </label>
                     </div>
-                        <input type="text" value="  <?php echo"$lname"?>" name="lname" required><br>
+                        <input type="text" value="<?php echo"$lname"?>" name="lname" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editlname">   
@@ -178,7 +178,7 @@
                     <div class="label">
                         <label >Email </label>
                     </div>
-                        <input type="text" value="  <?php echo"$email"?>" name="email" required><br>
+                        <input type="text" value="<?php echo"$email"?>" name="email" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editemail">   

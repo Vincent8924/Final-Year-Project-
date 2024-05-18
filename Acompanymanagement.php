@@ -136,25 +136,25 @@
                             <div class="label">
                                 <label >Company's name </label>
                             </div>
-                            <input type="text" placeholder="  Name" name="name" required><br>
+                            <input type="text" placeholder="Name" name="name" required><br>
                         </div>
                         <div class="bform">
                             <div class="label">
                                 <label>Company's Email </label>
                             </div>
-                            <input type="email" placeholder="  Email" name="email" required><br>
+                            <input type="email" placeholder="Email" name="email" required><br>
                         </div>
                         <div class="bform">
                             <div class="label">
                                 <label >Password </label>
                             </div>
-                            <input type="password" placeholder="  Password" name="password" required id="password" oninput="checkPasswordLength()"><br>
+                            <input type="password" placeholder="Password" name="password" required id="password" oninput="checkPasswordLength()"><br>
                         </div>
                         <div class="bform">
                             <div class="label">
                                 <label >Confirm password </label>
                             </div>
-                            <input type="password" placeholder="  Confirm password" name="confirm_password" id="confirm_password" required oninput="checkPasswordMatch()"><br>
+                            <input type="password" placeholder="Confirm password" name="confirm_password" id="confirm_password" required oninput="checkPasswordMatch()"><br>
                         </div>
                         <br>
                         <div class="alert">

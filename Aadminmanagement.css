@@ -196,7 +196,6 @@ main {
 .bform input
 {
     border-radius: 5px;
-    text-align: center;
 }
 .label
 {
@@ -289,4 +288,8 @@ main {
 .checkbox
 {
     margin-left: 85px;
+}
+#addadmin input
+{
+    padding: 5px 10px 5px 10px;
 }

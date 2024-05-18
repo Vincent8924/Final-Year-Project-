@@ -17,23 +17,114 @@ if (isset($_GET['email'])) {
     if ($query->num_rows > 0) {
         $query->bind_result($firstName, $lastName);
         $query->fetch();
+
+        
+        $updateQuery = $connect->prepare("INSERT INTO userprofile (jobseeker_email) VALUES (?) ON DUPLICATE KEY UPDATE jobseeker_email = ?");
+        $updateQuery->bind_param("ss", $email, $email);
+        $updateQuery->execute();
     }
 }
 
-if (isset($_POST['submit'])) {
-    $personalSummary = $_POST['personal_summary'] ?? '';
-    $education = $_POST['education'] ?? '';
-    $skills = $_POST['skills'] ?? '';
-    $workExperience = $_POST['work_experience'] ?? '';
+if (isset($_FILES['profile_picture']) && isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+    $profilePicture = $_FILES['profile_picture'];
 
-    // Update user profile in the database
-    $updateQuery = $connect->prepare("UPDATE userprofile SET PersonalSummary = ?, Education = ?, Skill = ?, WorkExperience = ? WHERE Email = ?");
-    $updateQuery->bind_param("sssss", $personalSummary, $education, $skills, $workExperience, $email);
-
-    if ($updateQuery->execute()) {
-        echo "Profile information saved successfully.";
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (in_array($profilePicture['type'], $allowedTypes) && $profilePicture['size'] <= 5000000) { // 5MB limit
+        $uploadDir = 'uploads/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        $uploadFile = $uploadDir . basename($profilePicture['name']);
+        if (move_uploaded_file($profilePicture['tmp_name'], $uploadFile)) {
+      
+            $relativePath = 'uploads/' . basename($profilePicture['name']);
+            
+           
+            $query = $connect->prepare("UPDATE userprofile SET ProfilePic = ? WHERE jobseeker_email = ?");
+            $query->bind_param("ss", $uploadFile, $email);
+            if ($query->execute()) {
+                if ($query->affected_rows > 0) {
+                    echo "Profile picture uploaded and database updated successfully.";
+                } else {
+                    echo "Profile picture uploaded but no database update. Check if the email exists in the database.";
+                }
+            } else {
+                echo "Error updating profile picture: " . $query->error;
+            }
+        } else {
+            echo "Error uploading file.";
+        }
     } else {
-        echo "Error saving profile information: " . $updateQuery->error;
+        echo "Invalid file type or size.";
+    }
+} else {
+    echo "No file uploaded or session email not set.";
+}
+
+
+if (isset($_POST['personal_summary']) && isset($_POST['email'])) {
+    $personalSummary = $_POST['personal_summary'];
+    $email = $_POST['email'];
+
+    $query = $connect->prepare("UPDATE userprofile SET personal_summary = ? WHERE jobseeker_email = ?");
+    $query->bind_param("ss", $personalSummary, $email);
+    if ($query->execute()) {
+        echo "Personal summary updated successfully.";
+    } else {
+        echo "Error updating personal summary: " . $query->error;
+    }
+}
+
+if (isset($_POST['education']) && isset($_POST['email'])) {
+    $education = $_POST['education'];
+    $email = $_POST['email'];
+
+    $query = $connect->prepare("UPDATE userprofile SET education = ? WHERE jobseeker_email = ?");
+    $query->bind_param("ss", $education, $email);
+    if ($query->execute()) {
+        echo "Education updated successfully.";
+    } else {
+        echo "Error updating education: " . $query->error;
+    }
+}
+
+if (isset($_POST['skills']) && isset($_POST['email'])) {
+    $skills = $_POST['skills'];
+    $email = $_POST['email'];
+
+    $query = $connect->prepare("UPDATE userprofile SET skills = ? WHERE jobseeker_email = ?");
+    $query->bind_param("ss", $skills, $email);
+    if ($query->execute()) {
+        echo "Skills updated successfully.";
+    } else {
+        echo "Error updating skills: " . $query->error;
+    }
+}
+
+if (isset($_POST['work_experience']) && isset($_POST['email'])) {
+    $workExperience = $_POST['work_experience'];
+    $email = $_POST['email'];
+
+    $query = $connect->prepare("UPDATE userprofile SET work_experience = ? WHERE jobseeker_email = ?");
+    $query->bind_param("ss", $workExperience, $email);
+    if ($query->execute()) {
+        echo "Work experience updated successfully.";
+    } else {
+        echo "Error updating work experience: " . $query->error;
+    }
+}
+
+if (isset($_POST['language']) && isset($_POST['email'])) {
+    $language = $_POST['language'];
+    $email = $_POST['email'];
+
+    $query = $connect->prepare("INSERT INTO userprofile (email, language) VALUES (?, ?)");
+    $query->bind_param("ss", $email, $language);
+    if ($query->execute()) {
+        echo "Language added successfully.";
+    } else {
+        echo "Error adding language: " . $query->error;
     }
 }
 ?>
@@ -395,21 +486,21 @@ if (isset($_POST['submit'])) {
 
     
     <div class="container">
-        <h2>Upload Profile Picture</h2>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="profile-picture-container">
-                <input type="file" id="profilePictureInput" name="profile_picture" accept="image/*" onchange="displayProfilePicture(event)">
-                <label for="profilePictureInput">
-                    <img src="default_profile_picture.png" alt="Profile Picture" id="profilePicture">
-                    <span class="upload-icon"><i class="fas fa-upload"></i></span>
-                </label>
-            </div>
-            <button type="submit">Upload</button>
-        </form>
-    </div>
+    <h2>Upload Profile Picture</h2>
+    <form action="upload_profile_picture.php" method="POST" enctype="multipart/form-data">
+        <div class="profile-picture-container">
+            <input type="file" id="profilePictureInput" name="profile_picture" accept="image/*" onchange="displayProfilePicture(event)">
+            <label for="profilePictureInput">
+                <img src="default_profile_picture.png" alt="Profile Picture" id="profilePicture">
+                <span class="upload-icon"><i class="fas fa-upload"></i></span>
+            </label>
+        </div>
+        <button type="submit" class="add-skill-btn">Upload</button>
+    </form>
+</div>
 
 
-    <div class="profile-info">
+<div class="profile-info">
     <div class="form-group">
         <h1 class="section-title">Personal Summary</h1>
         <div style="position: relative;">
@@ -419,11 +510,11 @@ if (isset($_POST['submit'])) {
     </div>
 
     <div id="editPersonalSummaryForm" style="display: none;" class="slide-from-right">
-        <form id="editForm" onsubmit="return savePersonalSummary()">
+        <form onsubmit="return savePersonalSummary()">
             <h1>Edit Personal Summary</h1>
             <input type="text" id="editedPersonalSummary" name="editedPersonalSummary" placeholder="Enter your personal summary">
             <div>
-            <button type="submit" name="submit" class="add-skill-btn">Save PersonalSummary</butto>
+                <button type="submit" class="add-skill-btn">Save PersonalSummary</button>
                 <button type="button" class="add-skill-btn" onclick="toggleEditForm('editPersonalSummaryForm')">Cancel</button>
             </div>
         </form>
@@ -475,23 +566,20 @@ if (isset($_POST['submit'])) {
         <h1>Edit Work Experience</h1>
         <input type="text" id="editedWorkExperience" name="editedWorkExperience" placeholder="Enter your work experience">
         <div>
-        <button type="submit" name="submit" class="add-skill-btn">Save Workaeaxperience</button>
+        <button type="submit" name="submit" class="add-skill-btn">Save Workexperience</button>
             <button type="button" class="add-skill-btn" onclick="toggleEditForm('editWorkExperienceForm')">Cancel</button>
         </div>
     </form>
 </div>
 
     
-        <div class="form-group">
+<div class="form-group">
     <h1 class="section-title">Language</h1>
-    
-    <div id="selectedLanguageBox" class="language-box" style="display: none;"></div>
+    <div id="selectedLanguageBox" class="language-box"></div>
     <button class="add-skill-btn" onclick="toggleLanguageSelectForm()">Add Language</button>
-    
-    <form id="languageSelectForm">
+    <form id="languageSelectForm" style="display: none;">
         <input type="text" id="languageSearch" onkeyup="filterLanguages()" placeholder="Search for a language...">
         <select id="languageSelect" multiple>
-          
             <option value="English">English</option>
             <option value="Spanish">Spanish</option>
             <option value="French">French</option>
@@ -505,13 +593,11 @@ if (isset($_POST['submit'])) {
             <option value="Korean">Korean</option>
             <option value="Dutch">Dutch</option>
             <option value="Swedish">Swedish</option>
-          
         </select>
         <button type="button" onclick="toggleLanguageSelectForm()">Cancel</button>
         <button type="button" onclick="saveLanguage()">Save</button>
     </form>
 </div>
-    </div>
 
 
 
@@ -557,7 +643,7 @@ if (isset($_POST['submit'])) {
             languageSelect.style.display = 'block';
         }
        
-function saveLanguage() {
+        function saveLanguage() {
     const select = document.getElementById('languageSelect');
     const selectedLanguages = [];
     for (let i = 0; i < select.options.length; i++) {
@@ -578,17 +664,25 @@ function saveLanguage() {
     toggleLanguageSelectForm();
 }
 
+
 function filterLanguages() {
-    const input = document.getElementById('languageSearch').value.toLowerCase();
-    const options = document.getElementById('languageSelect').options;
-    for (let i = 0; i < options.length; i++) {
-        const text = options[i].text.toLowerCase();
-        if (text.startsWith(input)) {
+    var input = document.getElementById('languageSearch');
+    var filter = input.value.toLowerCase();
+    var options = document.getElementById('languageSelect').options;
+
+    for (var i = 0; i < options.length; i++) {
+        var txtValue = options[i].textContent || options[i].innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
             options[i].style.display = '';
         } else {
             options[i].style.display = 'none';
         }
     }
+}
+
+function toggleLanguageSelectForm() {
+    var form = document.getElementById('languageSelectForm');
+    form.style.display = form.style.display === 'block' ? 'none' : 'block';
 }
 
         
@@ -602,23 +696,16 @@ function filterLanguages() {
         }
        
         function displayProfilePicture(event) {
-            const input = event.target;
-            const reader = new FileReader();
+    const input = event.target;
+    const reader = new FileReader();
 
-            reader.onload = function () {
-                const img = document.getElementById('profilePicture');
-                img.src = reader.result;
-            };
+    reader.onload = function () {
+        const img = document.getElementById('profilePicture');
+        img.src = reader.result;
+    };
 
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        function toggleLanguageSelectForm() {
-            const form = document.getElementById('languageSelectForm');
-            form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
-        }
-
-     
+    reader.readAsDataURL(input.files[0]);
+}    
         function displayProfilePicture(event) {
             const input = event.target;
             const reader = new FileReader();
@@ -640,19 +727,25 @@ function filterLanguages() {
             }
         }
 
-        function savePersonalSummary() {
+        function toggleEditForm(formId) {
+    var editForm = document.getElementById(formId);
+    if (editForm.style.display === 'none' || editForm.style.display === '') {
+        editForm.style.display = 'block';
+    } else {
+        editForm.style.display = 'none';
+    }
+}
+
+function savePersonalSummary() {
     const editedSummary = document.getElementById('editedPersonalSummary').value;
     document.getElementById('personalSummaryDisplay').value = editedSummary;
     toggleEditForm('editPersonalSummaryForm');
 
-    // Prepare data for submission
     const email = "<?php echo $email; ?>";
     const formData = new FormData();
     formData.append('personal_summary', editedSummary);
     formData.append('email', email);
-    formData.append('submit', 'submit'); // Add submit button value
 
-    // Send data to the server via AJAX
     fetch('save_personal_summary.php', {
         method: 'POST',
         body: formData
@@ -668,7 +761,7 @@ function filterLanguages() {
         console.error('Error saving personal summary:', error);
     });
 
-    return false; // Prevent default form submission
+    return false;
 }
 
 function saveEducation() {
@@ -676,7 +769,6 @@ function saveEducation() {
     document.getElementById('educationDisplay').value = editedEducation;
     toggleEditForm('editEducationForm');
 
-    // Update education in the database via AJAX
     const email = "<?php echo $email; ?>";
     const formData = new FormData();
     formData.append('education', editedEducation);
@@ -702,10 +794,9 @@ function saveEducation() {
 
 function saveSkills() {
     const editedSkills = document.getElementById('editedSkills').value;
-    document.getElementById('skillsDisplay').value = editedSkills;
+    document.getElementById('SkillsDisplay').value = editedSkills;
     toggleEditForm('editSkillsFormContainer');
 
-    // Update skills in the database via AJAX
     const email = "<?php echo $email; ?>";
     const formData = new FormData();
     formData.append('skills', editedSkills);
@@ -734,7 +825,6 @@ function saveWorkExperience() {
     document.getElementById('workExperienceDisplay').value = editedWorkExperience;
     toggleEditForm('editWorkExperienceForm');
 
-    // Update work experience in the database via AJAX
     const email = "<?php echo $email; ?>";
     const formData = new FormData();
     formData.append('work_experience', editedWorkExperience);
@@ -757,8 +847,6 @@ function saveWorkExperience() {
 
     return false;
 }
-
-
     </script>
 </body>
 </html>

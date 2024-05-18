@@ -133,4 +133,133 @@ footer {
     text-align: center;
 }
 
+.Acontainer
+{
+    width: 150vh;
+    max-height: 70vh;
+    overflow-y: hidden;
+    border: #9e9e9e solid 2px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.Bcontainer
+{
+    width: 120vh;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: solid black 2px;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+td 
+{
+    padding: 10px;
+    width: 40vh;
+}
+.Atd
+{
+    width: 25vh;
+    text-align: left;
+}
+.colontd
+{
+    text-align: center;
+    font-weight: bold;
+    width: 15vh;
+}
+.valuetd
+{
+    width: 55vh;
+    text-align: left;
+}
+.btntd
+{
+    text-align: right;
+    width: 15vh;
+}
+.edit
+{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #f4f4f4;
+}
+
+.aform
+{
+    margin: 20px;
+}
+.aform h2
+{
+    margin-bottom: 15px;
+}
+.bform
+{
+    display: flex;
+    margin-bottom: 10px;
+}
+.bform input
+{
+    border-radius: 5px;
+}
+.label
+{
+    width: 175px;
+}
+#editfname,#editlname,#editemail
+{
+    display: none;
+    position: absolute;
+    background-color: #f4f4f4;
+    top: 30vh;
+    left: 40%;
+    border: solid #2e2d2d;
+    border-radius: 5px;
+}
+.x button
+{
+    float: right;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 15px;
+}
+.x button:hover
+{
+    background-color: red;
+}
+
+
+.formbtn
+{
+    padding: 8px 15px;
+    background-color: #4b4a4d; 
+    color: #fff;
+    font-weight: bold;
+    text-align: center;     
+    float: right;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.formbtn:hover
+{
+    background-color: #2e2d2d;
+}
 

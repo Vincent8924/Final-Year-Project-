@@ -51,11 +51,13 @@
         <aside>
             <nav class="Menu">
                 <ul>
-                    <li><a href="Adashboard.php" >Dashboard</a></li>
+                    <li><a href="Adashboard.php">Dashboard</a></li>
                     <li><a href="Aseekermanagement.php">Seeker</a></li>
-                    <li><a href="Acompanymanagement.php" id="now">Companies</a></li>
-                    <li><a href="Aadminmanagement.php" >Admin</a></li>
+                    <li><a href="Acompanymanagement.php"  id="now">Companies</a></li>
+                    <li><a href="Aadminmanagement.php">Admin</a></li>
                     <li><a href="Apost.php">Post</a></li>
+                    <li><a href="Apackage.php">package</a></li>
+                    <li><a href="Asell.php">Sell</a></li>
                     <li><a href="Aprofile.php">Profile</a></li>
                 </ul>
             </nav>

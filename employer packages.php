@@ -48,8 +48,44 @@
     <h1 class="center">Our packages</h1>
 
     
+    <?php
+    
+    $result = mysqli_query($connect, "SELECT * FROM packages");	
+     while($row = mysqli_fetch_assoc($result))
+        {
+        
+        ?>	
+        <table class="mid_table">
+        <tr>
+            <td>
+                <form class="formbox" method="post">
+                    <div class="center">
+                        <h1><u><?php echo $row["name"] ?></u></h1>
+                        
+                        <h2>
+                        <?php echo $row["description"] ?>
+                        </h2>
 
-    <table class="mid_table">
+                        <h1>RM<?php echo $row["price"] ?></h1>
+                        <input type="hidden" name="post_number" value="1">
+                    </div>
+
+
+                
+                <button class="centerButton" type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
+                
+                <br/><br/>
+
+                </form>
+            </td>
+            </tr>
+            </table>
+
+
+        <?php } ?>
+
+
+    <!--<table class="mid_table">
         <tr>
             <td>
                 <form class="formbox" method="post">
@@ -111,7 +147,7 @@
                             
 
                             <h2>
-                                allow post two post
+                                allow post ten post
                             <br/><br/>
                                 without time limited
                             </h2>
@@ -136,7 +172,7 @@
             </td>
                     
         </tr>
-    </table>
+    </table>-->
 
 
     <?php

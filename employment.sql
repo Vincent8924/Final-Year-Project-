@@ -110,3 +110,16 @@ CREATE DATABASE employment;
     `Education` text DEFAULT NULL,
     `Language` varchar(50) DEFAULT NULL
   ) ;
+
+  CREATE TABLE packages
+  (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` varchar(200) NOT NULL,
+    `description` varchar(500) NOT NULL,
+    `price` INT NOT NULL
+  ) ;
+
+INSERT INTO `packages` (`name`, `description`, `price`) VALUES
+('1 post package','without time limit',8),
+('5 post package','without time limit',35),
+('10 post package','without time limit',60)

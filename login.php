@@ -1,47 +1,32 @@
 <?php
-// Start session
 session_start();
+include("dataconnection.php");
+$email = $_SESSION['email']; 
 
-// Check if form is submitted
-if(isset($_POST['submit'])){
-    // Database connection
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "jobstreet";
+if (isset($_POST['submit'])) {
+    $email = mysqli_real_escape_string($connect, $_POST['email']);
+    $password = mysqli_real_escape_string($connect, $_POST['password']);
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $query = "SELECT jobseeker_password FROM jobseeker WHERE jobseeker_email = '$email'";
+    $result = mysqli_query($connect, $query);
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row['jobseeker_password'])) {
+            $_SESSION['email'] = $email;
 
-    // Retrieve user input
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+            if (strpos($email, '@gmail.com') !== false) {
+                $_SESSION['gmail'] = $email;
+            }
 
-    // Query to check if the user exists
-    $sql = "SELECT * FROM jobseeker WHERE jobseeker_email='$email' AND jobseeker_password='$password'";
-    $result = $conn->query($sql);
-
-    // If user exists, redirect to homepage and store email in session
-    if ($result->num_rows > 0) {
-        // Start session
-        $_SESSION['email'] = $email; // Store user's email in session
-        // Check if user logged in with Gmail
-        if(strpos($email, '@gmail.com') !== false) {
-            $_SESSION['gmail'] = $email; // Store user's Gmail in session
+            header("Location: homepage.php");
+            exit();
+        } else {
+            $login_fail = true;
         }
-        header("Location: homepage.php"); // Redirect to homepage
-        exit();
     } else {
-        // If user does not exist, display login fail message
         $login_fail = true;
     }
-
-    // Close connection
-    $conn->close();
 }
 ?>
 
@@ -53,7 +38,7 @@ if(isset($_POST['submit'])){
     <title>Login | JobStreet</title>
     <style>
         body {
-            background-image:url('3.jpg');
+            background-image: url('3.jpg');
             background-repeat: no-repeat;
             background-size: 100% 160%;
             font-family: Arial, sans-serif;
@@ -63,7 +48,7 @@ if(isset($_POST['submit'])){
         }
 
         header {
-            background-color: white; /* Set background color to white */
+            background-color: white;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -72,7 +57,7 @@ if(isset($_POST['submit'])){
 
         .navigation {
             display: inline-block;
-            margin-left: 20px;
+            margin-right: 50%;
         }
 
         .navigation ul {
@@ -88,37 +73,37 @@ if(isset($_POST['submit'])){
 
         .navigation ul li a {
             text-decoration: none;
-            color: #333; /* Set the color of the links */
-            font-weight: bold; /* Make the links bold */
-            transition: color 0.3s; /* Add transition effect for color change */
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
         }
 
         .navigation ul li a:hover {
-            color: #555; /* Change the color on hover */
+            color: #555;
         }
 
         .sign-in,
         .employer-site {
             display: inline-block;
-            padding: 8px 16px; /* Adjust padding as needed */
-            border: 2px solid blue; /* Set border to blue */
-            border-radius: 5px; /* Add border radius for rounded corners */
+            padding: 8px 16px;
+            border: 2px solid blue;
+            border-radius: 5px;
         }
 
         .sign-in a,
         .employer-site a {
             text-decoration: none;
-            color: rgb(12, 12, 191); /* Set link color to blue */
+            color: rgb(12, 12, 191);
         }
 
         .sign-in:hover,
         .employer-site:hover {
-            background-color: blue; /* Change background color on hover */
+            background-color: blue;
         }
 
         .sign-in:hover a,
         .employer-site:hover a {
-            color: white; /* Change link color on hover */
+            color: white;
         }
 
         .logo {
@@ -126,39 +111,13 @@ if(isset($_POST['submit'])){
         }
 
         .logo img {
-            height: 50px; /* Adjust height as needed */
-        }
-
-        .navigation {
-            display: inline-block;
-            margin-left: 20px; /* Add space between logo and navigation */
-        }
-
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        .sign-in {
-            display: inline-block;
-            margin-left: auto; /* Moves to the right */
-            margin-right: 20px; /* Provides spacing between "Sign In" and "Employer Site" */
-        }
-
-        .employer-site {
-            display: inline-block;
+            height: 50px;
         }
 
         .container {
             max-width: 400px;
-            margin: 150px auto; /* Adjust margin to lower the form */
-            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
+            margin: 150px auto;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -202,7 +161,7 @@ if(isset($_POST['submit'])){
         .forget-password {
             font-size: 15px;
             text-align: center;
-            margin-top: 20px; /* Move the forget password link above the button */
+            margin-top: 20px;
         }
 
         .forget-password a {
@@ -230,7 +189,7 @@ if(isset($_POST['submit'])){
         </nav>
 
         <div class="sign-in">
-            <a href="register.php">Register</a> <!-- Update the href attribute -->
+            <a href="register.php">Register</a>
         </div>
 
         <div class="employer-site">
@@ -245,9 +204,9 @@ if(isset($_POST['submit'])){
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" name="submit">Login</button>
             <div class="forget-password">
-                <a href="reset.php">Forgot Password?</a> <!-- Link to the reset.php page -->
+                <a href="reset.php">Forgot Password?</a>
             </div>
-            <?php if(isset($login_fail) && $login_fail): ?>
+            <?php if (isset($login_fail) && $login_fail): ?>
                 <p>Login failed. Please check your email and password.</p>
             <?php endif; ?>
         </form>

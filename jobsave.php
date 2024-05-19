@@ -1,33 +1,34 @@
 <?php
-// Start session
 session_start();
+include("dataconnection.php");
 
-// Check if user is logged in
-if(!isset($_SESSION['email'])){
-    // If user is not logged in, redirect to login page
-    header("Location: login.php");
-    exit();
+// Check if the user is logged in
+if(isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+
+    // Check if the job post ID is received through POST request
+    if(isset($_POST['postId'])) {
+        $postId = $_POST['postId'];
+
+        // Prepare and execute SQL statement to insert the saved job post into the database
+        $stmt = $connect->prepare("INSERT INTO saved_jobs (jobseeker_email, job_id) VALUES (?, ?)");
+        $stmt->bind_param("si", $email, $postId);
+        $stmt->execute();
+        $stmt->close();
+
+        // Respond with success message or any other response if needed
+        echo "Job post saved successfully.";
+    } else {
+        // Respond with error message if no job post ID is received
+        echo "Error: No job post ID received.";
+    }
+} else {
+    // Respond with error message if user is not logged in
+    echo "Error: User is not logged in.";
 }
 
-// Get user email from session
-$user_email = $_SESSION['email'];
-
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobstreet";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Query to fetch saved job posts for the user
-$sql = "SELECT * FROM saved_jobs WHERE user_email='$user_email'";
-$result = $conn->query($sql);
+// Close database connection
+$connect->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -154,19 +155,5 @@ $result = $conn->query($sql);
         <a href="#">Employer Site</a>
     </div>
 </header>
-
-<?php
-    // Fetch and display saved job posts for the user
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            // Display saved job posts
-        }
-    } else {
-        echo "No saved job posts.";
-    }
-    ?>
-
-<!-- Your content goes here -->
-
 </body>
 </html>

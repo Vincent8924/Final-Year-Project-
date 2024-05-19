@@ -1,33 +1,39 @@
 <?php 
-    include("vdataconnection.php"); 
-    include("session.php");
+    include(__DIR__ . "/../Admin/Adataconnection.php");
+    include(__DIR__ . "/../Admin/Asession.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="Atemplate.css">
+    <link rel="stylesheet" href="Apost.css">
 </head>
 
 <body>
     <header class="header">
         <h1>JobHelper</h1>
         <div>
-            <a class="AdminAcc" onclick="displaybar()">
+            <a  class="AdminAcc" onclick="displaybar()">
                 <?php
                     $id = $_SESSION['id'];
+
+                    $result = mysqli_query($connect,"SELECT * FROM admin where admin_id='$id'");
+                    if($result)
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $fname = $row["admin_fname"];
+                    }
                 ?>
-                Admin ID: <?php echo"$id"; ?>            
+                <?php echo"$fname"; ?>            
             </a>
         </div>
     </header>
     
     <div class="aAccBar" id="aAccBar">
         <div class="bAccBar">
-            <a href="">Profile</a>
+            <a href="Aprofile.php">Profile</a>
         </div>
         <div class="bAccBar">
             <form action="" method="POST" id="logout">
@@ -46,11 +52,13 @@
         <aside>
             <nav class="Menu">
                 <ul>
-                    <li><a href="Adashboard.php" id="now">Dashboard</a></li>
+                    <li><a href="Adashboard.php">Dashboard</a></li>
                     <li><a href="Aseekermanagement.php">Seeker</a></li>
                     <li><a href="Acompanymanagement.php">Companies</a></li>
                     <li><a href="Aadminmanagement.php">Admin</a></li>
-                    <li><a href="Apost.php">Post</a></li>
+                    <li><a href="Apost.php" id="now">Post</a></li>
+                    <li><a href="Apackage.php">Package</a></li>
+                    <li><a href="Asell.php">Sell</a></li>
                     <li><a href="Aprofile.php">Profile</a></li>
                 </ul>
             </nav>

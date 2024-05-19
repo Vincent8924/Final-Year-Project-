@@ -2,25 +2,24 @@
 include("dataconnection.php");
 
 if(isset($_POST['registerBtn'])) {
-    // Retrieve form data
     $firstName = mysqli_real_escape_string($connect, $_POST["firstName"]);
     $lastName = mysqli_real_escape_string($connect, $_POST["lastName"]);
     $email = mysqli_real_escape_string($connect, $_POST["email"]);
     $password = mysqli_real_escape_string($connect, $_POST["password"]);
 
-    // Hash the password
+  
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Check if the email already exists
+  
     $check_query = "SELECT * FROM jobseeker WHERE jobseeker_email = '$email'";
     $result = mysqli_query($connect, $check_query);
     if(mysqli_num_rows($result) > 0) {
-        // Email already exists, display error message using JavaScript
+
         echo '<script>
                 alert("Email already exists! Registration failed.");
               </script>';
     } else {
-        // Insert data into the database
+ 
         $query = "INSERT INTO jobseeker (jobseeker_firstname, jobseeker_lastname, jobseeker_email, jobseeker_password) 
                   VALUES ('$firstName', '$lastName', '$email', '$hashedPassword')";
 
@@ -29,7 +28,7 @@ if(isset($_POST['registerBtn'])) {
                     alert("Registration successful");
                   </script>';
         } else {
-            // Display error message
+          
             echo "Error: " . mysqli_error($connect);
         }
     }
@@ -53,7 +52,7 @@ if(isset($_POST['registerBtn'])) {
         }
 
         header {
-            background-color: white; /* Set background color to white */
+            background-color: white; 
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -78,37 +77,37 @@ if(isset($_POST['registerBtn'])) {
 
         .navigation ul li a {
             text-decoration: none;
-            color: #333; /* Set the color of the links */
-            font-weight: bold; /* Make the links bold */
-            transition: color 0.3s; /* Add transition effect for color change */
+            color: #333; 
+            font-weight: bold; 
+            transition: color 0.3s; 
         }
 
         .navigation ul li a:hover {
-            color: #555; /* Change the color on hover */
+            color: #555; 
         }
 
         .sign-in,
         .employer-site {
             display: inline-block;
-            padding: 8px 16px; /* Adjust padding as needed */
-            border: 2px solid blue; /* Set border to blue */
-            border-radius: 5px; /* Add border radius for rounded corners */
+            padding: 8px 16px; 
+            border: 2px solid blue; 
+            border-radius: 5px; 
         }
 
         .sign-in a,
         .employer-site a {
             text-decoration: none;
-            color: rgb(12, 12, 191); /* Set link color to blue */
+            color: rgb(12, 12, 191); 
         }
 
         .sign-in:hover,
         .employer-site:hover {
-            background-color: blue; /* Change background color on hover */
+            background-color: blue; 
         }
 
         .sign-in:hover a,
         .employer-site:hover a {
-            color: white; /* Change link color on hover */
+            color: white; 
         }
 
         .logo {
@@ -116,12 +115,12 @@ if(isset($_POST['registerBtn'])) {
         }
 
         .logo img {
-            height: 50px; /* Adjust height as needed */
+            height: 50px; 
         }
 
         .navigation {
             display: inline-block;
-            margin-left: 20px; /* Add space between logo and navigation */
+            margin-left: 20px; 
         }
 
         .navigation ul {
@@ -137,8 +136,8 @@ if(isset($_POST['registerBtn'])) {
 
         .sign-in {
             display: inline-block;
-            margin-left: auto; /* Moves to the right */
-            margin-right: 20px; /* Provides spacing between "Sign In" and "Employer Site" */
+            margin-left: auto; 
+            margin-right: 20px; 
         }
 
         .employer-site {
@@ -147,11 +146,12 @@ if(isset($_POST['registerBtn'])) {
 
         .container {
             max-width: 400px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;        
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            
         }
 
         .register-form {
@@ -216,14 +216,7 @@ if(isset($_POST['registerBtn'])) {
             background-color: #0056b3;
         }
 
-        /* New styles for the container */
-        .container {
-            margin: 50px auto;
-            background-color: rgba(255, 255, 255, 0.8); /* Adjust alpha value for desired opacity */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-        }
+        
     </style>
 </head>
 <body>
@@ -293,9 +286,9 @@ if(isset($_POST['registerBtn'])) {
 
             if (password !== confirmPassword) {
                 alert("Password and Confirm Password do not match!");
-                return false; // Prevent form submission
+                return false; 
             }
-            return true; // Allow form submission
+            return true; 
         }
     </script>
 </body>

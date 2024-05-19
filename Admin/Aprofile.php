@@ -1,6 +1,6 @@
 <?php 
-    include("vdataconnection.php"); 
-    include("Asession.php");
+    include(__DIR__ . "/../Admin/Adataconnection.php");
+    include(__DIR__ . "/../Admin/Asession.php");
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +55,13 @@
         <aside>
             <nav class="Menu">
                 <ul>
-                    <li><a href="Adashboard.php" >Dashboard</a></li>
+                    <li><a href="Adashboard.php">Dashboard</a></li>
                     <li><a href="Aseekermanagement.php">Seeker</a></li>
                     <li><a href="Acompanymanagement.php">Companies</a></li>
                     <li><a href="Aadminmanagement.php">Admin</a></li>
                     <li><a href="Apost.php">Post</a></li>
+                    <li><a href="Apackage.php">Package</a></li>
+                    <li><a href="Asell.php">Sell</a></li>
                     <li><a href="Aprofile.php" id="now">Profile</a></li>
                 </ul>
             </nav>
@@ -138,7 +140,7 @@
                     <div class="label">
                         <label >First Name </label>
                     </div>
-                        <input type="text" value="  <?php echo"$fname"?>" name="fname" required><br>
+                        <input type="text" value="<?php echo"$fname"?>" name="fname" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editfname">   
@@ -158,7 +160,7 @@
                     <div class="label">
                         <label >Last Name </label>
                     </div>
-                        <input type="text" value="  <?php echo"$lname"?>" name="lname" required><br>
+                        <input type="text" value="<?php echo"$lname"?>" name="lname" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editlname">   
@@ -178,7 +180,7 @@
                     <div class="label">
                         <label >Email </label>
                     </div>
-                        <input type="text" value="  <?php echo"$email"?>" name="email" required><br>
+                        <input type="text" value="<?php echo"$email"?>" name="email" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editemail">   

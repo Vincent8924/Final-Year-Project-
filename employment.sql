@@ -152,3 +152,4 @@ CREATE DATABASE employment;
   );
 
   INSERT INTO sell (sell_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 1);
+

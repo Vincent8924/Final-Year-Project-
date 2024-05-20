@@ -118,7 +118,6 @@ if (isset($_POST['work_experience']) && isset($_POST['email'])) {
 if (isset($_POST['language']) && isset($_POST['email'])) {
     $language = $_POST['language'];
     $email = $_POST['email'];
-
     $query = $connect->prepare("INSERT INTO userprofile (email, language) VALUES (?, ?)");
     $query->bind_param("ss", $email, $language);
     if ($query->execute()) {
@@ -651,20 +650,40 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
             selectedLanguages.push(select.options[i].value);
         }
     }
-   
+
+    const formData = new FormData();
+    formData.append('language', JSON.stringify(selectedLanguages)); 
+    formData.append('email', "<?php echo $email; ?>");
+
+    fetch('save_language.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Language added successfully.');
+        } else {
+            console.error('Error adding language.');
+        }
+    })
+    .catch(error => {
+        console.error('Error adding language:', error);
+    });
+
+  
     const languageBox = document.getElementById('selectedLanguageBox');
+    languageBox.innerHTML = ''; 
     selectedLanguages.forEach(language => {
         const languageElement = document.createElement('div');
         languageElement.textContent = language;
         languageBox.appendChild(languageElement);
     });
+
     
     languageBox.style.display = 'block';
-    
+
     toggleLanguageSelectForm();
 }
-
-
 function filterLanguages() {
     var input = document.getElementById('languageSearch');
     var filter = input.value.toLowerCase();

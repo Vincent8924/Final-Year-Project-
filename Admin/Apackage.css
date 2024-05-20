@@ -118,6 +118,16 @@ aside nav ul li a:hover
 main {
     flex: 1;
     height: 90vh;
+    max-height: 90vh;
+    overflow-y: auto;
+
+}
+
+h1 
+{   
+    margin: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 section {
@@ -132,5 +142,115 @@ footer {
     padding: 20px;
     text-align: center;
 }
+
+
+.Acontainer
+{
+    border: #797979 solid 2px;
+    margin: 20px;
+    border-style: dotted;
+    border-width: thick;
+    border-radius: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    width: auto;
+    margin-bottom: 50px;
+    max-height : 60vh;
+    overflow-y: auto;
+    background-color: #d4d4db;
+    
+}
+
+.Aheader
+{
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+    border-bottom: dotted 2px #797979;
+    margin-left: 50px;
+    margin-right: 50px;
+    position: sticky;
+    top: 0;
+    background-color: #d4d4db;
+}
+
+.Bcontainer
+{
+    width: 90%;
+    margin: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.Apackage
+{
+    border: #9e9e9e solid 2px;
+    border-style: dashed;
+    border-radius: 10px;
+    background-color: #e7e7e9;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Apackage:hover
+{
+    background-color: #fcfcfc;
+}
+
+.hApackage
+{
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+    border-bottom: dashed 2px #9e9e9e;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.Bpackage
+{
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.Bpackage table
+{
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;  
+    
+}
+
+.Bpackage tr 
+{
+    border-bottom: 2px solid #797979;
+}
+
+.Bpackage td
+{
+    width: auto;
+    padding: 10px; 
+    text-align: justify;
+}
+
+.Bpackage .Atd
+{
+    text-align: right;
+    width: 35%;
+    font-weight: bold;
+}
+
+.Bpackage .Btd
+{
+    width: 5%;
+}
+
+
 
 

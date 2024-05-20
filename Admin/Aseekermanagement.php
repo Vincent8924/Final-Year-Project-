@@ -1,6 +1,6 @@
 <?php 
-    include(__DIR__ . "/../Admin/Adataconnection.php");
-    include(__DIR__ . "/../Admin/Asession.php");
+    include("../Admin/Adataconnection.php");
+    include("../Admin/Asession.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

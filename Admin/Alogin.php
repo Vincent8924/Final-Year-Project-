@@ -1,5 +1,5 @@
 <?php 
-    include(__DIR__ . "/../Admin/Adataconnection.php");
+    include("../Admin/Adataconnection.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
 <body>
     <div class="aform">
         <div class="bform">
-            <img src="logo.png" class="logo"/>
+            <img src="../img/logo.png" class="logo"/>
             <h1>Admin Log-in</h1>
         </div>
         

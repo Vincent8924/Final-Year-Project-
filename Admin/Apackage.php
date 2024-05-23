@@ -66,6 +66,7 @@
         </aside>
         
         <main>
+        <button onclick="displayAdd()" class="addbtn">Add A Package</button>
         <h1>Package</h1>
         <div class="Acontainer">
             <?php
@@ -137,19 +138,40 @@
                                     <td> <?php echo $package_post_quota; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td class="Atd">Package's Status</td>
+                                    <td class="Atd">Package's Sale Status</td>
                                     <td class="Btd"></td>
                                     <td> <?php echo $package_sale_status; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td class="Atd">Package's description</td>
+                                    <td class="Atd">Package's Description</td>
                                     <td class="Btd"></td>
                                     <td> <?php echo $package_description; ?> </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                        <div class="packagebtn">
+                            <form method="POST" onsubmit="return confirmdelete(<?php echo $row['package_id']; ?>)" >
+                                <button type="submit" class="deletebtn" name="delete" value="<?php echo $row['package_id']; ?>" >Delete</button>
+                            </form>
+                            <?php
+                    
+                                if (isset($_POST['delete'])) 
+                                {
+                                    $delete = $_POST['delete'];
+                                    mysqli_query($connect, "DELETE FROM package WHERE package_id = '$delete'");
+                            ?>
+                                <script>
+                                    alert("The package has been deleted!");
+                                    window.location.href = "Apackage.php";
+                                </script>
+                            <?php
+                                }
+                            ?>
 
+                            <button onclick="displayEdit()" class="editbtn">Edit</button>
+                        </div>
+
+                    </div>
                 </div>
 
                 <?php
@@ -232,19 +254,39 @@
                                     <td> <?php echo $package_post_quota; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td class="Atd">Package's Status</td>
+                                    <td class="Atd">Package's Sale Status</td>
                                     <td class="Btd"></td>
                                     <td> <?php echo $package_sale_status; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td class="Atd">Package's description</td>
+                                    <td class="Atd">Package's Description</td>
                                     <td class="Btd"></td>
                                     <td> <?php echo $package_description; ?> </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                        <div class="packagebtn">
+                            <form method="POST" onsubmit="return confirmdelete(<?php echo $row['package_id']; ?>)" >
+                                <button type="submit" class="deletebtn" name="delete" value="<?php echo $row['package_id']; ?>" >Delete</button>
+                            </form>
+                            <?php
+                    
+                                if (isset($_POST['delete'])) 
+                                {
+                                    $delete = $_POST['delete'];
+                                    mysqli_query($connect, "DELETE FROM package WHERE package_id = '$delete'");
+                            ?>
+                                <script>
+                                    alert("The package has been deleted!");
+                                    window.location.href = "Apackage.php";
+                                </script>
+                            <?php
+                                }
+                            ?>
 
+                            <button onclick="displayEdit()" class="editbtn">Edit</button>
+                        </div>
+                    </div>
                 </div>
 
                 <?php
@@ -256,6 +298,91 @@
 
         </div>
 
+        <div id="addpackage">
+                <form action="" method="POST">
+                    <div class="aform">
+                        <div class="x" >
+                            <button type="button" onclick="closeAdd()" id="x">x</button>
+                        </div>
+                        <h2>ADD PACKAGE</h2>
+                        
+                        <br>
+                        <div class="bbform">
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_name">Package's Name </label>
+                                </div>
+                                <input type="text" placeholder="Package's Name " name="name" required><br>
+                            </div>
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_price">Package's Price </label>
+                                </div>
+                                <input type="number" placeholder="Package's Price (RM) " name="price" required><br>
+                            </div>
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_post_quota">Package's Post Quota </label>
+                                </div>
+                                <input type="number" placeholder="Package's Post Quota" name="post_quots" required><br>
+                            </div>
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_status">Package's Sale Status </label>
+                                </div>
+                                <select name="status" class="status">
+                                    <option value="" disabled selected hidden>Package's Sale Status</option>
+                                    <option value="1">On-Sale</option>
+                                    <option value="0">Off-Sale</option>
+                                </select>
+                            </div>  
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="description">Package's Description</label>
+                                </div>
+                                <textarea class="desc" name="package_description" placeholder="Package's Description" required></textarea><br><br>
+                            </div>
+                        </div>
+
+                        <br>
+                        <input type="submit" value="Submit" class="formbtn" name="Submit">
+                    
+                    </div>
+ 
+                </form>
+                <?php
+                
+                    if(isset($_POST['Submit']))
+                    {
+                        if(isset($_POST['status']))
+                        {
+                            $name = $_POST['name'];
+                            $price = $_POST['price'];
+                            $post_quota = $_POST['post_quota'];
+                            $status = $_POST['status'];
+                            $desc = $_POST['desc'];
+
+                            $resuslt=mysqli_query($connect,"INSERT INTO package(package_name, admin_lname, admin_email,
+                             admin_password, superadmin) VALUES ('$fname','$lname','$email','$hashpassword','$superadmin')");
+                            ?>
+                            <script>
+                                alert("Admin has been successfully added!");
+                                window.location.href = "Aadminmanagement.php";
+                            </script>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <script>
+                                alert("Invalid Sale Status!");
+                                history.go(-1);
+                            </script>
+                            <?php
+                        }
+                    }
+                ?>
+            </div>
 
 
 
@@ -284,5 +411,26 @@
         {
             div.style.display = "block"; 
         }
+    }
+    function confirmdelete(id)
+    {
+        var confirmed = confirm("Are you sure you want to delete package with ID " + id + "?");
+
+        if(confirmed){
+            return true;
+        }
+        else{
+            return false;
+            history.go(-1);
+        }
+    }
+    function displayAdd(){
+        var div = document.getElementById("addpackage");
+        
+        div.style.display = "block";  
+    }
+    function closeAdd(){
+        var div = document.getElementById("addpackage");
+        div.style.display = "none";  
     }
 </SCript>

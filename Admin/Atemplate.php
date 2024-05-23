@@ -1,6 +1,6 @@
 <?php 
-    include(__DIR__ . "/../Admin/Adataconnection.php");
-    include(__DIR__ . "/../Admin/Asession.php");
+    include("../Admin/Adataconnection.php");
+    include("../Admin/Asession.php");
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +65,7 @@
             </nav>
         </aside>
         <main>
-        
+        <h1>topic</h1>
         </main>
     </div>
 

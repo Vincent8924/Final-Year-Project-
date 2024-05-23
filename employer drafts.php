@@ -26,6 +26,7 @@
                     
                         <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
                         <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
                         <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
                         <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
@@ -49,20 +50,7 @@
         <?php
     $id = $_REQUEST["id"];
 
-    $em = mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
-                
-
-    if ($em) 
-    {
-        $row = mysqli_fetch_assoc($em);
-        $email = $row['employer_email'];
-        mysqli_free_result($em);
-    }
-                
-    $result = mysqli_query($connect, "SELECT balance FROM employer WHERE employer_email = '$email'");
-
-    
-    $result = mysqli_query($connect, "SELECT * FROM drafts where `employer_email` = '$email'");	
+    $result = mysqli_query($connect, "SELECT * FROM drafts where `poster_id` = '$id'");	
     while($row = mysqli_fetch_assoc($result))
       {
       
@@ -72,13 +60,16 @@
         <div class="formbox">
             
             <h2>Drafts ID</h2>
-            <?php echo $row['drafts_id']?>
+            <?php echo $row['draft_id']?>
 
             <h2>Job name</h2>
             <?php echo $row['job_name']?>
 
+            <h2>Company/Employer name</h2>
+            <?php echo $row['company_name']?>
+
             <h2>Job type?</h2>
-            <?php echo $row['job_type']?>    
+            <?php echo $row['category']?>    
                 
 
             <h2>Location</h2>
@@ -96,14 +87,14 @@
             <br/><br/><br/><br/>
             <form method="post" action="">
                   
-                  <button><a href="employer edit post.php?did=<?php echo $row['drafts_id'];?> &id=<?php echo $id ?>" class="white">Edit</a></button>
+                  <button><a href="employer edit post.php?did=<?php echo $row['draft_id'];?> &id=<?php echo $id ?>" class="white">Edit</a></button>
                      
                     <button type="submit" name="delete_id" onclick="return confirmation();">Delete</button>
                     
-                    <input type="hidden" name="delete" value="<?php echo $row['drafts_id']; ?>">
+                    <input type="hidden" name="delete" value="<?php echo $row['draft_id']; ?>">
 
                     <button type="submit" name="post">Post</button>
-                    <input type="hidden" name="post_id" value="<?php echo $row['drafts_id']; ?>">
+                    <input type="hidden" name="pid" value="<?php echo $row['draft_id']; ?>">
                     
                     
 
@@ -121,7 +112,7 @@
               if (isset($_POST['delete_id'])) 
               {
                   $delete = $_POST['delete'];
-                  mysqli_query($connect, "DELETE FROM drafts WHERE drafts_id = '$delete'");
+                  mysqli_query($connect, "DELETE FROM drafts WHERE draft_id = '$delete'");
               
               ?>
               
@@ -140,19 +131,13 @@
             <?php
               if (isset($_POST['post'])) 
               {
-                $p = $_POST['post'];
+                $pid = $_POST['pid'];
                 $id = $_REQUEST["id"];
 
-                $em = mysqli_query($connect, "SELECT employer_email FROM employer WHERE id = '$id'");
+                
+
                             
-                if ($em) 
-                {
-                    $row = mysqli_fetch_assoc($em);
-                    $email = $row['employer_email'];
-                    mysqli_free_result($em);
-                }
-                            
-                $result = mysqli_query($connect, "SELECT balance FROM employer WHERE id = '$id'");
+                $result = mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
                 
                 if ($result) 
                 {
@@ -194,11 +179,13 @@
                 {
                     $balance--;
 
-                    mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE employer_email = '$email'");
-                    mysqli_query($connect, "INSERT INTO post(`employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary) 
-                    SELECT `employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary FROM drafts WHERE employer_email = '$email' ");
+          
+                    mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
+                    mysqli_query($connect, "INSERT INTO post(`post_id`,`poster_id`,job_name,`company_name`,`category`,`location`,employment_type,`description`,salary) 
+                    SELECT `draft_id`,`poster_id`,job_name,`company_name`,`category`,`location`,employment_type,`description`,salary FROM drafts WHERE draft_id = '$pid'");
                 }
-                
+         
+
                 ?>
                     
                 <script>

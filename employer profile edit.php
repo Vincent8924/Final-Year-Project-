@@ -25,6 +25,7 @@
                     
                         <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
                         <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
                         <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
                         <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     

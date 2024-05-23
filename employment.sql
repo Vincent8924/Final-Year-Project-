@@ -2,8 +2,10 @@ CREATE DATABASE employment;
 
 -------------------------------------------------------------------------------------------
 
+--old table--
   CREATE TABLE post (
       `post_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `poster_id` INT NOT NULL,
       `employer_email` varchar(200) NOT NULL,
       `job_name` varchar(200) NOT NULL,
       `job_type` varchar(200) NOT NULL,
@@ -13,6 +15,22 @@ CREATE DATABASE employment;
       `salary` varchar(200) NOT NULL
   );
 
+--new table--
+      CREATE TABLE post (
+      `post_id` INT NOT NULL PRIMARY KEY,
+      `poster_id` INT NOT NULL,
+      `job_name` varchar(200) NOT NULL,
+      `company_name` varchar(255) ,
+      `logo` LONGBLOB,
+      `category` varchar(200) ,
+      `location` varchar(500) ,
+      `employment_type` varchar(200) NOT NULL,
+      `description` varchar(9999) ,
+      `salary` INT NOT NULL,
+      `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
+  );
+
+--old table--
   CREATE TABLE drafts (
       `drafts_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `employer_email` varchar(200) NOT NULL,
@@ -23,6 +41,22 @@ CREATE DATABASE employment;
       `description` varchar(9999) ,
       `salary` varchar(200) NOT NULL
   );
+  
+-- new table--
+      CREATE TABLE drafts (
+      `draft_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `poster_id` INT NOT NULL,
+      `job_name` varchar(200) NOT NULL,
+      `company_name` varchar(255) ,
+      `logo` LONGBLOB,
+      `category` varchar(200) ,
+      `location` varchar(500) ,
+      `employment_type` varchar(200) NOT NULL,
+      `description` varchar(9999) ,
+      `salary` INT NOT NULL,
+      `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
+  );
+
 
   CREATE TABLE photos (
       `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -89,6 +123,10 @@ CREATE DATABASE employment;
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `category` varchar(50) DEFAULT NULL
   );
+
+
+
+  
   
   CREATE TABLE jobseeker 
   (

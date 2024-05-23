@@ -28,6 +28,7 @@
                     
                         <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
                         <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
                         <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
                         <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
@@ -125,12 +126,12 @@
             $salary = $_POST['salary'];
             $des = $_POST['description'];
 
-            $result = mysqli_query($connect, "SELECT employer_email FROM employer WHERE id = '$id'");
+            $result = mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
                 
                 if ($result) 
                 {
                     $row = mysqli_fetch_assoc($result);
-                    $email = $row['employer_email'];
+                    $em_name = $row['employer_name'];
                     mysqli_free_result($result);
                 }
         
@@ -147,8 +148,8 @@
            
             else
             {
-            mysqli_query($connect, "INSERT INTO `drafts` (`employer_email`,job_name,`job_type`,`location`,employment_type,`description`,salary) 
-            VALUES('$email','$job','$type','$location','$et','$des', '$salary')");
+            mysqli_query($connect, "INSERT INTO `drafts` (`poster_id`,`company_name`,job_name,`category`,`location`,employment_type,`description`,salary) 
+            VALUES('$id','$em_name','$job','$type','$location','$et','$des', '$salary')");
        
 
                 ?>

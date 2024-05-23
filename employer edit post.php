@@ -25,6 +25,7 @@
                     
                         <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
                         <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
                         <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
                         <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
@@ -54,6 +55,7 @@
          $did = $_REQUEST['did'];
          $id = $_REQUEST['id'];
          $job = $_POST['job_name'];
+         $em_name = $_POST['company_name'];
          $type = $_POST['job_type'];
          $location = $_POST['location'];
          
@@ -64,12 +66,13 @@
 
              mysqli_query($connect, "UPDATE `drafts` SET
              job_name = '$job',
-             job_type = '$type',
+             company_name = '$em_name',
+             category = '$type',
              `location` = '$location',
              employment_type = '$et',
              salary = '$salary',
              `description` = '$des'
-             WHERE drafts_id = '$did'");
+             WHERE draft_id = '$did'");
 
         
 
@@ -102,7 +105,7 @@
 
                 <?php
     
-                $result = mysqli_query($connect, "SELECT * FROM drafts where drafts_id = '$did'");	
+                $result = mysqli_query($connect, "SELECT * FROM drafts where draft_id = '$did'");	
                 $row = mysqli_fetch_assoc($result);
                 
                 
@@ -113,10 +116,17 @@
                 <h2>Job name?</h2>
                 <input type="text" class="field" placeholder="<?php echo $row['job_name']?>" name="job_name" value="<?php echo $row['job_name']?>">
 
+                <h2>Company/Employer name</h2>
+                <input type="text" class="field" placeholder="<?php echo $row['company_name']?>" name="company_name" value="<?php echo $row['company_name']?>">
+
+
+                
+
+
                 <h2>Job type?</h2>
                 
                 <select class="field" name="job_type">
-                            <option value="<?php echo $row['job_type'] ?>"><?php echo $row['job_type'] ?></option>
+                            <option value="<?php echo $row['category'] ?>"><?php echo $row['category'] ?></option>
                             <option value="Accounting">Accounting</option>
                             <option value="Administration & Office Support">Administration & Office Support</option>
                             <option value="Advertising, Atrs & Media">Advertising, Atrs & Media</option>

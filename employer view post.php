@@ -51,7 +51,7 @@
     <?php
     $id = $_REQUEST["id"];
 
-    $result = mysqli_query($connect, "SELECT * FROM drafts where `poster_id` = '$id'");	
+    $result = mysqli_query($connect, "SELECT * FROM post");	
     while($row = mysqli_fetch_assoc($result))
       {
       
@@ -60,8 +60,8 @@
           
         <div class="formbox">
             
-            <h2>Drafts ID</h2>
-            <?php echo $row['draft_id']?>
+            <h2>Post ID</h2>
+            <?php echo $row['post_id']?>
 
             <h2>Job name</h2>
             <?php echo $row['job_name']?>

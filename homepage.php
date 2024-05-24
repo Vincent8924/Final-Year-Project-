@@ -2,9 +2,9 @@
 session_start();
 include("dataconnection.php");
 
-if(isset($_SESSION['email'])) {
+if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
-    $email = $connect->real_escape_string($email);  
+    $email = $connect->real_escape_string($email);
     $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_email = '$email'";
     $result = $connect->query($query);
     if ($result->num_rows > 0) {
@@ -15,7 +15,6 @@ if(isset($_SESSION['email'])) {
 
 $sql = "SELECT * FROM post";
 $result = $connect->query($sql);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +23,7 @@ $result = $connect->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Search Homepage</title>
     <style>
-      
+        /* Add your styles here */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -66,24 +65,24 @@ $result = $connect->query($sql);
             color: #555;
         }
 
-        .employer-site { 
+        .employer-site {
             display: inline-block;
             padding: 8px 16px;
             border: 2px solid blue;
             border-radius: 5px;
-            margin-left: 20px; 
+            margin-left: 20px;
         }
 
-        .employer-site a { 
+        .employer-site a {
             text-decoration: none;
             color: rgb(12, 12, 191);
         }
 
-        .employer-site:hover { 
+        .employer-site:hover {
             background-color: blue;
         }
 
-        .employer-site:hover a { 
+        .employer-site:hover a {
             color: white;
         }
 
@@ -98,19 +97,19 @@ $result = $connect->query($sql);
         .user-info {
             display: inline-block;
             padding: 8px 16px;
-            border: 2px solid green; 
+            border: 2px solid green;
             border-radius: 5px;
-            margin-left: 50px; 
+            margin-left: 50px;
         }
 
         .user-info p {
             margin: 0;
             font-weight: bold;
-            color: green; 
+            color: green;
         }
 
         .user-info:hover {
-            background-color: green; 
+            background-color: green;
         }
 
         .user-info:hover p {
@@ -212,8 +211,32 @@ $result = $connect->query($sql);
         }
 
         .saved {
-            color: red; 
+            color: red;
         }
+
+        .applyButton {
+    background-color:purple;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px; 
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.applyButton:hover {
+    background-color: plum;
+}
+
+.applyButton:active {
+    background-color:plum;
+    transform: translateY(1px); 
+}
+
         footer {
             background-color: white;
             padding: 10px 20px;
@@ -260,8 +283,8 @@ $result = $connect->query($sql);
             </ul>
         </nav>
         <div class="user-info">
-            <?php 
-            if(isset($firstName)) {
+            <?php
+            if (isset($firstName)) {
                 echo '<p>Welcome, ' . $firstName . '</p>';
             }
             ?>
@@ -278,73 +301,86 @@ $result = $connect->query($sql);
         </select>
     </div>
     <div id="jobPosts">
-        <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo '<div class="jobPost" id="' . htmlspecialchars($row["job_name"]) . '">';
-                echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
-                echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
-                echo   htmlspecialchars($row["job_name"]) ;
-                echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>'; 
-                echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
-                echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
-                echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-                echo '<p>Description:' . htmlspecialchars($row["description"]) . '</p>';
-                echo '<span class="saveIcon">&#10084;</span>'; 
-                echo '</div>';
-            }
-        } else {
-            echo "No job posts available";
-        }
-        ?>
+    <?php
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $savedClass = ($row["favourite"] === 'yes') ? 'saved' : '';
+        echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
+        echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
+        echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
+        echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; // Display job name
+        echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
+        echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
+        echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
+        echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
+        echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
+        echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
+        echo '<span class="saveIcon ' . $savedClass . '" onclick="toggleFavouriteJobPost(this, ' . htmlspecialchars($row["post_id"]) . ')">&#10084;</span>';
+        echo '</div>';
+    }
+} else {
+    echo "No job posts available";
+}
+?>
     </div>
     <script>
         const searchBar = document.getElementById('searchBar');
         const categorySelector = document.getElementById('categorySelector');
         const jobPosts = document.getElementById('jobPosts');
 
-        searchBar.addEventListener('input', function() {
+        searchBar.addEventListener('input', function () {
             const searchText = searchBar.value.trim().toLowerCase();
             const posts = jobPosts.querySelectorAll('.jobPost');
 
             posts.forEach(post => {
                 const companyName = post.querySelector('h2').textContent.trim().toLowerCase();
-                const category = post.querySelector('p.category').textContent.trim().toLowerCase();
-                if (categorySelector.value === 'company' && companyName.includes(searchText)) {
-                    post.style.display = 'block';
-                } else if (categorySelector.value === 'category' && category.includes(searchText)) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
+                const category = post.querySelector('.category').textContent.trim().toLowerCase();
+
+                const searchBy = categorySelector.value;
+                const isVisible = searchBy === 'company'
+                    ? companyName.includes(searchText)
+                    : category.includes(searchText);
+
+                post.style.display = isVisible ? 'block' : 'none';
+            });
+        });
+
+        function toggleFavouriteJobPost(icon, postId) {
+            const request = new XMLHttpRequest();
+            request.open('POST', 'jobsave.php', true);
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+                    if (response.status === 'success') {
+                        if (response.favourite === 'yes') {
+                            icon.classList.add('saved');
+                        } else {
+                            icon.classList.remove('saved');
+                        }
+                    } else {
+                        alert(response.message);
+                    }
                 }
-            });
-        });
-
-        function toggleSaveJobPost(icon) {
-            const post = icon.parentNode;
-            const postId = post.id;
-            icon.classList.toggle('saved');
+            };
+            request.send('post_id=' + postId);
         }
-
-        const saveIcons = document.querySelectorAll('.saveIcon');
-        saveIcons.forEach(icon => {
-            icon.addEventListener('click', function(event) {
-                event.preventDefault();
-                toggleSaveJobPost(icon);
-            });
-        });
-
-        categorySelector.addEventListener('change', function() {
-            searchBar.dispatchEvent(new Event('input'));
-        });
-
-        
+        <script>
+    function applyJob(postId) {
+        // Here you can implement the logic for applying to a job
+        // For example, you can make an AJAX request to a PHP script to handle the application process
+        // You can also redirect the user to a separate application page or display a form within a modal
+        alert("You have applied to job post ID: " + postId);
+    }
+</script>
     </script>
-     <footer>
+    <footer>
         <nav>
             <ul>
                 <li><a href="aboutus.html">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                
             </ul>
         </nav>
     </footer>

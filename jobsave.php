@@ -5,27 +5,29 @@ include("dataconnection.php");
 // Check if the user is logged in
 if(isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
-
-    // Check if the job post ID is received through POST request
-    if(isset($_POST['postId'])) {
-        $postId = $_POST['postId'];
-
-        // Prepare and execute SQL statement to insert the saved job post into the database
-        $stmt = $connect->prepare("INSERT INTO saved_jobs (jobseeker_email, job_id) VALUES (?, ?)");
-        $stmt->bind_param("si", $email, $postId);
-        $stmt->execute();
-        $stmt->close();
-
-        // Respond with success message or any other response if needed
-        echo "Job post saved successfully.";
+    
+        // Check if the job post ID is received through POST request
+        if(isset($_POST['job_id'])) {
+            $job_id = $_POST['job_id'];
+    
+            // Prepare and execute SQL statement to insert the saved job post into the database
+            $stmt = $connect->prepare("INSERT INTO saved_jobs (jobseeker_email, job_id) VALUES (?, ?)");
+            $stmt->bind_param("si", $email, $job_id);
+            $stmt->execute();
+            $stmt->close();
+    
+            // Respond with success message or any other response if needed
+            echo "Job post saved successfully.";
+        } else {
+            // Respond with error message if no job post ID is received
+            echo "Error: No job post ID received.";
+        }
     } else {
-        // Respond with error message if no job post ID is received
-        echo "Error: No job post ID received.";
+        // Respond with error message if user is not logged in
+        echo "Error: User is not logged in.";
     }
-} else {
-    // Respond with error message if user is not logged in
-    echo "Error: User is not logged in.";
-}
+    
+    
 
 // Close database connection
 $connect->close();

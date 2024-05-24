@@ -1,4 +1,4 @@
-CREATE DATABASE employment;
+  CREATE DATABASE employment;
 
 -------------------------------------------------------------------------------------------
 
@@ -76,8 +76,7 @@ CREATE DATABASE employment;
     `superadmin` tinyint(1)
   );
 
-  INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin) 
-  VALUES ( '100001', 'Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1');
+  
 
   CREATE TABLE contact (
     `contact_id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
@@ -95,18 +94,17 @@ CREATE DATABASE employment;
     `jobseeker_email` varchar(60) NOT NULL,
     `jobseeker_password` varchar(500) NOT NULL
   );
-  CREATE TABLE userprofile
-  (
-    `UserID` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `ProfilePic` varchar(255) DEFAULT NULL,
-    `FullName` varchar(100) DEFAULT NULL,
-    `Email` varchar(100) DEFAULT NULL,
-    `PersonalSummary` text DEFAULT NULL,
-    `Skill` varchar(100) DEFAULT NULL,
-    `WorkExperience` text DEFAULT NULL,
-    `Education` text DEFAULT NULL,
-    `Language` varchar(50) DEFAULT NULL
-  ) ;
+  CREATE TABLE `userprofile` (
+  `UserID` int(11) NOT NULL,
+  `ProfilePic` varchar(255) DEFAULT NULL,
+  `PersonalSummary` text DEFAULT NULL,
+  `Skills` varchar(100) DEFAULT NULL,
+  `work_experience` text DEFAULT NULL,
+  `Education` text DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
+  `jobseeker_email` varchar(255) DEFAULT NULL
+);
+
 
   CREATE TABLE package 
   (
@@ -118,10 +116,29 @@ CREATE DATABASE employment;
     `package_sale_status` tinyint(1)
   );
 
+
+
+  CREATE TABLE sale
+  (
+    `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `purchase_amount` decimal(10, 2) NOT NULL,
+    `purchase_time` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    `payment_status` varchar(10) NOT NULL,
+    `employer_id` int NOT NULL,
+    `package_id` int(6) NOT NULL
+  );
+---------------------------------------------------------------------------------------------------
+  INSERT INTO sale (sale_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 200001);
+
+  INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin) 
+  VALUES ( '100001', 'Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1');
+
+  INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin) 
+  VALUES ( '100002', 'Jin Kai','Lo','lo@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','0');
+
   INSERT INTO package(package_id, package_name, package_price, package_description, package_post_quota, package_sale_status) 
   VALUES ( '200001', 'Single Post Quota Package','49.99',"With this package, you'll gain an additional single job posting opportunity, 
-  allowing you to showcase more employment opportunities when it matters most. Whether you're announcing a critical vacancy, promoting 
-  a unique job opportunity, or seeking specialized talent, this extra posting opportunity ensures your job listing receives the attention it deserves.",'1','1');
+  allowing you to showcas1y, or seeking specialized talent, this extra posting opportunity ensures your job listing receives the attention it deserves.",'1','1');
 
   INSERT INTO package(package_id, package_name, package_price, package_description, package_post_quota, package_sale_status) 
   VALUES ( '200002', 'Triple Post Quota Package','129.99',"This package offers three additional job posting opportunities, providing you with the flexibility to 
@@ -137,16 +154,3 @@ CREATE DATABASE employment;
   VALUES ( '200004', 'Decuple Post Quota Package','359.99',"This package provides ten additional job posting opportunities, enabling you to maximize your recruitment 
   efforts and fill multiple positions efficiently. Whether you're launching extensive hiring campaigns, expanding your workforce rapidly, or seeking talent across multiple 
   departments, these extra postings offer unparalleled exposure and candidate engagement.",'10','1');
-
-  CREATE TABLE sale
-  (
-    `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `purchase_amount` decimal(10, 2) NOT NULL,
-    `purchase_time` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    `payment_status` varchar(10) NOT NULL,
-    `employer_id` int NOT NULL,
-    `package_id` int(6) NOT NULL
-  );
-
-  INSERT INTO sale (sale_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 1);
-

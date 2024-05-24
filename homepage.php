@@ -13,8 +13,9 @@ if(isset($_SESSION['email'])) {
     }
 }
 
-$sql = "SELECT * FROM homepage";
+$sql = "SELECT * FROM post";
 $result = $connect->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -249,12 +250,15 @@ $result = $connect->query($sql);
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo '<div class="jobPost" id="' . htmlspecialchars($row["company_name"]) . '">';
-                echo '<img src="' . htmlspecialchars($row["logo_url"]) . '" alt="Company Logo">';
+                echo '<div class="jobPost" id="' . htmlspecialchars($row["job_name"]) . '">';
+                echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
                 echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
+                echo   htmlspecialchars($row["job_name"]) ;
                 echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>'; 
-                echo '<p>Salary: ' . htmlspecialchars($row["salary_range"]) . '</p>';
-                echo '<p>' . htmlspecialchars($row["job_description"]) . '</p>';
+                echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
+                echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
+                echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
+                echo '<p>Description:' . htmlspecialchars($row["description"]) . '</p>';
                 echo '<span class="saveIcon">&#10084;</span>'; 
                 echo '</div>';
             }

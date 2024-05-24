@@ -18,7 +18,6 @@ if (isset($_GET['email'])) {
         $query->bind_result($firstName, $lastName);
         $query->fetch();
 
-        
         $updateQuery = $connect->prepare("INSERT INTO userprofile (jobseeker_email) VALUES (?) ON DUPLICATE KEY UPDATE jobseeker_email = ?");
         $updateQuery->bind_param("ss", $email, $email);
         $updateQuery->execute();
@@ -37,10 +36,7 @@ if (isset($_FILES['profile_picture']) && isset($_SESSION['email'])) {
         }
         $uploadFile = $uploadDir . basename($profilePicture['name']);
         if (move_uploaded_file($profilePicture['tmp_name'], $uploadFile)) {
-      
             $relativePath = 'uploads/' . basename($profilePicture['name']);
-            
-           
             $query = $connect->prepare("UPDATE userprofile SET ProfilePic = ? WHERE jobseeker_email = ?");
             $query->bind_param("ss", $uploadFile, $email);
             if ($query->execute()) {
@@ -61,7 +57,6 @@ if (isset($_FILES['profile_picture']) && isset($_SESSION['email'])) {
 } else {
     echo "No file uploaded or session email not set.";
 }
-
 
 if (isset($_POST['personal_summary']) && isset($_POST['email'])) {
     $personalSummary = $_POST['personal_summary'];

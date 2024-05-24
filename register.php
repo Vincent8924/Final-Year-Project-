@@ -261,7 +261,7 @@ if(isset($_POST['registerBtn'])) {
             </div>
             <label>
                 <input type="checkbox" required>
-                <span style="font-size: 12px;">I agree to JH's privacy policy and acknowledge that my personal information may be gathered, saved, and used as specified by registering. As stated in the Privacy Policy, I also consent to receive marketing communications from JobStreet and its affiliates. I may withdraw my consent at any time by using the unsubscribe instructions.</span>
+                <span style="font-size: 12px;">I agree to JH's privacy policy and acknowledge that my personal information may be gathered, saved, and used as specified by registering. As stated in the Privacy Policy, I also consent to receive marketing communications from JobHelp and its affiliates. I may withdraw my consent at any time by using the unsubscribe instructions.</span>
             </label>
             <button type="submit" name="registerBtn">Sign Up</button>
         </form>

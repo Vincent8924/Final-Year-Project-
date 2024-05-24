@@ -152,3 +152,5 @@
   VALUES ( '200004', 'Decuple Post Quota Package','359.99',"This package provides ten additional job posting opportunities, enabling you to maximize your recruitment 
   efforts and fill multiple positions efficiently. Whether you're launching extensive hiring campaigns, expanding your workforce rapidly, or seeking talent across multiple 
   departments, these extra postings offer unparalleled exposure and candidate engagement.",'10','1');
+
+  

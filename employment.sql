@@ -95,11 +95,7 @@
       `jobseeker_password` varchar(500) NOT NULL
   );
 
-  INSERT INTO `jobseeker` (`jobseeker_id`, `jobseeker_firstname`, `jobseeker_lastname`, `jobseeker_email`, `jobseeker_password`) VALUES
-  (2, 'goh', 'hong', 'guo0618@gmail.com', '$2y$10$OyFqsNvouksGYDNNT1k9Teeibp15wvMvk2DL/aC6t1S.l/cpQJLMi'),
-  (4, 'goh', 'chengh', 'gohchenghong533@gmail.com', '$2y$10$wgfwuVb3um38d4IWAWnbs.O8gPz9iZo42etJvULnfGyHvVtfi6cMK'),
-  (5, 'jason', 'hong', 'jason0316@gmail.com', '$2y$10$ttUi0Bkmhwxp6h3US62ZnOEXrEANGaZtRWY2/Rmx5ssdxr2xvduRS'),
-  (6, 'Goh', 'Xin Ying', 'gxying0922@gmail.com', '$2y$10$/NcTY4dJ.jQl093ONzHHxe306m/4o.hX3TJZO7DnYBxXVKZU98xRe');
+
 
 
   CREATE TABLE `userprofile` (
@@ -160,3 +156,9 @@
   VALUES ( '200004', 'Decuple Post Quota Package','359.99',"This package provides ten additional job posting opportunities, enabling you to maximize your recruitment 
   efforts and fill multiple positions efficiently. Whether you're launching extensive hiring campaigns, expanding your workforce rapidly, or seeking talent across multiple 
   departments, these extra postings offer unparalleled exposure and candidate engagement.",'10','1');
+
+  INSERT INTO `jobseeker` (`jobseeker_id`, `jobseeker_firstname`, `jobseeker_lastname`, `jobseeker_email`, `jobseeker_password`) VALUES
+  (2, 'goh', 'hong', 'guo0618@gmail.com', '$2y$10$OyFqsNvouksGYDNNT1k9Teeibp15wvMvk2DL/aC6t1S.l/cpQJLMi'),
+  (4, 'goh', 'chengh', 'gohchenghong533@gmail.com', '$2y$10$wgfwuVb3um38d4IWAWnbs.O8gPz9iZo42etJvULnfGyHvVtfi6cMK'),
+  (5, 'jason', 'hong', 'jason0316@gmail.com', '$2y$10$ttUi0Bkmhwxp6h3US62ZnOEXrEANGaZtRWY2/Rmx5ssdxr2xvduRS'),
+  (6, 'Goh', 'Xin Ying', 'gxying0922@gmail.com', '$2y$10$/NcTY4dJ.jQl093ONzHHxe306m/4o.hX3TJZO7DnYBxXVKZU98xRe');

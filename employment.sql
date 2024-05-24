@@ -120,8 +120,7 @@ CREATE DATABASE employment;
 
   INSERT INTO package(package_id, package_name, package_price, package_description, package_post_quota, package_sale_status) 
   VALUES ( '200001', 'Single Post Quota Package','49.99',"With this package, you'll gain an additional single job posting opportunity, 
-  allowing you to showcase more employment opportunities when it matters most. Whether you're announcing a critical vacancy, promoting 
-  a unique job opportunity, or seeking specialized talent, this extra posting opportunity ensures your job listing receives the attention it deserves.",'1','1');
+  allowing you to showcas1y, or seeking specialized talent, this extra posting opportunity ensures your job listing receives the attention it deserves.",'1','1');
 
   INSERT INTO package(package_id, package_name, package_price, package_description, package_post_quota, package_sale_status) 
   VALUES ( '200002', 'Triple Post Quota Package','129.99',"This package offers three additional job posting opportunities, providing you with the flexibility to 

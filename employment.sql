@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------------------
 
 
-      CREATE TABLE post (
+  CREATE TABLE post (
       `post_id` INT NOT NULL PRIMARY KEY,
       `poster_id` INT NOT NULL,
       `job_name` varchar(200) NOT NULL,
@@ -17,7 +17,7 @@
       `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
   );
   
-      CREATE TABLE drafts (
+  CREATE TABLE drafts (
       `draft_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `poster_id` INT NOT NULL,
       `job_name` varchar(200) NOT NULL,
@@ -79,20 +79,20 @@
   
 
   CREATE TABLE contact (
-    `contact_id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
-    `name` varchar(255) NOT NULL,
-    `email` varchar(255) NOT NULL,
-    `subject` varchar(255) NOT NULL,
-    `message` text NOT NULL
+      `contact_id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+      `name` varchar(255) NOT NULL,
+      `email` varchar(255) NOT NULL,
+      `subject` varchar(255) NOT NULL,
+      `message` text NOT NULL
   );
   
   CREATE TABLE jobseeker 
   (
-    `jobseeker_id` INT(6) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `jobseeker_firstname` varchar(100) NOT NULL,
-    `jobseeker_lastname` varchar(100) NOT NULL,
-    `jobseeker_email` varchar(60) NOT NULL,
-    `jobseeker_password` varchar(500) NOT NULL
+      `jobseeker_id` INT(6) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `jobseeker_firstname` varchar(100) NOT NULL,
+      `jobseeker_lastname` varchar(100) NOT NULL,
+      `jobseeker_email` varchar(60) NOT NULL,
+      `jobseeker_password` varchar(500) NOT NULL
   );
 
   INSERT INTO `jobseeker` (`jobseeker_id`, `jobseeker_firstname`, `jobseeker_lastname`, `jobseeker_email`, `jobseeker_password`) VALUES
@@ -103,37 +103,35 @@
 
 
   CREATE TABLE `userprofile` (
-  `UserID` int(11) NOT NULL,
-  `ProfilePic` varchar(255) DEFAULT NULL,
-  `PersonalSummary` text DEFAULT NULL,
-  `Skills` varchar(100) DEFAULT NULL,
-  `work_experience` text DEFAULT NULL,
-  `Education` text DEFAULT NULL,
-  `language` varchar(255) DEFAULT NULL,
-  `jobseeker_email` varchar(255) DEFAULT NULL
-);
+      `UserID` int(11) NOT NULL,
+      `ProfilePic` varchar(255) DEFAULT NULL,
+      `PersonalSummary` text DEFAULT NULL,
+      `Skills` varchar(100) DEFAULT NULL,
+      `work_experience` text DEFAULT NULL,
+      `Education` text DEFAULT NULL,
+      `language` varchar(255) DEFAULT NULL,
+      `jobseeker_email` varchar(255) DEFAULT NULL
+  );
 
 
   CREATE TABLE package 
   (
-    `package_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `package_name` varchar(255) NOT NULL,
-    `package_price` decimal(10, 2) NOT NULL,
-    `package_description` TEXT,
-    `package_post_quota` int(10) NOT NULL,
-    `package_sale_status` tinyint(1)
+      `package_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+      `package_name` varchar(255) NOT NULL,
+      `package_price` decimal(10, 2) NOT NULL,
+      `package_description` TEXT,
+      `package_post_quota` int(10) NOT NULL,
+      `package_sale_status` tinyint(1)
   );
-
-
-
+  
   CREATE TABLE sale
   (
-    `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    `purchase_amount` decimal(10, 2) NOT NULL,
-    `purchase_time` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    `payment_status` varchar(10) NOT NULL,
-    `employer_id` int NOT NULL,
-    `package_id` int(6) NOT NULL
+      `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+      `purchase_amount` decimal(10, 2) NOT NULL,
+      `purchase_time` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      `payment_status` varchar(10) NOT NULL,
+      `employer_id` int NOT NULL,
+      `package_id` int(6) NOT NULL
   );
 ---------------------------------------------------------------------------------------------------
   INSERT INTO sale (sale_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 200001);

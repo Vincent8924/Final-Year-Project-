@@ -114,7 +114,7 @@
                     
             
                     mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
-                    mysqli_query($connect,"  INSERT INTO sell 
+                    mysqli_query($connect,"  INSERT INTO sale 
                     ( purchase_amount, payment_status, employer_id, package_id) 
                     VALUES ('$price', 'Successful', $id, '$pid');")
                     

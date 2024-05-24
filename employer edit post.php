@@ -13,6 +13,7 @@
                         {
                         $did = $_REQUEST["did"];
                         $id = $_REQUEST["id"];
+                       
                     ?>
         <nav>
             <div id="line">
@@ -51,40 +52,40 @@
      
      if (isset($_POST['edit']))
      {
-         
-         $did = $_REQUEST['did'];
-         $id = $_REQUEST['id'];
-         $job = $_POST['job_name'];
-         $em_name = $_POST['company_name'];
-         $type = $_POST['job_type'];
-         $location = $_POST['location'];
-         
-         $et = $_POST['employment_type'];
-         $salary = $_POST['salary'];
-         $des = $_POST['description'];
-
-
-             mysqli_query($connect, "UPDATE `drafts` SET
-             job_name = '$job',
-             company_name = '$em_name',
-             category = '$type',
-             `location` = '$location',
-             employment_type = '$et',
-             salary = '$salary',
-             `description` = '$des'
-             WHERE draft_id = '$did'");
-
         
+        $did = $_REQUEST['did'];
+        $id = $_REQUEST['id'];
+        $job = $_POST['job_name'];
+        $em_name = $_POST['company_name'];
+        $type = $_POST['job_type'];
+        $location = $_POST['location'];
+         
+        $et = $_POST['employment_type'];
+        $salary = $_POST['salary'];
+        $des = $_POST['description'];
 
-             ?>
-             <script type="text/javascript">
-                 alert("Post Edit successfully!");
-                 window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
-                 
-             </script>
+         
 
-             <?php
-             
+            mysqli_query($connect, "UPDATE `drafts` SET
+            job_name = '$job',
+            company_name = '$em_name',
+            category = '$type',
+            `location` = '$location',
+            employment_type = '$et',
+            salary = '$salary',
+            `description` = '$des'
+            WHERE draft_id = '$did'");
+
+       
+
+            ?>
+            <script type="text/javascript">
+                alert("Draft Edit successfully!");
+                window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+                
+            </script>
+
+            <?php
              
          }
      

@@ -43,7 +43,8 @@
                     ?>
     <br/><hr/><br/>
 
-
+    <h1>Manage your drafts</h1>
+        <br/><br/>
 
 
 
@@ -87,7 +88,7 @@
             <br/><br/><br/><br/>
             <form method="post" action="">
                   
-                  <button><a href="employer edit post.php?did=<?php echo $row['draft_id'];?> &id=<?php echo $id ?>" class="white">Edit</a></button>
+                  <button><a href="employer edit post.php?did=<?php echo $row['draft_id'];?> &id=<?php echo $id ?> " class="white">Edit</a></button>
                      
                     <button type="submit" name="delete_id" onclick="return confirmation();">Delete</button>
                     
@@ -106,7 +107,71 @@
         <?php
         }
         ?>
+
+        <h1>Your post history</h1>
+        <br/><br/>
+
+        <?php
+    $id = $_REQUEST["id"];
+
+    $result = mysqli_query($connect, "SELECT * FROM post where `poster_id` = '$id'");	
+    while($row = mysqli_fetch_assoc($result))
+      {
+      
+      ?>	
+
+          
+        <div class="formbox">
+            
+            <h2>Drafts ID</h2>
+            <?php echo $row['post_id']?>
+
+            <h2>Job name</h2>
+            <?php echo $row['job_name']?>
+
+            <h2>Company/Employer name</h2>
+            <?php echo $row['company_name']?>
+
+            <h2>Job type?</h2>
+            <?php echo $row['category']?>    
+                
+
+            <h2>Location</h2>
+            <?php echo $row['location']?>
+
+            <h2>Employment type</h2>
+            <?php echo $row['employment_type']?>
+
+            <h2>Salary</h2>
+            <?php echo $row['salary']?>
+
+            <h2>Description</h2>
+            <?php echo $row['description']?>
+
+            <br/><br/><br/><br/>
+            <form method="post" action="">
+                  
+                  
+                     
+                    <button type="submit" name="delete_post_id" onclick="return confirmation();">Delete post</button>
+                    
+                    <input type="hidden" name="delete_post" value="<?php echo $row['post_id']; ?>">
+
+                   
+                    
+                    
+
+                  </form>
+
+        </div>
+        <br/><br/><hr/><br/><br/>
+           
+        <?php
+        }
+        ?>
+
         
+
 
         <?php
               if (isset($_POST['delete_id'])) 
@@ -118,6 +183,25 @@
               
               <script type="text/javascript">
                   alert("Drafts has been deleted!");
+                  window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+              </script> 
+            
+            
+          <?php
+           
+              }
+          ?>
+
+<?php
+              if (isset($_POST['delete_post_id'])) 
+              {
+                  $delete = $_POST['delete_post'];
+                  mysqli_query($connect, "DELETE FROM post WHERE post_id = '$delete'");
+              
+              ?>
+              
+              <script type="text/javascript">
+                  alert("Post has been deleted!");
                   window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
               </script> 
             

@@ -37,7 +37,7 @@
         <div class="bAccBar">
             <form action="" method="POST" id="logout">
                 <input type="submit" name="logout" value="Log-Out">
-            </form>
+            </form> 
         </div>
     </div>
     <?php

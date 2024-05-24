@@ -214,6 +214,37 @@ $result = $connect->query($sql);
         .saved {
             color: red; 
         }
+        footer {
+            background-color: white;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer nav ul {
+            font-family: 'Times New Roman', Times, serif;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer nav ul li a:hover {
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -309,6 +340,14 @@ $result = $connect->query($sql);
 
         
     </script>
+     <footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 </html>
 <?php

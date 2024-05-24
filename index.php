@@ -11,7 +11,7 @@
     <body>
         <br/><br/><br/><br/><br/><br/><br/>
         
-            <div class="center" ><a href="job seekers login.php"><span class="formBox">Job Seekers</span></div>
+            <div class="center" ><a href="login.php"><span class="formBox">Job Seekers</span></div>
             <br/><br/>
             <div class="center" ><a href="employer login.php"><span class="formBox">Employer</span></div>
             <br/><br/>

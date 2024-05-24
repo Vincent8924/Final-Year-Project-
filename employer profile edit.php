@@ -149,7 +149,7 @@ if(isset($_POST['submit'])) {
 
     
     //$fileData = file_get_contents($fileTmpName);
-    $email = $_REQUEST["email"];
+    $id= $_REQUEST["id"];
     
     //mysqli_query($connect, "DELETE FROM employer_profile WHERE employer_email = '$email'");
 

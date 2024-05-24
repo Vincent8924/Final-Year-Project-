@@ -123,10 +123,6 @@ CREATE DATABASE employment;
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `category` varchar(50) DEFAULT NULL
   );
-
-
-
-  
   
   CREATE TABLE jobseeker 
   (

@@ -58,7 +58,7 @@
                     <li><a href="Aadminmanagement.php">Admin</a></li>
                     <li><a href="Apost.php" id="now">Post</a></li>
                     <li><a href="Apackage.php">Package</a></li>
-                    <li><a href="Asell.php">Sell</a></li>
+                    <li><a href="Asale.php">Sale</a></li>
                     <li><a href="Aprofile.php">Profile</a></li>
                 </ul>
             </nav>

@@ -2,20 +2,7 @@ CREATE DATABASE employment;
 
 -------------------------------------------------------------------------------------------
 
---old table--
-  CREATE TABLE post (
-      `post_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      `poster_id` INT NOT NULL,
-      `employer_email` varchar(200) NOT NULL,
-      `job_name` varchar(200) NOT NULL,
-      `job_type` varchar(200) NOT NULL,
-      `location` varchar(500) NOT NULL,
-      `employment_type` varchar(200) NOT NULL,
-      `description` varchar(9999) ,
-      `salary` varchar(200) NOT NULL
-  );
 
---new table--
       CREATE TABLE post (
       `post_id` INT NOT NULL PRIMARY KEY,
       `poster_id` INT NOT NULL,
@@ -29,20 +16,7 @@ CREATE DATABASE employment;
       `salary` INT NOT NULL,
       `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
   );
-
---old table--
-  CREATE TABLE drafts (
-      `drafts_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      `employer_email` varchar(200) NOT NULL,
-      `job_name` varchar(200) NOT NULL,
-      `job_type` varchar(200) NOT NULL,
-      `location` varchar(500) NOT NULL,
-      `employment_type` varchar(200) NOT NULL,
-      `description` varchar(9999) ,
-      `salary` varchar(200) NOT NULL
-  );
   
--- new table--
       CREATE TABLE drafts (
       `draft_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `poster_id` INT NOT NULL,
@@ -112,21 +86,6 @@ CREATE DATABASE employment;
     `subject` varchar(255) NOT NULL,
     `message` text NOT NULL
   );
-
-  CREATE TABLE homepage 
-  (
-    `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `company_name` varchar(255) NOT NULL,
-    `logo_url` varchar(255) DEFAULT NULL,
-    `salary_range` varchar(100) DEFAULT NULL,
-    `job_description` text DEFAULT NULL,
-    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-    `category` varchar(50) DEFAULT NULL
-  );
-
-
-
-  
   
   CREATE TABLE jobseeker 
   (
@@ -179,9 +138,9 @@ CREATE DATABASE employment;
   efforts and fill multiple positions efficiently. Whether you're launching extensive hiring campaigns, expanding your workforce rapidly, or seeking talent across multiple 
   departments, these extra postings offer unparalleled exposure and candidate engagement.",'10','1');
 
-  CREATE TABLE sell
+  CREATE TABLE sale
   (
-    `sell_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `purchase_amount` decimal(10, 2) NOT NULL,
     `purchase_time` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
     `payment_status` varchar(10) NOT NULL,
@@ -189,5 +148,5 @@ CREATE DATABASE employment;
     `package_id` int(6) NOT NULL
   );
 
-  INSERT INTO sell (sell_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 1);
+  INSERT INTO sale (sale_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 1);
 

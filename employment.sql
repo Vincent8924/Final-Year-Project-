@@ -123,7 +123,7 @@
       `package_post_quota` int(10) NOT NULL,
       `package_sale_status` tinyint(1)
   );
-  
+
   CREATE TABLE sale
   (
       `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -136,7 +136,7 @@
 ---------------------------------------------------------------------------------------------------
   INSERT INTO sale (sale_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 200001);
 
-  INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin) 
+  INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin)    
   VALUES ( '100001', 'Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1');
 
   INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin) 

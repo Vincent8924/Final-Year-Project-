@@ -252,10 +252,13 @@ $result = $connect->query($sql);
             while($row = $result->fetch_assoc()) {
                 echo '<div class="jobPost" id="' . htmlspecialchars($row["job_name"]) . '">';
                 echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
-                echo '<h2>' . htmlspecialchars($row["job_name"]) . '</h2>';
+                echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
+                echo   htmlspecialchars($row["job_name"]) ;
                 echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>'; 
+                echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
+                echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
                 echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-                echo '<p>' . htmlspecialchars($row["description"]) . '</p>';
+                echo '<p>Description:' . htmlspecialchars($row["description"]) . '</p>';
                 echo '<span class="saveIcon">&#10084;</span>'; 
                 echo '</div>';
             }

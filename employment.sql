@@ -95,18 +95,17 @@ CREATE DATABASE employment;
     `jobseeker_email` varchar(60) NOT NULL,
     `jobseeker_password` varchar(500) NOT NULL
   );
-  CREATE TABLE userprofile
-  (
-    `UserID` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `ProfilePic` varchar(255) DEFAULT NULL,
-    `FullName` varchar(100) DEFAULT NULL,
-    `Email` varchar(100) DEFAULT NULL,
-    `PersonalSummary` text DEFAULT NULL,
-    `Skill` varchar(100) DEFAULT NULL,
-    `WorkExperience` text DEFAULT NULL,
-    `Education` text DEFAULT NULL,
-    `Language` varchar(50) DEFAULT NULL
-  ) ;
+  CREATE TABLE `userprofile` (
+  `UserID` int(11) NOT NULL,
+  `ProfilePic` varchar(255) DEFAULT NULL,
+  `PersonalSummary` text DEFAULT NULL,
+  `Skills` varchar(100) DEFAULT NULL,
+  `work_experience` text DEFAULT NULL,
+  `Education` text DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
+  `jobseeker_email` varchar(255) DEFAULT NULL
+);
+
 
   CREATE TABLE package 
   (

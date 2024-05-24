@@ -42,7 +42,7 @@
             </form>
         </div>
     </div>
-    <?php
+    <?php 
         if(isset($_POST['logout']))
         {
             session_destroy();

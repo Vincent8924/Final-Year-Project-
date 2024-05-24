@@ -1,6 +1,6 @@
 <?php 
-    include(__DIR__ . "/../Admin/Adataconnection.php");
-    include(__DIR__ . "/../Admin/Asession.php");
+    include("../Admin/Adataconnection.php");
+    include("../Admin/Asession.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +57,7 @@
                     <li><a href="Aadminmanagement.php"  id="now">Admin</a></li>
                     <li><a href="Apost.php">Post</a></li>
                     <li><a href="Apackage.php">Package</a></li>
-                    <li><a href="Asell.php">Sell</a></li>
+                    <li><a href="Asale.php">Sale</a></li>
                     <li><a href="Aprofile.php">Profile</a></li>
                 </ul>
             </nav>

@@ -27,6 +27,7 @@
                     
                         <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
                         <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
+                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
                         <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
                         <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
                     
@@ -48,101 +49,53 @@
     <h1 class="center">Our packages</h1>
 
     
-
-    <table class="mid_table">
-        <tr>
-            <td>
-                <form class="formbox" method="post">
-                    <div class="center">
-                        <h1><u>1 Post Package</u></h1>
-                        
-                        <h2>
-                            allow post one post
-                            <br/><br/>
-                            without time limited
-                        </h2>
-
-                        <h1>RM8.00</h1>
-                        <input type="hidden" name="post_number" value="1">
-                    </div>
-
-
+    <?php
+    
+    $result = mysqli_query($connect, "SELECT * FROM package WHERE package_sale_status = '1'");	
+     while($row = mysqli_fetch_assoc($result))
+        {
+        
+        ?>	
+        <form  method="post">
+        <table border="0"   class="formBox">
+        <tr>   
+            <td rowspan="1">
                 
-                <button class="centerButton" type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
+            
+                <input type="hidden" name="pid" value="<?php echo $row["package_id"] ?>">
+                <div id="shipx"><u><?php echo $row['package_name']?></u></div><br/>
                 
-                <br/><br/>
-
-                </form>
+                <div id="erpx" ><?php echo $row['package_description']?> <br/><br/><br/>
+                <h1>RM<?php echo $row["package_price"] ?></h1>
+                <input type="hidden" name="price" value="<?php echo $row["package_price"] ?>">
+                    <input type="hidden" name="post_number" value="<?php echo $row["package_post_quota"] ?>">
+                
+                
+                    <button  type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
             </td>
-
-            <td>
-                <form class="formbox" method="post">
-                        <div class="center">
-                            <h1><u>5 Post Package</u></h1>
-                            
-
-                            <h2>
-                                allow post two post
-                            <br/><br/>
-                                without time limited
-                            </h2>
-
-                          
-                        
-
-                            <h1>RM35.00</h1>
-                            <input type="hidden" name="post_number" value="5">
-                        </div>
-
-
-                    
-                    <button class="centerButton" type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
-                    
-                    <br/><br/>
-
-                </form>
             
-            </td>
-
-            <td>
-                <form class="formbox" method="post">
-                        <div class="center">
-                            <h1><u>10 post package</u></h1>
-                            
-
-                            <h2>
-                                allow post two post
-                            <br/><br/>
-                                without time limited
-                            </h2>
-
-                          
-                        
-
-                            <h1>RM60.00</h1>
-                            <input type="hidden" name="post_number" value="10">
-
-
-                        </div>
-
-
-                    
-                    <button class="centerButton" type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
-                    
-                    <br/><br/>
-
-                </form>
             
-            </td>
-                    
+            
         </tr>
-    </table>
+        </table>
+        </form>
+            <br>
+
+
+
+
+        <?php } ?>
+
+
+   
 
 
     <?php
               if (isset($_POST['buy_package'])) 
               {
                 $pt = $_POST['post_number'];
+                $price = $_POST['price'];
+                $pid = $_POST['pid'];
                 $id = $_REQUEST['id'];
                 $result = mysqli_query($connect, "SELECT balance FROM employer WHERE id = '$id'");
                 //select the row first
@@ -161,7 +114,9 @@
                     
             
                     mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
-                    
+                    mysqli_query($connect,"  INSERT INTO sell 
+                    ( purchase_amount, payment_status, employer_id, package_id) 
+                    VALUES ('$price', 'Successful', $id, '$pid');")
                     
                     ?>
                     

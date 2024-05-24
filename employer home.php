@@ -108,7 +108,7 @@
                 <input type="text" class="field" placeholder="How about this job?" name="description">
 
                 <br/><br/><hr/><br/><br/>
-                <button type="submit"  name="post" value="post">Upload your draft</button>
+                <button type="submit"  name="post" value="post">Save your draft</button>
 
         </form>
 

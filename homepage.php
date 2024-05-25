@@ -308,7 +308,7 @@ if ($result->num_rows > 0) {
         echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
         echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
         echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
-        echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; // Display job name
+        echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
         echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
         echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
         echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
@@ -365,21 +365,21 @@ if ($result->num_rows > 0) {
             };
             request.send('post_id=' + postId);
         }
-        <script>
+        
+    
+
     function applyJob(postId) {
-        // Here you can implement the logic for applying to a job
-        // For example, you can make an AJAX request to a PHP script to handle the application process
-        // You can also redirect the user to a separate application page or display a form within a modal
-        alert("You have applied to job post ID: " + postId);
-    }
+    // Redirect to apply.php with the post_id as a query parameter
+    window.location.href = 'apply.php?post_id=' + postId;
+}
 </script>
-    </script>
+    
     <footer>
         <nav>
             <ul>
                 <li><a href="aboutus.html">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="applylist.php">Apply list</a></li>
                 
             </ul>
         </nav>

@@ -231,7 +231,7 @@ if(isset($_GET['post_id'])) {
             <ul>
                 <li><a href="aboutus.html">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="applylist.php">Apply list</a></li>
                 
             </ul>
         </nav>

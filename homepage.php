@@ -23,7 +23,7 @@ $result = $connect->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Search Homepage</title>
     <style>
-        /* Add your styles here */
+       
         body {
             font-family: Arial, sans-serif;
             margin: 0;

@@ -39,3 +39,13 @@ if (isset($_FILES['profile_picture']) && isset($_SESSION['email'])) {
     echo "No file uploaded or session email not set.";
 }
 ?>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const uploaded = urlParams.get('profile_pic_uploaded');
+    if (uploaded === '1') {
+        alert("Profile picture uploaded successfully.");
+    }
+});
+</script>

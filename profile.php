@@ -2,23 +2,21 @@
 session_start();
 include("dataconnection.php");
 
-// Check if session email is set
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 
-    // Fetch user profile data from the database
     $query = $connect->prepare("SELECT ProfilePic, PersonalSummary, Skills, work_experience, Education, language FROM userprofile WHERE jobseeker_email = ?");
     $query->bind_param("s", $email);
     $query->execute();
     $query->store_result();
     $query->bind_result($profilePic, $personalSummary, $skills, $workExperience, $education, $language);
     $query->fetch();
+
 } else {
     echo "Session email not set.";
 }
-
-// Display fetched data
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -336,6 +334,24 @@ if (isset($_SESSION['email'])) {
         textarea {
             height: 100px; 
         }
+        .upload-icon {
+            position: relative;
+            bottom: 5px;
+            right: 5px;
+            background-color: white;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .upload-icon i {
+            color: #555;
+        }
+
+        .upload-icon:hover {
+            background-color: #eee;
+        }
         footer {
             background-color: white;
             padding: 10px 20px;
@@ -479,9 +495,13 @@ if (isset($_SESSION['email'])) {
 </div>
 
 <div class="form-group">
-    <h1 class="section-title">Language</h1>
-    <div id="selectedLanguageBox" class="language-box"><?php echo $language; ?></div>
-    <button class="add-skill-btn" onclick="toggleLanguageSelectForm()">Add Language</button>
+        <h1 class="section-title">Language</h1>
+        <div id="selectedLanguageBox" class="language-box">
+            <?php echo '<div>' . $language . '</div>'; ?>
+        </div>
+        <button class="add-skill-btn" onclick="toggleLanguageSelectForm()">Add Language</button> <!-- Moved button here -->
+    </div>
+</div>
     <form id="languageSelectForm" style="display: none;">
         <input type="text" id="languageSearch" onkeyup="filterLanguages()" placeholder="Search for a language...">
         <select id="languageSelect" multiple>
@@ -498,31 +518,13 @@ if (isset($_SESSION['email'])) {
             <option value="Korean">Korean</option>
             <option value="Dutch">Dutch</option>
             <option value="Swedish">Swedish</option>
-            <option value="Danish">Danish</option>
-            <option value="Norwegian">Norwegian</option>
-            <option value="Finnish">Finnish</option>
-            <option value="Polish">Polish</option>
-            <option value="Greek">Greek</option>
-            <option value="Turkish">Turkish</option>
-            <option value="Hungarian">Hungarian</option>
-            <option value="Czech">Czech</option>
-            <option value="Slovak">Slovak</option>
-            <option value="Thai">Thai</option>
-            <option value="Hindi">Hindi</option>
-            <option value="Indonesian">Indonesian</option>
-            <option value="Malay">Malay</option>
-            <option value="Vietnamese">Vietnamese</option>
-            <option value="Tagalog">Tagalog</option>
-            <option value="Swahili">Swahili</option>
-            <option value="Afrikaans">Afrikaans</option>
         </select>
-        <button type="button" class="add-skill-btn" onclick="saveSelectedLanguages()">Save Languages</button>
+        <button type="button" onclick="toggleLanguageSelectForm()">Cancel</button>
+        <button type="button" onclick="saveLanguage()">Save</button>
     </form>
 </div>
 
-
-
-    <script>
+<script>
       
         const languages = [
             "English",
@@ -635,24 +637,6 @@ function toggleLanguageSelectForm() {
                 editForm.style.display = 'none';
             }
         }
-       
-        function toggleEditForm(formId) {
-            var editForm = document.getElementById(formId);
-            if (editForm.style.display === 'none' || editForm.style.display === '') {
-                editForm.style.display = 'block';
-            } else {
-                editForm.style.display = 'none';
-            }
-        }
-
-        function toggleEditForm(formId) {
-    var editForm = document.getElementById(formId);
-    if (editForm.style.display === 'none' || editForm.style.display === '') {
-        editForm.style.display = 'block';
-    } else {
-        editForm.style.display = 'none';
-    }
-}
 
 function savePersonalSummary() {
     const editedSummary = document.getElementById('editedPersonalSummary').value;
@@ -770,27 +754,33 @@ function saveWorkExperience() {
         fetchLanguages();
     });
 
-    function fetchLanguages() {
-        fetch('fetch_languages.php') // Assuming this endpoint returns an array of languages
-            .then(response => response.json())
-            .then(data => {
-                displayLanguages(data);
+   
+    event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('upload_resume.php', {
+                method: 'POST',
+                body: formData
             })
-            .catch(error => console.error('Error fetching languages:', error));
+            .then(response => {
+                if (response.ok) {
+                    console.log('Resume uploaded successfully.');
+                } else {
+                    console.error('Error uploading resume.');
+                }
+            })
+            .catch(error => {
+                console.error('Error uploading resume:', error);
+            });
+            function toggleEditForm(formId) {
+    var editForm = document.getElementById(formId);
+    if (editForm.style.display === 'none' || editForm.style.display === '') {
+        editForm.style.display = 'block';
+    } else {
+        editForm.style.display = 'none';
     }
-
-    function displayLanguages(languages) {
-        const languageBox = document.getElementById('selectedLanguageBox');
-        languageBox.innerHTML = ''; 
-
-        languages.forEach(language => {
-            const languageElement = document.createElement('div');
-            languageElement.textContent = language;
-            languageBox.appendChild(languageElement);
-        });
-
-        languageBox.style.display = 'block';
-    }
+}
+        
     </script>
     <footer>
         <nav>
@@ -804,3 +794,4 @@ function saveWorkExperience() {
     </footer>
 </body>
 </html>
+

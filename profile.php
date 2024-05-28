@@ -255,6 +255,18 @@ if (isset($_SESSION['jobseeker_email'])) {
             animation: slideFromRight 0.5s ease forwards;
         }
 
+        
+        @keyframes slideFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         #languageSelectForm {
             padding-top: 10px;
             border-top: 1px solid #ccc;

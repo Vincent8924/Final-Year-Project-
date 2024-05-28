@@ -170,8 +170,8 @@ tbody tr:nth-child(even) {
     </div>
     <nav class="navigation">
         <ul>
-            <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['email']); ?>">Job Save</a></li>
-            <li><a href="profile.php?email=<?php echo urlencode($_SESSION['email']); ?>">Profile</a></li>
+            <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Job Save</a></li>
+            <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
             <li><a href="#">Company Profile</a></li>
         </ul>
     </nav>

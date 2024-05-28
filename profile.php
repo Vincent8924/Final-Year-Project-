@@ -2,8 +2,8 @@
 session_start();
 include("dataconnection.php");
 
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_SESSION['jobseeker_email'])) {
+    $email = $_SESSION['jobseeker_email'];
 
     $query = $connect->prepare("SELECT ProfilePic, PersonalSummary, Skills, work_experience, Education, language FROM userprofile WHERE jobseeker_email = ?");
     $query->bind_param("s", $email);
@@ -394,8 +394,8 @@ if (isset($_SESSION['email'])) {
 
         <nav class="navigation">
             <ul>
-                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['email']); ?>">Job Save</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['email']); ?>">Profile</a></li>
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Job Save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
                 <li><a href="#">Company Profile</a></li>
             </ul>
         </nav>

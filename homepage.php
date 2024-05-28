@@ -1,9 +1,9 @@
 <?php
-session_start();
+include("Jsession.php");
 include("dataconnection.php");
 
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_SESSION['jobseeker_email'])) {
+    $email = $_SESSION['jobseeker_email'];
     $email = $connect->real_escape_string($email);
     $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_email = '$email'";
     $result = $connect->query($query);
@@ -277,8 +277,8 @@ $result = $connect->query($sql);
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['email']); ?>">Job Save</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['email']); ?>">Profile</a></li>
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Job Save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
                 <li><a href="#">Company Profile</a></li>
             </ul>
         </nav>

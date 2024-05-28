@@ -2,8 +2,8 @@
 session_start();
 include("dataconnection.php");
 
-if (isset($_FILES['profile_picture']) && isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_FILES['profile_picture']) && isset($_SESSION['jobseeker_email'])) {
+    $email = $_SESSION['jobseeker_email'];
     $profilePicture = $_FILES['profile_picture'];
 
     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];

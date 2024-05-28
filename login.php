@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("dataconnection.php");
 
 
@@ -13,10 +13,7 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['jobseeker_password'])) {
-            
-            session_start();
-            $_SESSION['jobseeker_email'] = $email;
-
+        
             if (strpos($email, '@gmail.com') !== false) {
                 $_SESSION['gmail'] = $email;
             }

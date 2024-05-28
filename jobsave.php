@@ -2,8 +2,8 @@
 session_start();
 include("dataconnection.php");
 
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_SESSION['jobseeker_email'])) {
+    $email = $_SESSION['jobseeker_email'];
     $email = $connect->real_escape_string($email);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['post_id'])) {
@@ -271,8 +271,8 @@ if (isset($_SESSION['email'])) {
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['email']); ?>">Homepage</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['email']); ?>">Profile</a></li>
+                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Homepage</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
                 <li><a href="#">Company Profile</a></li>
             </ul>
         </nav>

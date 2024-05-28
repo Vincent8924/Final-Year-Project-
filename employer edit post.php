@@ -1,4 +1,5 @@
 <?php include('vdataconnection.php'); ?>
+<?php include('employer session.php'); ?>
 <html>
     <head>
         <meta charset="UTF-8"/>
@@ -10,37 +11,44 @@
     </head>
     <body>
     <?php
-                        {
+                        
                         $did = $_REQUEST["did"];
-                        $id = $_REQUEST["id"];
+                        $id = $_SESSION['id'];
                        
+                        if(isset($_POST['logout']))
+            {
+                session_destroy();
+                echo'<script>alert("Log-Out successful!");window.location.href="employer login.php";</script>';
+            }
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                    <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
-                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
-                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
-                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
-                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
+                    <a href="employer home.php">HOME</a>
+                        <a href="employer drafts.php">Drafts</a>
+                        <a href="employer view post.php">Post</a>
+                        <a href="employer view application.php">Application</a>
+                        <a href="employer packages.php">Package</a>
+                        <a href="employer payment history.php">History</a>
+                        <a href="employer profile.php">Profile</a>
                     
                     </span>
-                    <span class="right" >
-                    <a href='index.php' onclick='return userconfirmation();'><img src='img/logout.png' style='width: 20px; height: 20px;'>LOG OUT</a></span> 
-                    
+                    <form method="post" >
+                        <span class="right" >
+                            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
+                        </span> 
+                    </form>
                 </div>
             </div>
         </nav>
 
-        <?php
-                        }
-                    ?>
+  
     <br/><hr/><br/>
 
     <h1>Edit your post</h1>
@@ -54,7 +62,7 @@
      {
         
         $did = $_REQUEST['did'];
-        $id = $_REQUEST['id'];
+        
         $job = $_POST['job_name'];
         $em_name = $_POST['company_name'];
         $type = $_POST['job_type'];

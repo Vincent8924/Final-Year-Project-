@@ -1,4 +1,5 @@
 <?php include('vdataconnection.php'); ?>
+<?php include('employer session.php'); ?>
 <html>
     <head>
         <meta charset="UTF-8"/>
@@ -12,36 +13,62 @@
     <br/> <br/>
 
     <?php
-                        {
-                        $id = $_REQUEST["id"];
+                        
+                            $id = $_SESSION['id'];
+                            
+
+                            if(isset($_POST['logout']))
+            {
+                session_destroy();
+                echo'<script>alert("Log-Out successful!");window.location.href="employer login.php";</script>';
+            }
+
+
+            $result = mysqli_query($connect,"SELECT * FROM employer WHERE id = '$id'");
+
+            if($result)
+            {
+                $row = mysqli_fetch_assoc($result);
+                $balance = $row['balance'];
+                mysqli_free_result($result);
+            }
+
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                        <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
-                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
-                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
-                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
-                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
+                    <a href="employer home.php">HOME</a>
+                        <a href="employer drafts.php">Drafts</a>
+                        <a href="employer view post.php">Post</a>
+                        <a href="employer view application.php">Application</a>
+                        <a href="employer packages.php">Package</a>
+                        <a href="employer payment history.php">History</a>
+                        <a href="employer profile.php">Profile</a>
                     
                     </span>
-                    <span class="right" >
-                    <a href='index.php' onclick='return userconfirmation();'><img src='img/logout.png' style='width: 20px; height: 20px;'>LOG OUT</a></span> 
-                    
+                    <form method="post" >
+                        <span class="right" >
+                            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
+                        </span> 
+                    </form>
                 </div>
             </div>
         </nav>
 
-        <?php
-                        }
-                    ?>
+    
     <br/><hr/><br/>
+
+    <h2>
+        Your post quota : <?php echo " $balance";?>
+    </h2> 
+
+    <hr/>
 
     <h1>Manage your drafts</h1>
         <br/><br/>
@@ -49,7 +76,7 @@
 
 
         <?php
-    $id = $_REQUEST["id"];
+
 
     $result = mysqli_query($connect, "SELECT * FROM drafts where `poster_id` = '$id'");	
     while($row = mysqli_fetch_assoc($result))
@@ -86,9 +113,18 @@
             <?php echo $row['description']?>
 
             <br/><br/><br/><br/>
+
+            <script>
+        function edit()
+        {
+            console.log("Edit function called.");
+            window.location = "employer edit post.php?did=<?php echo $row['draft_id'];?>";
+        }
+        </script>
+
             <form method="post" action="">
                   
-                  <button><a href="employer edit post.php?did=<?php echo $row['draft_id'];?> &id=<?php echo $id ?> " class="white">Edit</a></button>
+                  <button type="button" onclick="edit()">Edit</button>
                      
                     <button type="submit" name="delete_id" onclick="return confirmation();">Delete</button>
                     
@@ -112,7 +148,7 @@
         <br/><br/>
 
         <?php
-    $id = $_REQUEST["id"];
+
 
     $result = mysqli_query($connect, "SELECT * FROM post where `poster_id` = '$id'");	
     while($row = mysqli_fetch_assoc($result))
@@ -183,7 +219,7 @@
               
               <script type="text/javascript">
                   alert("Drafts has been deleted!");
-                  window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+                  window.location = "employer drafts.php";
               </script> 
             
             
@@ -202,7 +238,7 @@
               
               <script type="text/javascript">
                   alert("Post has been deleted!");
-                  window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+                  window.location = "employer drafts.php";
               </script> 
             
             
@@ -216,7 +252,7 @@
               if (isset($_POST['post'])) 
               {
                 $pid = $_POST['pid'];
-                $id = $_REQUEST["id"];
+                
 
                 
 
@@ -238,7 +274,7 @@
                     if(balance <= 0)
                     {
                         alert("You have not enough balance to post");
-                        window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+                        window.location = "employer drafts.php";
                     }
                     else if(balance > 0)
                     {
@@ -247,11 +283,12 @@
                         if(answer == true)
                         {
                             alert("Your post is successfully posted.");
+                            window.location = "employer drafts.php";
 
                         }
                         else if(answer != true)
                         {
-                            window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+                            window.location = "employer drafts.php";
                         }
                     }
                     
@@ -274,7 +311,7 @@
                     
                 <script>
                    
-                    window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+                    window.location = "employer drafts.php";
 
                 </script>
 
@@ -291,6 +328,7 @@
         answer = confirm("Do you want to delete this post?");
         return answer;
         }
+        
         </script>
 
 

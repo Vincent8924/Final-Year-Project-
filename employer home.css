@@ -95,3 +95,17 @@ button {
         color: white;
         text-decoration: none;
     }
+
+#logout
+{
+    font-size: 30px;
+    width: 200px;
+    margin-top: -15px;
+    border: none;
+}
+
+#logout_photo
+{
+    width: 25px; 
+    
+}

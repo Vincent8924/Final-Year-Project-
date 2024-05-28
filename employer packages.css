@@ -106,10 +106,24 @@ button {
 
 .formBox{
     position: relative;
-    width: 1200px;
+    width: 93%;
     column-width: auto;
     
     box-shadow: 0 2px 5px black;
     padding:30px 40px;
     border-radius: 10px;
+}
+
+#logout
+{
+    font-size: 30px;
+    width: 200px;
+    margin-top: -15px;
+    border: none;
+}
+
+#logout_photo
+{
+    width: 25px; 
+    
 }

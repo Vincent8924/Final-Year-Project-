@@ -120,6 +120,7 @@
       `package_sale_status` tinyint(1)
   );
 
+--old sale
   CREATE TABLE sale
   (
       `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -173,3 +174,22 @@ INSERT INTO `drafts` (`draft_id`, `poster_id`, `job_name`, `company_name`, `logo
 
 INSERT INTO `post` (`post_id`, `poster_id`, `job_name`, `company_name`, `logo`, `category`, `location`, `employment_type`, `description`, `salary`) VALUES
 (1, 1, 'software development', 'mihoyo', NULL, 'Accounting', 'china', 'full time', 'looking for a talent with familiar Java programming language', 3000);
+
+
+
+--new sale
+    CREATE TABLE sale
+  (
+      `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+      `purchase_amount` decimal(10, 2) NOT NULL,
+      `purchase_time` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      `payment_status` varchar(10) NOT NULL,
+      `employer_id` int NOT NULL,
+      `package_id` int(6) NOT NULL,
+      `bank` VARCHAR(100),
+      `card_name` varchar(200),
+      `card_number` INT,
+      `card_expire_year` INT,
+      `card_expire_month` INT,
+      `card_cvv` INT
+  );

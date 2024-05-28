@@ -56,14 +56,18 @@
             $email = $_POST["email"];
             $result = mysqli_query($connect,"SELECT * FROM employer WHERE employer_email='$email'");
             $row = mysqli_fetch_assoc($result);
-            $id = $row['id'];
+            
             if($row)
             {
+
+                session_start();
+              
+
                 if(password_verify($_POST["password"],$row["password"]))
                 {
-                    echo'<script>alert("Login successful!");';
-            
-                    header("Location:employer home.php?id=" . urlencode($id));
+                    
+                    $_SESSION['id'] = $row["id"];
+                    echo'<script>alert("Login successful!");window.location.href="employer home.php";</script>';
                 }
                 else
                 {

@@ -379,7 +379,7 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
         }
 
         
-        @keyframes slideFromRight {
+        @k  eyframes slideFromRight {
             0% {
                 opacity: 0;
                 transform: translateX(100%);

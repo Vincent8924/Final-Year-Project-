@@ -153,12 +153,12 @@
                         </thead>
                         <tbody>
                             <?php
-                                $result = mysqli_query($connect, "SELECT job_type, COUNT(*) as num FROM post GROUP BY job_type");
+                                $result = mysqli_query($connect, "SELECT category, COUNT(*) as num FROM post GROUP BY category");
                                 while($row = mysqli_fetch_assoc($result))
                                 {
                             ?>
                                 <tr>
-                                    <td class="category"><?php echo $row["job_type"] ?></td>
+                                    <td class="category"><?php echo $row["category"] ?></td>
                                     <td><?php echo $row["num"] ?></td>
                                 </tr>
                             <?php

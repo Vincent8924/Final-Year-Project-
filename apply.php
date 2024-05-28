@@ -61,129 +61,185 @@ if(isset($_GET['post_id'])) {
     <title>Apply for Job</title>
     <style>
        
-         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+       body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
 
-        header {
-            background-color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+header {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-        .navigation {
-            display: inline-block;
-            margin-right: 50%;
-        }
+.navigation {
+    display: inline-block;
+    margin-right: 55%;
+}
 
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
 
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
+.navigation ul li {
+    display: inline-block;
+}
 
-        .navigation ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+.navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
 
-        .navigation ul li a:hover {
-            color: #555;
-        }
+.navigation ul li a:hover {
+    color: #555;
+}
 
-        .employer-site {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid blue;
-            border-radius: 5px;
-            margin-left: 20px;
-        }
+.employer-site {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-left: 20px;
+}
 
-        .employer-site a {
-            text-decoration: none;
-            color: rgb(12, 12, 191);
-        }
+.employer-site a {
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+}
 
-        .employer-site:hover {
-            background-color: blue;
-        }
+.employer-site:hover {
+    background-color: blue;
+}
 
-        .employer-site:hover a {
-            color: white;
-        }
+.employer-site:hover a {
+    color: white;
+}
 
-        .logo {
-            display: inline-block;
-        }
+.logo {
+    display: inline-block;
+}
 
-        .logo img {
-            height: 50px;
-        }
+.logo img {
+    height: 50px;
+}
 
-        .user-info {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid green;
-            border-radius: 5px;
-            margin-left: 50px;
-        }
+.user-info {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-left: 50px;
+}
 
-        .user-info p {
-            margin: 0;
-            font-weight: bold;
-            color: green;
-        }
+.user-info p {
+    margin: 0;
+    font-weight: bold;
+    color: green;
+}
 
-        .user-info:hover {
-            background-color: green;
-        }
+.user-info:hover {
+    background-color: green;
+}
 
-        .user-info:hover p {
-            color: white;
-        }
+.user-info:hover p {
+    color: white;
+}
 
-        footer {
-            background-color: white;
-            padding: 10px 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+#applyForm {
+    background-color: white;
+    margin: 40px auto;
+    margin-top: 10%;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
 
-        footer nav ul {
-            font-family: 'Times New Roman', Times, serif;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
+#applyForm h2 {
+    margin-top: 0;
+}
 
-        footer nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+#applyForm p {
+    font-size: 16px;
+    color: #666;
+}
 
-        footer nav ul li a:hover {
-            color: #555;
-        }
+#applyForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+#applyForm form div {
+    margin-bottom: 15px;
+}
+
+#applyForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#applyForm input[type="file"] {
+    padding: 5px;
+}
+
+#applyForm input[type="submit"] {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#applyForm input[type="submit"]:hover {
+    background-color: darkgreen;
+}
+
+footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer nav ul li a:hover {
+    color: #555;
+}
     </style>
 </head>
 <body>

@@ -98,16 +98,17 @@
 
 
 
-  CREATE TABLE `userprofile` (
-      `UserID` int(11) NOT NULL,
-      `ProfilePic` varchar(255) DEFAULT NULL,
-      `PersonalSummary` text DEFAULT NULL,
-      `Skills` varchar(100) DEFAULT NULL,
-      `work_experience` text DEFAULT NULL,
-      `Education` text DEFAULT NULL,
-      `language` varchar(255) DEFAULT NULL,
-      `jobseeker_email` varchar(255) DEFAULT NULL
-  );
+ CREATE TABLE `userprofile` (
+  `UserID` int(11) NOT NULL,
+  `ProfilePic` varchar(255) DEFAULT NULL,
+  `PersonalSummary` text DEFAULT NULL,
+  `Skills` varchar(100) DEFAULT NULL,
+  `work_experience` text DEFAULT NULL,
+  `Education` text DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
+  `jobseeker_email` varchar(255) DEFAULT NULL
+  `resume` varchar(200) 
+) 
 
   CREATE TABLE `applications` (
   `id` int(11) NOT NULL,

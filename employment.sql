@@ -110,7 +110,7 @@
       `package_price` decimal(10, 2) NOT NULL,
       `package_description` TEXT,
       `package_post_quota` int(10) NOT NULL,
-      `package_sale_status` tinyint(1)
+      `package_sale_status` tinyint(1) 
   );
 
   CREATE TABLE sale

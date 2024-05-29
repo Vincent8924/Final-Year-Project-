@@ -1,18 +1,32 @@
 <?php
-    include("Jsession.php");
-    include("dataconnection.php");
-    if(isset($_SESSION['id'])) {
-        $id = $_SESSION['id'];
-        $id = $connect->real_escape_string($id);  
-        $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
-        $result = $connect->query($query);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $firstName = $row['jobseeker_firstname'];
-        }
+include("Jsession.php");
+include("dataconnection.php");
+
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+$firstName = '';
+
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
     }
-    $sql = "SELECT * FROM post";
-    $result = $connect->query($sql);
+}
+
+$sql = "SELECT * FROM post";
+$result = $connect->query($sql);
+
+if (!$result) {
+    die("Query failed: " . $connect->error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,7 +158,7 @@
         }
 
         .jobPost img {
-            width: 100%;
+            width: 30%;
             border-radius: 5px 5px 0 0;
         }
 
@@ -266,10 +280,11 @@
         footer nav ul li a:hover {
             color: #555;
         }
-    </style>
+        
+        </style>
 </head>
 <body>
-    <header>
+<header>
         <div class="logo">
             <img src="logo.png" alt="Company Logo">
         </div>
@@ -281,18 +296,7 @@
             </ul>
         </nav>
         <div class="user-info">
-        <?php
-                    $id = $_SESSION['id'];
-
-                    $result = mysqli_query($connect,"SELECT * FROM jobseeker where jobseeker_id='$id'");
-                    if($result)
-                    {
-                        $row = mysqli_fetch_assoc($result);
-                        $first_name = $row["jobseeker_firstname"];
-                    }
-                ?>
-                <?php echo"$first_name"; ?> 
-
+            <?php echo htmlspecialchars($firstName); ?>
         </div>
         <div class="employer-site">
             <a href="#">Employer Site</a>
@@ -307,26 +311,27 @@
     </div>
     <div id="jobPosts">
     <?php
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $savedClass = ($row["favourite"] === 'yes') ? 'saved' : '';
-        echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
-        echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
-        echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
-        echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
-        echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
-        echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
-        echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
-        echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-        echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
-        echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
-        echo '<span class="saveIcon ' . $savedClass . '" onclick="toggleFavouriteJobPost(this, ' . htmlspecialchars($row["post_id"]) . ')">&#10084;</span>';
-        echo '</div>';
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $savedClass = ($row["favourite"] === 'yes') ? 'saved' : '';
+            echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo">';
+            echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
+            echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
+            echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
+            echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
+            echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
+            echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
+            echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
+            echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
+            echo '<span class="saveIcon ' . $savedClass . '" onclick="toggleFavouriteJobPost(this, ' . htmlspecialchars($row["post_id"]) . ')">&#10084;</span>';
+            echo '</div>';
+        }
+    } else {
+        echo "No job posts available";
     }
-} else {
-    echo "No job posts available";
-}
-?>
+    ?>
+
     </div>
     <script>
         const searchBar = document.getElementById('searchBar');
@@ -370,22 +375,17 @@ if ($result->num_rows > 0) {
             };
             request.send('post_id=' + postId);
         }
-        
-    
 
-    function applyJob(postId) {
-    // Redirect to apply.php with the post_id as a query parameter
-    window.location.href = 'apply.php?post_id=' + postId;
-}
-</script>
-    
+        function applyJob(postId) {
+            window.location.href = 'apply.php?post_id=' + postId;
+        }
+    </script>
     <footer>
         <nav>
             <ul>
                 <li><a href="aboutus.html">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
                 <li><a href="applylist.php">Apply list</a></li>
-                
             </ul>
         </nav>
     </footer>

@@ -1,35 +1,7 @@
 <?php
-
-include("dataconnection.php");
-
-
-if (isset($_POST['submit'])) {
-    $email = mysqli_real_escape_string($connect, $_POST['email']);
-    $password = mysqli_real_escape_string($connect, $_POST['password']);
-
-    $query = "SELECT jobseeker_password FROM jobseeker WHERE jobseeker_email = '$email'";
-    $result = mysqli_query($connect, $query);
-
-    if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row['jobseeker_password'])) {
-            
-            session_start();
-            $_SESSION['jobseeker_email'] = $email;
-
-            if (strpos($email, '@gmail.com') !== false) {
-                $_SESSION['gmail'] = $email;
-            }
-
-            header("Location: homepage.php");
-            exit();
-        } else {
-            $login_fail = true;
-        }
-    } else {
-        $login_fail = true;
-    }
-}
+    
+    include("dataconnection.php");
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -239,11 +211,40 @@ if (isset($_POST['submit'])) {
             <div class="forget-password">
                 <a href="reset.php">Forgot Password?</a>
             </div>
-            <?php if (isset($login_fail) && $login_fail): ?>
+            <?php /*if (isset($login_fail) && $login_fail): ?>
                 <p>Login failed. Please check your email and password.</p>
-            <?php endif; ?>
+            <?php endif;*/ ?>
         </form>
     </div>
+    <?php
+    if(isset($_POST['submit'])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        
+        
+        $result = mysqli_query($connect,"SELECT * FROM jobseeker WHERE jobseeker_email='$email'");
+        $row = mysqli_fetch_assoc($result);
+        
+        if($row) {
+            if(password_verify($password, $row["jobseeker_password"])) {
+                $_SESSION['id'] = $row["jobseeker_id"];
+                if($_SESSION['id'])
+                {
+                    echo '<script>alert("Login successful!"); window.location.href="homepage.php";</script>';
+                }
+                else
+                {
+                    echo '<script>alert("Session!");;</script>';
+                }
+            } else {
+                echo '<script>alert("Password invalid! Please Try Again!"); history.go(-1);</script>';
+            }
+        } else {
+            echo '<script>alert("User does not exist!"); history.go(-1);</script>';
+        }
+    }
+    
+    ?>
     <footer>
         <nav>
             <ul>

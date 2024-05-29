@@ -1,20 +1,18 @@
 <?php
-include("Jsession.php");
-include("dataconnection.php");
-
-if (isset($_SESSION['jobseeker_email'])) {
-    $email = $_SESSION['jobseeker_email'];
-    $email = $connect->real_escape_string($email);
-    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_email = '$email'";
-    $result = $connect->query($query);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $firstName = $row['jobseeker_firstname'];
+    include("Jsession.php");
+    include("dataconnection.php");
+    if(isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+        $id = $connect->real_escape_string($id);  
+        $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+        $result = $connect->query($query);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $firstName = $row['jobseeker_firstname'];
+        }
     }
-}
-
-$sql = "SELECT * FROM post";
-$result = $connect->query($sql);
+    $sql = "SELECT * FROM post";
+    $result = $connect->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -277,17 +275,24 @@ $result = $connect->query($sql);
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Job Save</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
                 <li><a href="#">Company Profile</a></li>
             </ul>
         </nav>
         <div class="user-info">
-            <?php
-            if (isset($firstName)) {
-                echo '<p>Welcome, ' . $firstName . '</p>';
-            }
-            ?>
+        <?php
+                    $id = $_SESSION['id'];
+
+                    $result = mysqli_query($connect,"SELECT * FROM jobseeker where jobseeker_id='$id'");
+                    if($result)
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $first_name = $row["jobseeker_firstname"];
+                    }
+                ?>
+                <?php echo"$first_name"; ?> 
+
         </div>
         <div class="employer-site">
             <a href="#">Employer Site</a>

@@ -282,9 +282,9 @@ footer {
     margin-top: 10px;
 }
 
-#addpackage
+#addpackage,#editpackage
 {
-    display: none;
+    display: block;
     position: absolute;
     background-color: #f4f4f4;
     top: 25vh;
@@ -367,4 +367,15 @@ footer {
     border: #2e2d2d 2px solid;
 }
 
-
+textarea
+{
+    width: 100%;
+    height: 200px; /* 根据需要调整高度 */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif; /* 选择合适的字体 */
+    font-size: 14px; /* 根据需要调整字体大小 */
+}

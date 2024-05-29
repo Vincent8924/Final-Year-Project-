@@ -167,17 +167,17 @@
                             <?php
                                 }
                             ?>
+                            <button name="edit" class="editbtn" type="button" value="<?php echo $package_id; ?>" onclick="displayEdit()">Edit</button>
 
-                            <button onclick="displayEdit()" class="editbtn">Edit</button>
                         </div>
 
                     </div>
                 </div>
-
-                <?php
+                
+            <?php
 
                 }//end while
-                ?>
+            ?>
 
             </div>
 
@@ -283,8 +283,11 @@
                             <?php
                                 }
                             ?>
+                            <form method="POST">
+                                <button onclick="displayEdit()" class="editbtn" value="<?php echo $row['package_id']; ?>" name="edit">Edit</button>
+                            </form>
 
-                            <button onclick="displayEdit()" class="editbtn">Edit</button>
+                            
                         </div>
                     </div>
                 </div>
@@ -382,8 +385,112 @@
                         }
                     }
                 ?>
-            </div>
+        </div>
+            
+            
+            <?php
+                /*if(isset($_POST['edit'])) 
+                {
+                    $edit = $_POST['package_id'];
+                    $result = mysqli_query($connect, "SELECT * FROM package WHERE package_id = $edit");
+                    if($result)
+                    {
+                        $package_name = $row["package_name"];
+                        $package_id = $row["package_id"];
+                        $package_price = $row["package_price"];
+                        $package_description = $row["package_description"];
+                        $package_post_quota = $row["package_post_quota"];
+                        $package_sale_status_index = $row["package_sale_status"];
+                    }
+                }
+                */  
+            ?>
+            <div id="editpackage">
+                <form method="POST">
+                    <div class="aform">
+                        <div class="x" >
+                            <button type="button" onclick="closeEdit()" id="x">x</button>
+                        </div>
+                        <h2>EDITING PACKAGE (ID: <?php echo $package_id; ?>)</h2>
+                        
+                        <br>
+                        <div class="bbform">
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_name">Package's Name </label>
+                                </div>
+                                <input type="text" value="<?php echo $package_name; ?> " name="name" required><br>
+                            </div>
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_price">Package's Price </label>
+                                </div>
+                                <input type="number" value="<?php echo $package_price; ?>" name="price" required><br>
+                            </div>
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_post_quota">Package's Post Quota </label>
+                                </div>
+                                <input type="number" value="<?php echo $package_post_quota; ?>" name="post_quots" required><br>
+                            </div>
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="package_status">Package's Sale Status </label>
+                                </div>
+                                <select name="status" class="status">
+                                    <option value="<?php echo $package_sale_status; ?>" selected ><?php echo $package_sale_status; ?></option>
+                                    <option value="1">On-Sale</option>
+                                    <option value="0">Off-Sale</option>
+                                </select>
+                            </div>  
+                            <div class="bform">
+                                <div class="label">
+                                    <label for="description">Package's Description</label>
+                                </div>
+                                <textarea class="desc" name="package_description" required><?php echo $package_description; ?></textarea><br><br>
+                            </div>
+                        </div>
 
+                        <br>
+                        <input type="submit" value="Submit" class="formbtn" name="Submit">
+                    
+                    </div>
+ 
+                </form> 
+                
+                <?php
+                
+                    if(isset($_POST['Submit']))
+                    {
+                        /*if(isset($_POST['status']))
+                        {
+                            $name = $_POST['name'];
+                            $price = $_POST['price'];
+                            $post_quota = $_POST['post_quota'];
+                            $status = $_POST['status'];
+                            $desc = $_POST['desc'];
+
+                            $resuslt=mysqli_query($connect,"INSERT INTO package(package_name, admin_lname, admin_email,
+                             admin_password, superadmin) VALUES ('$fname','$lname','$email','$hashpassword','$superadmin')");
+                            ?>
+                            <script>
+                                alert("Admin has been successfully added!");
+                                window.location.href = "Aadminmanagement.php";
+                            </script>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <script>
+                                alert("Invalid Sale Status!");
+                                history.go(-1);
+                            </script>
+                            <?php
+                        }*/
+                    }
+                ?>
+            </div>
 
 
         
@@ -397,7 +504,7 @@
 </body>
 </html>
 
-<SCript>
+<script>
     function displaybar()
     {
         var div = document.getElementById("aAccBar");
@@ -433,4 +540,12 @@
         var div = document.getElementById("addpackage");
         div.style.display = "none";  
     }
-</SCript>
+    function displayEdit(){
+        var div = document.getElementById("editpackage");
+        div.style.display = "block";
+    }
+    function closeEdit(){
+        var div = document.getElementById("editpackage");
+        div.style.display = "none";  
+    }
+</script>

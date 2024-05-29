@@ -1,4 +1,5 @@
 <?php include('vdataconnection.php'); ?>
+<?php include('employer session.php'); ?>
 <html>
     <head>
         <meta charset="UTF-8"/>
@@ -13,35 +14,44 @@
     
     <br/> <br/>
     <?php
-                        {
-                        $id = $_REQUEST["id"];
+                        
+                            $id = $_SESSION['id'];
+                            
+
+                            if(isset($_POST['logout']))
+            {
+                session_destroy();
+                echo'<script>alert("Log-Out successful!");window.location.href="employer login.php";</script>';
+            }
                     ?>
         <nav>
             <div id="line">
                 <div class="choice">
                     <span class="left">
-                        <a href="employer home.php?id=<?php echo urlencode($id);?>"><img src="img/page logo2.png" id="page_logo"/></a>
+                    <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
                     </span>    
                     <span class="mid"> 
 
                     
-                        <a href="employer home.php?id=<?php echo urlencode($id);?>">HOME</a>
-                        <a href="employer drafts.php?id=<?php echo urlencode($id);?>">Drafts</a>
-                        <a href="employer view post.php?id=<?php echo urlencode($id);?>">Post</a>
-                        <a href="employer packages.php?id=<?php echo urlencode($id);?>">Package</a>
-                        <a href="employer profile.php?id=<?php echo urlencode($id);?>">Profile</a>
+                    <a href="employer home.php">HOME</a>
+                        <a href="employer drafts.php">Drafts</a>
+                        <a href="employer view post.php">Post</a>
+                        <a href="employer view application.php">Application</a>
+                        <a href="employer packages.php">Package</a>
+                        <a href="employer payment history.php">History</a>
+                        <a href="employer profile.php">Profile</a>
                     
                     </span>
-                    <span class="right" >
-                    <a href='index.php' onclick='return userconfirmation();'><img src='img/logout.png' style='width: 20px; height: 20px;'>LOG OUT</a></span> 
-                    
+                    <form method="post" >
+                        <span class="right" >
+                            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
+                        </span> 
+                    </form>
                 </div>
             </div>
         </nav>
 
-        <?php
-                        }
-                    ?>
+
     <br/><hr/><br/>
 
 
@@ -63,6 +73,7 @@
                 
             
                 <input type="hidden" name="pid" value="<?php echo $row["package_id"] ?>">
+
                 <div id="shipx"><u><?php echo $row['package_name']?></u></div><br/>
                 
                 <div id="erpx" ><?php echo $row['package_description']?> <br/><br/><br/>
@@ -71,7 +82,7 @@
                     <input type="hidden" name="post_number" value="<?php echo $row["package_post_quota"] ?>">
                 
                 
-                    <button  type="submit" name="buy_package" onclick="return confirmbuy();">Buy</button>
+                    <button  type="submit" name="buy_package" onclick="buy();">Buy</button>
             </td>
             
             
@@ -91,6 +102,7 @@
 
 
     <?php
+    /*
               if (isset($_POST['buy_package'])) 
               {
                 $pt = $_POST['post_number'];
@@ -129,10 +141,34 @@
 
                     <?php
                 } 
+                */
                 ?>
           
 
-       
+          <?php
+    
+              if (isset($_POST['buy_package'])) 
+              {
+                $pid = $_POST['pid'];
+             
+                
+                    
+                ?>
+                <script>
+                
+                window.location = "employer buy.php?pid=<?php echo $pid ?>";
+
+                </script>
+
+                <?php
+            
+                
+                
+                    
+                } 
+                
+                ?>
+      
 
         <script>
         function confirmbuy()

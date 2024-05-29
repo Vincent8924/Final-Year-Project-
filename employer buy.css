@@ -1,0 +1,265 @@
+.order{
+    margin: 0 auto;
+    position: relative;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 35px black;
+    padding:30px 40px;
+    border-radius: 10px;
+    background-color:lightblue;
+}
+.order h3{
+    text-align: center;
+}
+
+table, tr, th, td
+{
+    display:flex;
+    flex:75%;
+    border:2px solid black;
+    border-collapse: collapse;
+    width:700px;
+    text-align: center;
+    margin:0 auto;
+}
+th{
+    background-color: gray;
+    
+}
+td{
+    background-color:white;
+}
+
+.Payment .title
+{
+    text-align: center;
+
+}
+
+.Payment .title h2{
+    font-weight: bold;
+    font-size: 27px;
+}
+
+.Payment .title p{
+    font-size: 23px;
+    margin:0 auto;
+}
+
+.payment{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.formBox{
+    position: relative;
+    width: 90%;
+    
+    box-shadow: 0 5px 35px black;
+    padding:30px 40px;
+    border-radius: 10px;
+}
+.formBox .row50
+{
+    display: flex;
+    gap:20px;
+}
+
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.inputBox label{
+    color:blue;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+}
+
+.inputBox input{
+    padding: 10px;
+    font-size: 1.1em;
+    outline: none;
+    border: 1px solid black;
+}
+
+.inputBox100{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.inputBox100 label{
+    color:blue;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+}
+
+.inputBox100 input{
+    padding: 10px;
+    font-size: 1.1em;
+    outline: none;
+    border: 1px solid black;
+}
+
+.inputBox30{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 31.3%;
+}
+
+.inputBox30 label{
+    color:blue;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+}
+
+.inputBox30 input{
+    padding: 10px;
+    font-size: 1.1em;
+    outline: none;
+    border: 1px solid black;
+}
+
+.container {
+    color:green;
+    height:100%;
+    width:100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.active
+{
+     width:100px;
+    height:60px;
+}
+
+
+   
+#slideshow img:not(.active) 
+{
+    display: none;
+}  
+
+select{
+    border: 1px solid black;
+    padding:10px 150px;
+}
+.button-area input[type="submit"]
+{
+    background: gray;
+    color: white;
+    border: none;
+    font-size: 1.1em;
+    max-width: 120px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 14px 15px;
+    
+}
+
+.button-area span{
+    margin-left: 20px;
+    color: blue;
+    font-weight: bold;
+    
+}
+
+.text-danger{
+    color:red;
+}
+
+.error
+{
+    color:red;
+  
+}
+
+#total{
+    text-align:center;
+    font-weight:bold;
+    color:green;
+}
+
+body
+{
+    width: 90%; /* setting width */
+    margin: 0 auto; /* make content in middle */
+}
+
+#line {
+
+    
+    padding-right: 15px;
+    padding-left: 15px;
+
+    
+    background-color: black;
+    background-repeat: repeat-x;
+    height: 100px;
+}
+
+.choice a{
+    font-size: 30px;
+    text-decoration: none;
+    color: white;
+    margin-left: 35px;
+    position: relative;
+    display: inline-block; 
+    top: 25px;
+}
+
+.left 
+{
+    float: left;
+    margin-right: 65px;
+    
+}
+
+
+
+.right  
+{
+    float: right; 
+    margin-right: 65px;
+}
+
+#page_logo
+{
+    height: 45px;
+    top: 0px;
+}
+
+#logout
+{
+    font-size: 30px;
+    width: 200px;
+    margin-top: -6px;
+    border: none;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+
+}
+
+#logout_photo
+{
+    width: 25px; 
+    
+}
+

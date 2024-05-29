@@ -3,19 +3,19 @@
 -------------------------------------------------------------------------------------------
 
 
-  CREATE TABLE post (
-      `post_id` INT NOT NULL PRIMARY KEY,
-      `poster_id` INT NOT NULL,
-      `job_name` varchar(200) NOT NULL,
-      `company_name` varchar(255) ,
-      `logo` LONGBLOB,
-      `category` varchar(200) ,
-      `location` varchar(500) ,
-      `employment_type` varchar(200) NOT NULL,
-      `description` varchar(9999) ,
-      `salary` INT NOT NULL,
-      `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
-  );
+  CREATE TABLE `post` (
+  `post_id` int(11) NOT NULL,
+  `poster_id` int(11) NOT NULL,
+  `job_name` varchar(200) NOT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `logo` longblob DEFAULT NULL,
+  `category` varchar(200) DEFAULT NULL,
+  `location` varchar(500) DEFAULT NULL,
+  `employment_type` varchar(200) NOT NULL,
+  `description` varchar(9999) DEFAULT NULL,
+  `salary` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `favourite` enum('yes','no') DEFAULT 'no')
   
   CREATE TABLE drafts (
       `draft_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -102,6 +102,7 @@
       `language` varchar(255) DEFAULT NULL,
       `jobseeker_email` varchar(255) DEFAULT NULL
   );
+
 
   CREATE TABLE package 
   (

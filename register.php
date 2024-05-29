@@ -7,19 +7,15 @@ if(isset($_POST['registerBtn'])) {
     $email = mysqli_real_escape_string($connect, $_POST["email"]);
     $password = mysqli_real_escape_string($connect, $_POST["password"]);
 
-  
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-  
     $check_query = "SELECT * FROM jobseeker WHERE jobseeker_email = '$email'";
     $result = mysqli_query($connect, $check_query);
     if(mysqli_num_rows($result) > 0) {
-
         echo '<script>
                 alert("Email already exists! Registration failed.");
               </script>';
     } else {
- 
         $query = "INSERT INTO jobseeker (jobseeker_firstname, jobseeker_lastname, jobseeker_email, jobseeker_password) 
                   VALUES ('$firstName', '$lastName', '$email', '$hashedPassword')";
 
@@ -27,8 +23,9 @@ if(isset($_POST['registerBtn'])) {
             echo '<script>
                     alert("Registration successful");
                   </script>';
+            header("Location: login.php");
+            exit();
         } else {
-          
             echo "Error: " . mysqli_error($connect);
         }
     }
@@ -264,7 +261,7 @@ if(isset($_POST['registerBtn'])) {
             </div>
             <label>
                 <input type="checkbox" required>
-                <span style="font-size: 12px;">I agree to JH's privacy policy and acknowledge that my personal information may be gathered, saved, and used as specified by registering. As stated in the Privacy Policy, I also consent to receive marketing communications from JobStreet and its affiliates. I may withdraw my consent at any time by using the unsubscribe instructions.</span>
+                <span style="font-size: 12px;">I agree to JH's privacy policy and acknowledge that my personal information may be gathered, saved, and used as specified by registering. As stated in the Privacy Policy, I also consent to receive marketing communications from JobHelp and its affiliates. I may withdraw my consent at any time by using the unsubscribe instructions.</span>
             </label>
             <button type="submit" name="registerBtn">Sign Up</button>
         </form>

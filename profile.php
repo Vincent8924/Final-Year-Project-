@@ -2,126 +2,21 @@
 session_start();
 include("dataconnection.php");
 
-$firstName = "";
-$lastName = "";
-$email = "";
+if (isset($_SESSION['jobseeker_email'])) {
+    $email = $_SESSION['jobseeker_email'];
 
-if (isset($_GET['email'])) {
-    $email = $_GET['email'];
-
-    $query = $connect->prepare("SELECT jobseeker_firstname, jobseeker_lastname FROM jobseeker WHERE jobseeker_email = ?");
+    $query = $connect->prepare("SELECT ProfilePic, PersonalSummary, Skills, work_experience, Education, language FROM userprofile WHERE jobseeker_email = ?");
     $query->bind_param("s", $email);
     $query->execute();
     $query->store_result();
-    
-    if ($query->num_rows > 0) {
-        $query->bind_result($firstName, $lastName);
-        $query->fetch();
+    $query->bind_result($profilePic, $personalSummary, $skills, $workExperience, $education, $language);
+    $query->fetch();
 
-        $updateQuery = $connect->prepare("INSERT INTO userprofile (jobseeker_email) VALUES (?) ON DUPLICATE KEY UPDATE jobseeker_email = ?");
-        $updateQuery->bind_param("ss", $email, $email);
-        $updateQuery->execute();
-    }
-}
-
-if (isset($_FILES['profile_picture']) && isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
-    $profilePicture = $_FILES['profile_picture'];
-
-    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    if (in_array($profilePicture['type'], $allowedTypes) && $profilePicture['size'] <= 5000000) { // 5MB limit
-        $uploadDir = 'uploads/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-        $uploadFile = $uploadDir . basename($profilePicture['name']);
-        if (move_uploaded_file($profilePicture['tmp_name'], $uploadFile)) {
-            $relativePath = 'uploads/' . basename($profilePicture['name']);
-            $query = $connect->prepare("UPDATE userprofile SET ProfilePic = ? WHERE jobseeker_email = ?");
-            $query->bind_param("ss", $uploadFile, $email);
-            if ($query->execute()) {
-                if ($query->affected_rows > 0) {
-                    echo "Profile picture uploaded and database updated successfully.";
-                } else {
-                    echo "Profile picture uploaded but no database update. Check if the email exists in the database.";
-                }
-            } else {
-                echo "Error updating profile picture: " . $query->error;
-            }
-        } else {
-            echo "Error uploading file.";
-        }
-    } else {
-        echo "Invalid file type or size.";
-    }
 } else {
-    echo "No file uploaded or session email not set.";
-}
-
-if (isset($_POST['personal_summary']) && isset($_POST['email'])) {
-    $personalSummary = $_POST['personal_summary'];
-    $email = $_POST['email'];
-
-    $query = $connect->prepare("UPDATE userprofile SET personal_summary = ? WHERE jobseeker_email = ?");
-    $query->bind_param("ss", $personalSummary, $email);
-    if ($query->execute()) {
-        echo "Personal summary updated successfully.";
-    } else {
-        echo "Error updating personal summary: " . $query->error;
-    }
-}
-
-if (isset($_POST['education']) && isset($_POST['email'])) {
-    $education = $_POST['education'];
-    $email = $_POST['email'];
-
-    $query = $connect->prepare("UPDATE userprofile SET education = ? WHERE jobseeker_email = ?");
-    $query->bind_param("ss", $education, $email);
-    if ($query->execute()) {
-        echo "Education updated successfully.";
-    } else {
-        echo "Error updating education: " . $query->error;
-    }
-}
-
-if (isset($_POST['skills']) && isset($_POST['email'])) {
-    $skills = $_POST['skills'];
-    $email = $_POST['email'];
-
-    $query = $connect->prepare("UPDATE userprofile SET skills = ? WHERE jobseeker_email = ?");
-    $query->bind_param("ss", $skills, $email);
-    if ($query->execute()) {
-        echo "Skills updated successfully.";
-    } else {
-        echo "Error updating skills: " . $query->error;
-    }
-}
-
-if (isset($_POST['work_experience']) && isset($_POST['email'])) {
-    $workExperience = $_POST['work_experience'];
-    $email = $_POST['email'];
-
-    $query = $connect->prepare("UPDATE userprofile SET work_experience = ? WHERE jobseeker_email = ?");
-    $query->bind_param("ss", $workExperience, $email);
-    if ($query->execute()) {
-        echo "Work experience updated successfully.";
-    } else {
-        echo "Error updating work experience: " . $query->error;
-    }
-}
-
-if (isset($_POST['language']) && isset($_POST['email'])) {
-    $language = $_POST['language'];
-    $email = $_POST['email'];
-    $query = $connect->prepare("INSERT INTO userprofile (email, language) VALUES (?, ?)");
-    $query->bind_param("ss", $email, $language);
-    if ($query->execute()) {
-        echo "Language added successfully.";
-    } else {
-        echo "Error adding language: " . $query->error;
-    }
+    echo "Session email not set.";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,7 +25,6 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
     <title>Profile Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        
         header {
             background-color: white;
             padding: 10px 20px;
@@ -224,21 +118,9 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
             margin-bottom: 20px;
             position: relative; 
             margin-left: 13%; 
+            height: 250px;
+            weight: 250px;
         }
-
-        input[type="text"],
-        textarea {
-    width: 70%;
-    height: 180px;
-    padding: 12px 12px 12px 30px; 
-    border: 1px solid black; /* Change border color to black */
-    border-radius: 20px; 
-    box-sizing: border-box;
-    margin-top: 5px;
-    font-family: Arial, sans-serif; 
-    font-size: 16px; 
-    position: relative; 
-}
 
         .add-skill-btn,
         .select-language-btn {
@@ -261,12 +143,14 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
         }
 
         .edit-icon {
+            position: absolute;
+            margin-right: 320px;
+            margin-top: 100px;
             font-size: 20px;
             color: #999; 
             cursor: pointer;
             right: 10px; 
-            top: 50%;
-            transform: translateY(-50%);
+            top: 10px;
         }
 
         .edit-icon:hover::after {
@@ -281,7 +165,6 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
             z-index: -1; 
         }
 
-       
         .section-title {
             font-size: 24px;
             margin-bottom: 10px;
@@ -292,12 +175,10 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
             font-family: Arial, sans-serif; 
         }
 
-        
         .icon {
             margin-right: 120px;
         }
 
-       
         @keyframes slideFromRight {
             0% {
                 opacity: 0;
@@ -323,13 +204,11 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); 
         }
 
-        
         .profile-picture-container {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        
         .profile-picture-container input[type="file"] {
             display: none;
         }
@@ -342,7 +221,6 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
             cursor: pointer;
         }
 
-        
         .upload-icon {
             position: absolute;
             bottom: 5px;
@@ -358,7 +236,6 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
             color: #555;
         }
 
-        
         .upload-icon:hover {
             background-color: #eee;
         }
@@ -379,7 +256,7 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
         }
 
         
-        @k  eyframes slideFromRight {
+        @keyframes slideFromRight {
             0% {
                 opacity: 0;
                 transform: translateX(100%);
@@ -391,57 +268,133 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
         }
 
         #languageSelectForm {
-    padding-top: 10px;
-    border-top: 1px solid #ccc;
-}
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+        }
 
-#languageSearch {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    margin-right: 80px;
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 25px;
-}
-#languageSelect {
-    width: 100%;
-    height: 150px;
-    padding: 5px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-}
+        #languageSearch {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            margin-right: 80px;
+            border: 1px solid black;
+            border-radius: 5px;
+            height: 25px;
+        }
 
-#languageSelect option {
-    padding: 5px;
-}
+        #languageSelect {
+            width: 100%;
+            height: 150px;
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
 
+        #languageSelect option {
+            padding: 5px;
+        }
 
-#languageSelect::-ms-expand {
-    display: none;
-}
-.language-box {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
+        #languageSelect::-ms-expand {
+            display: none;
+        }
 
-.language-box div {
-    display: inline-block;
-    padding: 8px 16px;
-    border: 2px solid blue;
-    border-radius: 5px;
-    margin-left: 10px; 
-    margin-bottom: 10px; 
-    background-color: white;
-    text-decoration: none;
-    color: blue;
-    font-family: Arial, sans-serif;
-}
+        .language-box {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
 
+        .language-box div {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid blue;
+            border-radius: 5px;
+            margin-left: 10px; 
+            margin-bottom: 10px; 
+            background-color: white;
+            text-decoration: none;
+            color: blue;
+            font-family: Arial, sans-serif;
+        }
+
+        .display-box {
+            position: relative;
+            width: 70%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin-top: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            height: 200px; 
+            padding: 10px;
+            font-size: 18px; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            height: 100px; 
+        }
+        .upload-icon {
+            position: relative;
+            bottom: 5px;
+            right: 5px;
+            background-color: white;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .upload-icon i {
+            color: #555;
+        }
+
+        .upload-icon:hover {
+            background-color: #eee;
+        }
+        footer {
+            background-color: white;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer nav ul {
+            font-family: 'Times New Roman', Times, serif;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer nav ul li a:hover {
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -453,8 +406,8 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
 
         <nav class="navigation">
             <ul>
-                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['email']); ?>">Job Save</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['email']); ?>">Profile</a></li>
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Job Save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
                 <li><a href="#">Company Profile</a></li>
             </ul>
         </nav>
@@ -464,28 +417,18 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
         </div>
     </header>
 
-    <div class="container">
-        <div class="profile-info">
-            <h1>Jobseeker Profile</h1>
-            <p>
-                <i class="icon fas fa-user"></i> 
-                <strong>:</strong> <?php echo $firstName . ' ' . $lastName; ?>
-            </p>
-            <p>
-                <i class="icon fas fa-envelope"></i> 
-                <strong>:</strong> <?php echo $email; ?>
-            </p>
-        </div>
-    </div>
 
-    
     <div class="container">
     <h2>Upload Profile Picture</h2>
     <form action="upload_profile_picture.php" method="POST" enctype="multipart/form-data">
         <div class="profile-picture-container">
             <input type="file" id="profilePictureInput" name="profile_picture" accept="image/*" onchange="displayProfilePicture(event)">
             <label for="profilePictureInput">
-                <img src="default_profile_picture.png" alt="Profile Picture" id="profilePicture">
+                <?php if ($profilePic) { ?>
+                    <img src="<?php echo $profilePic; ?>" alt="Profile Picture" id="profilePicture">
+                <?php } else { ?>
+                    <img src="default_profile_picture.png" alt="Profile Picture" id="profilePicture">
+                <?php } ?>
                 <span class="upload-icon"><i class="fas fa-upload"></i></span>
             </label>
         </div>
@@ -493,22 +436,19 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
     </form>
 </div>
 
-
 <div class="profile-info">
     <div class="form-group">
         <h1 class="section-title">Personal Summary</h1>
-        <div style="position: relative;">
-            <textarea id="personalSummaryDisplay" name="Personal Summary" readonly></textarea>
-            <span class="edit-icon" onclick="toggleEditForm('editPersonalSummaryForm')">&#9998;</span>
-        </div>
+        <div id="personalSummaryDisplay" class="display-box"><?php echo $personalSummary; ?></div>
+        <span class="edit-icon" onclick="toggleEditForm('editPersonalSummaryForm')">&#9998;</span>
     </div>
 
     <div id="editPersonalSummaryForm" style="display: none;" class="slide-from-right">
         <form onsubmit="return savePersonalSummary()">
             <h1>Edit Personal Summary</h1>
-            <input type="text" id="editedPersonalSummary" name="editedPersonalSummary" placeholder="Enter your personal summary">
+            <input type="text" id="editedPersonalSummary" name="editedPersonalSummary" value="<?php echo $personalSummary; ?>" placeholder="Enter your personal summary">
             <div>
-                <button type="submit" class="add-skill-btn">Save PersonalSummary</button>
+                <button type="submit" class="add-skill-btn">Save Personal Summary</button>
                 <button type="button" class="add-skill-btn" onclick="toggleEditForm('editPersonalSummaryForm')">Cancel</button>
             </div>
         </form>
@@ -517,33 +457,33 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
 
 <div class="form-group">
     <h1 class="section-title">Skills</h1>
-    <textarea id="SkillsDisplay" name="Skills" readonly></textarea>
+    <div id="SkillsDisplay" class="display-box"><?php echo $skills; ?></div>
     <span class="edit-icon" onclick="toggleEditForm('editSkillsFormContainer')">&#9998;</span>
 </div>
 
 <div id="editSkillsFormContainer" style="display: none;" class="slide-from-right">
     <form id="editSkillsForm" onsubmit="return saveSkills()">
         <h1>Edit Skills</h1>
-        <input type="text" id="editedSkills" name="editedSkills" placeholder="Enter your skills" >
+        <input type="text" id="editedSkills" name="editedSkills" value="<?php echo $skills; ?>" placeholder="Enter your skills">
         <div>
-        <button type="submit" name="submit" class="add-skill-btn">Save skills</button>
+            <button type="submit" name="submit" class="add-skill-btn">Save skills</button>
             <button type="button" class="add-skill-btn" onclick="toggleEditForm('editSkillsFormContainer')">Cancel</button>
         </div>
     </form>
 </div>
-   
+
 <div class="form-group">
     <h1 class="section-title">Education</h1>
-    <textarea id="educationDisplay" name="education" readonly></textarea>
+    <div id="educationDisplay" class="display-box"><?php echo $education; ?></div>
     <span class="edit-icon" onclick="toggleEditForm('editEducationForm')">&#9998;</span>
 </div>
 
 <div id="editEducationForm" style="display: none;" class="slide-from-right">
     <form id="editEducationWorkForm" onsubmit="return saveEducation()">
         <h1>Edit Education</h1>
-        <input type="text" id="editedEducation" name="editedEducation" placeholder="Enter your education">
+        <input type="text" id="editedEducation" name="editedEducation" value="<?php echo $education; ?>" placeholder="Enter your education">
         <div>
-        <button type="submit" name="submit" class="add-skill-btn">Save Education</button>
+            <button type="submit" name="submit" class="add-skill-btn">Save Education</button>
             <button type="button" class="add-skill-btn" onclick="toggleEditForm('editEducationForm')">Cancel</button>
         </div>
     </form>
@@ -551,26 +491,29 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
 
 <div class="form-group">
     <h1 class="section-title">Work Experience</h1>
-    <textarea id="workExperienceDisplay" name="experience" readonly></textarea>
+    <div id="workExperienceDisplay" class="display-box"><?php echo $workExperience; ?></div>
     <span class="edit-icon" onclick="toggleEditForm('editWorkExperienceForm')">&#9998;</span>
 </div>
 
 <div id="editWorkExperienceForm" style="display: none;" class="slide-from-right">
     <form id="editWorkExperienceForm" onsubmit="return saveWorkExperience()">
         <h1>Edit Work Experience</h1>
-        <input type="text" id="editedWorkExperience" name="editedWorkExperience" placeholder="Enter your work experience">
+        <input type="text" id="editedWorkExperience" name="editedWorkExperience" value="<?php echo $workExperience; ?>" placeholder="Enter your work experience">
         <div>
-        <button type="submit" name="submit" class="add-skill-btn">Save Workexperience</button>
+            <button type="submit" name="submit" class="add-skill-btn">Save Workexperience</button>
             <button type="button" class="add-skill-btn" onclick="toggleEditForm('editWorkExperienceForm')">Cancel</button>
         </div>
     </form>
 </div>
 
-    
 <div class="form-group">
-    <h1 class="section-title">Language</h1>
-    <div id="selectedLanguageBox" class="language-box"></div>
-    <button class="add-skill-btn" onclick="toggleLanguageSelectForm()">Add Language</button>
+        <h1 class="section-title">Language</h1>
+        <div id="selectedLanguageBox" class="language-box">
+            <?php echo '<div>' . $language . '</div>'; ?>
+        </div>
+        <button class="add-skill-btn" onclick="toggleLanguageSelectForm()">Add Language</button> <!-- Moved button here -->
+    </div>
+</div>
     <form id="languageSelectForm" style="display: none;">
         <input type="text" id="languageSearch" onkeyup="filterLanguages()" placeholder="Search for a language...">
         <select id="languageSelect" multiple>
@@ -593,9 +536,7 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
     </form>
 </div>
 
-
-
-    <script>
+<script>
       
         const languages = [
             "English",
@@ -708,47 +649,6 @@ function toggleLanguageSelectForm() {
                 editForm.style.display = 'none';
             }
         }
-       
-        function displayProfilePicture(event) {
-    const input = event.target;
-    const reader = new FileReader();
-
-    reader.onload = function () {
-        const img = document.getElementById('profilePicture');
-        img.src = reader.result;
-    };
-
-    reader.readAsDataURL(input.files[0]);
-}    
-        function displayProfilePicture(event) {
-            const input = event.target;
-            const reader = new FileReader();
-
-            reader.onload = function () {
-                const img = document.getElementById('profilePicture');
-                img.src = reader.result;
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        function toggleEditForm(formId) {
-            var editForm = document.getElementById(formId);
-            if (editForm.style.display === 'none' || editForm.style.display === '') {
-                editForm.style.display = 'block';
-            } else {
-                editForm.style.display = 'none';
-            }
-        }
-
-        function toggleEditForm(formId) {
-    var editForm = document.getElementById(formId);
-    if (editForm.style.display === 'none' || editForm.style.display === '') {
-        editForm.style.display = 'block';
-    } else {
-        editForm.style.display = 'none';
-    }
-}
 
 function savePersonalSummary() {
     const editedSummary = document.getElementById('editedPersonalSummary').value;
@@ -861,6 +761,49 @@ function saveWorkExperience() {
 
     return false;
 }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        fetchLanguages();
+    });
+
+   
+    event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('upload_resume.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Resume uploaded successfully.');
+                } else {
+                    console.error('Error uploading resume.');
+                }
+            })
+            .catch(error => {
+                console.error('Error uploading resume:', error);
+            });
+            function toggleEditForm(formId) {
+    var editForm = document.getElementById(formId);
+    if (editForm.style.display === 'none' || editForm.style.display === '') {
+        editForm.style.display = 'block';
+    } else {
+        editForm.style.display = 'none';
+    }
+}
+        
     </script>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="homepage.php">Homepage</a></li>
+
+            </ul>
+        </nav>
+    </footer>
 </body>
 </html>
+

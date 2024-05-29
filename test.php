@@ -1,95 +1,225 @@
-<?php 
-    include("dataconnection.php"); 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seeker Management</title>
-    <link rel="stylesheet" href="test.css">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="uprofile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        #line {
+            padding-right: 15px;
+            padding-left: 15px;
+            background-color: black;
+            background-repeat: repeat-x;
+            height: 100px;
+        }
+
+        .choice a {
+            font-size: 30px;
+            text-decoration: none;
+            color: white;
+            margin-left: 35px;
+            position: relative;
+            display: inline-block;
+            top: 25px;
+        }
+
+        .left {
+            float: left;
+            margin-right: 65px;
+        }
+
+        .right {
+            float: right;
+            margin-right: 65px;
+        }
+
+        #page_logo {
+            height: 45px;
+            top: 0px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .formbox {
+            position: relative;
+            max-width: max-content;
+            max-height: max-content;
+            box-shadow: 0 2px 5px black;
+            padding: 30px 40px;
+            border-radius: 10px;
+        }
+
+        button {
+            width: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .centerButton {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #profile_photo_space {
+            border: 5px solid rgb(0, 0, 0);
+            width: 20%;
+            display: flex;
+        }
+
+        #profile_photo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .profile {
+            font-size: 20px;
+        }
+    </style>
 </head>
+</head>
+
 <body>
     <header class="header">
-        <h1>JobHelper</h1>
-        <div class="header-buttons">
-            <a href="#" class="AdminAcc">AdminAcc</a>
+        <h1>User Profile</h1>
+        <div>
+           
         </div>
     </header>
-
+    
+    <div class="uAccBar" id="uAccBar">
+        <div class="bAccBar">
+            <a href="Uprofile.php">Profile</a>
+        </div>
+        <div class="bAccBar">
+            <form action="" method="POST" id="logout">
+                <input type="submit" name="logout" value="Log-Out">
+            </form>
+        </div>
+    </div>
+    <?php
+        if(isset($_POST['logout']))
+        {
+            session_destroy();
+            echo'<script>alert("Log-Out successful!");window.location.href="Ulogin.php";</script>';
+        }
+    ?>
     <div class="container">
         <aside>
             <nav class="Menu">
                 <ul>
-                    <li><a href="Adashboard.php" >Dashboard</a></li>
-                    <li><a href="Aseekermanagement.php" id="now">Seeker</a></li>
-                    <li><a href="Acompanymanagement.php">Companies</a></li>
-                    <li><a href="Aadminmanagement.php">Admin</a></li>
-                    <li><a href="Apost.php">Post</a></li>
-                    <li><a href="Aprofile.php">Profile</a></li>
+                    <li><a href="Udashboard.php">Dashboard</a></li>
+                    <li><a href="Uprofile.php" id="now">Profile</a></li>
+                    <!-- Add more menu items for other sections if needed -->
                 </ul>
             </nav>
         </aside>
         <main>
-            <div id="addadmin">
-                <form action="">
-                    <h2>ADD ADMIN</h2>
-                    <div class="form">
-                        <div class="label">
-                            <label for="admin_fname">Admin's first name </label>
-                        </div>
-                        <input type="text" placeholder="First Name" name="admin_fname" required><br>
-                    </div>
-                    <div class="form">
-                        <div class="label">
-                            <label for="admin_lname">Admin's last name </label>
-                        </div>
-                        <input type="text" placeholder="Last Name" name="admin_fname" required><br>
-                    </div>
-                    <div class="form">
-                        <div class="label">
-                            <label for="admin_email">Admin's Email </label>
-                        </div>
-                        <input type="email" placeholder="Email" name="admin_email" required><br>
-                    </div>
-                    <div class="form">
-                        <div class="label">
-                            <label for="admin_password">Admin's password </label>
-                        </div>
-                        <input type="admin_password" placeholder="Password" name="admin_password" required><br>
-                    </div>
-                    <div class="form">
-                        <div class="label">
-                            <label for="confirm_password">Confirm password </label>
-                        </div>
-                        <input type="confirm_password" placeholder="Confirm password" name="confirm_password" required><br>
-                    </div>
-                    <br>
-
-                    <input type="submit" value="submit">
-                    
-                </form>
+            <h1>User Profile</h1>
+            <div class="Ucontainer">
+                <div class="Uinfo">
+                    <!-- Assuming you fetch user data from the database -->
+                    <table>
+                        <tbody>
+                            <
+                            <tr>
+                                <td class="Utd"><i class="fa-solid fa-user"></i>  ID</td>
+                                <td class="colontd">:</td>
+                         
+                                <td class="btntd"></td>
+                            </tr>
+                            <tr>
+                                <td class="Utd"><i class="fa-solid fa-signature"></i>  First Name</td>
+                                <td class="colontd">:</td>
+                          
+                                <td class="btntd">
+                                    <button onclick="editfname()" class="edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Add more rows for other fields -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <button onclick="display()">add</button>
         </main>
     </div>
-    
+
+    <!-- Modals for editing different fields -->
+
+    <!-- Modal for editing first name -->
+    <div id="editfname">
+        <form method="POST">
+            <div class="Uform">
+                <div class="x" >
+                    <button type="button" onclick="closeeditfname()" id="x">x</button>
+                </div>
+                
+                <h2>Edit First Name</h2>
+                <br>
+                <div class="Uformfield">
+                    <div class="label">
+                        <label >First Name </label>
+                    </div>
+                    <input type="text" value="<?php echo"$fname"?>" name="fname" required><br>
+                </div>
+                <br>
+                <input type="submit" value="Edit" class="formbtn" name="editfname">   
+            </div>
+        </form>
+    </div>
+
+    <!-- Add more modals for other fields like last name, email, etc. -->
+
     <footer>
         <p>JobHelper&trade;</p>
     </footer>
 
-</body>
-</html>
-<script>
-    function display(){
-        var div = document.getElementById("addadmin");
-        if(div.style.display !== "block")
+    <!-- JavaScript functions -->
+    <script>
+        function displaybar()
         {
+            var div = document.getElementById("uAccBar");
+            var divdisplay = window.getComputedStyle(div);
+
+            if(divdisplay.display === "block" )
+            {
+                div.style.display = "none";  
+            }
+            else 
+            {
+                div.style.display = "block"; 
+            }
+        }
+
+        // Add functions for editing other fields as required
+
+        // Function to open modal for editing first name
+        function editfname(){
+            var div = document.getElementById("editfname");
             div.style.display = "block";  
         }
-        else
-        {
+
+        // Function to close modal for editing first name
+        function closeeditfname(){
+            var div = document.getElementById("editfname");
             div.style.display = "none";  
         }
-    }
-</script>
+    </script>
+</body>
+</html>

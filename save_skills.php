@@ -15,4 +15,3 @@ if (isset($_POST['skills']) && isset($_POST['email'])) {
     }
 }
 ?>
-

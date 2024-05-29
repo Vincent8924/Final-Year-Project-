@@ -32,4 +32,6 @@ if (isset($_POST['language']) && isset($_POST['email'])) {
         }
     }
 }
+
+
 ?>

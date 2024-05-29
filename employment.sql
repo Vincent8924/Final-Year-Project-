@@ -106,7 +106,7 @@
   `work_experience` text DEFAULT NULL,
   `Education` text DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
-  `jobseeker_email` varchar(255) DEFAULT NULL
+  `jobseeker_email` varchar(255) DEFAULT NULL,
   `resume` varchar(200) 
 ) 
 

@@ -81,6 +81,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>ID</th>
                             <th>Campany Name</th>
                             <th>Email</th>
@@ -91,10 +92,12 @@
                     <tbody>
                         <?php
                             $result = mysqli_query($connect, "SELECT * FROM employer;");
+                            $i = 1;
                             while($row = mysqli_fetch_assoc($result))
                             {
                         ?>
                         <tr>
+                            <td><?php echo $i ?></td>
                             <td><?php echo $row["id"] ?></td>
                             <td><?php echo $row["employer_name"] ?></td>
                             <td><?php echo $row["employer_email"] ?></td>
@@ -118,6 +121,7 @@
                                 </script>
                         <?php
                             }
+                            $i++;
                         }
                         ?>
                     </tbody>

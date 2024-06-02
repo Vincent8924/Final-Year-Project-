@@ -65,11 +65,25 @@
             </nav>
         </aside>
         <main>
-        <h1>Sale</h1>
+                <?php
+                    $result = mysqli_query($connect,"SELECT count(*) AS total_sale FROM sale");
+                    if($result)
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $total_sale = $row["total_sale"];
+                    }
+                ?>
+                <div class="amount">
+                    <h1>
+                        <?php echo $total_sale?>
+                    </h1>
+                </div>
+                <h1>Sale</h1>
                 <div class="Acontainer">
                     <table>
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>ID</th>
                                 <th>Sale Amount</th>
                                 <th>Time</th>
@@ -81,6 +95,7 @@
                         <tbody>
                             <?php
                                 $result = mysqli_query($connect, "SELECT * FROM sale;");
+                                $i = 1;
                                 while($row = mysqli_fetch_assoc($result))
                                 {
                                     $employer_id = $row["employer_id"];
@@ -88,27 +103,16 @@
                                     $employer_row = mysqli_fetch_assoc($employer_result);
                                     $employer_name = $employer_row['employer_name'];
                                     
-
-
                                     $package_id = $row["package_id"];
                                     $package_result = mysqli_query($connect, "SELECT package_name FROM package WHERE package_id='$package_id'");
                                     $package_row = mysqli_fetch_assoc($package_result);
                                     $package_name = $package_row['package_name'];
 
-                                    /*   if no get the name
-                                    if ($package_result) {
-                                        $package_row = mysqli_fetch_assoc($package_result);
-                                        if ($package_row) {
-                                            $package_name = $package_row['package_name'];
-                                        } else {
-                                            $package_name = "Unknown";
-                                        }
-                                    } else {
-                                        $package_name = "Unknown";
-                                    }*/
+                                    
 
                             ?>
                                     <tr>
+                                        <td><?php echo $i ?></td>
                                         <td><?php echo $row["sale_id"] ?></td>
                                         <td><?php echo $row["purchase_amount"] ?></td>
                                         <td><?php echo $row["purchase_time"] ?></td>
@@ -117,6 +121,7 @@
                                         <td><?php echo $row["payment_status"] ?></td>
                                     </tr>
                             <?php
+                                    $i++;
                                 }
                             ?>
                         </tbody>

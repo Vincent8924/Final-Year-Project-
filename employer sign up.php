@@ -5,11 +5,28 @@
         <title>
             Sign up | Job Help
         </title>
-        <link rel="stylesheet" type="text/css" href="employer login.css">
+        <link rel="stylesheet" type="text/css" href="employer sign up.css">
         <link rel="icon" href="img/logo.png">
     </head>
     
     <body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="JobStreet Logo">
+        </div>
+
+        <nav class="navigation">
+            <ul>
+                <li><a href="#">AAA</a></li>
+                <li><a href="#">AAA</a></li>
+                <li><a href="#">AAA</a></li>
+            </ul>
+        </nav>
+
+        <div class="jobseeker-site">
+            <a href="register.php">Jobseeker Site</a>
+        </div>
+    </header>
     
     
     <?php
@@ -136,6 +153,14 @@
         }
 
     </script>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
     
 

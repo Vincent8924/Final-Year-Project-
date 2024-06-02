@@ -1,153 +1,162 @@
-body
-{
-    width: 90%; 
-    margin: 0 auto; 
-    
-   
+body {
+    background-image: url('lb.jpg');
+    background-size: cover;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-
-
-#line {
-
-    
-    padding-right: 15px;
-    padding-left: 15px;
-
-    
-    background-color: black;
-    background-repeat: repeat-x;
-    height: 100px;
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.choice a{
-    font-size: 30px;
+.navigation {
+    margin-right: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li a {
     text-decoration: none;
-    color: white;
-    margin-left: 35px;
-    position: relative;
-    display: inline-block; 
-    top: 25px;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-.left 
-{
-    float: left; 
-    margin-right: 65px;
-    
+.navigation ul li a:hover {
+    color: #007bff;
 }
 
-
-
-.right  
-{
-    float: right; 
-    margin-right: 65px;
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
 }
 
-#page_logo
-{
-    height: 45px;
-    top: 0px;
-}
-
-.center 
-{
-    text-align: center; 
-}
-
-.formbox{
-    position: relative;
-    width: 280px;
-    height: 280px;
-    
-   
-    
-    box-shadow: 0 2px 5px black;
-    padding:30px 40px;
-    margin-left: 50px;
-
-    border-radius: 10px;
-}
-
-button {
-    width: 100px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #000;
+#logout {
+    font-size: 16px;
+    padding: 8px 20px;
+    background-color: #007bff;
     color: #fff;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-   
-  }
-
-  .centerButton {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
 }
 
-.mid_table
-{
-
-    margin-left: auto;
-    margin-right: auto;
+#logout:hover {
+    background-color: #0056b3;
 }
 
-#shipx
-{
-    font-size: 40px;
-}
-#erpx
-{
-    font-size: 20px;
+#logout_photo {
+    width: 15px;
+    margin-right: 8px;
 }
 
-.formBox{
-    position: relative;
-    width: 93%;
-    column-width: auto;
-    
-    box-shadow: 0 2px 5px black;
-    padding:30px 40px;
-    border-radius: 10px;
+.content {
+    margin-top: 100px;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
 }
 
-#logout
-{
-    font-size: 30px;
-    width: 200px;
-    margin-top: -15px;
-    border: none;
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-#logout_photo
-{
-    width: 25px; 
-    
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 table {
-    background-color: #ffffff;
-    color: #000000;
-    border: 1px solid #ccc;
-    margin: 0 auto;
-    margin-top: 10px    ;
-    border: 10;
-    width: 100%;
+width: 100%;
+border-collapse: collapse;
+border: 1px solid #000; /* Add a black border around the table */
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
 
+th {
+    background-color: #ffffff;
+    font-size: 18px;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+tr:hover th, 
+tr:hover td {
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        align-items: flex-start;
     }
-   
-    th {
-        background-color: #eeeeee;
+
+    .navigation ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navigation ul li {
+        width: 100%;
+    }
+
+    .navigation ul li a {
+        padding: 10px 0;
+        width: 100%;
+        display: block;
         text-align: center;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        font-size: 14px;
         padding: 10px;
-        font-size: 25px;
-        }
-    
-        td {
-        padding: 10px;
-        text-align: center;
-        font-size: 20px;
-        }
+    }
+}

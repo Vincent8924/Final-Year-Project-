@@ -219,7 +219,7 @@ if(isset($_POST['registerBtn'])) {
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="new.jpg" alt="JobStreet Logo">
         </div>
 
         <nav class="navigation">

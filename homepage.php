@@ -287,7 +287,7 @@ if (!$result) {
 <body>
 <header>
         <div class="logo">
-            <img src="logo.png" alt="Company Logo">
+            <img src="new.jpg" alt="Company Logo">
         </div>
         <nav class="navigation">
             <ul>

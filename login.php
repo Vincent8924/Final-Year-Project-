@@ -184,7 +184,7 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="new.jpg" alt="JobStreet Logo">
         </div>
 
         <div class="sign-in">

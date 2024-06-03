@@ -8,7 +8,7 @@ ob_start();
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Profile | Job Help</title>
+    <title>profile | Job Help</title>
     <link rel="stylesheet" type="text/css" href="employer profile.css">
     <link rel="icon" href="img/logo.png">
    

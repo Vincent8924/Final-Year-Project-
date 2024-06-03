@@ -1,0 +1,162 @@
+body {
+            
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000; 
+}
+
+.navigation {
+    margin-right: 50%;
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li {
+    display: inline-block;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navigation ul li a:hover {
+    color: #555;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+}
+
+#logout {
+    font-size: 20px;
+    width: 100px;
+    margin-top: -10px;
+}
+
+#logout
+{
+    font-size: 15px;
+    width: 150px;
+    margin-right:40px ;
+    margin-top: 10px;
+    border: none;
+}
+
+#logout_photo
+{
+    width: 15px; 
+    
+}
+
+
+#profile_photo_space {
+    text-align: center;
+}
+
+#profile_photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+.mid {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="file"] {
+    display: block;
+    margin-bottom: 20px;
+}
+
+form .profile {
+    margin-bottom: 20px;
+}
+
+form .profile input[type="text"] {
+    width: calc(100% - 20px); /* Adjusting width for padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form button[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+form button[type="submit"]:hover {
+    background-color: #555;
+}
+hr {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    margin: 20px 0;
+}

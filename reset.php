@@ -171,7 +171,7 @@
         <img src="logo.png" alt="JobStreet Logo">
     </div>
 
-    <nav class="navigation">
+    <nav class="navigation"> 
         <ul>
             <li><a href="#">Job Search</a></li>
             <li><a href="#">Profile</a></li>

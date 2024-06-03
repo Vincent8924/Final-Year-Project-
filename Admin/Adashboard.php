@@ -183,7 +183,7 @@
             <div class="Apost">
                 <div class="postheader">
                     <div>
-                        <h3>Sale</h3>
+                        <h3>Application</h3>
                     </div>
                     <div class="amount">
                         <h3>

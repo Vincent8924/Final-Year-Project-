@@ -1,4 +1,5 @@
 <?php
+$jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '';
     include("dataconnection.php");
     session_start();
 
@@ -51,34 +52,13 @@
             align-items: center;
         }
 
-        .navigation {
+        .sign-in{
+            margin-left: 80%;
             display: inline-block;
-            margin-right: 50%;
+            padding: 8px 16px;
+            border: 2px solid blue;
+            border-radius: 5px;
         }
-
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        .navigation ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .navigation ul li a:hover {
-            color: #555;
-        }
-
-        .sign-in,
         .employer-site {
             display: inline-block;
             padding: 8px 16px;
@@ -206,14 +186,6 @@
         <div class="logo">
             <img src="logo.png" alt="JobStreet Logo">
         </div>
-
-        <nav class="navigation">
-            <ul>
-                <li><a href="homepage.php">homepage</a></li>
-                <li><a href="profile.php">Profile</a></li>
-         
-            </ul>
-        </nav>
 
         <div class="sign-in">
             <a href="register.php">Register</a>

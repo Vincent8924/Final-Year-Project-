@@ -2,6 +2,10 @@
 include("Jsession.php");
 include("dataconnection.php");
 $id = $_SESSION['id'];
+$postId = $_REQUEST['post_id'];
+
+
+
 
 $result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'");
         if ($result) {
@@ -12,7 +16,13 @@ $result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE
 
         if (isset($_POST['submit'])) {
             // if (isset($_FILES['resume']) && isset($_FILES['coverLetter']) && isset($_POST['post_id'])) {
-                $postId = $_POST['post_id'];
+                
+                $post = mysqli_query($connect,"SELECT * FROM post WHERE post_id = '$postId'");
+                if ($post) {
+                    $row = mysqli_fetch_assoc($post);
+                    $poster_id = $row['poster_id'];
+                }
+
                 $resume = $_FILES['resume'];
                 $coverLetter = $_FILES['coverLetter'];
         
@@ -25,14 +35,14 @@ $result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE
 
                 $resumeFilePath = 'uploads/' . $resumeFileName;
                 $coverLetterFilePath = 'uploads/' . $coverLetterFileName;
-                
+
                 move_uploaded_file($resume['tmp_name'], $resumeFilePath);
                 move_uploaded_file($coverLetter['tmp_name'], $coverLetterFilePath);
 
                 
         
                 // Example: Update database with file paths
-                $result = mysqli_query($connect, "INSERT INTO applications (jobseeker_id, post_id, `resume`, cover_letter) VALUES ('$id', '$postId', '$resumeFilePath', '$coverLetterFilePath')");
+                $result = mysqli_query($connect, "INSERT INTO applications (jobseeker_id, post_id,poster_id, `resume`, cover_letter) VALUES ('$id', '$postId','$poster_id', '$resumeFilePath', '$coverLetterFilePath')");
         
                 if ($result) {
                     echo '<script>alert("Apply successfully!");</script>';

@@ -111,8 +111,9 @@
 ) 
 
   CREATE TABLE `applications` (
-  `id` int(11) NOT NULL,
-  `post_id` int(11) DEFAULT NULL,
+  `id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  `post_id` INT DEFAULT NULL,
+  `jobseeker_id` INT NULL,
   `resume` varchar(255) DEFAULT NULL,
   `cover_letter` varchar(255) DEFAULT NULL,
   `application_date` timestamp NOT NULL DEFAULT current_timestamp(),

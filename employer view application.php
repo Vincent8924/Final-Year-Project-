@@ -6,7 +6,7 @@
         <title>
             Application | Job Help
         </title>
-        <link rel="stylesheet" type="text/css" href="employer home.css">
+        <link rel="stylesheet" type="text/css" href="employer payment history.css">
         <link rel="icon" href="img/logo.png">
     </head>
     <body>
@@ -66,3 +66,53 @@
 
     <h1>Manage the application</h1>
         <br/><br/>
+
+
+
+
+
+        <table>
+            <tr>
+                <th>Candidate Name</th>
+                <th>Personal Summary</th>
+                <th>Skill</th>
+                <th>Work Experience</th>
+                <th>Education</th>
+                <th>Language</th>
+                <th>Resume</th>
+            </tr>
+
+<?php
+    $result = mysqli_query($connect,"SELECT * FROM `applications` WHERE post_id = '3'");
+
+    while($row = mysqli_fetch_assoc($result))
+    {
+        $candidate_id = $row[''];
+        
+       $candidate = mysqli_query($connect,"SELECT * FROM `applications` WHERE post_id = '3'");
+
+
+        $pp = mysqli_query($connect,"SELECT * FROM `package` WHERE package_id = '$pid'");
+
+        if($pp)
+        {
+            $prow = mysqli_fetch_assoc($pp);
+            
+            $pname = $prow['package_name'];
+        }
+
+
+?>
+            <tr>
+                <td><?php echo $row['purchase_time']; ?></td>
+                <td><?php echo $row['card_name']; ?></td>
+                <td><?php echo $pname ?></td>
+                <td><?php echo $row['purchase_amount']; ?></td>
+                <td><?php echo $row['bank']; ?></td>
+            </tr>
+
+<?php
+}
+?>
+
+    </table>

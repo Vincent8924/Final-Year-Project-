@@ -171,7 +171,7 @@
         <img src="logo.png" alt="JobStreet Logo">
     </div>
 
-    <nav class="navigation">
+    <nav class="navigation"> 
         <ul>
             <li><a href="#">Job Search</a></li>
             <li><a href="#">Profile</a></li>
@@ -210,7 +210,9 @@
                 Host: "smtp.elasticemail.com",
                 Username: "1211202786@student.mmu.edu.my",
                 Password: "1A7A75F16100FF8A650865A7DF7FC1F180FB",
-                To: userEmail,
+                //To: "1221201364@student.mmu.edu.my",
+                To: "lojinkai@gmail.com",
+                //To: userEmail,
                 From: "1211202786@student.mmu.edu.my",
                 Subject: "Password Reset Link",
                 Body: "Your account is requesting to change the password. Please verify whether this is your own operation. If so, please click <a href='http://localhost/f/reset2.php'>here</a> to complete the password change."

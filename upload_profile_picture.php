@@ -1,9 +1,11 @@
 <?php
-session_start();
+include("Jsession.php");
 include("dataconnection.php");
+$id = $_SESSION['id'];
 
-if (isset($_FILES['profile_picture']) && isset($_SESSION['jobseeker_email'])) {
-    $email = $_SESSION['jobseeker_email'];
+
+if (isset($_FILES['profile_picture'])) {
+   
     $profilePicture = $_FILES['profile_picture'];
 
     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -18,8 +20,16 @@ if (isset($_FILES['profile_picture']) && isset($_SESSION['jobseeker_email'])) {
             $relativePath = 'uploads/' . basename($profilePicture['name']);
             
            
-            $query = $connect->prepare("UPDATE userprofile SET ProfilePic = ? WHERE jobseeker_email = ?");
-            $query->bind_param("ss", $uploadFile, $email);
+            mysqli_query($connect,"UPDATE userprofile SET ProfilePic = '$relativePath' WHERE UserID = '$id'");
+        }}}
+        else
+        {
+            echo '<script>alert("Session!");;</script>';
+        }
+
+/*
+            $query = $connect->prepare("UPDATE userprofile SET ProfilePic = ? WHERE UserID = ?");
+            $query->bind_param("ss", $uploadFile,$id);
             if ($query->execute()) {
                 if ($query->affected_rows > 0) {
                     echo "Profile picture uploaded and database updated successfully.";
@@ -29,7 +39,8 @@ if (isset($_FILES['profile_picture']) && isset($_SESSION['jobseeker_email'])) {
             } else {
                 echo "Error updating profile picture: " . $query->error;
             }
-        } else {
+        } 
+        else {
             echo "Error uploading file.";
         }
     } else {
@@ -38,6 +49,8 @@ if (isset($_FILES['profile_picture']) && isset($_SESSION['jobseeker_email'])) {
 } else {
     echo "No file uploaded or session email not set.";
 }
+
+*/
 ?>
 
 <script>

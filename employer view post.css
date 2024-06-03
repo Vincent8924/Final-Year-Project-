@@ -1,0 +1,151 @@
+body {
+ 
+    font-family: 'Times New Roman', Times, serif;
+    background-color:black;
+ 
+}
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #ccc; 
+}
+
+.navigation {
+    margin-right: 50%;
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li {
+    display: inline-block;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navigation ul li a:hover {
+    color: #555;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+}
+
+#logout {
+    font-size: 20px;
+    width: 100px;
+    margin-top: -10px;
+}
+
+.left {
+    float: left; /* 元素右浮动 */
+    margin-right: 65px;
+}
+
+.right {
+    float: right; /* 元素右浮动 */
+    margin-right: 65px;
+}
+
+#page_logo {
+    height: 45px;
+    top: 0px;
+}
+
+.formbox-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.formbox {
+    display: inline-block; 
+    width: calc(30% - 20px);
+    margin-right: 20px; 
+    margin-bottom: 20px; 
+    vertical-align: top; 
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    margin-top: 100px;
+}
+
+
+.formbox:hover {
+    transform: translateY(-5px);
+}
+
+.formbox h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: royalblue;
+}
+
+.formbox .details {
+    margin-bottom: 15px;
+    color: #333;
+}
+.formbox button {
+    margin-top: 10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.center span {
+    display: inline-block; 
+}
+
+.field {
+    height: 50px;
+    width: 80%;
+}
+
+button {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#logout {
+    font-size: 15px;
+    width: 150px;
+    margin-right: 40px;
+    margin-top: 10px;
+    border: none;
+}
+
+#logout_photo {
+    width: 15px;
+}

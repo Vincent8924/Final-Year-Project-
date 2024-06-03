@@ -1,75 +1,53 @@
 <?php include('vdataconnection.php'); ?>
 <?php include('employer session.php'); ?>
 <html>
-    <head>
-        <meta charset="UTF-8"/>
-        <title>
-            View Post | Job Help
-        </title>
-        <link rel="stylesheet" type="text/css" href="employer home.css">
-        <link rel="icon" href="img/logo.png">
-    </head>
-    <body>
-    <br/> <br/>
+<head>
+    <meta charset="UTF-8"/>
+    <title>View Post | Job Help</title>
+    <link rel="stylesheet" type="text/css" href="employer view post.css">
+    <link rel="icon" href="img/logo.png">
+  
+  
+</head>
+<body>
 
+    
     <?php
-                        
-                            $id = $_SESSION['id'];
-                            
+        $id = $_SESSION['id'];
 
-                            if(isset($_POST['logout']))
-            {
-                session_destroy();
-                echo'<script>alert("Log-Out successful!");window.location.href="employer login.php";</script>';
-            }
-                    ?>
-        <nav>
-            <div id="line">
-                <div class="choice">
-                    <span class="left">
-                    <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
-                    </span>    
-                    <span class="mid"> 
+        if(isset($_POST['logout']))
+        {
+            session_destroy();
+            echo'<script>alert("Log-Out successful!");window.location.href="employer login.php";</script>';
+        }
+    ?>
 
-                    
-                    <a href="employer home.php">HOME</a>
-                        <a href="employer drafts.php">Drafts</a>
-                        <a href="employer view post.php">Post</a>
-                        <a href="employer view application.php">Application</a>
-                        <a href="employer packages.php">Package</a>
-                        <a href="employer payment history.php">History</a>
-                        <a href="employer profile.php">Profile</a>
-                    
-                    </span>
-                    <form method="post" >
-                        <span class="right" >
-                            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
-                        </span> 
-                    </form>
-                </div>
-            </div>
+    <header>
+        <div class="logo">
+            <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="employer home.php">Home</a></li>
+                <li><a href="employer drafts.php">Drafts</a></li>
+                <li><a href="employer view post.php">Post</a></li>
+                <li><a href="employer view application.php">Application</a></li>
+                <li><a href="employer packages.php">Package</a></li>
+                <li><a href="employer payment history.php">History</a></li>
+                <li><a href="employer profile.php">Profile</a></li>
+            </ul>
         </nav>
+        <form method="post">
+            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
+        </form>
+    </header>
 
- 
-    <br/><hr/><br/>
-
-
-
-
-
-        
     <?php
-
-
-    $result = mysqli_query($connect, "SELECT * FROM post");	
-    while($row = mysqli_fetch_assoc($result))
-      {
-      
-      ?>	
-
-          
+        $result = mysqli_query($connect, "SELECT * FROM post");
+        while($row = mysqli_fetch_assoc($result))
+        {
+    ?>	
         <div class="formbox">
-            
             <h2>Post ID</h2>
             <?php echo $row['post_id']?>
 
@@ -79,9 +57,8 @@
             <h2>Company/Employer name</h2>
             <?php echo $row['company_name']?>
 
-            <h2>Job type?</h2>
-            <?php echo $row['category']?>    
-                
+            <h2>Job type</h2>
+            <?php echo $row['category']?>
 
             <h2>Location</h2>
             <?php echo $row['location']?>
@@ -96,125 +73,81 @@
             <?php echo $row['description']?>
 
             <br/><br/><br/><br/>
-            
         </div>
-        <br/><br/><hr/><br/><br/>
-           
-        <?php
+    <?php
         }
-        ?>
-        
+    ?>
 
-        <?php
-              if (isset($_POST['delete_id'])) 
-              {
-                  $delete = $_POST['delete'];
-                  mysqli_query($connect, "DELETE FROM drafts WHERE draft_id = '$delete'");
-              
-              ?>
-              
-              <script type="text/javascript">
-                  alert("Drafts has been deleted!");
-                  window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
-              </script> 
+    <?php
+        if (isset($_POST['delete_id'])) 
+        {
+            $delete = $_POST['delete'];
+            mysqli_query($connect, "DELETE FROM drafts WHERE draft_id = '$delete'");
+    ?>
+            <script type="text/javascript">
+                alert("Drafts has been deleted!");
+                window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+            </script> 
+    <?php
+        }
+    ?>
+
+    <?php
+        if (isset($_POST['post'])) 
+        {
+            $pid = $_POST['pid'];
+            $result= mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
             
-            
-          <?php
-           
-              }
-          ?>
-
-
-            <?php
-              if (isset($_POST['post'])) 
-              {
-                $pid = $_POST['pid'];
-     
-
-                
-
-                            
-                $result = mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
-                
-                if ($result) 
+            if ($result) 
+            {
+                $row = mysqli_fetch_assoc($result);
+                $balance = $row['balance'];
+                mysqli_free_result($result);
+            }
+    ?>
+            <script>
+                var balance = <?php echo $balance; ?>;
+                console.log(balance);
+                if(balance <= 0)
                 {
-                    $row = mysqli_fetch_assoc($result);
-                    $balance = $row['balance'];
-                    mysqli_free_result($result);
+                    alert("You have not enough balance to post");
+                    window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
                 }
-
-              ?>
-              
-              <script>
-                    var balance = <?php echo $balance; ?>;
-                    console.log(balance);
-                    if(balance <= 0)
+                else if(balance > 0)
+                {
+                    answer = confirm("Do you want to post this post?");
+                    if(answer == true)
                     {
-                        alert("You have not enough balance to post");
+                        alert("Your post is successfully posted.");
+                    }
+                    else if(answer != true)
+                    {
                         window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
                     }
-                    else if(balance > 0)
-                    {
-                        answer = confirm("Do you want to post this post?");
-
-                        if(answer == true)
-                        {
-                            alert("Your post is successfully posted.");
-
-                        }
-                        else if(answer != true)
-                        {
-                            window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
-                        }
-                    }
-                    
-
-              </script>
-
-          <?php
+                }
+            </script>
+    <?php
                 if($balance != 0)
                 {
                     $balance--;
-
-          
                     mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
                     mysqli_query($connect, "INSERT INTO post(`post_id`,`poster_id`,job_name,`company_name`,`category`,`location`,employment_type,`description`,salary) 
                     SELECT `draft_id`,`poster_id`,job_name,`company_name`,`category`,`location`,employment_type,`description`,salary FROM drafts WHERE draft_id = '$pid'");
                 }
-         
+    ?>
+            <script>
+                window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
+            </script>
+    <?php
+        }
+    ?>
 
-                ?>
-                    
-                <script>
-                   
-                    window.location = "employer drafts.php?id=<?php echo urlencode($id);?>";
-
-                </script>
-
-
-                <?php
-
-              }
-          ?>
-
-
-        <script>
+    <script>
         function confirmation()
         {
-        answer = confirm("Do you want to delete this post?");
-        return answer;
+            answer = confirm("Do you want to delete this post?");
+            return answer;
         }
-        </script>
-
-
-
-
-
-
-
-
-
-
-
-
-    </body>
+    </script>
+</body>
+</html>

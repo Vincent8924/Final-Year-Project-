@@ -132,7 +132,7 @@ header {
     padding: 5px;
 }
 
-#applyForm input[type="submit"] {
+#applyForm button{
     background-color: green;
     color: white;
     padding: 10px;
@@ -142,7 +142,7 @@ header {
     font-weight: bold;
 }
 
-#applyForm input[type="submit"]:hover {
+#applyForm button:hover {
     background-color: darkgreen;
 }
 

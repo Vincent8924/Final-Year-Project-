@@ -14,7 +14,7 @@
 
 <body>
     <header class="header">
-        <h1>JobHelper</h1>
+        <img src="../general_image/jobhelper_logo.png" class="logo">
         <div>
             <a  class="AdminAcc" onclick="displaybar()">
                 <?php

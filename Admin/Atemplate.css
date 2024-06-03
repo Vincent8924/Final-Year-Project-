@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: white;
     color: #333;
     line-height: 1.6;
 }
@@ -15,17 +15,21 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2e2d2d;
-    color: #fff;
+    background-color: #c9c9c9;
+    color: #333;
     padding: 20px;
 }
 
 .header h1 {
     margin: 0;
 }
-
+.logo
+{
+    height: 70px;
+    width: auto;
+}
 .AdminAcc {
-    color: white;
+    color: #333;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -83,7 +87,7 @@ body {
 
 aside {
     width: 200px;
-    background-color: #a8a8a8;
+    background-color: #c5c5c5;
     color: #fff;
 }
 

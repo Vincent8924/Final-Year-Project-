@@ -53,7 +53,7 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
         }
 
         .sign-in{
-            margin-left: 80%;
+            margin-left: 75%;
             display: inline-block;
             padding: 8px 16px;
             border: 2px solid blue;

@@ -3,6 +3,20 @@ include('dataconnection.php');
 include('Jsession.php');
 
 ob_start();
+
+$firstName = '';
+
+if (isset($_SESSION['id'])) 
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
 ?>
 <html>
 <head>
@@ -11,9 +25,8 @@ ob_start();
    
     <link rel="icon" href="img/logo.png">
     <style>
-        body {
-    width: 90%;
-    margin: 0 auto;
+  body {
+    margin: 0;
     font-family: 'Times New Roman', Times, serif;
     background-image: url('jt.jpg');
     background-size: cover;
@@ -22,35 +35,32 @@ ob_start();
 }
 
 header {
-    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+    background-color: white;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 
 .navigation {
+    display: inline-block;
     margin-right: 50%;
-    margin-top: 20px;
-    font-size: 20px;
-    display: flex;
-    gap: 20px;
 }
 
 .navigation ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    gap: 20px;
 }
 
 .navigation ul li {
     display: inline-block;
+    margin-right: 20px;
 }
 
 .navigation ul li a {
@@ -64,23 +74,56 @@ header {
     color: #555;
 }
 
+.employer-site {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.employer-site a {
+    text-decoration: none;
+    color: rgb(12, 12, 191);
+}
+
+.employer-site:hover {
+    background-color: blue;
+}
+
+.employer-site:hover a {
+    color: white;
+}
+
+.logo {
+    display: inline-block;
+}
+
 .logo img {
     height: 50px;
-    width: 50px;
-    margin-left: 30px;
 }
 
-#logout {
-    font-size: 20px;
-    width: 100px;
-    margin-top: -9px;
+.user-info {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-left: 50px;
 }
 
-#page_logo {
-    height: 45px;
-    top: 0px;
+.user-info p {
+    margin: 0;
+    font-weight: bold;
+    color: green;
 }
 
+.user-info:hover {
+    background-color: green;
+}
+
+.user-info:hover p {
+    color: white;
+}
 .center {
     text-align: center;
 }
@@ -174,23 +217,6 @@ button {
     font-size: 20px;
 }
 
-#logout {
-    font-size: 15px;
-    width: 150px;
-    margin-right: 130px;
-    margin-top: 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#logout:hover {
-    background-color: #0056b3;
-}
-
 #logout_photo {
     width: 15px;
 }
@@ -250,6 +276,38 @@ button {
 .edit-button:hover {
     background-color: #0056b3;
 }
+footer {
+            background-color: white;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer nav ul {
+            font-family: 'Times New Roman', Times, serif;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer nav ul li a:hover {
+            color: #555;
+        }
+        
     </style>
 </head>
 <body>
@@ -261,24 +319,33 @@ if (isset($_POST['logout'])) {
     echo '<script>alert("Log-Out successful!");window.location.href="login.php";</script>';
 }
 ?>
-<header>
-    <div class="logo">
-        <a href="jobseeker home.php"><img src="img/page logo2.png" id="page_logo"/></a>
-    </div>
-    <nav class="navigation">
-        <ul>
-            <li><a href="homepage.php">job search</a></li>
-            <li><a href="profile.php">Profile</a></li>
-            <li><a href="applylist.php">apply list</a></li>
-        </ul>
-    </nav>
-    <form method="post">
-        <button id="logout" name="logout" onclick='return userconfirmation();'>
-            <img src='img/logout.png' id="logout_photo"> LOG OUT
-        </button>
-    </form>
-</header>
-<br/><hr/><br/>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Company Logo">
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+                <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+   
+            </ul>
+        </nav>
+        <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
+        
+        <div class="employer-site">
+            <a href="employer sign up.php">Employer Site</a>
+        </div>
+    </header>
+    
 
 <?php
 $result = mysqli_query($connect, "SELECT * FROM jobseekerprofile where jobseeker_id = '$id' LIMIT 1");
@@ -320,3 +387,19 @@ if ($result) {
 <?php
 }
 ?>
+<footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+<script>
+ document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
+    });
+    </script>

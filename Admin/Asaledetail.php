@@ -105,16 +105,122 @@
                             </div>
                         </div>
                         <div class="Bcontainer">
-                            <h4>Buyer</h4>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="Atd">ID</td>
-                                        <td class="colontd">:</td>
-                                        <td class="valuetd"><?php echo $employer_id; ?></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="Ccontainer">
+                                <table>
+                                    <h2 class="title">Buyer Details</h2>
+                                    <tbody> 
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Emplomyer's ID</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $employer_id; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Emplomyer's Name</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $employer_name; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="Ccontainer">
+                                <table>
+                                    <h2 class="title">Package's Details</h2>
+                                    <tbody> 
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Package's ID</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $package_id; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Package's Name</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $package_name; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="Ccontainer">
+                                <table>
+                                    <h2 class="title">Purchase Details</h2>
+                                    <tbody> 
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Purchase Amount</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $purchase_amount; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Purchase Time</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $purchase_amount; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="Ccontainer">
+                                <table>
+                                    <h2 class="title">Payment Details</h2>
+                                    <tbody> 
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Bank</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $bank; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Card Name</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $card_name; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Card Number</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $card_number; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Card Expire(MM/YYYY)</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $card_expire_month; ?>/<?php echo $card_expire_year; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td1"></td>
+                                            <td class="Atd">Card CVV</td>
+                                            <td class="td2">
+                                            <td class="td3">
+                                            <td class="valuetd"><?php echo $card_cvv; ?></td>
+                                            <td class="td4"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
 

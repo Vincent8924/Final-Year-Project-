@@ -122,6 +122,7 @@
                     </div>
                 </div>
             </div>
+            <!--post--->
             <?php
                 $result = mysqli_query($connect,"SELECT count(*) AS total_post FROM post");
                 if($result)
@@ -164,6 +165,41 @@
                             <?php
                                 }
                             ?>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <!--sale-->
+            <?php
+                $result = mysqli_query($connect,"SELECT count(*) AS total_apply FROM applications");
+                if($result)
+                {
+                    $row = mysqli_fetch_assoc($result);
+                    $total_apply = $row["total_apply"];
+                }
+            ?>
+            <div class="Apost">
+                <div class="postheader">
+                    <div>
+                        <h3>Application</h3>
+                    </div>
+                    <div class="amount">
+                        <h3>
+                            <?php
+                                echo $total_apply;
+                            ?>
+                        </h3>
+                    </div>
+                </div>
+                <?php
+                
+                ?>
+                <div class="Bpost">
+                    <table>
+                        <tbody>
+                            no data hahahaha
                         </tbody>
                     </table>
 

@@ -15,7 +15,8 @@
   `description` varchar(9999) DEFAULT NULL,
   `salary` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `favourite` enum('yes','no') DEFAULT 'no')
+  `favourite` enum('yes','no') DEFAULT 'no'
+  );
   
   CREATE TABLE drafts (
       `draft_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -30,7 +31,6 @@
       `salary` INT NOT NULL,
       `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
   );
-
 
   CREATE TABLE photos (
       `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -52,7 +52,6 @@
       `password` varchar(500) NOT NULL,
       `balance` int NOT NULL
   );
-
 
   CREATE TABLE employer_profile (
       `profile_id` INT NOT NULL PRIMARY KEY ,
@@ -76,8 +75,6 @@
     `superadmin` tinyint(1)
   );
 
-  
-
   CREATE TABLE contact (
       `contact_id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
       `name` varchar(255) NOT NULL,
@@ -95,10 +92,8 @@
       `jobseeker_password` varchar(500) NOT NULL
   );
 
-
-
-
- CREATE TABLE `userprofile` (
+  CREATE TABLE `userprofile` 
+  (
   `UserID` int(11) NOT NULL,
   `ProfilePic` varchar(255) DEFAULT NULL,
   `PersonalSummary` text DEFAULT NULL,
@@ -108,9 +103,10 @@
   `language` varchar(255) DEFAULT NULL,
   `jobseeker_email` varchar(255) DEFAULT NULL,
   `resume` varchar(200) 
-) 
+  );
 
-  CREATE TABLE `applications` (
+  CREATE TABLE `applications` 
+  (
   `id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `post_id` INT DEFAULT NULL,
   `poster_id` INT DEFAULT NULL,
@@ -119,7 +115,7 @@
   `cover_letter` varchar(255) DEFAULT NULL,
   `application_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` enum('Pending','Successful','Failed') DEFAULT 'Pending'
-) ;
+  );
 
 
   CREATE TABLE package 

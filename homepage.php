@@ -293,7 +293,7 @@ if (!$result) {
             <ul>
                 <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
                 <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
+   
             </ul>
         </nav>
         <div class="user-info" id="logoutBtn">

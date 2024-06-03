@@ -1,272 +1,27 @@
 <?php
     include("Jsession.php");
     include("dataconnection.php");
-    if(isset($_SESSION['id'])) {
+
         $id = $_SESSION['id'];
-        $id = $connect->real_escape_string($id);  
-        $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
-        $result = $connect->query($query);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+       
+        
+        $result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'");
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
             $firstName = $row['jobseeker_firstname'];
         }
-    }
-    $sql = "SELECT * FROM post";
-    $result = $connect->query($sql);
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="homepage.css">
+
     <title>Job Search Homepage</title>
-    <style>
-       
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navigation {
-            display: inline-block;
-            margin-right: 50%;
-        }
-
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        .navigation ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .navigation ul li a:hover {
-            color: #555;
-        }
-
-        .employer-site {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid blue;
-            border-radius: 5px;
-            margin-left: 20px;
-        }
-
-        .employer-site a {
-            text-decoration: none;
-            color: rgb(12, 12, 191);
-        }
-
-        .employer-site:hover {
-            background-color: blue;
-        }
-
-        .employer-site:hover a {
-            color: white;
-        }
-
-        .logo {
-            display: inline-block;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .user-info {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid green;
-            border-radius: 5px;
-            margin-left: 50px;
-        }
-
-        .user-info p {
-            margin: 0;
-            font-weight: bold;
-            color: green;
-        }
-
-        .user-info:hover {
-            background-color: green;
-        }
-
-        .user-info:hover p {
-            color: white;
-        }
-
-        #jobPosts {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .jobPost {
-            position: relative;
-            width: calc(30% - 20px);
-            margin-bottom: 20px;
-            margin-right: 10px;
-            background-color: #f9f9f9;
-            border: 2px solid purple;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .jobPost:last-child {
-            margin-right: 0;
-        }
-
-        .jobPost:hover {
-            background-color: #e0e0e0;
-        }
-
-        .jobPost img {
-            width: 100%;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .jobPost h2 {
-            font-size: 18px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-
-        .jobPost p {
-            font-size: 14px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-        @media (max-width: 1000px) {
-            .jobPost {
-                width: calc(45% - 20px);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .jobPost {
-                width: calc(100% - 20px);
-            }
-        }
-
-        #searchContainer {
-            display: flex;
-            align-items: center;
-            width: 80%;
-            margin: 20px auto 0;
-        }
-
-        #searchBar {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid black;
-            border-radius: 5px 0 0 5px;
-        }
-
-        #categorySelector {
-            padding: 10px;
-            border: 1px solid black;
-            border-left: none;
-            border-radius: 0 5px 5px 0;
-            background-color: #fff;
-            cursor: pointer;
-        }
-
-        #categorySelector:focus {
-            outline: none;
-        }
-
-        .saveIcon {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            font-size: 20px;
-            color: black;
-            cursor: pointer;
-        }
-
-        .saved {
-            color: red;
-        }
-
-        .applyButton {
-    background-color:purple;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 10px; 
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.applyButton:hover {
-    background-color: plum;
-}
-
-.applyButton:active {
-    background-color:plum;
-    transform: translateY(1px); 
-}
-
-        footer {
-            background-color: white;
-            padding: 10px 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        footer nav ul {
-            font-family: 'Times New Roman', Times, serif;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        footer nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        footer nav ul li a:hover {
-            color: #555;
-        }
-    </style>
+    
 </head>
 <body>
     <header>
@@ -275,29 +30,24 @@
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+                <li><a href="jobsave.php">Job Save</a></li>
+                <li><a href="profile.php">Profile</a></li>
                 <li><a href="#">Company Profile</a></li>
             </ul>
         </nav>
         <div class="user-info">
-        <?php
-                    $id = $_SESSION['id'];
-
-                    $result = mysqli_query($connect,"SELECT * FROM jobseeker where jobseeker_id='$id'");
-                    if($result)
-                    {
-                        $row = mysqli_fetch_assoc($result);
-                        $first_name = $row["jobseeker_firstname"];
-                    }
-                ?>
-                <?php echo"$first_name"; ?> 
+            <?php
+               echo "Welcome " . $firstName;
+            ?>
 
         </div>
         <div class="employer-site">
             <a href="#">Employer Site</a>
         </div>
     </header>
+
+
+
     <div id="searchContainer">
         <input type="text" id="searchBar" placeholder="Search...">
         <select id="categorySelector">
@@ -307,8 +57,12 @@
     </div>
     <div id="jobPosts">
     <?php
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+
+    $result = mysqli_query($connect,"SELECT * FROM post");
+
+
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
         $savedClass = ($row["favourite"] === 'yes') ? 'saved' : '';
         echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
         echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
@@ -327,7 +81,13 @@ if ($result->num_rows > 0) {
     echo "No job posts available";
 }
 ?>
+
+
+
     </div>
+
+
+
     <script>
         const searchBar = document.getElementById('searchBar');
         const categorySelector = document.getElementById('categorySelector');

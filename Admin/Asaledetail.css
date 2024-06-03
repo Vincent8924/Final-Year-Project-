@@ -132,78 +132,84 @@ footer {
     padding: 20px;
     text-align: center;
 }
-
-.Acontainer
-{
-    border: #9e9e9e solid 2px;
-    margin: 20px;
-    border-width: thick;
-    border-radius: 10px;
-    width: auto;
-    margin-bottom: 50px;
-    background-color: #d4d4db;
-    max-height : 60vh;
-    overflow-y: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-thead
-{
-    position: sticky;
-    top: 0;
-}
-thead::after
-{
-    border-bottom: solid 2px;
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-}
-th, td 
-{
-    padding: 10px;
-    text-align: center;
-}
-th 
-{
-    background-color: #f2f2f2;
-}
-tr:nth-child(even) 
-{
-    background-color: #f2f2f2;
-}
-tr:hover 
-{
-    background-color: #ddd;
-}
-h1 
+.back h2
 {   
     margin: 50px;
     margin-bottom: 10px;
     margin-top: 10px;
+    color: black;
 }
-.amount
+.back
 {
+    text-decoration: none;
     float: right;
 }
 
-.view button
+.back h2:hover
 {
-    padding: 10px 20px;
+    font-size: 25px;
+    color: #616161;
+}
+
+.Acontainer
+{
+    border: #616161 solid 2px;
+    width: 70%;
+    height: 80vh;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #d4d4db;
+    border-radius: 10px;
+}
+
+.Aheader
+{
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+    border-bottom: solid 2px #797979;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #d4d4db;
+}
+
+.Bcontainer
+{
+    width: 90%;
+    margin: auto;
     border-radius: 5px;
-    background-color: #4b4a4d; 
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
+    margin-bottom: 15px;
 }
-.viewcontainer
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+td 
 {
-    display: block;
+    padding: 10px;
+    width: 40vh;
 }
+.Atd
+{
+    width: 25vh;
+    text-align: left;
+}
+.colontd
+{
+    text-align: center;
+    font-weight: bold;
+    width: 15vh;
+}
+.valuetd
+{
+    width: 55vh;
+    text-align: left;
+}
+
 
 

@@ -186,5 +186,9 @@ h1
     margin-bottom: 10px;
     margin-top: 10px;
 }
+.amount
+{
+    float: right;
+}
 
 

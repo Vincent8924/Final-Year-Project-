@@ -24,7 +24,7 @@
     
 </head>
 <body>
-    <header>
+<header>
         <div class="logo">
             <img src="logo.png" alt="Company Logo">
         </div>
@@ -130,22 +130,17 @@ if ($result) {
             };
             request.send('post_id=' + postId);
         }
-        
-    
 
-    function applyJob(postId) {
-    // Redirect to apply.php with the post_id as a query parameter
-    window.location.href = 'apply.php?post_id=' + postId;
-}
-</script>
-    
+        function applyJob(postId) {
+            window.location.href = 'apply.php?post_id=' + postId;
+        }
+    </script>
     <footer>
         <nav>
             <ul>
                 <li><a href="aboutus.html">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
                 <li><a href="applylist.php">Apply list</a></li>
-                
             </ul>
         </nav>
     </footer>

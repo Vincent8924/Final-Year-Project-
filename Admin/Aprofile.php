@@ -84,13 +84,13 @@
                             }
                         ?>
                         <tr>
-                            <td class="Atd"><i class="fa-solid fa-user"></i>  ID</td>
+                            <td class="Atd"><i class="fa-solid fa-id-card"></i>  ID</td>
                             <td class="colontd">:</td>
                             <td class="valuetd"><?php echo"$id" ?></td>
                             <td class="btntd"></td>
                         </tr>
                         <tr>
-                            <td class="Atd"><i class="fa-solid fa-signature"></i>  First Name</td>
+                            <td class="Atd"><i class="fa-regular fa-circle-user"></i>  First Name</td>
                             <td class="colontd">:</td>
                             <td class="valuetd"><?php echo"$fname" ?></td>
                             <td class="btntd">
@@ -100,7 +100,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="Atd"><i class="fa-solid fa-signature"></i>  Last Name</td>
+                            <td class="Atd"><i class="fa-regular fa-circle-user"></i>  Last Name</td>
                             <td class="colontd">:</td>
                             <td class="valuetd"><?php echo"$lname" ?></td>
                             <td class="btntd">
@@ -115,6 +115,16 @@
                             <td class="valuetd"><?php echo"$email" ?></td>
                             <td class="btntd">
                                 <button onclick="editemail()" class="edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Atd"><i class="fa-solid fa-lock"></i>  Password</td>
+                            <td class="colontd">:</td>
+                            <td class="valuetd">********</td>
+                            <td class="btntd">
+                                <button onclick="editpassword()" class="edit">
                                     <i class="fas fa-edit"></i>
                                 </button>
                             </td>
@@ -188,6 +198,32 @@
             </div>
         </form>
     </div>
+    <div id="editpassword">
+        <form method="POST">
+            <div class="aform">
+                <div class="x" >
+                    <button type="button" onclick="closeeditpassword()" id="x">x</button>
+                </div>
+                
+                <h2>Edit Password</h2>
+                <br>
+                <div class="bform">
+                    <div class="label">
+                        <label >Password </label>
+                    </div>
+                        <input type="text"  name="pw" required><br>
+                </div>
+                <div class="bform">
+                    <div class="label">
+                        <label >Confirm Password </label>
+                    </div>
+                        <input type="text"  name="cpw" required><br>
+                </div>
+                <br>
+                <input type="submit" value="Edit" class="formbtn" name="editpassword">   
+            </div>
+        </form>
+    </div>
     <?php
         if(isset($_POST['editfname']))
         {
@@ -231,6 +267,44 @@
                 <?php
             }
         }
+        if(isset($_POST['editpassword']))
+        {
+            $pw = $_POST['pw'];
+            $cpw = $_POST['cpw'];
+            $hpw = password_hash($_POST["pw"], PASSWORD_DEFAULT);
+            if(strlen($pw) < 8)
+            {
+                ?>
+                <script>
+                    alert("Unsucessful! The length for password must be at least 8 characters.");
+                    history.go(-1);
+                </script>
+                <?php
+            }
+            else if($pw !== $cpw)
+            {
+                ?>
+                <script>
+                    alert("Unsucessful! The password doesn't match.");
+                    history.go(-1);
+                </script>
+                <?php
+            }
+            else
+            {
+                $result=mysqli_query($connect,"UPDATE admin SET admin_password = '$hpw' where admin_id = '$id'");
+                if($result)
+                {
+                    ?>
+                    <script>
+                        alert("Your password have been changed!");
+                        window.location.href = "Aprofile.php";
+                    </script>
+                    <?php
+                }
+            }
+
+        }
         
         ?>
 
@@ -241,7 +315,7 @@
 </body>
 </html>
 
-<SCript>
+<script>
     function displaybar()
     {
         var div = document.getElementById("aAccBar");
@@ -280,4 +354,12 @@
         var div = document.getElementById("editemail");
         div.style.display = "none";  
     }
-</SCript>
+    function editpassword(){
+        var div = document.getElementById("editpassword");
+        div.style.display = "block";  
+    }
+    function closeeditpassword(){
+        var div = document.getElementById("editpassword");
+        div.style.display = "none";  
+    }
+</script>

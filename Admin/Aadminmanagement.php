@@ -81,6 +81,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -91,10 +92,12 @@
                     <tbody >
                         <?php
                             $result = mysqli_query($connect, "SELECT * FROM admin;");
+                            $i = 1;
                             while($row = mysqli_fetch_assoc($result))
                             {
                         ?>
                             <tr>
+                                <td><?php echo $i ?></td>
                                 <td><?php echo $row["admin_id"] ?></td>
                                 <td><?php echo $row["admin_fname"] ?></td>
                                 <td><?php echo $row["admin_lname"] ?></td>
@@ -111,14 +114,28 @@
                                 if (isset($_POST['delete'])) 
                                 {
                                     $delete = $_POST['delete'];
-                                    mysqli_query($connect, "DELETE FROM admin WHERE admin_id = '$delete'");
-                            ?>
-                                <script>
-                                    alert("The admin has been deleted!");
-                                    window.location.href = "Aadminmanagement.php";
-                                </script>
-                            <?php
+                                    if($id!==$delete)
+                                    {
+                                        mysqli_query($connect, "DELETE FROM admin WHERE admin_id = '$delete'");
+                                        ?>
+                                            <script>
+                                                alert("The admin has been deleted!");
+                                                window.location.href = "Aadminmanagement.php";
+                                            </script>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                            <script>
+                                                alert("You are not allow to delete youself!");
+                                                history.go(-1);
+                                            </script>
+                                        <?php
+                                    }
+
                                 }
+                                $i++;
                             }
                         ?>
                         

@@ -8,6 +8,7 @@
         </title>
         <link rel="stylesheet" type="text/css" href="employer home.css">
         <link rel="icon" href="img/logo.png">
+        
     </head>
     <body>
 
@@ -28,47 +29,40 @@
         
         ?>
 
-        <nav>
-            <div id="line">
-                <div class="choice">
-                    <span class="left">
-                    <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
-                    </span>    
-                    <span class="mid"> 
-
-                    
-                    <a href="employer home.php">HOME</a>
-                        <a href="employer drafts.php">Drafts</a>
-                        <a href="employer view post.php">Post</a>
-                        <a href="employer view application.php">Application</a>
-                        <a href="employer packages.php">Package</a>
-                        <a href="employer payment history.php">History</a>
-                        <a href="employer profile.php">Profile</a>
-                    
-                    </span>
-
-                    <form method="post" >
-                        <span class="right" >
-                            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
-                        </span> 
-                    </form>
+<header>
+    <div class="logo">
+        <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
+    </div>
+    <nav class="navigation">
+        <ul>
+            <li><a href="employer home.php">Home</a></li>
+            <li><a href="employer drafts.php">Drafts</a></li>
+            <li><a href="employer view post.php">Post</a></li>
+            <li><a href="employer view application.php">Application</a></li>
+            <li><a href="employer packages.php">Package</a></li>
+            <li><a href="employer payment history.php">History</a></li>
+            <li><a href="employer profile.php">Profile</a></li>
+        </ul>
+    </nav>
+    <form method="post" >
+       
+            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
+        </div> 
+    </form>
+</header>
 
                 </div>
             </div>
         </nav>
 
-       
-    <br/><hr/><br/>
 
-
-        <h1>Make a new post now!</h1>
-        <br/><br/>
-        <form class="formBox" name="addnewpost" method="post">
-            
-                <h1>Please fill in the information</h1>
-                <br/>
-                <h2>Job name?</h2>
-                <input type="text" class="field" placeholder="What is the job?" name="job_name">
+   
+<br/><br/>
+<form class="formBox" name="addnewpost" method="post">
+    <h1>Lets make a new post now and fill in the information</h1>
+    <br/>
+    <h2>Job name?</h2>
+    <input type="text" class="field" placeholder="What is the job?" name="job_name">
 
                 <h2>Job type?</h2>
                 

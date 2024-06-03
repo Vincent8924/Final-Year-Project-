@@ -195,6 +195,11 @@ td
     font-weight: bold;
     font-size: 15px;
     background-color: #f4f4f4;
+    border-radius: 5px;
+}
+.edit:hover
+{
+    background-color: #747373;
 }
 
 .aform
@@ -218,7 +223,7 @@ td
 {
     width: 175px;
 }
-#editfname,#editlname,#editemail
+#editfname,#editlname,#editemail,#editpassword
 {
     display: none;
     position: absolute;

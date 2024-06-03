@@ -2,7 +2,25 @@
 session_start();
 include("dataconnection.php");
 
-// Fetch the list of post IDs that have been applied for
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+$firstName = '';
+
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
+}
+
 $query = "SELECT DISTINCT post_id FROM applications";
 $result = $connect->query($query);
 
@@ -165,27 +183,30 @@ tbody tr:nth-child(even) {
 <body>
 
 <header>
-    <div class="logo">
-        <img src="logo.png" alt="Company Logo">
-    </div>
-    <nav class="navigation">
-        <ul>
-            <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Job Save</a></li>
-            <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
-            <li><a href="#">Company Profile</a></li>
-        </ul>
-    </nav>
-    <div class="user-info">
-        <?php
-        if (isset($firstName)) {
-            echo '<p>Welcome, ' . $firstName . '</p>';
-        }
-        ?>
-    </div>
-    <div class="employer-site">
-        <a href="#">Employer Site</a>
-    </div>
-</header>
+        <div class="logo">
+            <img src="logo.png" alt="Company Logo">
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+              
+            </ul>
+        </nav>
+        <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
+        
+        <div class="employer-site">
+            <a href="employer sign up.php">Employer Site</a>
+        </div>
+    </header>
+    
 
 <main style="display: flex; justify-content: center;margin-top:5%;">
     <table border="1" style="width: 80%; max-width: 1000px;">
@@ -199,21 +220,21 @@ tbody tr:nth-child(even) {
         </thead>
         <tbody>
             <?php
-            // Loop through each applied post ID
+      
             while ($row = $result->fetch_assoc()) {
                 $postId = $row['post_id'];
                 
-                // Fetch the company name and job name for the current post ID
+              
                 $postQuery = "SELECT company_name, job_name FROM post WHERE post_id = $postId";
                 $postResult = $connect->query($postQuery);
                 
-                // Check if the post exists
+             
                 if ($postResult->num_rows > 0) {
                     $postRow = $postResult->fetch_assoc();
                     $companyName = $postRow['company_name'];
                     $jobName = $postRow['job_name'];
                     
-                    // Output the details in a table row
+           
                     echo "<tr>";
                     echo "<td>$postId</td>";
                     echo "<td>$companyName</td>";
@@ -233,10 +254,18 @@ tbody tr:nth-child(even) {
         <ul>
             <li><a href="aboutus.html">About Us</a></li>
             <li><a href="contact.php">Contact Us</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+         
         </ul>
     </nav>
 </footer>
+<script>
+     document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
+    });
+</script>
 
 </body>
 </html

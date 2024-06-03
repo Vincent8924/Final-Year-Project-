@@ -37,7 +37,7 @@ $result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE
                 echo '<script>alert("Error occurred while applying!");</script>';
             }
        // } 
-    }
+    } 
     else 
     {
       //  echo '<script>alert("Please select both resume and cover letter files.");</script>';

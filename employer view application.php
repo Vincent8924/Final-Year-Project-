@@ -14,7 +14,7 @@
 
     <?php
                         
-                            $id = $_SESSION['id'];
+                            $id = $_SESSION['id']; 
                             
 
                             if(isset($_POST['logout']))

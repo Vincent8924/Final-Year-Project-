@@ -1,9 +1,27 @@
 <?php
-session_start();
+include("Jsession.php");
 include("dataconnection.php");
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
 
-if (isset($_SESSION['jobseeker_email'])) {
-    $email = $_SESSION['jobseeker_email'];
+$firstName = '';
+
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
+}
+
+if (isset($_SESSION['id'])) {
+    $email = $_SESSION['id'];
     $email = $connect->real_escape_string($email);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['post_id'])) {
@@ -46,7 +64,7 @@ if (isset($_SESSION['jobseeker_email'])) {
     <title>Saved Job Posts</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family:'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
         }
@@ -271,20 +289,22 @@ if (isset($_SESSION['jobseeker_email'])) {
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Homepage</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
+                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+                <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+   
             </ul>
         </nav>
-        <div class="user-info">
-            <?php
-            if (isset($firstName)) {
-                echo '<p>Welcome, ' . $firstName . '</p>';
-            }
-            ?>
-        </div>
+        <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
+        
         <div class="employer-site">
-            <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
         </div>
     </header>
     
@@ -315,7 +335,7 @@ if (isset($_SESSION['jobseeker_email'])) {
         <nav>
             <ul>
                
-                <li><a href="companies.php">Companies</a></li>
+                
                 <li><a href="about.php">About</a></li>
                 <li><a href="contact.php">Contact</a></li>
             </ul>
@@ -347,6 +367,12 @@ if (isset($_SESSION['jobseeker_email'])) {
           
             window.location.href = 'apply.php?post_id=' + postId;
         }
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
+    });
     </script>
 </body>
 </html>

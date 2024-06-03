@@ -37,7 +37,7 @@ if (!$result) {
     <style>
        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
         }
@@ -293,6 +293,8 @@ if (!$result) {
             <ul>
                 <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
                 <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+                <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+   
    
             </ul>
         </nav>
@@ -305,7 +307,7 @@ if (!$result) {
 </div>
         </div>
         <div class="employer-site">
-            <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
         </div>
     </header>
     <div id="searchContainer">

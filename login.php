@@ -1,9 +1,31 @@
 <?php
-    
     include("dataconnection.php");
     session_start();
-?>
 
+    if(isset($_POST['submit'])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        
+        $result = mysqli_query($connect,"SELECT * FROM jobseeker WHERE jobseeker_email='$email'");
+        $row = mysqli_fetch_assoc($result);
+        
+        if($row) {
+            if(password_verify($password, $row["jobseeker_password"])) {
+                $_SESSION['id'] = $row["jobseeker_id"];
+                if($_SESSION['id']) {
+                    header("Location: homepage.php");
+                    exit();
+                } else {
+                    echo '<script>alert("Session error!");</script>';
+                }
+            } else {
+                echo '<script>alert("Password invalid! Please Try Again!"); history.go(-1);</script>';
+            }
+        } else {
+            echo '<script>alert("User does not exist!"); history.go(-1);</script>';
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +36,8 @@
         body {
             background-image: url('3.jpg');
             background-repeat: no-repeat;
-            background-size: 100% 160%;
-            font-family: Arial, sans-serif;
+            background-size: 100% 200%;
+            font-family: 'Times New Roman', Times, serif;
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
@@ -187,9 +209,9 @@
 
         <nav class="navigation">
             <ul>
-                <li><a href="#">Job Search</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
+                <li><a href="homepage.php">homepage</a></li>
+                <li><a href="profile.php">Profile</a></li>
+         
             </ul>
         </nav>
 

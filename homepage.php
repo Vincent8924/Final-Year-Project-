@@ -128,6 +128,7 @@ if (!$result) {
             color: white;
         }
 
+
         #jobPosts {
             display: flex;
             flex-wrap: wrap;
@@ -295,8 +296,13 @@ if (!$result) {
                 <li><a href="#">Company Profile</a></li>
             </ul>
         </nav>
-        <div class="user-info">
-            <?php echo htmlspecialchars($firstName); ?>
+        <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
         </div>
         <div class="employer-site">
             <a href="#">Employer Site</a>
@@ -379,6 +385,12 @@ if (!$result) {
         function applyJob(postId) {
             window.location.href = 'apply.php?post_id=' + postId;
         }
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
+    });
     </script>
     <footer>
         <nav>

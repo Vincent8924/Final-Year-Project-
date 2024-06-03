@@ -202,6 +202,38 @@
             clear: both;
             display: table;
         }
+        footer {
+            background-color: white;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer nav ul {
+            font-family: 'Times New Roman', Times, serif;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer nav ul li a:hover {
+            color: #555;
+        }
+        
     </style>
 </head>
 <body>
@@ -213,9 +245,9 @@
 
     <nav class="navigation">
         <ul>
-            <li><a href="#">Job Search</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Company Profile</a></li>
+            <li><a href="homepage.php">Job Search</a></li>
+            <li><a href="profile.php">Profile</a></li>
+         
         </ul>
     </nav>
 
@@ -271,11 +303,20 @@
 
     <div class="image-box">
         <img src="jay.jpg" alt="Team Member">
-        <p>Description of the team member here.</p>
+        <p></p>
     </div>
 
     <div class="clearfix"></div>
 </div>
+<footer>
+    <nav>
+        <ul>
+            <li><a href="login.php">login</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
+            <li><a href="applylist.php">Apply list</a></li>
+        </ul>
+    </nav>
+</footer>
 
 </body>
 </html>

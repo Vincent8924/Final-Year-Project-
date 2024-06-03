@@ -1,809 +1,322 @@
 <?php
-session_start();
-include("dataconnection.php");
+include('dataconnection.php');
+include('Jsession.php');
 
-if (isset($_SESSION['jobseeker_email'])) {
-    $email = $_SESSION['jobseeker_email'];
-
-    $query = $connect->prepare("SELECT ProfilePic, PersonalSummary, Skills, work_experience, Education, language FROM userprofile WHERE jobseeker_email = ?");
-    $query->bind_param("s", $email);
-    $query->execute();
-    $query->store_result();
-    $query->bind_result($profilePic, $personalSummary, $skills, $workExperience, $education, $language);
-    $query->fetch();
-
-} else {
-    echo "Session email not set.";
-}
+ob_start();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8"/>
+    <title>Profile | Job Help</title>
+   
+    <link rel="icon" href="img/logo.png">
     <style>
-        header {
-            background-color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .logo {
-            display: inline-block;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .navigation {
-            display: inline-block;
-            margin-right: 60%;
-        }
-
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        .navigation ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-            font-family: Arial, sans-serif; 
-        }
-
-        .navigation ul li a:hover {
-            color: #555;
-        }
-
-        .employer-site { 
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid blue;
-            border-radius: 5px;
-            margin-left: 20px; 
-            background-color: white;
-        }
-
-        .employer-site a { 
-            text-decoration: none;
-            color: blue;
-            font-family: Arial, sans-serif; 
-        }
-
-        .employer-site:hover { 
-            background-color: blue;
-        }
-
-        .employer-site:hover a { 
-            color: white;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .profile-info {
-            margin-bottom: 20px;
-        }
-
-        .profile-info p {
-            margin: 5px 0;
-            font-family: Arial, sans-serif; 
-            font-size: 18px; 
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            position: relative; 
-            margin-left: 13%; 
-            height: 250px;
-            weight: 250px;
-        }
-
-        .add-skill-btn,
-        .select-language-btn {
-            background-color: blue;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: Arial, sans-serif; 
-            transition: background-color 0.3s, color 0.3s; 
-            margin-left: 10px;
-        }
-
-        .add-skill-btn:hover,
-        .select-language-btn:hover {
-            background-color: darkblue; 
-            color: white; 
-        }
-
-        .edit-icon {
-            position: absolute;
-            margin-right: 320px;
-            margin-top: 100px;
-            font-size: 20px;
-            color: #999; 
-            cursor: pointer;
-            right: 10px; 
-            top: 10px;
-        }
-
-        .edit-icon:hover::after {
-            content: "";
-            width: 30px;
-            height: 30px;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1; 
-        }
-
-        .section-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-            margin-left: 20px;
-        }
-
         body {
-            font-family: Arial, sans-serif; 
-        }
+    width: 90%;
+    margin: 0 auto;
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url('jt.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
-        .icon {
-            margin-right: 120px;
-        }
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-        @keyframes slideFromRight {
-            0% {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+.navigation {
+    margin-right: 50%;
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+}
 
-        .slide-from-right {
-            animation: slideFromRight 0.5s ease forwards;
-            width: 40%; 
-            height: 100%;
-            position: fixed;
-            top: 0;
-            right: 0;
-            background-color: #fff;
-            z-index: 999; 
-            overflow-y: auto; 
-            padding: 20px;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); 
-        }
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
 
-        .profile-picture-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.navigation ul li {
+    display: inline-block;
+}
 
-        .profile-picture-container input[type="file"] {
-            display: none;
-        }
+.navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
 
-        .profile-picture-container img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 2px solid #ccc;
-            cursor: pointer;
-        }
+.navigation ul li a:hover {
+    color: #555;
+}
 
-        .upload-icon {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background-color: white;
-            padding: 5px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+}
 
-        .upload-icon i {
-            color: #555;
-        }
+#logout {
+    font-size: 20px;
+    width: 100px;
+    margin-top: -9px;
+}
 
-        .upload-icon:hover {
-            background-color: #eee;
-        }
+#page_logo {
+    height: 45px;
+    top: 0px;
+}
 
-        #languageSelectForm {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 40%; 
-            height: 100%;
-            background-color: #fff;
-            z-index: 999; 
-            overflow-y: auto; 
-            padding: 20px;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); 
-            animation: slideFromRight 0.5s ease forwards;
-        }
+.center {
+    text-align: center;
+}
 
-        
-        @keyframes slideFromRight {
-            0% {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+.formbox {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-        #languageSelectForm {
-            padding-top: 10px;
-            border-top: 1px solid #ccc;
-        }
+.formbox h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
 
-        #languageSearch {
-            width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            margin-right: 80px;
-            border: 1px solid black;
-            border-radius: 5px;
-            height: 25px;
-        }
+.formbox label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
 
-        #languageSelect {
-            width: 100%;
-            height: 150px;
-            padding: 5px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-        }
+.formbox input[type="text"],
+.formbox input[type="email"],
+.formbox textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
 
-        #languageSelect option {
-            padding: 5px;
-        }
+.formbox button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        #languageSelect::-ms-expand {
-            display: none;
-        }
+.formbox button:hover {
+    background-color: #0056b3;
+}
 
-        .language-box {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
+button {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-        .language-box div {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid blue;
-            border-radius: 5px;
-            margin-left: 10px; 
-            margin-bottom: 10px; 
-            background-color: white;
-            text-decoration: none;
-            color: blue;
-            font-family: Arial, sans-serif;
-        }
+.centerButton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-        .display-box {
-            position: relative;
-            width: 70%;
-            height: 200px;
-            padding: 10px;
-            border: 1px solid black;
-            border-radius: 5px;
-            margin-top: 5px;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-        }
+#profile_photo_space {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #007bff;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        input[type="text"], textarea {
-            width: 100%;
-            height: 200px; 
-            padding: 10px;
-            font-size: 18px; 
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
+#profile_photo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
 
-        textarea {
-            height: 100px; 
-        }
-        .upload-icon {
-            position: relative;
-            bottom: 5px;
-            right: 5px;
-            background-color: white;
-            padding: 5px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+.profile {
+    font-size: 20px;
+}
 
-        .upload-icon i {
-            color: #555;
-        }
+#logout {
+    font-size: 15px;
+    width: 150px;
+    margin-right: 130px;
+    margin-top: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        .upload-icon:hover {
-            background-color: #eee;
-        }
-        footer {
-            background-color: white;
-            padding: 10px 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+#logout:hover {
+    background-color: #0056b3;
+}
 
-        footer nav ul {
-            font-family: 'Times New Roman', Times, serif;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
+#logout_photo {
+    width: 15px;
+}
 
-        footer nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+.container {
+    margin: 100px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.profile-section {
+    margin-bottom: 20px;
+}
 
-        footer nav ul li a:hover {
-            color: #555;
-        }
+.profile-section h2 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-section p {
+    margin: 0;
+    color: #666;
+    font-size: 18px;
+}
+
+#profile_photo_space {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #007bff;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+    display: block;
+    width: 150px;
+    margin: 20px auto 0;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
     </style>
 </head>
 <body>
-   
-    <header>
-        <div class="logo">
-            <img src="logo.png" alt="Company Logo">
-        </div>
-
-        <nav class="navigation">
-            <ul>
-                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Job Save</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
-            </ul>
-        </nav>
-
-        <div class="employer-site">
-            <a href="#">Employer Site</a>
-        </div>
-    </header>
-
-
-    <div class="container">
-    <h2>Upload Profile Picture</h2>
-    <form action="upload_profile_picture.php" method="POST" enctype="multipart/form-data">
-        <div class="profile-picture-container">
-            <input type="file" id="profilePictureInput" name="profile_picture" accept="image/*" onchange="displayProfilePicture(event)">
-            <label for="profilePictureInput">
-                <?php if ($profilePic) { ?>
-                    <img src="<?php echo $profilePic; ?>" alt="Profile Picture" id="profilePicture">
-                <?php } else { ?>
-                    <img src="default_profile_picture.png" alt="Profile Picture" id="profilePicture">
-                <?php } ?>
-                <span class="upload-icon"><i class="fas fa-upload"></i></span>
-            </label>
-        </div>
-        <button type="submit" class="add-skill-btn">Upload</button>
-    </form>
-</div>
-
-<div class="profile-info">
-    <div class="form-group">
-        <h1 class="section-title">Personal Summary</h1>
-        <div id="personalSummaryDisplay" class="display-box"><?php echo $personalSummary; ?></div>
-        <span class="edit-icon" onclick="toggleEditForm('editPersonalSummaryForm')">&#9998;</span>
+<br/><br/>
+<?php
+$id = $_SESSION['id'];
+if (isset($_POST['logout'])) {
+    session_destroy();
+    echo '<script>alert("Log-Out successful!");window.location.href="login.php";</script>';
+}
+?>
+<header>
+    <div class="logo">
+        <a href="jobseeker home.php"><img src="img/page logo2.png" id="page_logo"/></a>
     </div>
+    <nav class="navigation">
+        <ul>
+            <li><a href="homepage.php">job search</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="applylist.php">apply list</a></li>
+        </ul>
+    </nav>
+    <form method="post">
+        <button id="logout" name="logout" onclick='return userconfirmation();'>
+            <img src='img/logout.png' id="logout_photo"> LOG OUT
+        </button>
+    </form>
+</header>
+<br/><hr/><br/>
 
-    <div id="editPersonalSummaryForm" style="display: none;" class="slide-from-right">
-        <form onsubmit="return savePersonalSummary()">
-            <h1>Edit Personal Summary</h1>
-            <input type="text" id="editedPersonalSummary" name="editedPersonalSummary" value="<?php echo $personalSummary; ?>" placeholder="Enter your personal summary">
-            <div>
-                <button type="submit" class="add-skill-btn">Save Personal Summary</button>
-                <button type="button" class="add-skill-btn" onclick="toggleEditForm('editPersonalSummaryForm')">Cancel</button>
-            </div>
-        </form>
+<?php
+$result = mysqli_query($connect, "SELECT * FROM jobseekerprofile where jobseeker_id = '$id' LIMIT 1");
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+?>
+<div class="container">
+    <div id="profile_photo_space">
+        <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($row['photo_data']); ?>" alt="Photo">
     </div>
-</div>
-
-<div class="form-group">
-    <h1 class="section-title">Skills</h1>
-    <div id="SkillsDisplay" class="display-box"><?php echo $skills; ?></div>
-    <span class="edit-icon" onclick="toggleEditForm('editSkillsFormContainer')">&#9998;</span>
-</div>
-
-<div id="editSkillsFormContainer" style="display: none;" class="slide-from-right">
-    <form id="editSkillsForm" onsubmit="return saveSkills()">
-        <h1>Edit Skills</h1>
-        <input type="text" id="editedSkills" name="editedSkills" value="<?php echo $skills; ?>" placeholder="Enter your skills">
-        <div>
-            <button type="submit" name="submit" class="add-skill-btn">Save skills</button>
-            <button type="button" class="add-skill-btn" onclick="toggleEditForm('editSkillsFormContainer')">Cancel</button>
-        </div>
-    </form>
-</div>
-
-<div class="form-group">
-    <h1 class="section-title">Education</h1>
-    <div id="educationDisplay" class="display-box"><?php echo $education; ?></div>
-    <span class="edit-icon" onclick="toggleEditForm('editEducationForm')">&#9998;</span>
-</div>
-
-<div id="editEducationForm" style="display: none;" class="slide-from-right">
-    <form id="editEducationWorkForm" onsubmit="return saveEducation()">
-        <h1>Edit Education</h1>
-        <input type="text" id="editedEducation" name="editedEducation" value="<?php echo $education; ?>" placeholder="Enter your education">
-        <div>
-            <button type="submit" name="submit" class="add-skill-btn">Save Education</button>
-            <button type="button" class="add-skill-btn" onclick="toggleEditForm('editEducationForm')">Cancel</button>
-        </div>
-    </form>
-</div>
-
-<div class="form-group">
-    <h1 class="section-title">Work Experience</h1>
-    <div id="workExperienceDisplay" class="display-box"><?php echo $workExperience; ?></div>
-    <span class="edit-icon" onclick="toggleEditForm('editWorkExperienceForm')">&#9998;</span>
-</div>
-
-<div id="editWorkExperienceForm" style="display: none;" class="slide-from-right">
-    <form id="editWorkExperienceForm" onsubmit="return saveWorkExperience()">
-        <h1>Edit Work Experience</h1>
-        <input type="text" id="editedWorkExperience" name="editedWorkExperience" value="<?php echo $workExperience; ?>" placeholder="Enter your work experience">
-        <div>
-            <button type="submit" name="submit" class="add-skill-btn">Save Workexperience</button>
-            <button type="button" class="add-skill-btn" onclick="toggleEditForm('editWorkExperienceForm')">Cancel</button>
-        </div>
-    </form>
-</div>
-
-<div class="form-group">
-        <h1 class="section-title">Language</h1>
-        <div id="selectedLanguageBox" class="language-box">
-            <?php echo '<div>' . $language . '</div>'; ?>
-        </div>
-        <button class="add-skill-btn" onclick="toggleLanguageSelectForm()">Add Language</button> <!-- Moved button here -->
+    <div class="profile-section">
+        <h2>Personal Summary</h2>
+        <p><?php echo $row['PersonalSummary']; ?></p>
+    </div>
+    <div class="profile-section">
+        <h2>Work Experience</h2>
+        <p><?php echo $row['work_experience']; ?></p>
+    </div>
+    <div class="profile-section">
+        <h2>Education</h2>
+        <p><?php echo $row['Education']; ?></p>
+    </div>
+    <div class="profile-section">
+        <h2>Skills</h2>
+        <p><?php echo $row['Skills']; ?></p>
+    </div>
+    <div class="profile-section">
+        <h2>Language</h2>
+        <p><?php echo $row['language']; ?></p>
+    </div>
+    <div class="profile-section">
+        <h2>Resume</h2>
+        <p><a href="view_resume.php?id=<?php echo $id; ?>">View Resume</a></p>
+    </div>
+    <div class="profile-section">
+        <button onclick="window.location.href='edit profile.php?id=<?php echo $id; ?>'" class="edit-button">Edit Profile</button>
     </div>
 </div>
-    <form id="languageSelectForm" style="display: none;">
-        <input type="text" id="languageSearch" onkeyup="filterLanguages()" placeholder="Search for a language...">
-        <select id="languageSelect" multiple>
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            <option value="French">French</option>
-            <option value="German">German</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Arabic">Arabic</option>
-            <option value="Russian">Russian</option>
-            <option value="Portuguese">Portuguese</option>
-            <option value="Italian">Italian</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Korean">Korean</option>
-            <option value="Dutch">Dutch</option>
-            <option value="Swedish">Swedish</option>
-        </select>
-        <button type="button" onclick="toggleLanguageSelectForm()">Cancel</button>
-        <button type="button" onclick="saveLanguage()">Save</button>
-    </form>
-</div>
-
-<script>
-      
-        const languages = [
-            "English",
-    "Spanish",
-    "French",
-    "German",
-    "Chinese",
-    "Arabic",
-    "Russian",
-    "Portuguese",
-    "Italian",
-    "Japanese",
-    "Korean",
-    "Dutch",
-    "Swedish",
-    "Danish",
-    "Norwegian",
-    "Finnish",
-    "Greek",
-    "Turkish",
-    "Polish",
-    
-          
-        ];
-
-        function showLanguageOptions() {
-            const languageSelect = document.getElementById('languageSelect');
-
-            
-            languageSelect.innerHTML = '';
-
-            
-            languages.forEach(language => {
-                const option = document.createElement('option');
-                option.text = language;
-                languageSelect.add(option);
-            });
-
-            languageSelect.style.display = 'block';
-        }
-       
-        function saveLanguage() {
-    const select = document.getElementById('languageSelect');
-    const selectedLanguages = [];
-    for (let i = 0; i < select.options.length; i++) {
-        if (select.options[i].selected) {
-            selectedLanguages.push(select.options[i].value);
-        }
-    }
-
-    const formData = new FormData();
-    formData.append('language', JSON.stringify(selectedLanguages)); 
-    formData.append('email', "<?php echo $email; ?>");
-
-    fetch('save_language.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Language added successfully.');
-        } else {
-            console.error('Error adding language.');
-        }
-    })
-    .catch(error => {
-        console.error('Error adding language:', error);
-    });
-
-  
-    const languageBox = document.getElementById('selectedLanguageBox');
-    languageBox.innerHTML = ''; 
-    selectedLanguages.forEach(language => {
-        const languageElement = document.createElement('div');
-        languageElement.textContent = language;
-        languageBox.appendChild(languageElement);
-    });
-
-    
-    languageBox.style.display = 'block';
-
-    toggleLanguageSelectForm();
+<?php
 }
-function filterLanguages() {
-    var input = document.getElementById('languageSearch');
-    var filter = input.value.toLowerCase();
-    var options = document.getElementById('languageSelect').options;
-
-    for (var i = 0; i < options.length; i++) {
-        var txtValue = options[i].textContent || options[i].innerText;
-        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-            options[i].style.display = '';
-        } else {
-            options[i].style.display = 'none';
-        }
-    }
-}
-
-function toggleLanguageSelectForm() {
-    var form = document.getElementById('languageSelectForm');
-    form.style.display = form.style.display === 'block' ? 'none' : 'block';
-}
-
-        
-        function toggleEditForm() {
-            var editForm = document.querySelector('.edit-form');
-            if (editForm.style.display === 'none' || editForm.style.display === '') {
-                editForm.style.display = 'block';
-            } else {
-                editForm.style.display = 'none';
-            }
-        }
-
-function savePersonalSummary() {
-    const editedSummary = document.getElementById('editedPersonalSummary').value;
-    document.getElementById('personalSummaryDisplay').value = editedSummary;
-    toggleEditForm('editPersonalSummaryForm');
-
-    const email = "<?php echo $email; ?>";
-    const formData = new FormData();
-    formData.append('personal_summary', editedSummary);
-    formData.append('email', email);
-
-    fetch('save_personal_summary.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Personal summary saved successfully.');
-        } else {
-            console.error('Error saving personal summary.');
-        }
-    })
-    .catch(error => {
-        console.error('Error saving personal summary:', error);
-    });
-
-    return false;
-}
-
-function saveEducation() {
-    const editedEducation = document.getElementById('editedEducation').value;
-    document.getElementById('educationDisplay').value = editedEducation;
-    toggleEditForm('editEducationForm');
-
-    const email = "<?php echo $email; ?>";
-    const formData = new FormData();
-    formData.append('education', editedEducation);
-    formData.append('email', email);
-
-    fetch('save_education.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Education saved successfully.');
-        } else {
-            console.error('Error saving education.');
-        }
-    })
-    .catch(error => {
-        console.error('Error saving education:', error);
-    });
-
-    return false;
-}
-
-function saveSkills() {
-    const editedSkills = document.getElementById('editedSkills').value;
-    document.getElementById('SkillsDisplay').value = editedSkills;
-    toggleEditForm('editSkillsFormContainer');
-
-    const email = "<?php echo $email; ?>";
-    const formData = new FormData();
-    formData.append('skills', editedSkills);
-    formData.append('email', email);
-
-    fetch('save_skills.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Skills saved successfully.');
-        } else {
-            console.error('Error saving skills.');
-        }
-    })
-    .catch(error => {
-        console.error('Error saving skills:', error);
-    });
-
-    return false;
-}
-
-function saveWorkExperience() {
-    const editedWorkExperience = document.getElementById('editedWorkExperience').value;
-    document.getElementById('workExperienceDisplay').value = editedWorkExperience;
-    toggleEditForm('editWorkExperienceForm');
-
-    const email = "<?php echo $email; ?>";
-    const formData = new FormData();
-    formData.append('work_experience', editedWorkExperience);
-    formData.append('email', email);
-
-    fetch('save_work_experience.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Work experience saved successfully.');
-        } else {
-            console.error('Error saving work experience.');
-        }
-    })
-    .catch(error => {
-        console.error('Error saving work experience:', error);
-    });
-
-    return false;
-}
-
-    document.addEventListener("DOMContentLoaded", function() {
-        fetchLanguages();
-    });
-
-   
-    event.preventDefault();
-            const formData = new FormData(this);
-
-            fetch('upload_resume.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Resume uploaded successfully.');
-                } else {
-                    console.error('Error uploading resume.');
-                }
-            })
-            .catch(error => {
-                console.error('Error uploading resume:', error);
-            });
-            function toggleEditForm(formId) {
-    var editForm = document.getElementById(formId);
-    if (editForm.style.display === 'none' || editForm.style.display === '') {
-        editForm.style.display = 'block';
-    } else {
-        editForm.style.display = 'none';
-    }
-}
-        
-    </script>
-    <footer>
-        <nav>
-            <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="homepage.php">Homepage</a></li>
-
-            </ul>
-        </nav>
-    </footer>
-</body>
-</html>
-
+?>

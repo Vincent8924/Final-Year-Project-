@@ -214,6 +214,22 @@
                         $hashpassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
                         $confirm_password = $_POST['confirm_password'];
 
+                        $result=mysqli_query($connect,"SELECT * FROM admin");
+                        if($result)
+                        {
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                if($row["admin_email"]==$email)
+                                {
+                                    ?>
+                                    <script>
+                                        alert("Unsucessful! The email is exist!");
+                                    </script>
+                                    <?php
+                                    exit;
+                                }
+                            }
+                        }
                         
                         if (strlen($password) < 8)
                         {
@@ -243,7 +259,7 @@
                             {
                                 $superadmin = 0;
                             }
-                            $resuslt=mysqli_query($connect,"INSERT INTO admin(admin_fname, admin_lname, admin_email,
+                            $result=mysqli_query($connect,"INSERT INTO admin(admin_fname, admin_lname, admin_email,
                              admin_password, superadmin) VALUES ('$fname','$lname','$email','$hashpassword','$superadmin')");
                             ?>
                             <script>
@@ -252,7 +268,7 @@
                             </script>
                             <?php
                         }
-                    }
+                }
                 ?>
             </div>
             

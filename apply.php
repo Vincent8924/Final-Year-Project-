@@ -10,34 +10,37 @@ $result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE
         }
 
 
-    if(isset($_POST['Submit Application']))
-    {
-        //if(isset($_FILES['resume']) && isset($_FILES['coverLetter']) && isset($_POST['post_id'])) 
-        //{
-            $postId = $_POST['post_id'];
-            $resume = $_FILES['resume'];
-            $coverLetter = $_FILES['coverLetter'];
-            
-            // Perform necessary validations on files (e.g., file type, size)
-            // Insert logic to handle file uploads securely and store in a secure location
-            
-            // Example: Move uploaded files to a directory
-            $resumeFileName = 'resume_' . time() . '_' . $resume['name'];
-            $coverLetterFileName = 'cover_letter_' . time() . '_' . $coverLetter['name'];
-            move_uploaded_file($resume['tmp_name'], 'uploads/' . $resumeFileName);
-            move_uploaded_file($coverLetter['tmp_name'], 'uploads/' . $coverLetterFileName);
+        if (isset($_POST['submit'])) {
+            // if (isset($_FILES['resume']) && isset($_FILES['coverLetter']) && isset($_POST['post_id'])) {
+                $postId = $_POST['post_id'];
+                $resume = $_FILES['resume'];
+                $coverLetter = $_FILES['coverLetter'];
         
-            // Example: Update database with file paths
+                // Perform necessary validations on files (e.g., file type, size)
+                // Insert logic to handle file uploads securely and store in a secure location
+                
+                // Example: Move uploaded files to a directory
+                $resumeFileName = 'resume_' . time() . '_' . $resume['name'];
+                $coverLetterFileName = 'cover_letter_' . time() . '_' . $coverLetter['name'];
 
-            $result = mysqli_query($connect,"INSERT INTO applications (jobseeker_id,post_id, `resume`, cover_letter) VALUES ('$id','$postId', '$resumeFileName', '$coverLetterFileName')");
-            
-            if($result) {
-                echo '<script>alert("Apply successfully!");</script>';
-            } else {
-                echo '<script>alert("Error occurred while applying!");</script>';
-            }
-       // } 
-    } 
+                $resumeFilePath = 'uploads/' . $resumeFileName;
+                $coverLetterFilePath = 'uploads/' . $coverLetterFileName;
+                
+                move_uploaded_file($resume['tmp_name'], $resumeFilePath);
+                move_uploaded_file($coverLetter['tmp_name'], $coverLetterFilePath);
+
+                
+        
+                // Example: Update database with file paths
+                $result = mysqli_query($connect, "INSERT INTO applications (jobseeker_id, post_id, `resume`, cover_letter) VALUES ('$id', '$postId', '$resumeFilePath', '$coverLetterFilePath')");
+        
+                if ($result) {
+                    echo '<script>alert("Apply successfully!");</script>';
+                } else {
+                    echo '<script>alert("Error occurred while applying!");</script>';
+                }
+            // }
+        }
     else 
     {
       //  echo '<script>alert("Please select both resume and cover letter files.");</script>';
@@ -54,7 +57,7 @@ if(isset($_GET['post_id'])) {
         $row = mysqli_fetch_assoc($result);
         $companyName = $row['company_name'];
         $logo = $row['logo'];
-        $description = $row['description'];
+        $description = $row['description']; 
         $job = $row['job_name'];
     }
 }
@@ -107,7 +110,7 @@ if(isset($_GET['post_id'])) {
             <input type="file" id="coverLetter" name="coverLetter">
         </div>
         <input type="hidden" name="post_id" value="<?php echo $postId ?>">
-        <input type="submit" value="Submit Application">
+        <button type="submit" name="submit">Submit Application</button>
     </form>
 </div>
 

@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
@@ -186,6 +186,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 100%;
             border: none; 
         }
+        footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer nav ul li a:hover {
+    color: #555;
+}
     </style>
 </head>
 <body>
@@ -198,9 +232,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <nav class="navigation">
         <ul>
-            <li><a href="#">Job Search</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Company Profile</a></li>
+            <li><a href="homepage.php">Job Search</a></li>
+            <li><a href="profile.php">Profile</a></li>
+           
         </ul>
     </nav>
 
@@ -256,6 +290,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
     });
 </script>
+<footer>
+    <nav>
+        <ul>
+            <li><a href="login.php">login</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
+            <li><a href="applylist.php">Apply list</a></li>
+        </ul>
+    </nav>
+</footer>
 
 </body>
 </html>

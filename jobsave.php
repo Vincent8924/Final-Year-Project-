@@ -43,7 +43,7 @@ if (isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Wishlist</title>
     <style>
-        body {
+ body {
             font-family: 'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
@@ -288,6 +288,30 @@ if (isset($_SESSION['id'])) {
         footer nav ul li a:hover {
             color: #555;
         }
+.removeButton {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.removeButton:hover {
+    background-color: darkred;
+}
+
+.removeButton:active {
+    background-color: darkred;
+    transform: translateY(1px);
+}
+
+
     </style>
 </head>
 <body>
@@ -328,6 +352,7 @@ if (isset($_SESSION['id'])) {
                 echo '<p>Salary: ' . htmlspecialchars($post["salary"]) . '</p>';
                 echo '<p>Description: ' . htmlspecialchars($post["description"]) . '</p>';
                 echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($post["post_id"]) . ')">Apply</button>';
+                echo '<button class="removeButton" onclick="removePost(' . htmlspecialchars($post["post_id"]) . ')">Remove</button>';
                 echo '</div>';
             }
         } else {
@@ -348,12 +373,28 @@ if (isset($_SESSION['id'])) {
         function applyJob(postId) {
             window.location.href = 'apply.php?post_id=' + postId;
         }
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-        var confirmLogout = confirm('Are you sure you want to logout?');
-        if (confirmLogout) {
-            window.location.href = 'login.php';
+
+        function removePost(postId) {
+            if (confirm('Are you sure you want to remove this post from your wishlist?')) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "remove_from_wishlist.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        alert('Post removed successfully');
+                        document.getElementById('post_' + postId).remove();
+                    }
+                };
+                xhr.send("post_id=" + postId);
+            }
         }
-    });
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            var confirmLogout = confirm('Are you sure you want to logout?');
+            if (confirmLogout) {
+                window.location.href = 'login.php';
+            }
+        });
     </script>
 </body>
 </html>

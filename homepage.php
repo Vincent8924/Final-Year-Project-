@@ -249,6 +249,28 @@ if (!$result) {
     background-color:plum;
     transform: translateY(1px); 
 }
+.wishlistButton {
+            background-color: orange;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .wishlistButton:hover {
+            background-color: darkorange;
+        }
+
+        .wishlistButton:active {
+            background-color: darkorange;
+            transform: translateY(1px);
+        }
 
         footer {
             background-color: white;
@@ -319,25 +341,20 @@ if (!$result) {
     </div>
     <div id="jobPosts">
     <?php
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $savedClass = ($row["favourite"] === 'yes') ? 'saved' : '';
-            echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo">';
-            echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
-            echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
-            echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
-            echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
-            echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
-            echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-            echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
-            echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
-            echo '<span class="saveIcon ' . $savedClass . '" onclick="toggleFavouriteJobPost(this, ' . htmlspecialchars($row["post_id"]) . ')">&#10084;</span>';
-            echo '</div>';
-        }
-    } else {
-        echo "No job posts available";
-    }
+   while ($row = $result->fetch_assoc()) {
+    echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
+    echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo">';
+    echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
+    echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
+    echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
+    echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
+    echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
+    echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
+    echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
+    echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
+    echo '<button class="wishlistButton" onclick="saveToWishlist(' . htmlspecialchars($row["post_id"]) . ')">Save to Wishlist</button>';
+    echo '</div>';
+}
     ?>
 
     </div>
@@ -362,27 +379,19 @@ if (!$result) {
                 post.style.display = isVisible ? 'block' : 'none';
             });
         });
+        function saveToWishlist(postId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "wishlist.php?post_id=" + postId, true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert(xhr.responseText);
+            } else {
+                alert("An error occurred while saving to wishlist.");
+            }
+        };
+        xhr.send();
+    }
 
-        function toggleFavouriteJobPost(icon, postId) {
-            const request = new XMLHttpRequest();
-            request.open('POST', 'jobsave.php', true);
-            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            request.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    const response = JSON.parse(this.responseText);
-                    if (response.status === 'success') {
-                        if (response.favourite === 'yes') {
-                            icon.classList.add('saved');
-                        } else {
-                            icon.classList.remove('saved');
-                        }
-                    } else {
-                        alert(response.message);
-                    }
-                }
-            };
-            request.send('post_id=' + postId);
-        }
 
         function applyJob(postId) {
             window.location.href = 'apply.php?post_id=' + postId;

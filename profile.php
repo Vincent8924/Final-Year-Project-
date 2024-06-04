@@ -358,27 +358,27 @@ if ($result) {
     </div>
     <div class="profile-section">
         <h2>Personal Summary</h2>
-        <p><?php echo !empty($row['PersonalSummary']) ? $row['PersonalSummary'] : 'No detail'; ?></p>
+        <p><?php echo $row['PersonalSummary']; ?></p>
     </div>
     <div class="profile-section">
         <h2>Work Experience</h2>
-        <p><?php echo !empty($row['work_experience']) ? $row['work_experience'] : 'No detail'; ?></p>
+        <p><?php echo $row['work_experience']; ?></p>
     </div>
     <div class="profile-section">
         <h2>Education</h2>
-        <p><?php echo !empty($row['Education']) ? $row['Education'] : 'No detail'; ?></p>
+        <p><?php echo $row['Education']; ?></p>
     </div>
     <div class="profile-section">
         <h2>Skills</h2>
-        <p><?php echo !empty($row['Skills']) ? $row['Skills'] : 'No detail'; ?></p>
+        <p><?php echo $row['Skills']; ?></p>
     </div>
     <div class="profile-section">
         <h2>Language</h2>
-        <p><?php echo !empty($row['language']) ? $row['language'] : 'No detail'; ?></p>
+        <p><?php echo $row['language']; ?></p>
     </div>
     <div class="profile-section">
         <h2>Resume</h2>
-        <p><?php echo !empty($row['Resume']) ? '<a href="view_resume.php?id='.$id.'">View Resume</a>' : 'No detail'; ?></p>
+        <p><a href="view_resume.php?id=<?php echo $id; ?>">View Resume</a></p>
     </div>
     <div class="profile-section">
         <button onclick="window.location.href='edit profile.php?id=<?php echo $id; ?>'" class="edit-button">Edit Profile</button>

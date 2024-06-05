@@ -231,7 +231,7 @@ while ($row = mysqli_fetch_assoc($all)) {
             $candidate = mysqli_query($connect, "SELECT * FROM `userprofile` WHERE UserID = '$candidate_id'");
 
             if ($candidate) {
-                $candidate_row = mysqli_fetch_assoc($candidate);
+                $candidate_row = mysqli_fetch_assoc($candidate); 
                 $ps = $candidate_row['PersonalSummary'];
                 $skill = $candidate_row['Skills'];
                 $ex = $candidate_row['work_experience'];

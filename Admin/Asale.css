@@ -191,4 +191,19 @@ h1
     float: right;
 }
 
+.view button
+{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4b4a4d; 
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+.viewcontainer
+{
+    display: block;
+}
+
 

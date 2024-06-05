@@ -90,6 +90,7 @@
                                 <th>Buyer/Employer</th>
                                 <th>Package/Item</th>
                                 <th>Payment Status</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,6 +120,9 @@
                                         <td><?php echo $employer_name ?></td>
                                         <td><?php echo $package_name ?></td>
                                         <td><?php echo $row["payment_status"] ?></td>
+                                        <td class="view">
+                                            <button type="button" onclick="view(<?php echo $row['sale_id']; ?>)">View</button>
+                                        </td>
                                     </tr>
                             <?php
                                     $i++;
@@ -138,7 +142,7 @@
 </body>
 </html>
 
-<SCript>
+<script>
     function displaybar()
     {
         var div = document.getElementById("aAccBar");
@@ -153,4 +157,8 @@
             div.style.display = "block"; 
         }
     }
-</SCript>
+    function view(id)
+    {
+        window.location = "Asaledetail.php?saleid="+id;
+    }
+</script>

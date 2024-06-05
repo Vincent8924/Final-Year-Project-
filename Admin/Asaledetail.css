@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
 }
@@ -15,21 +15,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #c9c9c9;
-    color: #333;
+    background-color: #2e2d2d;
+    color: #fff;
     padding: 20px;
 }
 
 .header h1 {
     margin: 0;
 }
-.logo
-{
-    height: 70px;
-    width: auto;
-}
+
 .AdminAcc {
-    color: #333;
+    color: white;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -87,7 +83,7 @@ body {
 
 aside {
     width: 200px;
-    background-color: #c5c5c5;
+    background-color: #a8a8a8;
     color: #fff;
 }
 
@@ -136,11 +132,109 @@ footer {
     padding: 20px;
     text-align: center;
 }
-h1 
+.back h2
 {   
     margin: 50px;
     margin-bottom: 10px;
     margin-top: 10px;
+    color: black;
 }
+.back
+{
+    text-decoration: none;
+    float: right;
+}
+
+.back h2:hover
+{
+    font-size: 25px;
+    color: #616161;
+}
+
+.Acontainer
+{
+    border: #616161 solid 3px;
+    width: 90%;
+    height: 80vh;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #d4d4db;
+    border-radius: 10px;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.Aheader
+{
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+    border-bottom: solid 2px #797979;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #d4d4db;
+    position: sticky;
+    top: 0;
+}
+
+.Bcontainer
+{
+    width: 80%;
+    margin: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 10px;
+}
+td 
+{
+    padding: 10px;
+    width: 40vh;
+}
+.Atd
+{
+    width: 30%;
+    text-align: right;
+}
+.td1
+{
+    width: 10%;
+}
+.td2
+{
+    border-right: dashed #797979 2px;
+    width: 10%;
+}
+.td3
+{
+    width: 10%;
+}
+.td4
+{
+    width: 5%;
+}
+.valuetd
+{
+    width: 35%;
+}
+.Ccontainer 
+{
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.title
+{
+    text-align: center;
+    border-bottom: #797979 solid 2px;
+}
+
+
 
 

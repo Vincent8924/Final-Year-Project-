@@ -192,6 +192,23 @@
                         $hashpassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
                         $confirm_password = $_POST['confirm_password'];
 
+                        $result=mysqli_query($connect,"SELECT * FROM jobseeker");
+                        if($result)
+                        {
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                if($row["jobseeker_email"]==$email)
+                                {
+                                    ?>
+                                    <script>
+                                        alert("Unsucessful! The email is exist!");
+                                    </script>
+                                    <?php
+                                    exit;
+                                }
+                            }
+                        }
+                        
                         if (strlen($password) < 8)
                         {
                             ?>
@@ -210,9 +227,9 @@
                             </script>
                             <?php
                         }
-                        else if($result)
+                        else
                         {
-                            $resuslt=mysqli_query($connect,"INSERT INTO jobseeker(jobseeker_firstname, jobseeker_lastname, jobseeker_email, jobseeker_password) VALUES ('$fname','$lname','$email','$hashpassword')");
+                            $result=mysqli_query($connect,"INSERT INTO jobseeker(jobseeker_firstname, jobseeker_lastname, jobseeker_email, jobseeker_password) VALUES ('$fname','$lname','$email','$hashpassword')");
                             ?>
                             <script>
                                 alert("Admin has been successfully added!");

@@ -211,13 +211,13 @@
                     <div class="label">
                         <label >Password </label>
                     </div>
-                        <input type="text"  name="pw" required><br>
+                        <input type="password"  name="pw" required><br>
                 </div>
                 <div class="bform">
                     <div class="label">
                         <label >Confirm Password </label>
                     </div>
-                        <input type="text"  name="cpw" required><br>
+                        <input type="password"  name="cpw" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editpassword">   

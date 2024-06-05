@@ -32,13 +32,14 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="login.css">
     <title>Login | JobStreet</title>
     <style>
         body {
             background-image: url('3.jpg');
             background-repeat: no-repeat;
-            background-size: 100% 200%;
-            font-family: 'Times New Roman', Times, serif;
+            background-size: 100% 160%;
+            font-family: Arial, sans-serif;
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
@@ -52,13 +53,34 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
             align-items: center;
         }
 
-        .sign-in{
-            margin-left: 75%;
+        .navigation {
             display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid blue;
-            border-radius: 5px;
+            margin-right: 50%;
         }
+
+        .navigation ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navigation ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .navigation ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navigation ul li a:hover {
+            color: #555;
+        }
+
+        .sign-in,
         .employer-site {
             display: inline-block;
             padding: 8px 16px;
@@ -148,7 +170,37 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
         .forget-password a:hover {
             text-decoration: underline;
         }
-        
+        footer {
+            background-color: white;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer nav ul {
+            font-family: 'Times New Roman', Times, serif;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer nav ul li a:hover {
+            color: #555;
+        }
     </style>
 </head>
 <body>

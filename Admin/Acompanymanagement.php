@@ -182,6 +182,23 @@
                         $hashpassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
                         $confirm_password = $_POST['confirm_password'];
 
+                        $result=mysqli_query($connect,"SELECT * FROM employer");
+                        if($result)
+                        {
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                if($row["employer_email"]==$email)
+                                {
+                                    ?>
+                                    <script>
+                                        alert("Unsucessful! The email is exist!");
+                                    </script>
+                                    <?php
+                                    exit;
+                                }
+                            }
+                        }
+                        
                         if (strlen($password) < 8)
                         {
                             ?>
@@ -200,9 +217,9 @@
                             </script>
                             <?php
                         }
-                        else if($result)
+                        else
                         {
-                            $resuslt=mysqli_query($connect,"INSERT INTO employer(employer_name, employer_email, password) VALUES ('$name','$email','$hashpassword')");
+                            $result=mysqli_query($connect,"INSERT INTO employer(employer_name, employer_email, password) VALUES ('$name','$email','$hashpassword')");
                             ?>
                             <script>
                                 alert("The company has been successfully added!");

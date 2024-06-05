@@ -171,7 +171,7 @@
         <img src="logo.png" alt="JobStreet Logo">
     </div>
 
-    <nav class="navigation">
+    <nav class="navigation"> 
         <ul>
             <li><a href="#">Job Search</a></li>
             <li><a href="#">Profile</a></li>
@@ -208,10 +208,10 @@
             document.getElementById("confirmButton").classList.add("button-clicked"); 
             Email.send({
                 Host: "smtp.elasticemail.com",
-                Username: "gohchenghong533@gmail.com",
-                Password: "28B7D947C5EA7004B173EC6DE795FAAED0DA",
+                Username: "1211202786@student.mmu.edu.my",
+                Password: "1A7A75F16100FF8A650865A7DF7FC1F180FB",
                 To: userEmail,
-                From: "gohchenghong533@gmail.com",
+                From: "1211202786@student.mmu.edu.my",
                 Subject: "Password Reset Link",
                 Body: "Your account is requesting to change the password. Please verify whether this is your own operation. If so, please click <a href='http://localhost/f/reset2.php'>here</a> to complete the password change."
             }).then(

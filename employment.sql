@@ -145,25 +145,8 @@
         `Resume varchar`(255) DEFAULT NULL,
         `jobseeker_id `int(11) NOT NULL
    );
-   CREATE TABLE jobseekerprofile 
-(
-    `ProfileID` int(11) NOT NULL PRIMARY KEY,
-    `photo_name` varchar(500) DEFAULT NULL,
-    `photo_data` longblob DEFAULT NULL,
-    `PersonalSummary` text DEFAULT NULL,
-    `Skills` varchar(100) DEFAULT NULL,
-    `work_experience` text DEFAULT NULL,
-    `Education` text DEFAULT NULL,
-    `language` varchar(255) DEFAULT NULL,
-    `jobseeker_email` varchar(255) DEFAULT NULL,
-    `Resume` varchar(255) DEFAULT NULL,
-    `jobseeker_id` int(11) NOT NULL,
-    FOREIGN KEY (`jobseeker_id`) REFERENCES jobseeker(`jobseeker_id`)
-);
 
-
-
-CREATE TABLE wishlist 
+  CREATE TABLE wishlist 
    (
         `wishlist_id` int(11) NOT NULL,
         `jobseeker_id` int(11) DEFAULT NULL,

@@ -220,28 +220,34 @@ tbody tr:nth-child(even) {
         </thead>
         <tbody>
             <?php
-      
-            while ($row = $result->fetch_assoc()) {
-                $postId = $row['post_id'];
+            $result = mysqli_query($connect, "SELECT * FROM applications where jobseeker_id=$id;");  
+            $i = 1;
+            while($row = mysqli_fetch_assoc($result)) {
                 
-              
-                $postQuery = "SELECT company_name, job_name FROM post WHERE post_id = $postId";
-                $postResult = $connect->query($postQuery);
-                
-             
-                if ($postResult->num_rows > 0) {
-                    $postRow = $postResult->fetch_assoc();
-                    $companyName = $postRow['company_name'];
-                    $jobName = $postRow['job_name'];
-                    
-           
+                    $Eid= $row["poster_id"];
+                    $postid = $row["post_id"];
+
+                    if(isset($Eid))
+                    {
+                        $Eresult = mysqli_query($connect, "SELECT * FROM employer where employmer_id=$Eid;");
+                        $Erow = mysqli_fetch_assoc($Eresult);
+                        $Ename= $Erow["Employer_name"];
+                    }
+
+                    if(isset($post_id))
+                    {
+                        $result = mysqli_query($connect, "SELECT * FROM post where post_id=$postid;");
+                        $row = mysqli_fetch_assoc($Eresult);
+                        $Jname= $Erow["job_name"];
+                    }
+
                     echo "<tr>";
-                    echo "<td>$postId</td>";
-                    echo "<td>$companyName</td>";
-                    echo "<td>$jobName</td>";
-                    echo "<td>Applied</td>";
+                    echo "<td>$i</td>";
+                    echo "<td>$Ename</td>";
+                    echo "<td>$Jname</td>";
+                    echo "<td>$status</td>";
                     echo "</tr>";
-                }
+                    $i++;
             }
             ?>
         </tbody>

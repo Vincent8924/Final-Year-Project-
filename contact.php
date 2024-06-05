@@ -1,5 +1,6 @@
 <?php
 include("dataconnection.php");
+include("Jsession.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = mysqli_real_escape_string($connect, $_POST['name']);
@@ -232,18 +233,17 @@ footer nav ul li a:hover {
 
     <nav class="navigation">
         <ul>
-            <li><a href="homepage.php">Job Search</a></li>
-            <li><a href="profile.php">Profile</a></li>
-           
+        <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job search</a></li>
+        <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
         </ul>
     </nav>
 
     <div class="sign-in">
-        <a href="#">Sign In</a>
+    <li><a href="login.php?email=<?php echo urlencode($_SESSION['id']); ?>">Sign in</a></li>
     </div>
 
     <div class="employer-site">
-        <a href="#">Employer Site</a>
+    <li><a href="employer sign up.php?email=<?php echo urlencode($_SESSION['id']); ?>">Employer site</a></li>
     </div>
 </header>
 
@@ -293,9 +293,9 @@ footer nav ul li a:hover {
 <footer>
     <nav>
         <ul>
-            <li><a href="login.php">login</a></li>
-            <li><a href="contact.php">Contact Us</a></li>
-            <li><a href="applylist.php">Apply list</a></li>
+        <li><a href="login.php?email=<?php echo urlencode($_SESSION['id']); ?>">Login</a></li>
+        <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
+        <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
         </ul>
     </nav>
 </footer>

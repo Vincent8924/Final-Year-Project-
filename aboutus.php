@@ -1,6 +1,25 @@
 <?php
 include("Jsession.php");
 include("dataconnection.php");
+
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+$firstName = '';
+
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +29,7 @@ include("dataconnection.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     <style>
+     
        
         header {
             background-color: white;
@@ -44,7 +64,29 @@ include("dataconnection.php");
         .navigation ul li a:hover {
             color: #555; 
         }
-        .sign-in,
+        .user-info {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid green;
+            border-radius: 5px;
+            margin-left: 60%;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-weight: bold;
+            color: green;
+        }
+
+        .user-info:hover {
+            background-color: green;
+        }
+
+        .user-info:hover p {
+            color: white;
+        }
+
+        
         .employer-site {
             display: inline-block;
             padding: 8px 16px; 
@@ -52,18 +94,18 @@ include("dataconnection.php");
             border-radius: 5px; 
         }
 
-        .sign-in a,
+      
         .employer-site a {
             text-decoration: none;
             color: rgb(12, 12, 191); 
         }
 
-        .sign-in:hover,
+       
         .employer-site:hover {
             background-color: blue; 
         }
 
-        .sign-in:hover a,
+        
         .employer-site:hover a {
             color: white; 
         }
@@ -77,6 +119,7 @@ include("dataconnection.php");
         }
 
         .navigation {
+            font-family: 'Times New Roman', Times, serif;
             display: inline-block;
             margin-left: 20px; 
         }
@@ -92,11 +135,7 @@ include("dataconnection.php");
             margin-right: 20px;
         }
 
-        .sign-in {
-            display: inline-block;
-            margin-left: auto; 
-            margin-right: 20px; 
-        }
+       
 
         .employer-site {
             display: inline-block;
@@ -250,18 +289,23 @@ include("dataconnection.php");
 
     <nav class="navigation">
         <ul>
-            <li><a href="homepage.php">Job Search</a></li>
-            <li><a href="profile.php">Profile</a></li>
+        <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
+            <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
          
         </ul>
     </nav>
-
-    <div class="sign-in">
-        <a href="#">Sign In</a>
-    </div>
+    <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
+        </div>
+   
 
     <div class="employer-site">
-        <a href="#">Employer Site</a>
+        <a href="employer sign up.php">Employer Site</a>
     </div>
 </header>
 
@@ -316,12 +360,19 @@ include("dataconnection.php");
 <footer>
     <nav>
         <ul>
-        <li><a href="login.php?email=<?php echo urlencode($_SESSION['id']); ?>">Login</a></li>
         <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
         <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
         </ul>
     </nav>
 </footer>
+<script>
+     document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
+    });
+</script>
 
 </body>
 </html>

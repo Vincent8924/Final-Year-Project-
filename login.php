@@ -80,7 +80,10 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
             color: #555;
         }
 
-        .sign-in,
+        .sign-in{
+            margin-left: 75%;
+        }
+
         .employer-site {
             display: inline-block;
             padding: 8px 16px;

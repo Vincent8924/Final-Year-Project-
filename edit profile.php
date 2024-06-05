@@ -232,6 +232,38 @@ if (isset($_SESSION['id'])) {
         .edit-button:hover {
             background-color: #0056b3;
         }
+        footer {
+            background-color: white;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer nav ul {
+            font-family: 'Times New Roman', Times, serif;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer nav ul li a:hover {
+            color: #555;
+        }
+        
     </style>
 </head>
 <body>
@@ -385,6 +417,15 @@ if (isset($_POST['save_profile'])) {
         <button type="submit" name="save_profile" class="edit-button centerButton">Save Profile</button>
     </div>
 </form>
+<footer>
+        <nav>
+            <ul>
+            <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
+            <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
+            
+            </ul>
+        </nav>
+    </footer>
 
 <script>
     document.getElementById('logoutBtn').addEventListener('click', function() {

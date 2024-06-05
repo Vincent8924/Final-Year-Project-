@@ -294,6 +294,7 @@ footer nav ul li a:hover {
         <ul>
         <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job search</a></li>
         <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+        <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
         </ul>
     </nav>
     
@@ -360,7 +361,7 @@ footer nav ul li a:hover {
         <ul>
         <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
         <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
-        <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+        
         </ul>
     </nav>
 </footer>

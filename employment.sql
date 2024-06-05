@@ -92,10 +92,6 @@
       `jobseeker_password` varchar(500) NOT NULL
   );
 
-
-
-
-
   CREATE TABLE `applications` 
   (
   `id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,

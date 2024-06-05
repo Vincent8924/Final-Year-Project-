@@ -377,9 +377,17 @@ if ($result) {
         <p><?php echo $row['language']; ?></p>
     </div>
     <div class="profile-section">
-        <h2>Resume</h2>
-        <p><a href="view_resume.php?id=<?php echo $id; ?>">View Resume</a></p>
-    </div>
+    <h2> View Resume</h2>
+    <?php
+    $query = "SELECT Resume FROM jobseekerprofile WHERE jobseeker_id = '$id'";
+    $result = mysqli_query($connect, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $resumePath = $row['Resume'];
+        echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
+    }
+    ?>
+</div>
     <div class="profile-section">
         <button onclick="window.location.href='edit profile.php?id=<?php echo $id; ?>'" class="edit-button">Edit Profile</button>
     </div>

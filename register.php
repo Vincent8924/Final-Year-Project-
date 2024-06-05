@@ -49,14 +49,14 @@ if(isset($_POST['registerBtn'])) {
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="new.jpg" alt="JobStreet Logo">
         </div>
 
         <nav class="navigation">
             <ul>
             <li><a href="homepage.php">Job Search</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
+                <li><a href="profile.php">Profile</a></li>
+          
             </ul>
         </nav>
 
@@ -65,7 +65,7 @@ if(isset($_POST['registerBtn'])) {
         </div>
 
         <div class="employer-site">
-            <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
         </div>
     </header>
     <div class="container">

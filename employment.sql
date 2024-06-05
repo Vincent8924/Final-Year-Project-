@@ -130,6 +130,26 @@
         `employer_id` int NOT NULL,
         `package_id` int(6) NOT NULL
   );
+
+  CREATE TABLE jobseekerprofile (
+  `ProfileID` int(11) NOT NULL,
+  `photo_name` varchar(500) DEFAULT NULL,
+  `photo_data longblob` DEFAULT NULL,
+  `PersonalSummary` text DEFAULT NULL,
+  `Skills` varchar(100) DEFAULT NULL,
+  `work_experience` text DEFAULT NULL,
+  `Education` text DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
+  `jobseeker_email` varchar(255) DEFAULT NULL,
+  `Resume varchar`(255) DEFAULT NULL,
+  `jobseeker_id `int(11) NOT NULL)
+
+
+CREATE TABLE wishlist (
+  `wishlist_id` int(11) NOT NULL,
+ `jobseeker_id` int(11) DEFAULT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp)
 ---------------------------------------------------------------------------------------------------
   INSERT INTO sale (sale_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 200001);
 

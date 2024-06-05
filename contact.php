@@ -1,5 +1,24 @@
 <?php
 include("dataconnection.php");
+include("Jsession.php");
+
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+$firstName = '';
+
+if (isset($_SESSION['id'])) 
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = mysqli_real_escape_string($connect, $_POST['name']);
@@ -22,6 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     mysqli_free_result($result);
+
+    $firstName = '';
+
 }
 ?>
 <!DOCTYPE html>
@@ -35,15 +57,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
        
         header {
-            background-color: white; 
+            background-color: white;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .navigation {
             display: inline-block;
-            margin-left: 20px;
+            margin-right: 50%;
         }
 
         .navigation ul {
@@ -59,15 +82,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .navigation ul li a {
             text-decoration: none;
-            color: #333; 
+            color: #333;
             font-weight: bold;
-            transition: color 0.3s; 
+            transition: color 0.3s;
         }
 
         .navigation ul li a:hover {
-            color: #555; 
+            color: #555;
         }
-        .sign-in,
+   
         .employer-site {
             display: inline-block;
             padding: 8px 16px;
@@ -75,18 +98,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 5px; 
         }
 
-        .sign-in a,
+  
         .employer-site a {
             text-decoration: none;
             color: rgb(12, 12, 191); 
         }
 
-        .sign-in:hover,
+     
         .employer-site:hover {
             background-color: blue; 
         }
 
-        .sign-in:hover a,
+      
         .employer-site:hover a {
             color: white; 
         }
@@ -115,18 +138,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-right: 20px;
         }
 
-        .sign-in {
-            display: inline-block;
-            margin-left: auto; 
-            margin-right: 20px; 
-        }
+        
 
         .employer-site {
             display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid blue;
+            border-radius: 5px;
+            margin-left: 20px;
         }
 
+        .employer-site a {
+            text-decoration: none;
+            color: rgb(12, 12, 191);
+        }
+
+        .employer-site:hover {
+            background-color: blue;
+        }
+
+        .employer-site:hover a {
+            color: white;
+        }
+
+        .user-info {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid green;
+            border-radius: 5px;
+            margin-left: 50px;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-weight: bold;
+            color: green;
+        }
+
+        .user-info:hover {
+            background-color: green;
+        }
+
+        .user-info:hover p {
+            color: white;
+        }
+
+
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
@@ -186,6 +246,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 100%;
             border: none; 
         }
+        footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer nav ul li a:hover {
+    color: #555;
+}
     </style>
 </head>
 <body>
@@ -193,23 +287,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <header>
     <div class="logo">
-        <img src="logo.png" alt="Company Logo">
+        <img src="new.jpg" alt="Company Logo">
     </div>
 
     <nav class="navigation">
         <ul>
-            <li><a href="#">Job Search</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Company Profile</a></li>
+        <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job search</a></li>
+        <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
         </ul>
     </nav>
-
-    <div class="sign-in">
-        <a href="#">Sign In</a>
-    </div>
+    
+    <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
+  
 
     <div class="employer-site">
-        <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
+        </div>
     </div>
 </header>
 
@@ -254,6 +353,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
         alert("Your message has been successfully sent!");
         
+    });
+</script>
+<footer>
+    <nav>
+        <ul>
+        <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
+        <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
+        <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+        </ul>
+    </nav>
+</footer>
+<script>
+     document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
     });
 </script>
 

@@ -1,41 +1,39 @@
 <?php
-session_start();
+include("Jsession.php");
 include("dataconnection.php");
 
-if (isset($_SESSION['jobseeker_email'])) {
-    $email = $_SESSION['jobseeker_email'];
-    $email = $connect->real_escape_string($email);
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+$firstName = '';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['post_id'])) {
-        $post_id = intval($_POST['post_id']);
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
 
-        $check_query = "SELECT favourite FROM post WHERE post_id = $post_id";
-        $check_result = $connect->query($check_query);
-
-        if ($check_result->num_rows > 0) {
-            $row = $check_result->fetch_assoc();
-            $new_status = ($row['favourite'] == 'yes') ? 'no' : 'yes';
-
-            
-            $update_query = "UPDATE post SET favourite = '$new_status' WHERE post_id = $post_id";
-            if ($connect->query($update_query) === TRUE) {
-                echo json_encode(['status' => 'success', 'favourite' => $new_status]);
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to update favourite status.']);
-            }
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Post not found.']);
-        }
-        $connect->close();
-        exit();
-    }
-
-   
-    $query = "SELECT * FROM post WHERE favourite = 'yes'";
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
     $result = $connect->query($query);
-} else {
-    echo "Please log in to view your saved job posts.";
-    exit();
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
+}
+
+$wishlist = [];
+
+if (isset($_SESSION['id'])) {
+    $jobseeker_id = $_SESSION['id'];
+    $jobseeker_id = $connect->real_escape_string($jobseeker_id);
+
+    $query = "SELECT post.* FROM wishlist JOIN post ON wishlist.post_id = post.post_id WHERE wishlist.jobseeker_id = '$jobseeker_id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $wishlist[] = $row;
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -43,10 +41,10 @@ if (isset($_SESSION['jobseeker_email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saved Job Posts</title>
+    <title>Your Wishlist</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+ body {
+            font-family: 'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
         }
@@ -137,7 +135,7 @@ if (isset($_SESSION['jobseeker_email'])) {
             color: white;
         }
 
-        #jobPosts {
+        #wishlistPosts {
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
@@ -158,8 +156,9 @@ if (isset($_SESSION['jobseeker_email'])) {
             transition: background-color 0.3s ease;
         }
 
-        .jobPost:last-child {
-            margin-right: 0;
+        .jobPost:las
+        .jobPost:nth-child(2) {
+            margin-left: auto;
         }
 
         .jobPost:hover {
@@ -167,7 +166,7 @@ if (isset($_SESSION['jobseeker_email'])) {
         }
 
         .jobPost img {
-            width: 100%;
+            width: 30%;
             border-radius: 5px 5px 0 0;
         }
 
@@ -195,6 +194,33 @@ if (isset($_SESSION['jobseeker_email'])) {
             }
         }
 
+        #searchContainer {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            margin: 20px auto 0;
+        }
+
+        #searchBar {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px 0 0 5px;
+        }
+
+        #categorySelector {
+            padding: 10px;
+            border: 1px solid black;
+            border-left: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        #categorySelector:focus {
+            outline: none;
+        }
+
         .saveIcon {
             position: absolute;
             bottom: 5px;
@@ -217,7 +243,7 @@ if (isset($_SESSION['jobseeker_email'])) {
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin-top: 10px; 
+            margin-top: 10px;
             cursor: pointer;
             border-radius: 5px;
         }
@@ -228,7 +254,7 @@ if (isset($_SESSION['jobseeker_email'])) {
 
         .applyButton:active {
             background-color: plum;
-            transform: translateY(1px); 
+            transform: translateY(1px);
         }
 
         footer {
@@ -262,21 +288,45 @@ if (isset($_SESSION['jobseeker_email'])) {
         footer nav ul li a:hover {
             color: #555;
         }
+.removeButton {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.removeButton:hover {
+    background-color: darkred;
+}
+
+.removeButton:active {
+    background-color: darkred;
+    transform: translateY(1px);
+}
+
+
     </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Company Logo">
+            <img src="new.jpg" alt="Company Logo">
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Homepage</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['jobseeker_email']); ?>">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
+                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+                <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
             </ul>
         </nav>
-        <div class="user-info">
+        <div class="user-info" id="logoutBtn">
             <?php
             if (isset($firstName)) {
                 echo '<p>Welcome, ' . $firstName . '</p>';
@@ -284,69 +334,67 @@ if (isset($_SESSION['jobseeker_email'])) {
             ?>
         </div>
         <div class="employer-site">
-            <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
         </div>
     </header>
-    
-    <div id="jobPosts">
+    <h1>Your Wishlist</h1>
+    <div id="wishlistPosts">
         <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $savedClass = ($row["favourite"] === 'yes') ? 'saved' : '';
-                echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
-                echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
-                echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
-                echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>';
-                echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
-                echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
-                echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
-                echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-                echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
-                echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
-                echo '<span class="saveIcon ' . $savedClass . '" onclick="toggleFavouriteJobPost(this, ' . htmlspecialchars($row["post_id"]) . ')">&#10084;</span>';
+        if (count($wishlist) > 0) {
+            foreach ($wishlist as $post) {
+                echo '<div class="jobPost" id="post_' . htmlspecialchars($post["post_id"]) . '">';
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($post["logo"]) . '" alt="logo">';
+                echo '<h2>' . htmlspecialchars($post["company_name"]) . '</h2>';
+                echo '<p>' . htmlspecialchars($post["job_name"]) . '</p>';
+                echo '<p class="category">Category: ' . htmlspecialchars($post["category"]) . '</p>';
+                echo '<p>Employment type: ' . htmlspecialchars($post["employment_type"]) . '</p>';
+                echo '<p>Location: ' . htmlspecialchars($post["location"]) . '</p>';
+                echo '<p>Salary: ' . htmlspecialchars($post["salary"]) . '</p>';
+                echo '<p>Description: ' . htmlspecialchars($post["description"]) . '</p>';
+                echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($post["post_id"]) . ')">Apply</button>';
+                echo '<button class="removeButton" onclick="removePost(' . htmlspecialchars($post["post_id"]) . ')">Remove</button>';
                 echo '</div>';
             }
         } else {
-            echo "No saved job posts available";
+            echo "No job posts in your wishlist.";
         }
         ?>
     </div>
     <footer>
         <nav>
             <ul>
-               
-                <li><a href="companies.php">Companies</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="applylist.php">Apply list</a></li>
             </ul>
         </nav>
     </footer>
     <script>
-        function toggleFavouriteJobPost(icon, postId) {
-            const request = new XMLHttpRequest();
-            request.open('POST', 'jobsave.php', true);
-            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            request.onreadystatechange = function() {
-                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    const response = JSON.parse(this.responseText);
-                    if (response.status === 'success') {
-                        if (response.favourite === 'yes') {
-                            icon.classList.add('saved');
-                        } else {
-                            icon.classList.remove('saved');
-                        }
-                    } else {
-                        alert(response.message);
-                    }
-                }
-            };
-            request.send('post_id=' + postId);
-        }
-
         function applyJob(postId) {
-          
             window.location.href = 'apply.php?post_id=' + postId;
         }
+
+        function removePost(postId) {
+            if (confirm('Are you sure you want to remove this post from your wishlist?')) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "remove_from_wishlist.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        alert('Post removed successfully');
+                        document.getElementById('post_' + postId).remove();
+                    }
+                };
+                xhr.send("post_id=" + postId);
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            var confirmLogout = confirm('Are you sure you want to logout?');
+            if (confirmLogout) {
+                window.location.href = 'login.php';
+            }
+        });
     </script>
 </body>
 </html>

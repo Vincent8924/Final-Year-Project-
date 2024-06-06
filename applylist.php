@@ -220,35 +220,36 @@ tbody tr:nth-child(even) {
         </thead>
         <tbody>
             <?php
-            $result = mysqli_query($connect, "SELECT * FROM applications where jobseeker_id=$id;");  
-            $i = 1;
-            while($row = mysqli_fetch_assoc($result)) {
-                
-                    $Eid= $row["poster_id"];
-                    $postid = $row["post_id"];
+                $result = mysqli_query($connect, "SELECT * FROM applications where jobseeker_id=$id;");  
+                $i = 1;
+                while($row = mysqli_fetch_assoc($result)) {
+                    
+                        $Eid= $row["poster_id"];
+                        $postid = $row["post_id"];
+                        $status = $row["status"];
+                        if(isset($Eid))
+                        {
+                            $result = mysqli_query($connect, "SELECT * FROM employer where id=$Eid;");
+                            $row = mysqli_fetch_assoc($result);
+                            $Ename= $row["employer_name"];
+                        }
 
-                    if(isset($Eid))
-                    {
-                        $Eresult = mysqli_query($connect, "SELECT * FROM employer where employer_id=$Eid;");
-                        $Erow = mysqli_fetch_assoc($Eresult);
-                        $Ename= $Erow["Employer_name"];
-                    }
+                        if(isset($postid))
+                        {
+                            $result = mysqli_query($connect, "SELECT * FROM post where post_id=$postid;");
+                            $row = mysqli_fetch_assoc($result);
+                            $Jname= $row["job_name"];
+                        }
 
-                    if(isset($post_id))
-                    {
-                        $result = mysqli_query($connect, "SELECT * FROM post where post_id=$postid;");
-                        $row = mysqli_fetch_assoc($Eresult);
-                        $Jname= $Erow["job_name"];
-                    }
+                        echo "<tr>";
+                        echo "<td>$i</td>";
+                        echo "<td>$Ename</td>";
+                        echo "<td>$Jname</td>";
+                        echo "<td>$status</td>";
+                        echo "</tr>";
 
-                    echo "<tr>";
-                    echo "<td>$i</td>";
-                    echo "<td>$Ename</td>";
-                    echo "<td>$Jname</td>";
-                    echo "<td>$status</td>";
-                    echo "</tr>";
-                    $i++;
-            }
+                        $i++;
+                }
             ?>
         </tbody>
     </table>

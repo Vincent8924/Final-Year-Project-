@@ -229,7 +229,7 @@ tbody tr:nth-child(even) {
 
                     if(isset($Eid))
                     {
-                        $Eresult = mysqli_query($connect, "SELECT * FROM employer where employmer_id=$Eid;");
+                        $Eresult = mysqli_query($connect, "SELECT * FROM employer where employer_id=$Eid;");
                         $Erow = mysqli_fetch_assoc($Eresult);
                         $Ename= $Erow["Employer_name"];
                     }

@@ -121,20 +121,44 @@
         `package_sale_status` tinyint(1) 
   );
 
-CREATE TABLE `sale` (
-  `sale_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `purchase_amount` decimal(10,2) NOT NULL,
-  `purchase_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `payment_status` varchar(10) NOT NULL,
-  `employer_id` int(11) NOT NULL,
-  `package_id` int(6) NOT NULL,
-  `bank` varchar(100) DEFAULT NULL,
-  `card_name` varchar(200) DEFAULT NULL,
-  `card_number` int(11) DEFAULT NULL,
-  `card_expire_year` int(11) DEFAULT NULL,
-  `card_expire_month` int(11) DEFAULT NULL,
-  `card_cvv` int(11) DEFAULT NULL
-) 
+   CREATE TABLE `sale` 
+   (
+        `sale_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        `purchase_amount` decimal(10,2) NOT NULL,
+        `purchase_time` datetime NOT NULL DEFAULT current_timestamp(),
+        `payment_status` varchar(10) NOT NULL,
+        `employer_id` int(11) NOT NULL,
+        `package_id` int(6) NOT NULL,
+        `bank` varchar(100) DEFAULT NULL,
+        `card_name` varchar(200) DEFAULT NULL,
+        `card_number` int(11) DEFAULT NULL,
+        `card_expire_year` int(11) DEFAULT NULL,
+        `card_expire_month` int(11) DEFAULT NULL,
+        `card_cvv` int(11) DEFAULT NULL
+   ) 
+
+  CREATE TABLE jobseekerprofile 
+  (
+        `ProfileID` int(11) NOT NULL,
+        `photo_name` varchar(500) DEFAULT NULL,
+        `photo_data` longblob DEFAULT NULL,
+        `PersonalSummary` text DEFAULT NULL,
+        `Skills` varchar(100) DEFAULT NULL,
+        `work_experience` text DEFAULT NULL,
+        `Education` text DEFAULT NULL,
+        `language` varchar(255) DEFAULT NULL,
+        `jobseeker_email` varchar(255) DEFAULT NULL,
+        `Resume varchar`(255) DEFAULT NULL,
+        `jobseeker_id `int(11) NOT NULL
+   );
+
+  CREATE TABLE wishlist 
+   (
+        `wishlist_id` int(11) NOT NULL,
+        `jobseeker_id` int(11) DEFAULT NULL,
+        `post_id` int(11) DEFAULT NULL,
+        `date_added` timestamp NOT NULL DEFAULT current_timestamp
+   );
 ---------------------------------------------------------------------------------------------------
 INSERT INTO `sale` (`sale_id`, `purchase_amount`, `purchase_time`, `payment_status`, `employer_id`, `package_id`, `bank`, `card_name`, `card_number`, `card_expire_year`, `card_expire_month`, `card_cvv`) VALUES
 (300001, 49.99, '2024-05-28 17:01:10', 'Successful', 1, 200001, NULL, NULL, NULL, NULL, NULL, NULL),

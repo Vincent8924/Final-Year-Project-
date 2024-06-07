@@ -171,7 +171,7 @@
                 </div>
             </div>
 
-            <!--sale-->
+            <!--application-->
             <?php
                 $result = mysqli_query($connect,"SELECT count(*) AS total_apply FROM applications");
                 if($result)
@@ -188,21 +188,164 @@
                     <div class="amount">
                         <h3>
                             <?php
-                                echo $total_apply;
+                                echo $total_apply
                             ?>
                         </h3>
                     </div>
                 </div>
-                <?php
-                
-                ?>
+
                 <div class="Bpost">
                     <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th> 
+                                <th>Job Seeker's ID</th>
+                                <th>Employer's ID</th>
+                                <th>Post's ID</th>
+                                <th>Status</th>
+
+                                <?php
+                                    /*
+                                    <th>No.</th> 
+                                    <th>Job Seeker's ID</th>
+                                    <th>Job Seeker's Name</th>
+                                    <th>Employer's ID</th>
+                                    <th>Employer's Name</th>
+                                    <th>Post's ID</th>
+                                    <th>Post's Name</th>
+                                    <th>Status</th>
+                                    */
+                                ?>
+                            </tr>
+                        </thead>
                         <tbody>
-                            no data hahahaha
+                        <?php
+                                $i=1;   
+                                $result = mysqli_query($connect, "SELECT * FROM applications");
+                                while($row = mysqli_fetch_assoc($result))
+                                {
+                                    $Sid = $row["jobseeker_id"];
+                                    $Eid = $row["poster_id"];
+                                    $postid = $row["post_id"];
+                                    $status = $row["status"];
+
+                                    if(isset($Sid))
+                                    {
+                                        $sresult = mysqli_query($connect, "SELECT * FROM jobseeker where jobseeker_id=$Sid;");
+                                        $srow = mysqli_fetch_assoc($sresult);
+                                        $Sname= $srow["jobseeker_firstname"];
+                                    }
+
+                                    if(isset($Eid))
+                                    {
+                                        $eresult = mysqli_query($connect, "SELECT * FROM employer where id=$Eid;");
+                                        $erow = mysqli_fetch_assoc($eresult);
+                                        $Ename= $erow["employer_name"];
+                                    }
+
+                                    if(isset($postid))
+                                    {
+                                        $presult = mysqli_query($connect, "SELECT * FROM post where post_id=$postid;");
+                                        $prow = mysqli_fetch_assoc($presult);
+                                        $postname= $prow["job_name"];
+                                    }
+                            ?>
+                                <tr>
+                                    <td><?php echo $i ?></td>
+                                    <td><?php echo $Sname ?></td>
+                                    <td><?php echo $Ename ?></td>
+                                    <td><?php echo $postname ?></td>
+                                    <td><?php echo $status ?></td>
+
+                                    <?php
+                                    /*
+                                    <td><?php echo $i ?></td>   
+                                    <td><?php echo $Sid ?></td>
+                                    <td><?php echo $Sname ?></td>
+                                    <td><?php echo $Eid ?></td>
+                                    <td><?php echo $Ename ?></td>
+                                    <td><?php echo $postid ?></td>
+                                    <td><?php echo $postname ?></td>
+                                    <td><?php echo $status ?></td>
+                                    */
+                                    ?>
+                                </tr>
+                            <?php
+
+                                    $i++;
+                                }
+                            ?>
                         </tbody>
                     </table>
+                </div>
+            </div>
 
+
+            <!--sale-->
+            <?php
+                $result = mysqli_query($connect,"SELECT SUM(purchase_amount) AS total_sale FROM sale");
+                if($result)
+                {
+                    $row = mysqli_fetch_assoc($result);
+                    $total_sale = $row["total_sale"];
+                }
+            ?>
+            <div class="Apost">
+                <div class="postheader">
+                    <div>
+                        <h3>Sale</h3>
+                    </div>
+                    <div class="amount">
+                        <h3>
+                            RM 
+                            <?php
+                                echo $total_sale
+                            ?>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="Bpost">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th> 
+                                <th>Buyer/Employer's ID</th>
+                                <th>Package</th>
+                                <th>Sale Amount</th>
+
+                                <?php
+
+                                ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $i=1;   
+                                $result = mysqli_query($connect, "SELECT * FROM sale");
+                                while($row = mysqli_fetch_assoc($result))
+                                {
+                                    $packageid = $row["package_id"];
+                                    if(isset($packageid))
+                                    {
+                                        $sresult = mysqli_query($connect, "SELECT * FROM package WHERE package_id = $packageid");
+                                        $srow = mysqli_fetch_assoc($sresult);
+                                        $packagename= $srow["package_name"];
+                                    }
+                            ?>
+                                <tr>
+                                    <td><?php echo $i ?></td>
+                                    <td><?php echo $row["employer_id"] ?></td>
+                                    <td><?php echo $packagename     ?></td>
+                                    <td><?php echo $row["purchase_amount"] ?></td>
+                                </tr>
+                            <?php
+
+                                    $i++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>

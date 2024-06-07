@@ -2,8 +2,10 @@ body {
  
     font-family: 'Times New Roman', Times, serif;
     background-color:black;
- 
+    margin: 0;
+    padding: 0;
 }
+
 header {
     background-color: #ffffff;
     padding: 10px 20px;
@@ -17,7 +19,7 @@ header {
 }
 
 .navigation {
-    margin-right: 50%;
+    
     margin-top: 20px;
     font-size: 20px;
     display: flex;
@@ -55,8 +57,19 @@ header {
 
 #logout {
     font-size: 20px;
-    width: 100px;
+   
     margin-top: -10px;
+    font-size: 15px;
+    width: 150px;
+    margin-right: 40px;
+    margin-top: 10px;
+    border: none;
+}
+
+    
+
+#logout_photo {
+    width: 15px;
 }
 
 .left {
@@ -70,8 +83,8 @@ header {
 }
 
 #page_logo {
-    height: 45px;
-    top: 0px;
+    width: 80px;
+    padding-top: 8px;
 }
 
 .formbox-container {
@@ -136,16 +149,37 @@ button {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+    background-color: #007bff;
 }
 
-#logout {
-    font-size: 15px;
-    width: 150px;
-    margin-right: 40px;
-    margin-top: 10px;
-    border: none;
+footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#logout_photo {
-    width: 15px;
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer nav ul li a:hover {
+    color: #555;
 }

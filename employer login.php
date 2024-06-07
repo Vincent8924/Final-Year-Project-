@@ -14,13 +14,7 @@
             <img src="logo.png" alt="JobStreet Logo">
         </div>
 
-        <nav class="navigation">
-            <ul>
-                <li><a href="#">AAA</a></li>
-                <li><a href="#">AAA</a></li>
-                <li><a href="#">AAA</a></li>
-            </ul>
-        </nav>
+
 
         <div class="jobseeker-site">
             <a href="register.php">Jobseeker Site</a>
@@ -39,8 +33,8 @@
                 <input name="password" autocomplete="off" placeholder="Password" class="input-field" type="password"/>
             </div>
             <div>
-                <button class="half_button" name="login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                <button class="half_button" name="sign up"><a href="employer sign up.php">Sign Up</a></button>
+                <button class="half_button" type="submit" name="login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                <button class="half_button" type="button" onclick="sign_up()">Sign Up</button>
             </div>
             <div>
                 <button class="full_button" name="forgot">Forgot Password</button>
@@ -67,6 +61,14 @@
         }
     }
     ?>
+
+    <script>
+        function sign_up()
+        {
+            window.location = "employer sign up.php";
+        }
+    </script>
+
 
     <footer>
         <nav>

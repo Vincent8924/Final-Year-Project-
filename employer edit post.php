@@ -6,9 +6,8 @@
         <title>
             Drafts | Job Help
         </title>
-        <link rel="stylesheet" type="text/css" href="employer edit post.css">
-        <link rel="icon" href="img/logo.png">
-       
+        <link rel="stylesheet" type="text/css" href="employer home.css">
+        <link rel="icon" href="general_image/jobhelper_logo.png">
     </head>
     <body>
     <?php
@@ -24,7 +23,7 @@
                     ?>
         <header>
     <div class="logo">
-        <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
+        <a href="employer home.php"><img src="general_image/jobhelper_logo.png" id="page_logo"/></a>
     </div>
     <nav class="navigation">
         <ul>
@@ -44,16 +43,13 @@
     </form>
 </header>
 
-                </div>
-            </div>
-        </nav>
-
-
   
-    <br/><hr/><br/>
-    <div class="formBox">
-    <h1 style="text-align: center;">Edit your post</h1>
-    <form name="addnewpost" method="post">
+    <br/><br/> <br/><br/> <br/><br/>
+
+    <h1 class="h1_center">Edit your post</h1>
+        <br/><br/>
+        <form class="formBox" name="addnewpost" method="post">
+            
                
         <?php
      
@@ -193,16 +189,14 @@
 
 
 
-
-
-
-        
-
-
-
-
-
-
+        <footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
 
 
 

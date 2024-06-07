@@ -5,7 +5,7 @@
     <meta charset="UTF-8"/>
     <title>View Post | Job Help</title>
     <link rel="stylesheet" type="text/css" href="employer view post.css">
-    <link rel="icon" href="img/logo.png">
+    <link rel="icon" href="general_image/jobhelper_logo.png">
   
   
 </head>
@@ -24,7 +24,7 @@
 
     <header>
         <div class="logo">
-            <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
+            <a href="employer home.php"><img src="general_image/jobhelper_logo.png" id="page_logo"/></a>
         </div>
         <nav class="navigation">
             <ul>
@@ -149,5 +149,17 @@
             return answer;
         }
     </script>
+
+
+<br/><br/><br/><br/>
+<footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+
 </body>
 </html>

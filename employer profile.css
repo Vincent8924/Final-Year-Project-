@@ -1,12 +1,25 @@
-body {
-    width: 90%;
-    margin: 0 auto;
+body{
+    background-image: url('t.jpg');
+    background-size: 100% 150%;
+    background-repeat:no-repeat;
     font-family: 'Times New Roman', Times, serif;
-    background-image: url('n.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
 }
+
+#logout {
+    font-size: 15px;
+    width: 150px;
+    margin-right: 40px;
+    margin-top: 10px;
+    border: none;
+}
+
+#logout_photo {
+    width: 15px;
+}
+
 
 header {
     background-color: #ffffff;
@@ -17,11 +30,11 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ccc; /* Add a 1px solid border to the bottom */
 }
 
 .navigation {
-    margin-right: 50%;
+
     margin-top: 20px;
     font-size: 20px;
     display: flex;
@@ -57,28 +70,79 @@ header {
     margin-left: 30px;
 }
 
-#logout {
-    font-size: 20px;
-    width: 100px;
-    margin-top: -9px;
+
+
+.post-quota {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: dimgray;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.left {
+    float: left; /* 元素右浮动 */
+    margin-right: 65px;
+}
+
+.right {
+    float: right; /* 元素右浮动 */
+    margin-right: 65px;
 }
 
 #page_logo {
-    height: 45px;
-    top: 0px;
+    width: 80px;
+    padding-top: 8px;
 }
 
-.center {
-    text-align: center;
+.formbox-container {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
 }
 
 .formbox {
-    position: relative;
-    max-width: max-content;
-    max-height: max-content;
-    box-shadow: 0 2px 5px black;
-    padding: 30px 40px;
-    border-radius: 10px;
+flex: 0 0 calc(30% - 20px);
+border: 1px solid #ccc;
+padding: 20px;
+border-radius: 5px;
+background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s;
+
+}
+
+.formbox:hover {
+transform: translateY(-5px);
+}
+
+.formbox h2 {
+margin-bottom: 10px;
+font-size: 18px;
+color: royalblue;
+}
+
+.formbox .details {
+margin-bottom: 15px;
+color: #333;
+}
+.formbox button {
+    margin-top: 10px;
+}
+
+.center {
+    text-align: center; /* make text keep center */
+}
+
+.center span {
+    display: inline-block; /* make span same like div, otherwise span can't keep center */
+}
+
+.field {
+    height: 50px;
+    width: 80%;
 }
 
 button {
@@ -89,25 +153,15 @@ button {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.centerButton {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    background-color: #007bff;
 }
 
 #profile_photo_space {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid #007bff;
-    margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 5px solid rgb(0, 0, 0);
+    width:  280px; /* 宽度设为固定的百分比 */
+   
+    display: flex; /* 使用 Flex 布局 */
+    /*/justify-content: center; /* 水平居中 */
 }
 
 #profile_photo {
@@ -116,81 +170,40 @@ button {
     object-fit: cover;
 }
 
-.profile {
-    font-size: 20px;
+#subbody
+{
+    margin: 0 auto ;
+    width: 95%;
 }
 
-#logout {
-    font-size: 15px;
-    width: 150px;
-    margin-right: 130px;
-    margin-top: 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#logout:hover {
-    background-color: #0056b3;
-}
-
-#logout_photo {
-    width: 15px;
-}
-
-.container {
-    margin: 100px auto;
-    max-width: 800px;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-.profile-section {
-    margin-bottom: 20px;
-    background-color:darkgrey;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.profile-section:hover {
-    background-color: #e9ecef;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.profile-section h2 {
-    margin-bottom: 10px;
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.profile-section p {
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
+    list-style-type: none;
+    padding: 0;
     margin: 0;
-    color: #666;
-    font-size: 18px;
+    display: flex;
+    gap: 20px;
 }
 
-.edit-button {
-    display: block;
-    width: 150px;
-    margin: 20px auto 0;
-    text-align: center;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+footer nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-.edit-button:hover {
-    background-color: #0056b3;
+footer nav ul li a:hover {
+    color: #555;
 }

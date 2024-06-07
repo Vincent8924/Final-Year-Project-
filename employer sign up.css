@@ -1,5 +1,6 @@
 body {
-    background-image: url('h.jpg');
+    background-image: url('3.jpg');
+    background-repeat: no-repeat;
     background-size: 100% 160%;
     font-family: 'Times New Roman', Times, serif;
     background-color: #f2f2f2;

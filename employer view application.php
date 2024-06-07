@@ -7,10 +7,9 @@
         Application | Job Help
     </title>
     <link rel="stylesheet" type="text/css" href="employer payment history.css">
-    <link rel="icon" href="img/logo.png">
+    <link rel="icon" href="general_image/jobhelper_logo.png">
 </head>
-<body>
-<br/> <br/>
+
 
 <?php
 $id = $_SESSION['id'];
@@ -148,33 +147,72 @@ if (isset($_POST['view_resume'])) {
 }
 
 
+
+if(isset($_POST['reject']))
+{
+    $id = $_POST['reject_id'];
+
+    mysqli_query($connect,"UPDATE `applications` SET
+    `status` = 'Failed'
+    WHERE id = '$id'");
+
+    ?>
+    <script>
+        alert("Reject successfully!");
+        window.location = "employer view application.php";
+    </script>
+
+
+    <?php
+
+}
+
+if(isset($_POST['access']))
+{
+    $id = $_POST['access_id'];
+
+    mysqli_query($connect,"UPDATE `applications` SET
+    `status` = 'Successful'
+    WHERE id = '$id'");
+
+    ?>
+    <script>
+        alert("Reject successfully!");
+        window.location = "employer view application.php";
+    </script>
+
+
+    <?php
+
+}
+
+
+
 ?>
 
-<nav>
-    <div id="line">
-        <div class="choice">
-            <span class="left">
-                <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
-            </span>
-            <span class="mid">
-                <a href="employer home.php">HOME</a>
-                <a href="employer drafts.php">Drafts</a>
-                <a href="employer view post.php">Post</a>
-                <a href="employer view application.php">Application</a>
-                <a href="employer packages.php">Package</a>
-                <a href="employer payment history.php">History</a>
-                <a href="employer profile.php">Profile</a>
-            </span>
-            <form method="post">
-                <span class="right">
-                    <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
-                </span>
-            </form>
+<body>
+<br/> <br/>
+<header>
+        <div class="logo">
+            <a href="employer home.php"><img src="general_image/jobhelper_logo.png" id="page_logo"/></a>
         </div>
-    </div>
-</nav>
+        <nav class="navigation">
+            <ul>
+                <li><a href="employer home.php">Home</a></li>
+                <li><a href="employer drafts.php">Drafts</a></li>
+                <li><a href="employer view post.php">Post</a></li>
+                <li><a href="employer view application.php">Application</a></li>
+                <li><a href="employer packages.php">Package</a></li>
+                <li><a href="employer payment history.php">History</a></li>
+                <li><a href="employer profile.php">Profile</a></li>
+            </ul>
+        </nav>
+        <form method="post">
+            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
+        </form>
+    </header>
 
-<br/><hr/><br/>
+<br/><br/>
 
 <h1>Manage the application</h1>
 <br/><br/>
@@ -205,18 +243,21 @@ while ($row = mysqli_fetch_assoc($all)) {
             <th>Work Experience</th>
             <th>Education</th>
             <th>Language</th>
+            <th>Status</th>
             <th>Resume</th>
             <th>Cover Letter</th>
+            <th>Action</th>
         </tr>
 
         <?php
-        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id'");
+        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Pending'");
         while ($row = mysqli_fetch_assoc($result)) {
             $candidate_id = $row['jobseeker_id'];
             $app_id = $row['id'];
+            $status = $row['status'];
             
 
-            // 如果已经显示过这个 jobseeker_id，跳过
+            // 如果已经显示过这个人，就会跳过
             if (in_array($candidate_id, $displayed_candidates)) {
                 continue;
             }
@@ -237,6 +278,7 @@ while ($row = mysqli_fetch_assoc($all)) {
                 $ex = $candidate_row['work_experience'];
                 $education = $candidate_row['Education'];
                 $language = $candidate_row['language'];
+
             }
             ?>
             <tr>
@@ -246,6 +288,7 @@ while ($row = mysqli_fetch_assoc($all)) {
                 <td><?php echo $ex ?></td>
                 <td><?php echo $education ?></td>
                 <td><?php echo $language ?></td>
+                <td><?php echo $status ?></td>
                 <td>
                     <form method="post">
                         <button type="submit" name="view_resume">
@@ -253,7 +296,8 @@ while ($row = mysqli_fetch_assoc($all)) {
                         </button>
                         <input type="hidden" name="resume" value="<?php echo $app_id ?>">
 
-
+                        <br>
+                        <br>
 
                         <button type="submit" name="download_resume">
                         Download
@@ -267,8 +311,8 @@ while ($row = mysqli_fetch_assoc($all)) {
                         view
                         </button>
                         <input type="hidden" name="letter" value="<?php echo $app_id ?>">
-
-
+                        <br>
+                        <br>
 
                         <button type="submit" name="download_letter">
                         Download
@@ -276,6 +320,119 @@ while ($row = mysqli_fetch_assoc($all)) {
                         <input type="hidden" name="dletter" value="<?php echo $app_id ?>">
                     </form>
                 </td>
+                <td>
+                    <form method="post">
+                        <button type="submit" name="access">
+                        Access
+                        </button>
+                        <input type="hidden" name="access_id" value="<?php echo $app_id ?>">
+                        <br>
+                        <br>
+
+                        <button type="submit" name="reject">
+                        Reject
+                        </button>
+                        <input type="hidden" name="reject_id" value="<?php echo $app_id ?>">
+                    </form>
+                </td>
+            </tr>
+            <?php
+            // 将已经显示过的 jobseeker_id 添加到数组中
+            $displayed_candidates[] = $candidate_id;
+        }
+        ?>
+
+    </table>
+
+        <!--这里开始是看access的-->
+    
+    <h2>The candidate list you access to apply for job of <?php echo $jname ?></h2>
+
+    <table>
+        <tr>
+            <th>Candidate Name</th>
+            <th>Personal Summary</th>
+            <th>Skill</th>
+            <th>Work Experience</th>
+            <th>Education</th>
+            <th>Language</th>
+            <th>Status</th>
+            <th>Resume</th>
+            <th>Cover Letter</th>
+        </tr>
+
+        <?php
+        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Successful'");
+        while ($row = mysqli_fetch_assoc($result)) {
+            $candidate_id = $row['jobseeker_id'];
+            $app_id = $row['id'];
+            $status = $row['status'];
+            
+
+            // 如果已经显示过这个人，就会跳过
+            if (in_array($candidate_id, $displayed_candidates)) {
+                continue;
+            }
+
+            $jobseeker = mysqli_query($connect, "SELECT * FROM `jobseeker` WHERE jobseeker_id = '$candidate_id'");
+
+            if ($jobseeker) {
+                $jobseeker_row = mysqli_fetch_assoc($jobseeker);
+                $name = $jobseeker_row['jobseeker_firstname'] . " " . $jobseeker_row['jobseeker_lastname'];
+            }
+
+            $candidate = mysqli_query($connect, "SELECT * FROM `userprofile` WHERE UserID = '$candidate_id'");
+
+            if ($candidate) {
+                $candidate_row = mysqli_fetch_assoc($candidate); 
+                $ps = $candidate_row['PersonalSummary'];
+                $skill = $candidate_row['Skills'];
+                $ex = $candidate_row['work_experience'];
+                $education = $candidate_row['Education'];
+                $language = $candidate_row['language'];
+
+            }
+            ?>
+            <tr>
+                <td><?php echo $name ?></td>
+                <td><?php echo $ps ?></td>
+                <td><?php echo $skill ?></td>
+                <td><?php echo $ex ?></td>
+                <td><?php echo $education ?></td>
+                <td><?php echo $language ?></td>
+                <td><?php echo $status ?></td>
+                <td>
+                    <form method="post">
+                        <button type="submit" name="view_resume">
+                        view
+                        </button>
+                        <input type="hidden" name="resume" value="<?php echo $app_id ?>">
+
+                        <br>
+                        <br>
+
+                        <button type="submit" name="download_resume">
+                        Download
+                        </button>
+                        <input type="hidden" name="dresume" value="<?php echo $app_id ?>">
+                    </form>
+                </td>
+                <td>
+                    <form method="post">
+                        <button type="submit" name="view_letter">
+                        view
+                        </button>
+                        <input type="hidden" name="letter" value="<?php echo $app_id ?>">
+                        <br>
+                        <br>
+
+                        <button type="submit" name="download_letter">
+                        Download
+                        </button>
+                        <input type="hidden" name="dletter" value="<?php echo $app_id ?>">
+                    </form>
+                </td>
+               
             </tr>
             <?php
             // 将已经显示过的 jobseeker_id 添加到数组中
@@ -290,5 +447,14 @@ while ($row = mysqli_fetch_assoc($all)) {
     <?php
 }
 ?>
+
+<footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 </html>

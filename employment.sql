@@ -121,16 +121,21 @@
         `package_sale_status` tinyint(1) 
   );
 
-  CREATE TABLE sale
-  (
-        `sale_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        `purchase_amount` decimal(10, 2) NOT NULL,
-        `purchase_time` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   CREATE TABLE `sale` 
+   (
+        `sale_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        `purchase_amount` decimal(10,2) NOT NULL,
+        `purchase_time` datetime NOT NULL DEFAULT current_timestamp(),
         `payment_status` varchar(10) NOT NULL,
-        `employer_id` int NOT NULL,
-        `package_id` int(6) NOT NULL
-        
-  );
+        `employer_id` int(11) NOT NULL,
+        `package_id` int(6) NOT NULL,
+        `bank` varchar(100) DEFAULT NULL,
+        `card_name` varchar(200) DEFAULT NULL,
+        `card_number` int(11) DEFAULT NULL,
+        `card_expire_year` int(11) DEFAULT NULL,
+        `card_expire_month` int(11) DEFAULT NULL,
+        `card_cvv` int(11) DEFAULT NULL
+   ) 
 
   CREATE TABLE jobseekerprofile 
   (
@@ -155,7 +160,22 @@
         `date_added` timestamp NOT NULL DEFAULT current_timestamp
    );
 ---------------------------------------------------------------------------------------------------
-  INSERT INTO sale (sale_id, purchase_amount, payment_status, employer_id, package_id) VALUES (300001, 49.99, 'Successful', 1, 200001);
+INSERT INTO `sale` (`sale_id`, `purchase_amount`, `purchase_time`, `payment_status`, `employer_id`, `package_id`, `bank`, `card_name`, `card_number`, `card_expire_year`, `card_expire_month`, `card_cvv`) VALUES
+(300001, 49.99, '2024-05-28 17:01:10', 'Successful', 1, 200001, NULL, NULL, NULL, NULL, NULL, NULL),
+(300002, 49.99, '2024-05-28 17:03:20', 'Successful', 2, 200001, 'CIMB', 'Vincent', 2147483647, 2024, 6, 123),
+(300003, 49.99, '2024-05-28 17:05:38', 'Successful', 2, 200001, 'MASTER CARD', 'kkkk', 2147483647, 2, 2, 213),
+(300004, 129.99, '2024-05-28 17:40:07', 'Successful', 2, 200002, 'PAYPAL', 'kkkk', 2147483647, 2, 2, 133),
+(300005, 49.99, '2024-06-04 00:15:29', 'Successful', 2, 200001, 'CIMB', 'kkkk', 2147483647, 1, 1, 123),
+(300006, 49.99, '2024-06-07 13:29:41', 'Successful', 1, 200001, 'CIMB', 'kkkk', 2147483647, 2000, 9, 123),
+(300007, 49.99, '2024-06-07 13:31:38', 'Successful', 1, 200001, 'PAYPAL', 'kkkk', 2147483647, 200, 2, 123),
+(300008, 49.99, '2024-06-07 13:32:53', 'Successful', 1, 200001, 'CIMB', 'kkkk', 2147483647, 222, 3, 123),
+(300009, 49.99, '2024-06-07 13:41:04', 'Successful', 1, 200001, 'CIMB', 'kkkk', 2147483647, 1, 10, 123),
+(300010, 49.99, '2024-06-07 13:41:26', 'Successful', 1, 200001, 'CIMB', 'Vincent', 2147483647, 12, 10, 123),
+(300011, 49.99, '2024-06-07 13:43:35', 'Successful', 1, 200001, 'CIMB', 'kkkk', 2147483647, 111, 9, 123),
+(300012, 49.99, '2024-06-07 13:47:36', 'Successful', 1, 200001, 'CIMB', 's', 2147483647, 145, 11, 123),
+(300013, 49.99, '2024-06-07 13:49:18', 'Successful', 1, 200001, 'CIMB', 'kkkk', 2147483647, 2024, 6, 225),
+(300014, 49.99, '2024-06-07 13:50:23', 'Successful', 2, 200001, 'VISA', 'kkkk', 2147483647, 4444, 11, 444),
+(300015, 49.99, '2024-06-07 13:54:39', 'Successful', 2, 200001, 'Public bank', 'Vincent', 2147483647, 5555, 2, 555);
 
   INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin)    
   VALUES ( '100001', 'Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1');

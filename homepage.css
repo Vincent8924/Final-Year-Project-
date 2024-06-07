@@ -153,27 +153,27 @@ header {
 .slide-form {
 position: fixed;
 top: 0;
-right: -50%; /* Initially hidden */
-width: 50%; /* Adjust width as needed */
+right: -60%; 
+width: 50%; 
 height: 100%;
 background-color: white;
 box-shadow: -2px 0 5px rgba(0,0,0,0.5);
-transition: right 0.3s ease, width 0.3s ease; /* Add transition for width */
+transition: right 0.3s ease, width 0.3s ease; 
 padding: 20px;
 overflow-y: auto;
 }
 
 .slide-form.open {
-right: 0; /* Slide in when open */
-width: 50%; /* Adjust width as needed */
+right: 0; 
+width: 50%; 
 }
 
 .slide-form.closed {
-width: 0; /* Collapse the form when closed */
-overflow: hidden; /* Hide any overflowing content */
+width: 0; 
+overflow: hidden; 
 }
 
-/* Add additional styling for form elements inside .slide-form */
+
 .slide-form label {
 font-weight: bold;
 }

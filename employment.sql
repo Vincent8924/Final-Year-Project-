@@ -135,7 +135,7 @@
         `card_expire_year` int(11) DEFAULT NULL,
         `card_expire_month` int(11) DEFAULT NULL,
         `card_cvv` int(11) DEFAULT NULL
-   ) 
+   );
 
   CREATE TABLE jobseekerprofile 
   (
@@ -148,8 +148,8 @@
         `Education` text DEFAULT NULL,
         `language` varchar(255) DEFAULT NULL,
         `jobseeker_email` varchar(255) DEFAULT NULL,
-        `Resume varchar`(255) DEFAULT NULL,
-        `jobseeker_id `int(11) NOT NULL
+        `Resume` varchar(255) DEFAULT NULL,
+        `jobseeker_id` int(11) NOT NULL
    );
 
   CREATE TABLE wishlist 

@@ -142,7 +142,7 @@
         `ProfileID` int(11) NOT NULL,
         `photo_name` varchar(500) DEFAULT NULL,
         `photo_data` longblob DEFAULT NULL,
-        `PersonalSummary` text DEFAULT NULL,
+        `PersonalSummary` text DEFAULT NULL, 
         `Skills` varchar(100) DEFAULT NULL,
         `work_experience` text DEFAULT NULL,
         `Education` text DEFAULT NULL,

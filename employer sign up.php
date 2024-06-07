@@ -15,14 +15,7 @@
             <img src="logo.png" alt="JobStreet Logo">
         </div>
 
-        <nav class="navigation">
-            <ul>
-                <li><a href="#">AAA</a></li>
-                <li><a href="#">AAA</a></li>
-                <li><a href="#">AAA</a></li>
-            </ul>
-        </nav>
-
+        
         <div class="jobseeker-site">
             <a href="register.php">Jobseeker Site</a>
         </div>
@@ -37,45 +30,68 @@
             $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
             $confirmPassword = $_POST["confirmPassword"];
 
-            if (strlen($_POST["password"]) < 8) {
-                ?>
-                <script>
-                    alert("Password must be at least 8 characters long! Please Try again");
-                    history.go(-1);
-                </script>
-                <?php
-            } else if ($_POST["password"] !== $confirmPassword) {
-                ?>
-                <script>
-                    alert("Password does not match! Please Try again");
-                    history.go(-1);
-                </script>
-                <?php
-            } else {
-                mysqli_query($connect, "INSERT INTO employer(employer_email,employer_name,`password`,`balance`) VALUES ('$email', '$name','$password','0')");
-                
-                mysqli_query($connect, "INSERT INTO employer_profile(`employer_email`,`photo_name`,`photo_data`) SELECT text_data,file_name,photo_data FROM website_file");
 
 
-                $result = mysqli_query($connect, "SELECT * FROM employer WHERE employer_email = '$email'");
-                                
+            $registed = mysqli_query($connect,"SELECT * FROM `employer` WHERE employer_email = '$email'");
 
-                    if ($result) 
-                    {
-                        $row = mysqli_fetch_assoc($result);
-                        $id = $row['id'];
-                        mysqli_free_result($result);
-                    }
+            $registed_email = mysqli_num_rows($registed);
 
-                                                                                
-                mysqli_query($connect, "UPDATE employer_profile SET profile_id = $id, employer_email = '$email',name = '$name' WHERE employer_email = 'none'");
-                ?>
-                <script type="text/javascript">
-                    alert("Registration successful. You can now proceed to log in.");
-                    window.location.href = 'employer login.php';
-                </script>
-                <?php
+            if($registed_email > 0)
+            {
+
+            ?>
+            <script>
+                alert("This account already registed!");
+                window.location = "employer login.php";
+
+            </script>
+
+            <?php
+
             }
+            else
+            {
+                if (strlen($_POST["password"]) < 8) {
+                    ?>
+                    <script>
+                        alert("Password must be at least 8 characters long! Please Try again");
+                        history.go(-1);
+                    </script>
+                    <?php
+                } else if ($_POST["password"] !== $confirmPassword) {
+                    ?>
+                    <script>
+                        alert("Password does not match! Please Try again");
+                        history.go(-1);
+                    </script>
+                    <?php
+                } else {
+                    mysqli_query($connect, "INSERT INTO employer(employer_email,employer_name,`password`,`balance`) VALUES ('$email', '$name','$password','0')");
+                    
+                    mysqli_query($connect, "INSERT INTO employer_profile(`employer_email`,`photo_name`,`photo_data`) SELECT text_data,file_name,photo_data FROM website_file");
+    
+    
+                    $result = mysqli_query($connect, "SELECT * FROM employer WHERE employer_email = '$email'");
+                                    
+    
+                        if ($result) 
+                        {
+                            $row = mysqli_fetch_assoc($result);
+                            $id = $row['id'];
+                            mysqli_free_result($result);
+                        }
+    
+                                                                                    
+                    mysqli_query($connect, "UPDATE employer_profile SET profile_id = $id, employer_email = '$email',name = '$name' WHERE employer_email = 'none'");
+                    ?>
+                    <script type="text/javascript">
+                        alert("Registration successful. You can now proceed to log in.");
+                        window.location.href = 'employer login.php';
+                    </script>
+                    <?php
+                }
+            }
+
         }
     ?>
 
@@ -119,11 +135,10 @@
 
         <button class="full_button" type="submit" name="submit">Sign Up</button>
         <div>
-                <button class="full_button" name="login">
-                <a href="employer login.php">
-                Login
-                </a>
-                </button>
+        <button class="full_button" type="button" onclick="login()">
+        Login
+        </button>
+
                 </div>
     
             </form>
@@ -151,6 +166,13 @@
                 message.textContent = "";
             }
         }
+
+
+        function login()
+        {
+            window.location = "employer login.php";
+        }
+
 
     </script>
     <footer>

@@ -7,7 +7,7 @@
             Drafts | Job Help
         </title>
         <link rel="stylesheet" type="text/css" href="employer home.css">
-        <link rel="icon" href="img/logo.png">
+        <link rel="icon" href="general_image/jobhelper_logo.png">
     </head>
     <body>
     <?php
@@ -21,37 +21,32 @@
                 echo'<script>alert("Log-Out successful!");window.location.href="employer login.php";</script>';
             }
                     ?>
-        <nav>
-            <div id="line">
-                <div class="choice">
-                    <span class="left">
-                    <a href="employer home.php"><img src="img/page logo2.png" id="page_logo"/></a>
-                    </span>    
-                    <span class="mid"> 
-
-                    
-                    <a href="employer home.php">HOME</a>
-                        <a href="employer drafts.php">Drafts</a>
-                        <a href="employer view post.php">Post</a>
-                        <a href="employer view application.php">Application</a>
-                        <a href="employer packages.php">Package</a>
-                        <a href="employer payment history.php">History</a>
-                        <a href="employer profile.php">Profile</a>
-                    
-                    </span>
-                    <form method="post" >
-                        <span class="right" >
-                            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
-                        </span> 
-                    </form>
-                </div>
-            </div>
-        </nav>
+        <header>
+    <div class="logo">
+        <a href="employer home.php"><img src="general_image/jobhelper_logo.png" id="page_logo"/></a>
+    </div>
+    <nav class="navigation">
+        <ul>
+            <li><a href="employer home.php">Home</a></li>
+            <li><a href="employer drafts.php">Drafts</a></li>
+            <li><a href="employer view post.php">Post</a></li>
+            <li><a href="employer view application.php">Application</a></li>
+            <li><a href="employer packages.php">Package</a></li>
+            <li><a href="employer payment history.php">History</a></li>
+            <li><a href="employer profile.php">Profile</a></li>
+        </ul>
+    </nav>
+    <form method="post" >
+       
+            <button id="logout" name="logout" onclick='return userconfirmation();'><img src='img/logout.png' id="logout_photo">LOG OUT</button>
+        </div> 
+    </form>
+</header>
 
   
-    <br/><hr/><br/>
+    <br/><br/> <br/><br/> <br/><br/>
 
-    <h1>Edit your post</h1>
+    <h1 class="h1_center">Edit your post</h1>
         <br/><br/>
         <form class="formBox" name="addnewpost" method="post">
             
@@ -194,16 +189,14 @@
 
 
 
-
-
-
-        
-
-
-
-
-
-
+        <footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
 
 
 

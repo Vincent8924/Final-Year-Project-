@@ -1,68 +1,148 @@
-body
-{
-    width: 90%; /* setting width */
-    margin: 0 auto; /* make content in middle */
+body{
+    background-image: url('t.jpg');
+    background-size: 100% 150%;
+    background-repeat:no-repeat;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
 }
 
-#line {
-
-    
-    padding-right: 15px;
-    padding-left: 15px;
-
-    
-    background-color: black;
-    background-repeat: repeat-x;
-    height: 100px;
+#logout {
+    font-size: 15px;
+    width: 150px;
+    margin-right: 40px;
+    margin-top: 10px;
+    border: none;
 }
 
-.choice a{
-    font-size: 30px;
+#logout_photo {
+    width: 15px;
+}
+
+
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #ccc; /* Add a 1px solid border to the bottom */
+}
+
+.navigation {
+
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li {
+    display: inline-block;
+}
+
+.navigation ul li a {
     text-decoration: none;
-    color: white;
-    margin-left: 35px;
-    position: relative;
-    display: inline-block; 
-    top: 25px;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-.left 
-{
+.navigation ul li a:hover {
+    color: #555;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+}
+
+
+
+.post-quota {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: dimgray;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.left {
     float: left; /* 元素右浮动 */
     margin-right: 65px;
-    
 }
 
-
-
-.right  
-{
+.right {
     float: right; /* 元素右浮动 */
     margin-right: 65px;
 }
 
-#page_logo
-{
-    height: 45px;
-    top: 0px;
+#page_logo {
+    width: 80px;
+    padding-top: 8px;
 }
 
-.center 
-{
+.formbox-container {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+}
+
+.formbox {
+flex: 0 0 calc(30% - 20px);
+border: 1px solid #ccc;
+padding: 20px;
+border-radius: 5px;
+background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s;
+
+}
+
+.formbox:hover {
+transform: translateY(-5px);
+}
+
+.formbox h2 {
+margin-bottom: 10px;
+font-size: 18px;
+color: royalblue;
+}
+
+.formbox .details {
+margin-bottom: 15px;
+color: #333;
+}
+.formbox button {
+    margin-top: 10px;
+}
+
+.center {
     text-align: center; /* make text keep center */
 }
 
-.formbox{
-    position: relative;
-    max-width: max-content;
-    max-height: max-content;
-    
-   
-    
-    box-shadow: 0 2px 5px black;
-    padding:30px 40px;
+.center span {
+    display: inline-block; /* make span same like div, otherwise span can't keep center */
+}
 
-    border-radius: 10px;
+.field {
+    height: 50px;
+    width: 80%;
 }
 
 button {
@@ -73,19 +153,12 @@ button {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-   
-  }
-
-  .centerButton {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    background-color: #007bff;
 }
-
 
 #profile_photo_space {
     border: 5px solid rgb(0, 0, 0);
-    width:  20%; /* 宽度设为固定的百分比 */
+    width:  280px; /* 宽度设为固定的百分比 */
    
     display: flex; /* 使用 Flex 布局 */
     /*/justify-content: center; /* 水平居中 */
@@ -98,22 +171,40 @@ button {
     /*align-self: center; /* 图像垂直居中 */
 }
 
-
-.profile
+#subbody
 {
-    font-size: 20px;
+    margin: 0 auto ;
+    width: 95%;
 }
 
-#logout
-{
-    font-size: 30px;
-    width: 200px;
-    margin-top: -15px;
-    border: none;
+footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#logout_photo
-{
-    width: 25px; 
-    
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer nav ul li a:hover {
+    color: #555;
 }

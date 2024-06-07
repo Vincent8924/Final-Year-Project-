@@ -1,3 +1,13 @@
+body{
+    background-image: url('t.jpg');
+    background-size: 100% 150%;
+    background-repeat:no-repeat;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
 .order{
     margin: 0 auto;
     position: relative;
@@ -9,6 +19,80 @@
     border-radius: 10px;
     background-color:lightblue;
 }
+
+
+
+#logout {
+    font-size: 15px;
+    width: 150px;
+    margin-right: 40px;
+    margin-top: 10px;
+    border: none;
+}
+
+#logout_photo {
+    width: 15px;
+}
+
+
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #ccc; /* Add a 1px solid border to the bottom */
+}
+
+.navigation {
+
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li {
+    display: inline-block;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navigation ul li a:hover {
+    color: #555;
+}
+
+
+button {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+}
+
+
+
+
 .order h3{
     text-align: center;
 }
@@ -84,10 +168,9 @@ td{
 }
 
 .inputBox input{
-    padding: 10px;
-    font-size: 1.1em;
-    outline: none;
-    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 5px 5px 5px;
+    width: 350px;
 }
 
 .inputBox100{
@@ -196,11 +279,7 @@ select{
     color:green;
 }
 
-body
-{
-    width: 90%; /* setting width */
-    margin: 0 auto; /* make content in middle */
-}
+
 
 #line {
 
@@ -239,27 +318,49 @@ body
     margin-right: 65px;
 }
 
-#page_logo
-{
-    height: 45px;
-    top: 0px;
+#page_logo {
+    width: 80px;
+    padding-top: 8px;
 }
 
-#logout
+.select
 {
-    font-size: 30px;
-    width: 200px;
-    margin-top: -6px;
-    border: none;
-    cursor: pointer;
-    background-color: #000;
-    color: #fff;
-
+    border-radius: 5px;
+    padding: 5px 5px 5px 5px;
+    padding-left: 2px;
+    width: 350px;
+    height: 30px;
+    border: #2e2d2d 2px solid;
 }
 
-#logout_photo
-{
-    width: 25px; 
-    
+footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer nav ul li a:hover {
+    color: #555;
+}

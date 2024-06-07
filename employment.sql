@@ -129,6 +129,7 @@
         `payment_status` varchar(10) NOT NULL,
         `employer_id` int NOT NULL,
         `package_id` int(6) NOT NULL
+        
   );
 
   CREATE TABLE jobseekerprofile 

@@ -278,8 +278,7 @@ if (isset($_POST['logout'])) {
 if (isset($_POST['save_profile'])) {
     $photo_data = !empty($_FILES['photo_data']['tmp_name']) ? addslashes(file_get_contents($_FILES['photo_data']['tmp_name'])) : null;
     $photo_name = !empty($_FILES['photo_data']['name']) ? $_FILES['photo_data']['name'] : null;
-    $Resume = !empty($_FILES['Resume']['tmp_name']) ? addslashes(file_get_contents($_FILES['Resume']['tmp_name'])) : null;
-
+    $Resume = !empty($_FILES['Resume']['tmp_name']) ? $_FILES['Resume']['name'] : null;
     $PersonalSummary = $_POST['PersonalSummary'];
     $work_experience = $_POST['work_experience'];
     $Education = $_POST['Education'];
@@ -298,8 +297,18 @@ if (isset($_POST['save_profile'])) {
         }
 
         if ($Resume) {
-            $query .= ", Resume = '$Resume'";
+            $targetDirectory = 'uploads/';
+            $targetFilePath = $targetDirectory . basename($Resume);
+    
+            if (move_uploaded_file($_FILES['Resume']['tmp_name'], $targetFilePath)) {
+                // File uploaded successfully, update the database with the file path
+                $query .= ", Resume = '$targetFilePath'";
+            } else {
+                // Error occurred while moving the file
+                echo '<script>alert("Error uploading resume.");</script>';
+            }
         }
+    
 
         $query .= " WHERE jobseeker_id = '$id'";
     } else {
@@ -411,9 +420,18 @@ if (isset($_POST['save_profile'])) {
             ?>">
         </div>
         <div class="profile-section">
-            <h2>Resume</h2>
-            <input type="file" name="Resume" accept=".pdf">
-        </div>
+    <h2>Resume</h2>
+    <?php
+    $query = "SELECT Resume FROM jobseekerprofile WHERE jobseeker_id = '$id'";
+    $result = mysqli_query($connect, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $resumePath = $row['Resume'];
+        echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
+    }
+    ?>
+    <input type="file" name="Resume" accept=".pdf">
+</div>
         <button type="submit" name="save_profile" class="edit-button centerButton">Save Profile</button>
     </div>
 </form>

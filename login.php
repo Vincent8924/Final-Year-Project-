@@ -34,7 +34,7 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="login.css">
     <title>Login | JobStreet</title>
-    
+   
 </head>
 <body>
     <header>

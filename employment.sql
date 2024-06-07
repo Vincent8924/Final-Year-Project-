@@ -4,128 +4,121 @@
 
 
   CREATE TABLE `post` (
-  `post_id` int(11) NOT NULL,
-  `poster_id` int(11) NOT NULL,
-  `job_name` varchar(200) NOT NULL,
-  `company_name` varchar(255) DEFAULT NULL,
-  `logo` longblob DEFAULT NULL,
-  `category` varchar(200) DEFAULT NULL,
-  `location` varchar(500) DEFAULT NULL,
-  `employment_type` varchar(200) NOT NULL,
-  `description` varchar(9999) DEFAULT NULL,
-  `salary` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `favourite` enum('yes','no') DEFAULT 'no'
-  );
+        `post_id` int(11) NOT NULL,
+        `poster_id` int(11) NOT NULL,
+        `job_name` varchar(200) NOT NULL,
+        `company_name` varchar(255) DEFAULT NULL,
+        `logo` longblob DEFAULT NULL,
+        `category` varchar(200) DEFAULT NULL,
+        `location` varchar(500) DEFAULT NULL,
+        `employment_type` varchar(200) NOT NULL,
+        `description` varchar(9999) DEFAULT NULL,
+        `salary` int(11) NOT NULL,
+        `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+        `favourite` enum('yes','no') DEFAULT 'no'
+    );
   
   CREATE TABLE drafts (
-      `draft_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      `poster_id` INT NOT NULL,
-      `job_name` varchar(200) NOT NULL,
-      `company_name` varchar(255) ,
-      `logo` LONGBLOB,
-      `category` varchar(200) ,
-      `location` varchar(500) ,
-      `employment_type` varchar(200) NOT NULL,
-      `description` varchar(9999) ,
-      `salary` INT NOT NULL,
-      `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
-  );
-
-  CREATE TABLE photos (
-      `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      `employer_email` varchar(500) NOT NULL ,
-      `photo_name` VARCHAR(500),
-      `photo_data` LONGBLOB
+        `draft_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        `poster_id` INT NOT NULL,
+        `job_name` varchar(200) NOT NULL,
+        `company_name` varchar(255) ,
+        `logo` LONGBLOB,
+        `category` varchar(200) ,
+        `location` varchar(500) ,
+        `employment_type` varchar(200) NOT NULL,
+        `description` varchar(9999) ,
+        `salary` INT NOT NULL,
+        `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
   );
 
   CREATE TABLE website_file (
-      `file_name` varchar(500) NOT NULL PRIMARY KEY ,
-      `text_data` varchar(5000) ,
-      `photo_data` LONGBLOB
+        `file_name` varchar(500) NOT NULL PRIMARY KEY ,
+        `text_data` varchar(5000) ,
+        `photo_data` LONGBLOB
   );
 
   CREATE TABLE employer (
-      `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      `employer_email` varchar(200) NOT NULL,
-      `employer_name` varchar(500) NOT NULL,
-      `password` varchar(500) NOT NULL,
-      `balance` int NOT NULL
+        `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        `employer_email` varchar(200) NOT NULL,
+        `employer_name` varchar(500) NOT NULL,
+        `password` varchar(500) NOT NULL,
+        `balance` int NOT NULL
   );
 
   CREATE TABLE employer_profile (
-      `profile_id` INT NOT NULL PRIMARY KEY ,
-      `employer_email` varchar(200) NOT NULL ,
-      `name` varchar(500),
-      `photo_name` VARCHAR(500),
-      `photo_data` LONGBLOB,
-      `website` varchar(1000),
-      `industry` varchar(1000),
-      `company_size` varchar(500),
-      `primary_location` varchar(1000),
-      `description` varchar(9999)
+        `profile_id` INT NOT NULL PRIMARY KEY ,
+        `employer_email` varchar(200) NOT NULL ,
+        `name` varchar(500),
+        `photo_name` VARCHAR(500),
+        `photo_data` LONGBLOB,
+        `website` varchar(1000),
+        `industry` varchar(1000),
+        `company_size` varchar(500),
+        `primary_location` varchar(1000),
+        `description` varchar(9999)
   );
 
   CREATE TABLE admin (
-    `admin_id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `admin_fname` varchar(500) NOT NULL ,
-    `admin_lname` varchar(500) NOT NULL ,
-    `admin_password` varchar(500) NOT NULL ,
-    `admin_email` varchar(255) NOT NULL,
-    `superadmin` tinyint(1)
+        `admin_id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        `admin_fname` varchar(500) NOT NULL ,
+        `admin_lname` varchar(500) NOT NULL ,
+        `admin_password` varchar(500) NOT NULL ,
+        `admin_email` varchar(255) NOT NULL,
+        `superadmin` tinyint(1)
   );
 
   CREATE TABLE contact (
-      `contact_id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
-      `name` varchar(255) NOT NULL,
-      `email` varchar(255) NOT NULL,
-      `subject` varchar(255) NOT NULL,
-      `message` text NOT NULL
+        `contact_id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+        `name` varchar(255) NOT NULL,
+        `email` varchar(255) NOT NULL,
+        `subject` varchar(255) NOT NULL,
+        `message` text NOT NULL
   );
   
   CREATE TABLE jobseeker 
   (
-      `jobseeker_id` INT(6) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      `jobseeker_firstname` varchar(100) NOT NULL,
-      `jobseeker_lastname` varchar(100) NOT NULL,
-      `jobseeker_email` varchar(60) NOT NULL,
-      `jobseeker_password` varchar(500) NOT NULL
+        `jobseeker_id` INT(6) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        `jobseeker_firstname` varchar(100) NOT NULL,
+        `jobseeker_lastname` varchar(100) NOT NULL,
+        `jobseeker_email` varchar(60) NOT NULL,
+        `jobseeker_password` varchar(500) NOT NULL
   );
 
   CREATE TABLE `userprofile` 
   (
-  `UserID` int(11) NOT NULL,
-  `ProfilePic` varchar(255) DEFAULT NULL,
-  `PersonalSummary` text DEFAULT NULL,
-  `Skills` varchar(100) DEFAULT NULL,
-  `work_experience` text DEFAULT NULL,
-  `Education` text DEFAULT NULL,
-  `language` varchar(255) DEFAULT NULL,
-  `jobseeker_email` varchar(255) DEFAULT NULL,
-  `resume` varchar(200) 
+        `UserID` int(11) NOT NULL,
+        `ProfilePic` varchar(255) DEFAULT NULL,
+        `PersonalSummary` text DEFAULT NULL,
+        `Skills` varchar(100) DEFAULT NULL,
+        `work_experience` text DEFAULT NULL,
+        `Education` text DEFAULT NULL,
+        `language` varchar(255) DEFAULT NULL,
+        `jobseeker_email` varchar(255) DEFAULT NULL,
+        `resume` varchar(200) 
   );
 
   CREATE TABLE `applications` 
   (
-  `id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  `post_id` INT DEFAULT NULL,
-  `poster_id` INT DEFAULT NULL,
-  `jobseeker_id` INT NULL,
-  `resume` varchar(255) DEFAULT NULL,
-  `cover_letter` varchar(255) DEFAULT NULL,
-  `application_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` enum('Pending','Successful','Failed') DEFAULT 'Pending'
+        `id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        `post_id` INT DEFAULT NULL,
+        `poster_id` INT DEFAULT NULL,
+        `jobseeker_id` INT NULL,
+        `resume` varchar(255) DEFAULT NULL,
+        `cover_letter` varchar(255) DEFAULT NULL,
+        `application_date` timestamp NOT NULL DEFAULT current_timestamp(),
+        `status` enum('Pending','Successful','Failed') DEFAULT 'Pending'
   );
 
 
   CREATE TABLE package 
   (
-      `package_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-      `package_name` varchar(255) NOT NULL,
-      `package_price` decimal(10, 2) NOT NULL,
-      `package_description` TEXT,
-      `package_post_quota` int(10) NOT NULL,
-      `package_sale_status` tinyint(1)
+        `package_id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        `package_name` varchar(255) NOT NULL,
+        `package_price` decimal(10, 2) NOT NULL,
+        `package_description` TEXT,
+        `package_post_quota` int(10) NOT NULL,
+        `package_sale_status` tinyint(1) 
   );
 
 CREATE TABLE `sale` (

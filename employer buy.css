@@ -281,28 +281,59 @@ select{
 
 
 
-#line {
-
-    
-    padding-right: 15px;
-    padding-left: 15px;
-
-    
-    background-color: black;
-    background-repeat: repeat-x;
-    height: 100px;
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000; 
 }
 
-.choice a{
-    font-size: 30px;
+.navigation {
+    margin-right: 50%;
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li {
+    display: inline-block;
+}
+
+.navigation ul li a {
     text-decoration: none;
-    color: white;
-    margin-left: 35px;
-    position: relative;
-    display: inline-block; 
-    top: 25px;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
+.navigation ul li a:hover {
+    color: #555;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+}
+
+#logout {
+    font-size: 20px;
+    width: 100px;
+    margin-top: -10px;
+}
 .left 
 {
     float: left;
@@ -363,4 +394,21 @@ footer nav ul li a {
 
 footer nav ul li a:hover {
     color: #555;
+}
+    font-size: 15px;
+    width: 150px;
+    height: 40px;
+    margin-top: -6px;
+    margin-right: 130px;
+    border: none;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+
+}
+
+#logout_photo
+{
+    width: 15px; 
+    
 }

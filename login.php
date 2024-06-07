@@ -1,9 +1,32 @@
 <?php
-    
+$jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '';
     include("dataconnection.php");
     session_start();
-?>
 
+    if(isset($_POST['submit'])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        
+        $result = mysqli_query($connect,"SELECT * FROM jobseeker WHERE jobseeker_email='$email'");
+        $row = mysqli_fetch_assoc($result);
+        
+        if($row) {
+            if(password_verify($password, $row["jobseeker_password"])) {
+                $_SESSION['id'] = $row["jobseeker_id"];
+                if($_SESSION['id']) {
+                    header("Location: homepage.php");
+                    exit();
+                } else {
+                    echo '<script>alert("Session error!");</script>';
+                }
+            } else {
+                echo '<script>alert("Password invalid! Please Try Again!"); history.go(-1);</script>';
+            }
+        } else {
+            echo '<script>alert("User does not exist!"); history.go(-1);</script>';
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,28 +34,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="login.css">
     <title>Login | JobStreet</title>
-
+    
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="new.jpg" alt="JobStreet Logo">
         </div>
-
-        <nav class="navigation">
-            <ul>
-                <li><a href="#">Job Search</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
-            </ul>
-        </nav>
 
         <div class="sign-in">
             <a href="register.php">Register</a>
         </div>
 
         <div class="employer-site">
-            <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
         </div>
     </header>
 
@@ -79,13 +94,6 @@
     }
     
     ?>
-    <footer>
-        <nav>
-            <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
-            </ul>
-        </nav>
-    </footer>
+   
 </body>
 </html>

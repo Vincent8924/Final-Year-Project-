@@ -1,17 +1,32 @@
 <?php
-    include("Jsession.php");
-    include("dataconnection.php");
+include("Jsession.php");
+include("dataconnection.php");
 
-        $id = $_SESSION['id'];
-       
-        
-        $result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'");
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
-            $firstName = $row['jobseeker_firstname'];
-        }
-    
-    
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+$firstName = '';
+
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
+}
+
+$sql = "SELECT * FROM post";
+$result = $connect->query($sql);
+
+if (!$result) {
+    die("Query failed: " . $connect->error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,35 +34,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="homepage.css">
-
     <title>Job Search Homepage</title>
-    
+    <style>
+       
+        </style>
 </head>
 <body>
 <header>
         <div class="logo">
-            <img src="logo.png" alt="Company Logo">
+            <img src="new.jpg" alt="Company Logo">
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="jobsave.php">Job Save</a></li>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+                <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+   
+   
             </ul>
         </nav>
-        <div class="user-info">
-            <?php
-               echo "Welcome " . $firstName;
-            ?>
-
+        <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
         </div>
         <div class="employer-site">
-            <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
         </div>
     </header>
-
-
-
     <div id="searchContainer">
         <input type="text" id="searchBar" placeholder="Search...">
         <select id="categorySelector">
@@ -57,37 +74,27 @@
     </div>
     <div id="jobPosts">
     <?php
-
-    $result = mysqli_query($connect,"SELECT * FROM post");
-
-
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $savedClass = ($row["favourite"] === 'yes') ? 'saved' : '';
-        echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
-        echo '<img src="' . htmlspecialchars($row["logo"]) . '" alt="logo">';
-        echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
-        echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
-        echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
-        echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
-        echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
-        echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-        echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
-        echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
-        echo '<span class="saveIcon ' . $savedClass . '" onclick="toggleFavouriteJobPost(this, ' . htmlspecialchars($row["post_id"]) . ')">&#10084;</span>';
-        echo '</div>';
-    }
-} else {
-    echo "No job posts available";
+   while ($row = $result->fetch_assoc()) {
+    echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
+    echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo">';
+    echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
+    echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
+    echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
+    echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
+    echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
+    echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
+    echo '<button class="wishlistButton" onclick="saveToWishlist(' . htmlspecialchars($row["post_id"]) . ')">Save to Wishlist</button>';
+    echo '</div>';
 }
-?>
-
-
+    ?>
 
     </div>
-
-
-
+    <div id="slideForm" class="slide-form">
+    <button id="closeForm" class="close-form">&times;</button>
+    <div id="formContent">
+        <!-- Form content will be populated by JavaScript -->
+    </div>
+</div>
     <script>
         const searchBar = document.getElementById('searchBar');
         const categorySelector = document.getElementById('categorySelector');
@@ -109,38 +116,62 @@ if ($result) {
                 post.style.display = isVisible ? 'block' : 'none';
             });
         });
+        function saveToWishlist(postId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "wishlist.php?post_id=" + postId, true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert(xhr.responseText);
+            } else {
+                alert("An error occurred while saving to wishlist.");
+            }
+        };
+        xhr.send();
+    }
 
-        function toggleFavouriteJobPost(icon, postId) {
-            const request = new XMLHttpRequest();
-            request.open('POST', 'jobsave.php', true);
-            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            request.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    const response = JSON.parse(this.responseText);
-                    if (response.status === 'success') {
-                        if (response.favourite === 'yes') {
-                            icon.classList.add('saved');
-                        } else {
-                            icon.classList.remove('saved');
-                        }
-                    } else {
-                        alert(response.message);
-                    }
-                }
-            };
-            request.send('post_id=' + postId);
-        }
 
         function applyJob(postId) {
             window.location.href = 'apply.php?post_id=' + postId;
         }
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
+    });
+
+    function showForm(postId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "getPostDetails.php?post_id=" + postId, true); 
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById('formContent').innerHTML = xhr.responseText;
+            document.getElementById('slideForm').classList.add('open');
+            document.getElementById('slideForm').classList.remove('closed'); // Remove closed class
+        } else {
+            alert("An error occurred while fetching post details.");
+        }
+    };
+    xhr.send();
+}
+    document.querySelectorAll('.jobPost').forEach(post => {
+        post.addEventListener('click', function() {
+            const postId = this.id.split('_')[1];
+            showForm(postId);
+        });
+    });
+
+    document.getElementById('closeForm').addEventListener('click', function() {
+    document.getElementById('slideForm').classList.remove('open');
+    document.getElementById('slideForm').classList.add('closed'); // Add closed class
+});
     </script>
     <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="applylist.php">Apply list</a></li>
+            <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
+            <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
+            
             </ul>
         </nav>
     </footer>
@@ -149,3 +180,4 @@ if ($result) {
 <?php
 $connect->close();
 ?>
+ 

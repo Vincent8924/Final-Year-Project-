@@ -176,7 +176,7 @@
 
                 <h2>Description?</h2>
                 <input type="text" class="field" placeholder="<?php echo $row['description']?>" name="description" value="<?php echo $row['description']?>">
-                <br/><br/><hr/><br/><br/>
+             
                 <button type="submit" id="add" name="edit" value="Edit">Edit post</button>
 
                 <?php

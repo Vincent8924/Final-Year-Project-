@@ -1,5 +1,10 @@
-<?php include('vdataconnection.php'); ?>
-<?php include('employer session.php'); ?>
+<?php
+
+include('vdataconnection.php'); 
+include('employer session.php'); 
+
+ob_start();
+?>
 <html>
     <head>
         <meta charset="UTF-8"/>
@@ -77,73 +82,34 @@
     <div id="profile_photo_space" >
     
     <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($row['photo_data']); ?>" alt="Photo">
-    </div>
-    
-
-    <br/><br/><br/>
-    
-
-
-
-
-    <div class="profile">
-    <b>Employer/Company name</b> 
-    <br/><br/>
-    <?php echo $row['name'] ?>
-    
-    </div>
-
-    <br/><br/>
-
-    <div class="profile">
-    <b>Website</b> 
-    <br/><br/>
-    <?php echo $row['website'] ?>
-    
-    </div>
-
-    <br/><br/>
-
-    <div class="profile">
-    <b>industry</b>
-    <br/><br/>
-    <?php echo $row['industry'] ?>
-    
-    </div>
-
-    <br/><br/>
-
-    <div class="profile">
-    <b>Company Size</b>
-    <br/><br/>
-    <?php echo $row['company_size'] ?>
-    
-    </div>
-
-    <br/><br/>
-
-    <div class="profile">
-    <b>Primary location</b>
-    <br/><br/>
-    <?php echo $row['primary_location'] ?>
-    
-    </div>
-
-    <br/><br/>
-
-    <div class="profile">
-    <b>Description</b>
-    <br/><br/>
-    <?php echo $row['description'] ?>
-    
-    </div>
-    <?php
-
-
-
+</div>
+<div class="profile-section">
+    <h2>Employer/Company Name</h2>
+    <p><?php echo $row['name']; ?></p>
+</div>
+<div class="profile-section">
+    <h2>Website</h2>
+    <p><?php echo $row['website']; ?></p>
+</div>
+<div class="profile-section">
+    <h2>Industry</h2>
+    <p><?php echo $row['industry']; ?></p>
+</div>
+<div class="profile-section">
+    <h2>Company Size</h2>
+    <p><?php echo $row['company_size']; ?></p>
+</div>
+<div class="profile-section">
+    <h2>Primary Location</h2>
+    <p><?php echo $row['primary_location']; ?></p>
+</div>
+<div class="profile-section">
+    <h2>Description</h2>
+    <p><?php echo $row['description']; ?></p>
+</div>
+<?php
+    }
 }
-}
-
 ?>
     
 
@@ -179,3 +145,7 @@
 
     
 </html>
+<?php
+
+ob_end_flush();
+?>

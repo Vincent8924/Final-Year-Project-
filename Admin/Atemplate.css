@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
 }
@@ -15,19 +15,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #c9c9c9;
+    background-color: rgb(218, 211, 211);
     color: #333;
     padding: 20px;
+    border-bottom: rgb(187, 180, 180) solid 3px;
 }
 
-.header h1 {
-    margin: 0;
-}
 .logo
 {
-    height: 70px;
-    width: auto;
+    width: 100px;
 }
+
 .AdminAcc {
     color: #333;
     padding: 10px 20px;
@@ -39,7 +37,7 @@ body {
 }
 
 .AdminAcc:hover{
-    color: orange;
+    color: rgb(187, 180, 180);
     font-size: 22px;
 }
 
@@ -87,7 +85,7 @@ body {
 
 aside {
     width: 200px;
-    background-color: #c5c5c5;
+    background-color: rgb(187, 180, 180);
     color: #fff;
 }
 
@@ -131,10 +129,11 @@ section {
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: rgb(218, 211, 211);
+    color: #2e2d2d;
     padding: 20px;
     text-align: center;
+    border-top: rgb(187, 180, 180) solid 3px;
 }
 h1 
 {   

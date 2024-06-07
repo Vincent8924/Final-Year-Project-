@@ -113,8 +113,8 @@ $result = $connect->query($query);
 <footer>
     <nav>
         <ul>
-            <li><a href="aboutus.html">About Us</a></li>
-            <li><a href="contact.php">Contact Us</a></li>
+        <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
+        <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact</a></li>
          
         </ul>
     </nav>

@@ -1,0 +1,225 @@
+
+header {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation {
+    display: inline-block;
+    margin-right: 50%;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navigation ul li a:hover {
+    color: #555;
+}
+
+.employer-site {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid blue; 
+    border-radius: 5px; 
+}
+
+
+.employer-site a {
+    text-decoration: none;
+    color: rgb(12, 12, 191); 
+}
+
+
+.employer-site:hover {
+    background-color: blue; 
+}
+
+
+.employer-site:hover a {
+    color: white; 
+}
+
+.logo {
+    display: inline-block;
+}
+
+.logo img {
+    height: 50px; 
+}
+
+.navigation {
+    display: inline-block;
+    margin-left: 20px; 
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+
+
+.employer-site {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.employer-site a {
+    text-decoration: none;
+    color: rgb(12, 12, 191);
+}
+
+.employer-site:hover {
+    background-color: blue;
+}
+
+.employer-site:hover a {
+    color: white;
+}
+
+.user-info {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+.user-info p {
+    margin: 0;
+    font-weight: bold;
+    color: green;
+}
+
+.user-info:hover {
+    background-color: green;
+}
+
+.user-info:hover p {
+    color: white;
+}
+
+
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+}
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+.contact-info, .business-hours, .message-form, .address-map {
+    margin-bottom: 30px;
+}
+.contact-info p {
+    margin: 10px 0;
+    color: #555;
+}
+.message-form input[type="text"],
+.message-form input[type="email"],
+.message-form input[type="subject"],
+.message-form textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 30px; 
+    outline: none;
+}
+.message-form textarea {
+width: calc(100% - 22px);
+height: 300px;
+padding: 10px;
+margin-bottom: 15px;
+border: 1px solid #000; 
+border-radius: 30px;
+outline: none;
+}
+.message-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.message-form button:hover {
+    background-color: #0056b3;
+}
+.address-map img {
+    width: 100%;
+    border: none; 
+}
+footer {
+background-color: white;
+padding: 10px 20px;
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+footer nav ul {
+font-family: 'Times New Roman', Times, serif;
+list-style-type: none;
+padding: 0;
+margin: 0;
+display: flex;
+gap: 20px;
+justify-content: center;
+align-items: center;
+}
+
+footer nav ul li a {
+text-decoration: none;
+color: #333;
+font-weight: bold;
+transition: color 0.3s;
+}
+
+footer nav ul li a:hover {
+color: #555;
+}

@@ -7,11 +7,24 @@ $postId = $_REQUEST['post_id'];
 
 
 
-$result = mysqli_query($connect,"SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'");
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
-            $firstName = $row['jobseeker_firstname'];
-        }
+if (!$connect) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+$firstName = '';
+
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $id = $connect->real_escape_string($id);
+
+    $query = "SELECT jobseeker_firstname FROM jobseeker WHERE jobseeker_id = '$id'";
+    $result = $connect->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['jobseeker_firstname'];
+    }
+}
 
 
         if (isset($_POST['submit'])) {
@@ -88,26 +101,28 @@ if(isset($_GET['post_id'])) {
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="jobsave.php">Job Save</a></li>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="#">Company Profile</a></li>
+            <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
+            <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job save</a></li>
+            <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+              
             </ul>
         </nav>
-        <div class="user-info">
-            <?php
-            
-                echo "Welcome " . $firstName;
-
-            ?>
-
+        <div class="user-info" id="logoutBtn">
+    <?php
+    if (isset($firstName)) {
+        echo '<p>Welcome, ' . $firstName . '</p>';
+    }
+    ?>
+</div>
 
         </div>
         <div class="employer-site">
-            <a href="#">Employer Site</a>
+            <a href="employer sign up.php">Employer Site</a>
         </div>
 </header>
 
 <div id="applyForm">
+<?php echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo" style="height: 150px; margin-bottom: 20px;">'; ?>
     <h2>Apply for <?php echo  $job  ?></h2>
     <p><?php echo $description ?></p>
     <form enctype="multipart/form-data" method="post">
@@ -129,12 +144,21 @@ if(isset($_GET['post_id'])) {
     <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="applylist.php">Apply list</a></li>
+            <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
+            <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
+            <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
                 
             </ul>
         </nav>
     </footer>
+
+    <script>
+          document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Are you sure you want to logout?');
+        if (confirmLogout) {
+            window.location.href = 'login.php';
+        }
+    });
+    </script>
 </body>
 </html>

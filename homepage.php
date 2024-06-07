@@ -33,277 +33,10 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="homepage.css">
     <title>Job Search Homepage</title>
     <style>
        
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navigation {
-            display: inline-block;
-            margin-right: 50%;
-        }
-
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        .navigation ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .navigation ul li a:hover {
-            color: #555;
-        }
-
-        .employer-site {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid blue;
-            border-radius: 5px;
-            margin-left: 20px;
-        }
-
-        .employer-site a {
-            text-decoration: none;
-            color: rgb(12, 12, 191);
-        }
-
-        .employer-site:hover {
-            background-color: blue;
-        }
-
-        .employer-site:hover a {
-            color: white;
-        }
-
-        .logo {
-            display: inline-block;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .user-info {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid green;
-            border-radius: 5px;
-            margin-left: 50px;
-        }
-
-        .user-info p {
-            margin: 0;
-            font-weight: bold;
-            color: green;
-        }
-
-        .user-info:hover {
-            background-color: green;
-        }
-
-        .user-info:hover p {
-            color: white;
-        }
-
-
-        #jobPosts {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .jobPost {
-            position: relative;
-            width: calc(30% - 20px);
-            margin-bottom: 20px;
-            margin-right: 10px;
-            background-color: #f9f9f9;
-            border: 2px solid purple;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .jobPost:last-child {
-            margin-right: 0;
-        }
-
-        .jobPost:hover {
-            background-color: #e0e0e0;
-        }
-
-        .jobPost img {
-            width: 30%;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .jobPost h2 {
-            font-size: 18px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-
-        .jobPost p {
-            font-size: 14px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-        @media (max-width: 1000px) {
-            .jobPost {
-                width: calc(45% - 20px);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .jobPost {
-                width: calc(100% - 20px);
-            }
-        }
-
-        #searchContainer {
-            display: flex;
-            align-items: center;
-            width: 80%;
-            margin: 20px auto 0;
-        }
-
-        #searchBar {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid black;
-            border-radius: 5px 0 0 5px;
-        }
-
-        #categorySelector {
-            padding: 10px;
-            border: 1px solid black;
-            border-left: none;
-            border-radius: 0 5px 5px 0;
-            background-color: #fff;
-            cursor: pointer;
-        }
-
-        #categorySelector:focus {
-            outline: none;
-        }
-
-        .saveIcon {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            font-size: 20px;
-            color: black;
-            cursor: pointer;
-        }
-
-        .saved {
-            color: red;
-        }
-
-        .applyButton {
-    background-color:purple;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 10px; 
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.applyButton:hover {
-    background-color: plum;
-}
-
-.applyButton:active {
-    background-color:plum;
-    transform: translateY(1px); 
-}
-.wishlistButton {
-            background-color: orange;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .wishlistButton:hover {
-            background-color: darkorange;
-        }
-
-        .wishlistButton:active {
-            background-color: darkorange;
-            transform: translateY(1px);
-        }
-
-        footer {
-            background-color: white;
-            padding: 10px 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        footer nav ul {
-            font-family: 'Times New Roman', Times, serif;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        footer nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        footer nav ul li a:hover {
-            color: #555;
-        }
-        
         </style>
 </head>
 <body>
@@ -349,8 +82,6 @@ if (!$result) {
     echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
     echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
     echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
-    echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-    echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
     echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
     echo '<button class="wishlistButton" onclick="saveToWishlist(' . htmlspecialchars($row["post_id"]) . ')">Save to Wishlist</button>';
     echo '</div>';
@@ -358,6 +89,12 @@ if (!$result) {
     ?>
 
     </div>
+    <div id="slideForm" class="slide-form">
+    <button id="closeForm" class="close-form">&times;</button>
+    <div id="formContent">
+        <!-- Form content will be populated by JavaScript -->
+    </div>
+</div>
     <script>
         const searchBar = document.getElementById('searchBar');
         const categorySelector = document.getElementById('categorySelector');
@@ -402,6 +139,32 @@ if (!$result) {
             window.location.href = 'login.php';
         }
     });
+
+    function showForm(postId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "getPostDetails.php?post_id=" + postId, true); 
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById('formContent').innerHTML = xhr.responseText;
+            document.getElementById('slideForm').classList.add('open');
+            document.getElementById('slideForm').classList.remove('closed'); // Remove closed class
+        } else {
+            alert("An error occurred while fetching post details.");
+        }
+    };
+    xhr.send();
+}
+    document.querySelectorAll('.jobPost').forEach(post => {
+        post.addEventListener('click', function() {
+            const postId = this.id.split('_')[1];
+            showForm(postId);
+        });
+    });
+
+    document.getElementById('closeForm').addEventListener('click', function() {
+    document.getElementById('slideForm').classList.remove('open');
+    document.getElementById('slideForm').classList.add('closed'); // Add closed class
+});
     </script>
     <footer>
         <nav>

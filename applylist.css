@@ -1,12 +1,6 @@
 body {
-    background-image: url('3.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 160%;
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-}
+    background-color: blanchedalmond; 
+}   
 
 header {
     background-color: white;
@@ -43,33 +37,23 @@ header {
     color: #555;
 }
 
-.sign-in
-{
-    display: inline-block;
-    padding: 8px 16px;
-    border: 2px solid blue;
-    border-radius: 5px;
-    margin-left:751%;
-}
 .employer-site {
     display: inline-block;
     padding: 8px 16px;
     border: 2px solid blue;
     border-radius: 5px;
+    margin-left: 20px;
 }
 
-.sign-in a,
 .employer-site a {
     text-decoration: none;
     color: rgb(12, 12, 191);
 }
 
-.sign-in:hover,
 .employer-site:hover {
     background-color: blue;
 }
 
-.sign-in:hover a,
 .employer-site:hover a {
     color: white;
 }
@@ -82,64 +66,51 @@ header {
     height: 50px;
 }
 
-.container {
-    max-width: 400px;
-    margin: 150px auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+.user-info {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid green;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 50px;
 }
 
-.login-form {
-    padding-top: 20px;
+.user-info p {
+    margin: 0;
+    font-weight: bold;
+    color: green;
 }
 
-.login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+.user-info:hover {
+    background-color: green;
 }
 
-.login-form input[type="email"],
-.login-form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
+.user-info:hover p {
+    color: white;
 }
 
-.login-form button {
-    width: 100%;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+table {
+border-collapse: collapse;
+width: 100%;
 }
 
-.login-form button:hover {
-    background-color: #0056b3;
+th, td {
+padding: 8px;
+text-align: left;
 }
 
-.forget-password {
-    font-size: 15px;
-    text-align: center;
-    margin-top: 20px;
+thead {
+background-color: #f2f2f2;
 }
 
-.forget-password a {
-    color: blue;
-    text-decoration: none;
+th {
+background-color: #ddd;
+font-weight: bold;
 }
 
-.forget-password a:hover {
-    text-decoration: underline;
+tbody tr:nth-child(even) {
+background-color: #f2f2f2;
 }
+
 footer {
     background-color: white;
     padding: 10px 20px;

@@ -10,7 +10,7 @@
 <body>
     <div class="aform">
         <div class="bform">
-            <img src="../img/logo.png" class="logo"/>
+            <img src="../general_image/jobhelper_logo.png" class="logo"/>
             <h1>Admin Log-in</h1>
         </div>
         

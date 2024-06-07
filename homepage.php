@@ -187,6 +187,66 @@ if (!$result) {
             }
         }
 
+        .slide-form {
+    position: fixed;
+    top: 0;
+    right: -50%; /* Initially hidden */
+    width: 50%; /* Adjust width as needed */
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    transition: right 0.3s ease, width 0.3s ease; /* Add transition for width */
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.slide-form.open {
+    right: 0; /* Slide in when open */
+    width: 50%; /* Adjust width as needed */
+}
+
+.slide-form.closed {
+    width: 0; /* Collapse the form when closed */
+    overflow: hidden; /* Hide any overflowing content */
+}
+
+/* Add additional styling for form elements inside .slide-form */
+.slide-form label {
+    font-weight: bold;
+}
+
+.slide-form input[type="text"],
+.slide-form input[type="file"],
+.slide-form textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.slide-form button {
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 95%;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.slide-form button:hover {
+    background-color: plum;
+}
+
+.slide-form button:active {
+    background-color: plum;
+    transform: translateY(1px);
+}
         #searchContainer {
             display: flex;
             align-items: center;
@@ -349,8 +409,6 @@ if (!$result) {
     echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
     echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
     echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
-    echo '<p>Salary: ' . htmlspecialchars($row["salary"]) . '</p>';
-    echo '<p>Description: ' . htmlspecialchars($row["description"]) . '</p>';
     echo '<button class="applyButton" onclick="applyJob(' . htmlspecialchars($row["post_id"]) . ')">Apply</button>';
     echo '<button class="wishlistButton" onclick="saveToWishlist(' . htmlspecialchars($row["post_id"]) . ')">Save to Wishlist</button>';
     echo '</div>';
@@ -358,6 +416,12 @@ if (!$result) {
     ?>
 
     </div>
+    <div id="slideForm" class="slide-form">
+    <button id="closeForm" class="close-form">&times;</button>
+    <div id="formContent">
+        <!-- Form content will be populated by JavaScript -->
+    </div>
+</div>
     <script>
         const searchBar = document.getElementById('searchBar');
         const categorySelector = document.getElementById('categorySelector');
@@ -402,6 +466,32 @@ if (!$result) {
             window.location.href = 'login.php';
         }
     });
+
+    function showForm(postId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "getPostDetails.php?post_id=" + postId, true); 
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById('formContent').innerHTML = xhr.responseText;
+            document.getElementById('slideForm').classList.add('open');
+            document.getElementById('slideForm').classList.remove('closed'); // Remove closed class
+        } else {
+            alert("An error occurred while fetching post details.");
+        }
+    };
+    xhr.send();
+}
+    document.querySelectorAll('.jobPost').forEach(post => {
+        post.addEventListener('click', function() {
+            const postId = this.id.split('_')[1];
+            showForm(postId);
+        });
+    });
+
+    document.getElementById('closeForm').addEventListener('click', function() {
+    document.getElementById('slideForm').classList.remove('open');
+    document.getElementById('slideForm').classList.add('closed'); // Add closed class
+});
     </script>
     <footer>
         <nav>

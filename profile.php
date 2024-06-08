@@ -100,15 +100,16 @@ if ($result) {
         <p><?php echo htmlspecialchars($language); ?></p>
     </div>
     <div class="profile-section">
-        <h2>View Resume</h2>
-        <?php
-        if (!empty($row['Resume'])) {
-            $resumePath = htmlspecialchars($row['Resume']);
-            echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
-        } else {
-            echo '<p>No resume available</p>';
-        }
-        ?>
+    <h2>View Resume</h2>
+    <?php
+    if (!empty($row['Resume'])) {
+        $resumePath = htmlspecialchars($row['Resume']);
+        echo '<p>Current Resume: <a href="download.php?file='.$resumePath.'">'.basename($resumePath).'</a></p>';
+    } else {
+        echo '<p>No resume available</p>';
+    }
+    ?>
+</div>
     </div>
     <div class="profile-section">
         <button onclick="window.location.href='edit profile.php?id=<?php echo urlencode($id); ?>'" class="edit-button">Edit Profile</button>

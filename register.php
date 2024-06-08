@@ -47,12 +47,7 @@ if(isset($_POST['registerBtn'])) {
         <div class="logo">
             <img src="new.jpg" alt="JobStreet Logo">
         </div>
-        <nav class="navigation">
-            <ul>
-            <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
-            <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
-            </ul>
-        </nav>
+       
         <div class="sign-in">
             <a href="login.php">Sign In</a>
         </div>

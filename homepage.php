@@ -77,8 +77,8 @@ if (!$result) {
    while ($row = $result->fetch_assoc()) {
     echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
     echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo">';
-    echo '<h2>' . htmlspecialchars($row["company_name"]) . '</h2>';
-    echo '<p>' . htmlspecialchars($row["job_name"]) . '</p>'; 
+    echo '<h2>' . htmlspecialchars($row["job_name"]) . '</h2>';
+    echo '<p>'  . htmlspecialchars($row["company_name"]) . '</p>'; 
     echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
     echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
     echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
@@ -92,7 +92,7 @@ if (!$result) {
     <div id="slideForm" class="slide-form">
     <button id="closeForm" class="close-form">&times;</button>
     <div id="formContent">
-        <!-- Form content will be populated by JavaScript -->
+    
     </div>
 </div>
     <script>
@@ -147,7 +147,7 @@ if (!$result) {
         if (xhr.status === 200) {
             document.getElementById('formContent').innerHTML = xhr.responseText;
             document.getElementById('slideForm').classList.add('open');
-            document.getElementById('slideForm').classList.remove('closed'); // Remove closed class
+            document.getElementById('slideForm').classList.remove('closed'); 
         } else {
             alert("An error occurred while fetching post details.");
         }
@@ -163,7 +163,7 @@ if (!$result) {
 
     document.getElementById('closeForm').addEventListener('click', function() {
     document.getElementById('slideForm').classList.remove('open');
-    document.getElementById('slideForm').classList.add('closed'); // Add closed class
+    document.getElementById('slideForm').classList.add('closed'); 
 });
     </script>
     <footer>

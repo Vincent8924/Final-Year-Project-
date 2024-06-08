@@ -76,9 +76,9 @@ if (!$result) {
     <?php
    while ($row = $result->fetch_assoc()) {
     echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
-    echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo">';
+    echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo" onclick="showForm(' . htmlspecialchars($row["post_id"]) . ')">';
     echo '<h2>' . htmlspecialchars($row["job_name"]) . '</h2>';
-    echo '<p>'  . htmlspecialchars($row["company_name"]) . '</p>'; 
+    echo '<p>'. htmlspecialchars($row["company_name"]) . '</p>'; 
     echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';
     echo '<p>Employment type: ' . htmlspecialchars($row["employment_type"]) . '</p>';
     echo '<p>Location: ' . htmlspecialchars($row["location"]) . '</p>';
@@ -92,7 +92,7 @@ if (!$result) {
     <div id="slideForm" class="slide-form">
     <button id="closeForm" class="close-form">&times;</button>
     <div id="formContent">
-    
+        <!-- Form content will be populated by JavaScript -->
     </div>
 </div>
     <script>
@@ -147,38 +147,24 @@ if (!$result) {
         if (xhr.status === 200) {
             document.getElementById('formContent').innerHTML = xhr.responseText;
             document.getElementById('slideForm').classList.add('open');
-            document.getElementById('slideForm').classList.remove('closed'); 
+            document.getElementById('slideForm').classList.remove('closed'); // Remove closed class
         } else {
             alert("An error occurred while fetching post details.");
         }
     };
     xhr.send();
 }
-    document.querySelectorAll('.jobPost').forEach(post => {
-        post.addEventListener('click', function() {
-            const postId = this.id.split('_')[1];
-            showForm(postId);
-        });
-    });
-
-    document.querySelectorAll('.applyButton').forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.stopPropagation(); 
-        const postId = this.parentElement.id.split('_')[1];
+document.querySelectorAll('.jobPost img').forEach(logo => {
+    logo.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevents the click event from propagating to parent elements
+        const postId = this.parentElement.id.split('_')[1]; // Get the postId from the parent element's id
         showForm(postId);
     });
 });
 
-document.querySelectorAll('.wishlistButton').forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.stopPropagation(); 
-        const postId = this.parentElement.id.split('_')[1];
-        saveToWishlist(postId);
-    });
-});
     document.getElementById('closeForm').addEventListener('click', function() {
     document.getElementById('slideForm').classList.remove('open');
-    document.getElementById('slideForm').classList.add('closed'); 
+    document.getElementById('slideForm').classList.add('closed'); // Add closed class
 });
     </script>
     <footer>

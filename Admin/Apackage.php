@@ -324,7 +324,7 @@
                                 <div class="label">
                                     <label for="package_post_quota">Package's Post Quota </label>
                                 </div>
-                                <input type="number" placeholder="Package's Post Quota" name="post_quots" required><br>
+                                <input type="number" placeholder="Package's Post Quota" name="post_quota" required><br>
                             </div>
                             <div class="bform">
                                 <div class="label">
@@ -360,14 +360,14 @@
                             $price = $_POST['price'];
                             $post_quota = $_POST['post_quota'];
                             $status = $_POST['status'];
-                            $desc = $_POST['desc'];
+                            $desc = $_POST['package_description'];
 
-                            $resuslt=mysqli_query($connect,"INSERT INTO package(package_name, admin_lname, admin_email,
-                             admin_password, superadmin) VALUES ('$fname','$lname','$email','$hashpassword','$superadmin')");
+                            $resuslt=mysqli_query($connect,"INSERT INTO package(package_name, package_price, package_post_quota,
+                             package_description, package_sale_status) VALUES ('$name','$price','$post_quota','$desc','$status')");
                             ?>
                             <script>
-                                alert("Admin has been successfully added!");
-                                window.location.href = "Aadminmanagement.php";
+                                alert("Package has been successfully added!");
+                                window.location.href = "Apackage.php";
                             </script>
                             <?php
                         }

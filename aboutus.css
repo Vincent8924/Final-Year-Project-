@@ -36,7 +36,7 @@ header {
     padding: 8px 16px;
     border: 2px solid green;
     border-radius: 5px;
-    margin-left: 60%;
+    margin-left: 50px;
 }
 
 .user-info p {
@@ -56,25 +56,23 @@ header {
 
 .employer-site {
     display: inline-block;
-    padding: 8px 16px; 
-    border: 2px solid blue; 
-    border-radius: 5px; 
+    padding: 8px 16px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-left: 20px;
 }
-
 
 .employer-site a {
     text-decoration: none;
-    color: rgb(12, 12, 191); 
+    color: rgb(12, 12, 191);
 }
-
 
 .employer-site:hover {
-    background-color: blue; 
+    background-color: blue;
 }
 
-
 .employer-site:hover a {
-    color: white; 
+    color: white;
 }
 
 .logo {
@@ -88,7 +86,7 @@ header {
 .navigation {
     font-family: 'Times New Roman', Times, serif;
     display: inline-block;
-    margin-left: 20px; 
+    margin-right: 50%; 
 }
 
 .navigation ul {

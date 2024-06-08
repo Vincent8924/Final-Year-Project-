@@ -161,6 +161,21 @@ if (!$result) {
         });
     });
 
+    document.querySelectorAll('.applyButton').forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.stopPropagation(); 
+        const postId = this.parentElement.id.split('_')[1];
+        showForm(postId);
+    });
+});
+
+document.querySelectorAll('.wishlistButton').forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.stopPropagation(); 
+        const postId = this.parentElement.id.split('_')[1];
+        saveToWishlist(postId);
+    });
+});
     document.getElementById('closeForm').addEventListener('click', function() {
     document.getElementById('slideForm').classList.remove('open');
     document.getElementById('slideForm').classList.add('closed'); 

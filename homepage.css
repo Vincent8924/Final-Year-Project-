@@ -1,12 +1,13 @@
 
 body {
     font-family: 'Times New Roman', Times, serif;
+    background-color:antiquewhite;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: white;
+    background-color: rgb(218, 211, 211);
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -36,9 +37,6 @@ header {
     transition: color 0.3s;
 }
 
-.navigation ul li a:hover {
-    color: #555;
-}
 
 .employer-site {
     display: inline-block;
@@ -106,7 +104,7 @@ header {
     margin-bottom: 20px;
     margin-right: 10px;
     background-color: #f9f9f9;
-    border: 2px solid purple;
+    border: 2px solid black;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
@@ -249,54 +247,54 @@ transform: translateY(1px);
 .saved {
     color: red;
 }
+.applyButton, .wishlistButton {
+    padding: 5px 10px; 
+    font-size: 14px; 
+    margin-right: 10px; 
+}
 
 .applyButton {
-background-color:purple;
-border: none;
-color: white;
-padding: 10px 20px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-margin-top: 10px; 
-cursor: pointer;
-border-radius: 5px;
-}
-
-.applyButton:hover {
-background-color: plum;
-}
-
-.applyButton:active {
-background-color:plum;
-transform: translateY(1px); 
-}
-.wishlistButton {
-    background-color: orange;
+    background-color:royalblue;
     border: none;
     color: white;
-    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.applyButton:hover {
+    background-color:cyan;
+}
+
+.applyButton:active {
+    background-color:cyan;
+    transform: translateY(1px);
+}
+
+.wishlistButton {
+    background-color:royalblue;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .wishlistButton:hover {
-    background-color: darkorange;
+    background-color:cyan;
 }
 
 .wishlistButton:active {
-    background-color: darkorange;
+    background-color:cyan;
     transform: translateY(1px);
 }
 
 footer {
-    background-color: white;
+    background-color: rgb(218, 211, 211);
     padding: 10px 20px;
     position: fixed;
     bottom: 0;

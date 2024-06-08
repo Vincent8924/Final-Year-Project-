@@ -24,11 +24,7 @@ if (isset($_SESSION['id'])) {
     <meta charset="UTF-8"/>
     <title>editProfile | Job Help</title>
     <link rel="icon" href="img/logo.png">
-    <link rel="stylesheet" type="text/css" href=" edit profile.css">
-    <style>
-       
-        
-    </style>
+    <link rel="stylesheet" type="text/css" href="edit profile.css">
 </head>
 <body>
 <br/><br/>
@@ -73,7 +69,6 @@ if (isset($_POST['save_profile'])) {
             }
         }
     
-
         $query .= " WHERE jobseeker_id = '$id'";
     } else {
         // Insert new profile
@@ -82,7 +77,10 @@ if (isset($_POST['save_profile'])) {
     }
 
     if (mysqli_query($connect, $query)) {
-        echo '<script>alert("Profile saved successfully!");</script>';
+        echo '<script>
+                alert("Profile saved successfully!");
+                window.location.href = "profile.php";
+              </script>';
     } else {
         echo '<script>alert("Error saving profile.");</script>';
     }
@@ -184,30 +182,29 @@ if (isset($_POST['save_profile'])) {
             ?>">
         </div>
         <div class="profile-section">
-    <h2>Resume</h2>
-    <?php
-    $query = "SELECT Resume FROM jobseekerprofile WHERE jobseeker_id = '$id'";
-    $result = mysqli_query($connect, $query);
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $resumePath = $row['Resume'];
-        echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
-    }
-    ?>
-    <input type="file" name="Resume" accept=".pdf">
-</div>
+            <h2>Resume</h2>
+            <?php
+            $query = "SELECT Resume FROM jobseekerprofile WHERE jobseeker_id = '$id'";
+            $result = mysqli_query($connect, $query);
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $resumePath = $row['Resume'];
+                echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
+            }
+            ?>
+            <input type="file" name="Resume" accept=".pdf">
+        </div>
         <button type="submit" name="save_profile" class="edit-button centerButton">Save Profile</button>
     </div>
 </form>
 <footer>
-        <nav>
-            <ul>
+    <nav>
+        <ul>
             <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
             <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
-            
-            </ul>
-        </nav>
-    </footer>
+        </ul>
+    </nav>
+</footer>
 
 <script>
     document.getElementById('logoutBtn').addEventListener('click', function() {

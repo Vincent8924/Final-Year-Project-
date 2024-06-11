@@ -24,11 +24,7 @@ if (isset($_SESSION['id'])) {
     <meta charset="UTF-8"/>
     <title>editProfile | Job Help</title>
     <link rel="icon" href="img/logo.png">
-    <link rel="stylesheet" type="text/css" href=" edit profile.css">
-    <style>
-       
-        
-    </style>
+    <link rel="stylesheet" type="text/css" href="edit profile.css">
 </head>
 <body>
 <br/><br/>
@@ -61,9 +57,14 @@ if (isset($_POST['save_profile'])) {
         }
 
         if ($Resume) {
-            $targetDirectory = 'uploads/';
+            $targetDirectory = 'resume/';
             $targetFilePath = $targetDirectory . basename($Resume);
-    
+
+            // Ensure the resume directory exists
+            if (!is_dir($targetDirectory)) {
+                mkdir($targetDirectory, 0755, true);
+            }
+
             if (move_uploaded_file($_FILES['Resume']['tmp_name'], $targetFilePath)) {
                 // File uploaded successfully, update the database with the file path
                 $query .= ", Resume = '$targetFilePath'";
@@ -72,17 +73,29 @@ if (isset($_POST['save_profile'])) {
                 echo '<script>alert("Error uploading resume.");</script>';
             }
         }
-    
 
         $query .= " WHERE jobseeker_id = '$id'";
     } else {
         // Insert new profile
         $query = "INSERT INTO jobseekerprofile (photo_name, photo_data, PersonalSummary, work_experience, Education, Skills, language, Resume, jobseeker_id) 
-        VALUES ('$photo_name', '$photo_data', '$PersonalSummary', '$work_experience', '$Education', '$Skills', '$language', '$Resume', '$id')";
+        VALUES ('$photo_name', '$photo_data', '$PersonalSummary', '$work_experience', '$Education', '$Skills', '$language', '$targetFilePath', '$id')";
+
+        // Ensure the resume directory exists
+        if (!is_dir($targetDirectory)) {
+            mkdir($targetDirectory, 0755, true);
+        }
+
+        if ($Resume && move_uploaded_file($_FILES['Resume']['tmp_name'], $targetFilePath)) {
+            // File uploaded successfully, include file path in query
+            $query .= ", Resume = '$targetFilePath'";
+        }
     }
 
     if (mysqli_query($connect, $query)) {
-        echo '<script>alert("Profile saved successfully!");</script>';
+        echo '<script>
+                alert("Profile saved successfully!");
+                window.location.href = "profile.php";
+              </script>';
     } else {
         echo '<script>alert("Error saving profile.");</script>';
     }
@@ -101,7 +114,7 @@ if (isset($_POST['save_profile'])) {
     </nav>
     <div class="user-info" id="logoutBtn">
         <?php
-         if (isset($firstName)) {
+        if (isset($firstName)) {
             echo '<p>Welcome, ' . $firstName . '</p>';
         }
         ?>
@@ -184,30 +197,29 @@ if (isset($_POST['save_profile'])) {
             ?>">
         </div>
         <div class="profile-section">
-    <h2>Resume</h2>
-    <?php
-    $query = "SELECT Resume FROM jobseekerprofile WHERE jobseeker_id = '$id'";
-    $result = mysqli_query($connect, $query);
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $resumePath = $row['Resume'];
-        echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
-    }
-    ?>
-    <input type="file" name="Resume" accept=".pdf">
-</div>
+            <h2>Resume</h2>
+            <?php
+            $query = "SELECT Resume FROM jobseekerprofile WHERE jobseeker_id = '$id'";
+            $result = mysqli_query($connect, $query);
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $resumePath = $row['Resume'];
+                echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
+            }
+            ?>
+            <input type="file" name="Resume" accept=".pdf">
+        </div>
         <button type="submit" name="save_profile" class="edit-button centerButton">Save Profile</button>
     </div>
 </form>
 <footer>
-        <nav>
-            <ul>
+    <nav>
+        <ul>
             <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
             <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact us</a></li>
-            
-            </ul>
-        </nav>
-    </footer>
+        </ul>
+    </nav>
+</footer>
 
 <script>
     document.getElementById('logoutBtn').addEventListener('click', function() {

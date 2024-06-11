@@ -278,6 +278,12 @@
   
         return true;
     }
+
+    function userconfirmation()
+        {
+            answer = confirm("Do you want to log out?");
+            return answer;
+        }
     </script>
 
     <br><br><br><br>    
@@ -285,8 +291,8 @@
     <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>

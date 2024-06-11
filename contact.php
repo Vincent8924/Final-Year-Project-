@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="address-map">
         <h3>Location</h3>
         
-        <img src="melaka.jpg" alt="Location Map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7973.82971250458!2d102.25202053559836!3d2.1859772622551272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d1ee1c87b4e103%3A0x40a3028e79c8f4c0!2sMelaka%20Raya%2C%2075000%20Malacca!5e0!3m2!1sen!2smy!4v1717972401813!5m2!1sen!2smy" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <div class="message-form">
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="email" placeholder="Your Email" required>
         <input type="text" name="subject" placeholder="Subject" required>
         <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Submit</button>
+        <button type="submit" name="submit">Submit</button>
     </form>
 </div>
 

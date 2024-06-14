@@ -37,7 +37,7 @@
                 <button class="half_button" type="button" onclick="sign_up()">Sign Up</button>
             </div>
             <div>
-                <button class="full_button" name="forgot">Forgot Password</button>
+                <button class="full_button"type="button" onclick="forgot()">Forgot Password</button>
             </div>
         </form>
     </div>
@@ -66,6 +66,11 @@
         function sign_up()
         {
             window.location = "employer sign up.php";
+        }
+
+        function forgot()
+        {
+            window.location = "employer forgot.php";
         }
     </script>
 

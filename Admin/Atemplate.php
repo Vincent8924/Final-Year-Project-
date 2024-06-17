@@ -9,14 +9,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="Atemplate.css">
+    <link rel="stylesheet" href="Atemplate2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <header class="header">
         <img src="../general_image/jobhelper_logo.png" class="logo">
         <div>
-            <a  class="AdminAcc" onclick="displaybar()">
+            <button class="AdminAcc" onclick="displaybar()">
                 <?php
                     $id = $_SESSION['id'];
 
@@ -27,8 +28,8 @@
                         $fname = $row["admin_fname"];
                     }
                 ?>
-                <?php echo"$fname"; ?>            
-            </a>
+                <i class="fa-solid fa-user"></i><?php echo"   $fname"; ?>            
+            </button>
         </div>
     </header>
     

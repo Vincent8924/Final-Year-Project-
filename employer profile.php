@@ -59,7 +59,7 @@ ob_start();
 
             if(isset($_POST['edit']))
             {
-                header("Location:employer profile edit.php?id=" . urlencode($id));
+                header("Location:employer profile edit.php");
                 
             }
         ?>
@@ -83,7 +83,7 @@ ob_start();
     
     <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($row['photo_data']); ?>" alt="Photo">
 </div>
-<br/><br/>
+
 
 <div class="mid">
 

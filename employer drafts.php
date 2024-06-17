@@ -56,12 +56,32 @@
         <h2>Your post quota: <?php echo $balance; ?></h2>
     </div>
 
-    <h1>Manage your drafts</h1>
-    <br/><br/>
+
+    <?php
+            $result = mysqli_query($connect, "SELECT * FROM drafts where `poster_id` = '$id'");
+           
+            if(mysqli_num_rows($result) > 0)
+            {
+                ?>
+                    <h1>Manage your drafts</h1>
+                    <br/><br/>
+                <?php
+            }
+            else
+            {
+                ?>
+                    <h1>Your have not any drafts now.</h1>
+                    <h1>Let make your new draft now.</h1>
+                    <br/><br/>
+                <?php
+            }
+        ?>
+
+    
 
     <div class="formbox-container">
-        <?php
-            $result = mysqli_query($connect, "SELECT * FROM drafts where `poster_id` = '$id'");
+         <?php
+            
             while($row = mysqli_fetch_assoc($result)) {
         ?>
             <div class="formbox">
@@ -93,15 +113,36 @@
                     <input type="hidden" name="pid" value="<?php echo $row['draft_id']; ?>">
                 </form>
             </div>
+            
+            
         <?php
             }
         ?>
-    </div>
+    
+    <br/><br/><br/>
 
-    <h1>Your post history</h1>
-    <br/><br/>
 
+        </div>
+    
+
+    <?php
+            $result = mysqli_query($connect, "SELECT * FROM post where `poster_id` = '$id'");
+           
+            if(mysqli_num_rows($result) > 0)
+            {
+                ?>
+                <br/><br/>
+                    <h1>Your post history</h1>
+                    
+                <?php
+            }
+        ?>
+
+    
     <div class="formbox-container">
+    
+
+
     <?php
     $result = mysqli_query($connect, "SELECT * FROM post where `poster_id` = '$id'");
     while($row = mysqli_fetch_assoc($result)) {
@@ -139,6 +180,8 @@
     }
     ?>
 </div>
+
+
 
     <?php
         if (isset($_POST['delete_id'])) {
@@ -217,7 +260,7 @@
             return answer;
         }
     </script>
-
+<br/><br/><br/><br/>
 <footer>
         <nav>
             <ul>

@@ -1,7 +1,7 @@
 body {
  
     font-family: 'Times New Roman', Times, serif;
-    background-color:black;
+    
     margin: 0;
     padding: 0;
 }
@@ -96,7 +96,7 @@ header {
 
 .formbox {
     display: inline-block; 
-    width: calc(30% - 20px);
+    width: 27.9%;
     margin-right: 20px; 
     margin-bottom: 20px; 
     vertical-align: top; 
@@ -182,4 +182,10 @@ footer nav ul li a {
 
 footer nav ul li a:hover {
     color: #555;
+}
+
+.center-container {
+    margin-left: 40px ;
+    margin-right: 40px;
+    margin-top: 50px;
 }

@@ -35,12 +35,14 @@
     
     <div class="aAccBar" id="aAccBar">
         <div class="bAccBar">
-            <a href="Aprofile.php">Profile</a>
+            <form >
+                <input type="button" name="profile" value="Profile" onclick="goProfile()">
+            </form>
         </div>
         <div class="bAccBar">
             <form action="" method="POST" id="logout">
                 <input type="submit" name="logout" value="Log-Out">
-            </form>
+            </form> 
         </div>
     </div>
     <?php

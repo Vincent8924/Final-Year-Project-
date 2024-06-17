@@ -86,7 +86,7 @@ body {
 
 aside {
     width: 200px;
-    background-color: #a8a8a8;
+    background-color: rgb(200,200,200);
     color: #fff;
 }
 
@@ -117,6 +117,7 @@ aside nav ul li a:hover
     color: #56549b;
     font-size: 18px;
 }
+
 footer {
     background-color: white;
     color: #2e2d2d;

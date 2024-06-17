@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="Aadminmanagement.css">
 </head>
 <body>
-<header class="header">
-        <h1>JobHelper</h1>
+    <header class="header">
+        <img src="../general_image/jobhelper_logo.png" class="logo">
         <div>
-            <a  class="AdminAcc" onclick="displaybar()">
+            <button class="AdminAcc" onclick="displaybar()">
                 <?php
                     $id = $_SESSION['id'];
 
@@ -25,8 +25,8 @@
                         $fname = $row["admin_fname"];
                     }
                 ?>
-                <?php echo"$fname"; ?>            
-            </a>
+                <i class="fa-solid fa-user"></i><?php echo"   $fname"; ?>            
+            </button>
         </div>
     </header>
     

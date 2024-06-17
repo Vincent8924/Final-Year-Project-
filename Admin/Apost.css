@@ -27,7 +27,6 @@ body {
     margin-top: 8px;
     margin-bottom: 8px;
 }
-
 .AdminAcc{
     color: white;
     background-color: #797979;
@@ -54,7 +53,7 @@ body {
     top: 70px; 
     right: 20px; 
     background-color:  white; 
-    border: 1px solid #ccc; 
+    border: 2px solid #8b8b8b; 
     padding: 10px; 
     border-radius: 5px;
     text-align: center;
@@ -80,6 +79,7 @@ body {
 {
     color: #a8a8a8;
 }
+
 .container {
     display: flex;
 }
@@ -117,7 +117,6 @@ aside nav ul li a:hover
     color: #56549b;
     font-size: 18px;
 }
-
 
 main {
     flex: 1;
@@ -162,7 +161,7 @@ h1
     margin-right: 100px;
     width: auto;
     margin-bottom: 30px;
-    background-color: #d4d4db;
+    background-color: white;
     
 }
 .Aheader
@@ -173,7 +172,7 @@ h1
     border-bottom: dotted 2px #797979;
     margin-left: 50px;
     margin-right: 50px;
-    background-color: #d4d4db;
+    background-color: white;
 }
 .Bcontainer
 {
@@ -238,8 +237,8 @@ h2
     margin-top: 25px;
     justify-content: space-between;
     margin-left: 50px;
-    margin-right: 50px;
-    background-color: #d4d4db;
+    margin-right: 50px;    
+    background-color: white;
     margin-bottom: 10px;
 }
 

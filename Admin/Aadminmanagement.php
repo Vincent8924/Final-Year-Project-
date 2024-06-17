@@ -33,7 +33,9 @@
     
     <div class="aAccBar" id="aAccBar">
         <div class="bAccBar">
-            <a href="Aprofile.php">Profile</a>
+            <form >
+                <input type="button" name="profile" value="Profile" onclick="goProfile()">
+            </form>
         </div>
         <div class="bAccBar">
             <form action="" method="POST" id="logout">
@@ -365,6 +367,10 @@
         {
             div.style.display = "block"; 
         }
+    }
+    function goProfile()
+    {
+        window.location.href = "Aprofile.php";
     }
 </script>
 

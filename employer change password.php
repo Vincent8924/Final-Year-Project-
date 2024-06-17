@@ -12,13 +12,13 @@ session_start();
         Reset Password | Job Help
         </title>
         <link rel="stylesheet" type="text/css" href="employer reset.css">
-        <link rel="icon" href="img/logo.png">
+        <link rel="icon" href="general_image/jobhelper_logo.png">
     </head>
     
     <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="general_image/jobhelper_logo.png" alt="JobStreet Logo">
         </div>
 
         

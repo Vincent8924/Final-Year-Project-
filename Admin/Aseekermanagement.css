@@ -118,8 +118,8 @@ aside nav ul li a:hover
     font-size: 18px;
 }
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: white;
+    color: #2e2d2d;
     padding: 20px;
     text-align: center;
 }

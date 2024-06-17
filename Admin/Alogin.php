@@ -6,6 +6,7 @@
 <head>
     <title>Admin Login</title>
     <link rel="stylesheet" href="Alogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="aform">

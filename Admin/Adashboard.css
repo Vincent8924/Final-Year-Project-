@@ -120,7 +120,8 @@ aside nav ul li a:hover
 
 main {
     flex: 1;
-    height: 90vh;
+    height: 92vh;
+    max-height: 92vh;
     overflow-y: auto;
 }
 

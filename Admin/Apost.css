@@ -161,8 +161,7 @@ h1
     margin-right: 100px;
     width: auto;
     margin-bottom: 30px;
-    background-color: white;
-    
+    background-color: #d4d4db;
 }
 .Aheader
 {
@@ -172,7 +171,7 @@ h1
     border-bottom: dotted 2px #797979;
     margin-left: 50px;
     margin-right: 50px;
-    background-color: white;
+    background-color: #d4d4db;
 }
 .Bcontainer
 {
@@ -238,7 +237,7 @@ h2
     justify-content: space-between;
     margin-left: 50px;
     margin-right: 50px;    
-    background-color: white;
+    background-color: #d4d4db;
     margin-bottom: 10px;
 }
 

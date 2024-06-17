@@ -1,6 +1,6 @@
 body
 {
-    background-color: rgb(218, 211, 211);
+    background-color: white;
 }
 .aform
 {
@@ -9,7 +9,7 @@ body
     margin: auto;
     background-color: #f4f4f4;
     border-radius: 5px;
-    margin-top: 200px;
+    margin-top: 10%;
 }
 
 .logo

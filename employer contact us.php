@@ -4,6 +4,11 @@ include("employer session.php");
 
 
     $id = $_SESSION['id'];
+
+    if(isset($_POST['logout'])) {
+        session_destroy();
+        echo'<script>alert("Log-Out successful!");window.location.href="employer login.php";</script>';
+    }
     
 
 if (isset($_POST['submit'])) {

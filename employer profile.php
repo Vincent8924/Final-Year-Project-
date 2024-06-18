@@ -79,10 +79,28 @@ ob_start();
         {
     ?>
 
-    <div id="profile_photo_space" >
     
-    <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($row['photo_data']); ?>" alt="Photo">
-</div>
+        <?php
+            if($row['photo_data'] == null)
+            {
+                ?>
+                    <div id="profile_photo_space" >
+                    
+                    </div>
+                <?php
+            }
+            else if($row['photo_data'] != null)
+            {
+                ?>
+                    <div id="profile_photo_space" >
+                        <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($row['photo_data']); ?>" alt="Photo">
+                    </div>
+                <?php
+            }
+
+
+        ?>
+   
 
 
 <div class="mid">

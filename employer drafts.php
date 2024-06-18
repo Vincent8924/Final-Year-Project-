@@ -70,9 +70,12 @@
             else
             {
                 ?>
-                    <h1>Your have not any drafts now.</h1>
-                    <h1>Let make your new draft now.</h1>
-                    <br/><br/>
+                    <div class="none_mid">
+                    <b>Your have not any drafts now.</b>
+                    <br/><br/><br/>
+                    Let make your new draft now.
+                    </div>
+                   
                 <?php
             }
         ?>

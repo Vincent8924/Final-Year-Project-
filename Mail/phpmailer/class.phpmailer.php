@@ -70,7 +70,14 @@ class PHPMailer
      * The From email address for the message.
      * @var string
      */
-    public $From = 'root@localhost';
+
+    public $From = 'www.jobhelper@gmail.com';
+    //public $From = 'root@localhost';
+    
+
+
+
+
 
     /**
      * The From name of the message.

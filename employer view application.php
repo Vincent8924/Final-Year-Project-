@@ -6,7 +6,7 @@
     <title>
         Application | Job Help
     </title>
-    <link rel="stylesheet" type="text/css" href="employer payment history.css">
+    <link rel="stylesheet" type="text/css" href="employer view applications.css">
     <link rel="icon" href="general_image/jobhelper_logo.png">
 </head>
 
@@ -214,11 +214,33 @@ if(isset($_POST['access']))
 
 <br/><br/>
 
-<h1>Manage the application</h1>
-<br/><br/>
+
 
 <?php
 $all = mysqli_query($connect, "SELECT DISTINCT post_id FROM `applications` WHERE poster_id = '$id'");
+
+        if(mysqli_num_rows($all) > 0)
+        {
+            ?>
+                <h1>Manage your application</h1>
+                <br/><br/>
+            <?php
+        }
+        else
+        {
+            ?>
+            <br/><br/>
+            <div class="none_mid">
+                <b>Not jobseeker apply your job yet.</b>
+                <br/><br/>
+                You can add your job description to attract candidates.
+            </div>
+
+                
+            <?php
+        }
+
+
 while ($row = mysqli_fetch_assoc($all)) {
     $post_id = $row['post_id'];
 
@@ -232,8 +254,20 @@ while ($row = mysqli_fetch_assoc($all)) {
     $displayed_candidates = array();
     ?>
 
-    <h3>Your post <?php echo $post_id ?></h3>
-    <h2>The candidate list apply for job of <?php echo $jname ?></h2>
+    <h3 class="mid_content">Your post <?php echo $post_id ?></h3>
+
+    <?php
+        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Pending'");
+
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $candidate_id = $row['jobseeker_id'];
+            $app_id = $row['id'];
+            $status = $row['status'];
+    ?>
+
+
+    <h2 class="mid_content">The candidate list apply for job of <?php echo $jname ?></h2>
 
     <table>
         <tr>
@@ -250,11 +284,7 @@ while ($row = mysqli_fetch_assoc($all)) {
         </tr>
 
         <?php
-        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Pending'");
-        while ($row = mysqli_fetch_assoc($result)) {
-            $candidate_id = $row['jobseeker_id'];
-            $app_id = $row['id'];
-            $status = $row['status'];
+        
             
 
             // 如果已经显示过这个人，就会跳过
@@ -345,8 +375,17 @@ while ($row = mysqli_fetch_assoc($all)) {
     </table>
 
         <!--这里开始是看access的-->
+
+        <?php
+            $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Successful'");
+            while ($row = mysqli_fetch_assoc($result)) {
+                $candidate_id = $row['jobseeker_id'];
+                $app_id = $row['id'];
+                $status = $row['status'];
+        ?>
+        
     
-    <h2>The candidate list you access to apply for job of <?php echo $jname ?></h2>
+    <h2 class="mid_content">The candidate list you access to apply for job of <?php echo $jname ?></h2>
 
     <table>
         <tr>
@@ -362,11 +401,7 @@ while ($row = mysqli_fetch_assoc($all)) {
         </tr>
 
         <?php
-        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Successful'");
-        while ($row = mysqli_fetch_assoc($result)) {
-            $candidate_id = $row['jobseeker_id'];
-            $app_id = $row['id'];
-            $status = $row['status'];
+        
             
 
             // 如果已经显示过这个人，就会跳过

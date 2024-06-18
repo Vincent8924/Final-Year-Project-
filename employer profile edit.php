@@ -78,12 +78,27 @@
         if ($result) {
         while($data = mysqli_fetch_assoc($result))
         {
-    ?>
 
-    <div id="profile_photo_space" >
-    
-    <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($data['photo_data']); ?>" alt="Photo" >
-    </div>
+
+            if($data['photo_data'] == null)
+            {
+                ?>
+                    <div id="profile_photo_space" >
+                        <img id="profile_photo" >
+                    </div>
+                <?php
+            }
+            else if($data['photo_data'] != null)
+            {
+                ?>
+                    <div id="profile_photo_space" >
+                        <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($data['photo_data']); ?>" alt="Photo">
+                    </div>
+                <?php
+            }
+
+
+        ?>
     
 
 

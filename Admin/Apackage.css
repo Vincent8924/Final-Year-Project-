@@ -149,9 +149,8 @@ footer {
 
 .Acontainer
 {
-    border: #797979 solid 2px;
+    border: #9e9e9e solid;
     margin: 20px;
-    border-style: dotted;
     border-width: thick;
     border-radius: 10px;
     margin-left: 100px;

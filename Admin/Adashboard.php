@@ -63,6 +63,7 @@
                     <li><a href="Apost.php">Post</a></li>
                     <li><a href="Apackage.php">Package</a></li>
                     <li><a href="Asale.php">Sale</a></li>
+                    <li><a href="Ahelp.php">Help and Feedback</a></li>
                     <li><a href="Aprofile.php">Profile</a></li>
                 </ul>
             </nav>

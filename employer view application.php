@@ -167,9 +167,9 @@ if(isset($_POST['reject']))
 
 }
 
-if(isset($_POST['access']))
+if(isset($_POST['accept']))
 {
-    $id = $_POST['access_id'];
+    $id = $_POST['accept_id'];
 
     mysqli_query($connect,"UPDATE `applications` SET
     `status` = 'Successful'
@@ -352,10 +352,10 @@ while ($row = mysqli_fetch_assoc($all)) {
                 </td>
                 <td>
                     <form method="post">
-                        <button type="submit" name="access">
-                        Access
+                        <button type="submit" name="accept">
+                        Accept
                         </button>
-                        <input type="hidden" name="access_id" value="<?php echo $app_id ?>">
+                        <input type="hidden" name="accept_id" value="<?php echo $app_id ?>">
                         <br>
                         <br>
 
@@ -374,7 +374,7 @@ while ($row = mysqli_fetch_assoc($all)) {
 
     </table>
 
-        <!--这里开始是看access的-->
+        <!--这里开始是看accept的-->
 
         <?php
             $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Successful'");
@@ -385,7 +385,7 @@ while ($row = mysqli_fetch_assoc($all)) {
         ?>
         
     
-    <h2 class="mid_content">The candidate list you access to apply for job of <?php echo $jname ?></h2>
+    <h2 class="mid_content">The candidate list you accept to apply for job of <?php echo $jname ?></h2>
 
     <table>
         <tr>

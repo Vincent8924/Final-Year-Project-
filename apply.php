@@ -28,7 +28,7 @@ if (isset($_SESSION['id'])) {
 
 
         if (isset($_POST['submit'])) {
-            // if (isset($_FILES['resume']) && isset($_FILES['coverLetter']) && isset($_POST['post_id'])) {
+        
                 
                 $post = mysqli_query($connect,"SELECT * FROM post WHERE post_id = '$postId'");
                 if ($post) {
@@ -39,10 +39,7 @@ if (isset($_SESSION['id'])) {
                 $resume = $_FILES['resume'];
                 $coverLetter = $_FILES['coverLetter'];
         
-                // Perform necessary validations on files (e.g., file type, size)
-                // Insert logic to handle file uploads securely and store in a secure location
-                
-                // Example: Move uploaded files to a directory
+             
                 $resumeFileName = 'resume_' . time() . '_' . $resume['name'];
                 $coverLetterFileName = 'cover_letter_' . time() . '_' . $coverLetter['name'];
 
@@ -54,7 +51,7 @@ if (isset($_SESSION['id'])) {
 
                 
         
-                // Example: Update database with file paths
+           
                 $result = mysqli_query($connect, "INSERT INTO applications (jobseeker_id, post_id,poster_id, `resume`, cover_letter) VALUES ('$id', '$postId','$poster_id', '$resumeFilePath', '$coverLetterFilePath')");
         
                 if ($result) {
@@ -62,15 +59,15 @@ if (isset($_SESSION['id'])) {
                 } else {
                     echo '<script>alert("Error occurred while applying!");</script>';
                 }
-            // }
+           
         }
     else 
     {
-      //  echo '<script>alert("Please select both resume and cover letter files.");</script>';
+      
     }
 
 
-// Retrieve post details if post_id is provided
+
 if(isset($_GET['post_id'])) {
     $postId = $_GET['post_id'];
 

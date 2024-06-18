@@ -1,13 +1,12 @@
-
 body {
     font-family: 'Times New Roman', Times, serif;
-    background-color:antiquewhite;
+    background-color: white; 
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: rgb(218, 211, 211);
+    background-color: white; 
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -16,7 +15,7 @@ header {
 
 .navigation {
     display: inline-block;
-    margin-right: 50%;
+    margin-right: 40%;
 }
 
 .navigation ul {

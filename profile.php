@@ -39,11 +39,12 @@ if (isset($_POST['logout'])) {
 <body>
     <header>
         <div class="logo">
-            <img src="new.jpg" alt="Company Logo">
+        <img src="../Final-Year-Project-/general_image/jobhelper_logo.png" alt="JobStreet Logo">
         </div>
         <nav class="navigation">
             <ul>
-                <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>
+            <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>  
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
                 <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
                 <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
             </ul>
@@ -100,15 +101,16 @@ if ($result) {
         <p><?php echo htmlspecialchars($language); ?></p>
     </div>
     <div class="profile-section">
-        <h2>View Resume</h2>
-        <?php
-        if (!empty($row['Resume'])) {
-            $resumePath = htmlspecialchars($row['Resume']);
-            echo '<p>Current Resume: <a href="'.$resumePath.'" target="_blank">'.basename($resumePath).'</a></p>';
-        } else {
-            echo '<p>No resume available</p>';
-        }
-        ?>
+    <h2>View Resume</h2>
+    <?php
+    if (!empty($row['Resume'])) {
+        $resumePath = htmlspecialchars($row['Resume']);
+        echo '<p>Current Resume: <a href="download.php?file='.$resumePath.'">'.basename($resumePath).'</a></p>';
+    } else {
+        echo '<p>No resume available</p>';
+    }
+    ?>
+</div>
     </div>
     <div class="profile-section">
         <button onclick="window.location.href='edit profile.php?id=<?php echo urlencode($id); ?>'" class="edit-button">Edit Profile</button>

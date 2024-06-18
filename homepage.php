@@ -42,10 +42,11 @@ if (!$result) {
 <body>
 <header>
         <div class="logo">
-            <img src="new.jpg" alt="Company Logo">
+        <img src="../Final-Year-Project-/general_image/jobhelper_logo.png" alt="JobStreet Logo">
         </div>
         <nav class="navigation">
             <ul>
+            <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>  
                 <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
                 <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
                 <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>

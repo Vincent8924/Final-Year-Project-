@@ -45,11 +45,11 @@ if (isset($_POST['save_profile'])) {
     $Skills = $_POST['Skills'];
     $language = $_POST['language'];
 
-    $query = "SELECT * FROM jobseekerprofile WHERE jobseeker_id = '$id'";
-    $result = mysqli_query($connect, $query);
-
+    
+    $targetFilePath = '';
+    $targetDirectory = 'resume/';
     if (mysqli_num_rows($result) > 0) {
-        // Update existing profile
+      
         $query = "UPDATE jobseekerprofile SET PersonalSummary = '$PersonalSummary', work_experience = '$work_experience', Education = '$Education', Skills = '$Skills', language = '$language'";
 
         if ($photo_name && $photo_data) {
@@ -60,33 +60,31 @@ if (isset($_POST['save_profile'])) {
             $targetDirectory = 'resume/';
             $targetFilePath = $targetDirectory . basename($Resume);
 
-            // Ensure the resume directory exists
             if (!is_dir($targetDirectory)) {
                 mkdir($targetDirectory, 0755, true);
             }
 
             if (move_uploaded_file($_FILES['Resume']['tmp_name'], $targetFilePath)) {
-                // File uploaded successfully, update the database with the file path
+              
                 $query .= ", Resume = '$targetFilePath'";
             } else {
-                // Error occurred while moving the file
+              
                 echo '<script>alert("Error uploading resume.");</script>';
             }
         }
 
         $query .= " WHERE jobseeker_id = '$id'";
     } else {
-        // Insert new profile
+      
         $query = "INSERT INTO jobseekerprofile (photo_name, photo_data, PersonalSummary, work_experience, Education, Skills, language, Resume, jobseeker_id) 
         VALUES ('$photo_name', '$photo_data', '$PersonalSummary', '$work_experience', '$Education', '$Skills', '$language', '$targetFilePath', '$id')";
 
-        // Ensure the resume directory exists
         if (!is_dir($targetDirectory)) {
             mkdir($targetDirectory, 0755, true);
         }
 
         if ($Resume && move_uploaded_file($_FILES['Resume']['tmp_name'], $targetFilePath)) {
-            // File uploaded successfully, include file path in query
+            
             $query .= ", Resume = '$targetFilePath'";
         }
     }
@@ -103,7 +101,7 @@ if (isset($_POST['save_profile'])) {
 ?>
 <header>
     <div class="logo">
-        <img src="new.jpg" alt="Company Logo">
+    <img src="../Final-Year-Project-/general_image/jobhelper_logo.png" alt="JobStreet Logo">
     </div>
     <nav class="navigation">
         <ul>

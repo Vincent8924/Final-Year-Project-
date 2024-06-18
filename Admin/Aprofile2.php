@@ -245,7 +245,7 @@
                 <?php
             }
         }
-        if (isset($_POST['editPassword'])) 
+        if (isset($_POST['editPassword']))  
         {   
             $otp = rand(100000, 999999);
 

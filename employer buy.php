@@ -157,8 +157,11 @@
                 $mail->SMTPSecure='tls';
 
                
-                $mail->Username='lojinkai@gmail.com';
-                $mail->Password='iesz ctny gnma ntqc';
+                //$mail->Username='lojinkai@gmail.com';
+                //$mail->Password='iesz ctny gnma ntqc';
+
+                $mail->Username = 'www.jobhelper@gmail.com';
+                $mail->Password = 'izva godc asun goxa';
 
                 
                 $mail->setFrom('Jolp Help', 'Password Reset');

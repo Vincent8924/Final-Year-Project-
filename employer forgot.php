@@ -19,10 +19,12 @@
             $token = bin2hex(random_bytes(50));
 
             $otp = rand(100000,999999);
-            $_SESSION['otp'] = $otp;
+            
 
 
             session_start ();
+
+            $_SESSION['otp'] = $otp;
             $_SESSION['token'] = $token;
             $_SESSION['email'] = $email;
 

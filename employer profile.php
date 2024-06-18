@@ -84,8 +84,8 @@ ob_start();
             if($row['photo_data'] == null)
             {
                 ?>
-                    <div id="profile_photo_space" >
-                    
+                    <div id="profile_photo_space_blank" >
+                   
                     </div>
                 <?php
             }

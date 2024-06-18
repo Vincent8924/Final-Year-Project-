@@ -45,9 +45,9 @@ if (isset($_POST['save_profile'])) {
     $Skills = $_POST['Skills'];
     $language = $_POST['language'];
 
-    $query = "SELECT * FROM jobseekerprofile WHERE jobseeker_id = '$id'";
-    $result = mysqli_query($connect, $query);
-
+    // Define $targetFilePath and $targetDirectory here
+    $targetFilePath = '';
+    $targetDirectory = 'resume/';
     if (mysqli_num_rows($result) > 0) {
         // Update existing profile
         $query = "UPDATE jobseekerprofile SET PersonalSummary = '$PersonalSummary', work_experience = '$work_experience', Education = '$Education', Skills = '$Skills', language = '$language'";

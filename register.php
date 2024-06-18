@@ -18,10 +18,18 @@ if(isset($_POST['registerBtn'])) {
                     alert("Email already exists! Registration failed.");
                   </script>';
         } else {
+            // Insert user into jobseeker table
             mysqli_query($connect, "INSERT INTO jobseeker (jobseeker_firstname, jobseeker_lastname, jobseeker_email, jobseeker_password) 
             VALUES ('$firstName', '$lastName', '$email', '$hashedPassword')");
+
+            // Fetch the auto-generated jobseeker_id
+            $jobseekerIdResult = mysqli_query($connect, "SELECT jobseeker_id FROM jobseeker WHERE jobseeker_email = '$email'");
+            $row = mysqli_fetch_assoc($jobseekerIdResult);
+            $jobseekerId = $row['jobseeker_id'];
+
+            // Insert corresponding record into jobseekerprofile table
+            mysqli_query($connect, "INSERT INTO jobseekerprofile (jobseeker_id) VALUES ('$jobseekerId')");
             
-            mysqli_query($connect, "INSERT INTO userprofile (`UserID`) SELECT jobseeker_id FROM jobseeker WHERE jobseeker_email = '$email'");
             ?>
 
             <script>

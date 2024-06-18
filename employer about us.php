@@ -70,8 +70,8 @@
 
     <div class="image-box">
         <img src="about_us_img\jk.png" alt="Team Member">
-        <p><b>Lo Jin Kai</b></p>
-    </div>
+        <p><b>Lo Jin Kai</b></p> 
+    </div> 
 
     
     <div class="position-box">

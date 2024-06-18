@@ -1,243 +1,121 @@
+<?php include('dataconnection.php'); 
+
+    if(isset($_POST["forgot"])){
+
+        $email = $_POST["email"];
+
+        $sql = mysqli_query($connect, "SELECT * FROM jobseeker WHERE jobseeker_email = '$email'");
+        $query = mysqli_num_rows($sql);
+  	    $fetch = mysqli_fetch_assoc($sql);
+
+        if(mysqli_num_rows($sql) <= 0){
+            ?>
+            <script>
+                alert("<?php  echo "Sorry, no emails exists "?>");
+            </script>
+            <?php
+        }else{
+            // generate token by binaryhexa 
+            $token = bin2hex(random_bytes(50));
+
+            $otp = rand(100000,999999);
+            
+
+
+            session_start ();
+
+            $_SESSION['otp'] = $otp;
+            $_SESSION['token'] = $token;
+            $_SESSION['email'] = $email;
+
+            require "Mail/phpmailer/PHPMailerAutoload.php";
+            $mail = new PHPMailer;
+
+            $mail->isSMTP();
+            $mail->Host='smtp.gmail.com';
+            $mail->Port=587;
+            $mail->SMTPAuth=true;
+            $mail->SMTPSecure='tls';
+
+            
+            //$mail->Username='lojinkai@gmail.com';
+            //$mail->Password='iesz ctny gnma ntqc';
+
+            $mail->Username = 'www.jobhelper@gmail.com';
+            $mail->Password = 'izva godc asun goxa';
+
+            
+            $mail->setFrom('Jolp Help', 'Password Reset');
+            
+            // get email from input
+            $mail->addAddress($_POST["email"]);
+            
+
+            // HTML body
+            $mail->isHTML(true);
+            $mail->Subject="Recover your password";
+            $mail->Body = "<p>Dear user, </p> <h3>Your verify OTP code is $otp <br></h3>";
+
+
+            if(!$mail->send()){
+                echo "<script>alert('Fail to send OTP, please try again.');</script>";
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            }else{
+               
+                echo "<script>alert('Send OTP successfully, OTP sent to $email'); window.location.replace('reset2.php');</script>";
+            }
+
+        
+        }
+    }
+
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>reset</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
-    <style>
-         body {
-            font-family: 'Times New Roman', Times, serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background: url('halo.jpg') center center fixed;
-            background-size: cover;
-            line-height: 1.6;
-            color: #0c0b0b; 
-        }
-
-        header {
-            background-color: white; 
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navigation {
-            display: inline-block;
-            margin-left: 20px;
-        }
-
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        .navigation ul li a {
-            text-decoration: none;
-            color: #333; 
-            font-weight: bold; 
-            transition: color 0.3s; /
-        }
-
-        .navigation ul li a:hover {
-            color: #555; 
-        }
-
-        .sign-in,
-        .employer-site {
-            display: inline-block;
-            padding: 8px 16px; 
-            border: 2px solid blue; 
-            border-radius: 5px; 
-        }
-
-        .sign-in a,
-        .employer-site a {
-            text-decoration: none;
-            color: rgb(12, 12, 191); 
-        }
-
-        .sign-in:hover,
-        .employer-site:hover {
-            background-color: blue; 
-        }
-
-        .sign-in:hover a,
-        .employer-site:hover a {
-            color: white; 
-        }
-
-        .logo {
-            display: inline-block;
-        }
-
-        .logo img {
-            height: 50px; 
-        }
-
-        .navigation {
-            display: inline-block;
-            margin-left: 20px;
-        }
-
-        .navigation ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navigation ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        .sign-in {
-            display: inline-block;
-            margin-left: auto; 
-            margin-right: 20px; 
-        }
-
-        .employer-site {
-            display: inline-block;
-        }
-
-
-        .form-container {
-            max-width: 400px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px); 
-            margin: 100px auto; 
-        }
-
-        h2 {
-            text-align: center;
-            color: #070606; 
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #070707; 
-        }
-
-        input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            box-sizing: border-box;
-            border: 1px solid #0d0c0c;
-            border-radius: 4px;
-            color: #070707; 
-        }
-
-        button {
-            background-color: #f1f6f1;
-            color: rgb(20, 14, 14);
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover, 
-        .button-clicked { 
-            background-color: #a4d3ff;
-        }
-
-        .message {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #111010; 
-        }
-    </style>
+    <meta charset="UTF-8"/>
+    <title>Reset Password | Job Help</title>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="icon" href="general_image/jobhelper_logo.png">
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <img src="general_image/jobhelper_logo.png" alt="JobStreet Logo">
+        </div>
 
-<header>
-    <div class="logo">
-        <img src="logo.png" alt="JobStreet Logo">
+
+
+        <div class="jobseeker-site">
+            <a href="employer sign up.php">Employer Site</a>
+        </div>
+    </header>
+
+    <div id="form_container">
+        <form class="form" method="post">
+            <p id="heading">Your Email</p>
+            <div class="field">
+                <span class="material-symbols-outlined"> Email </span>
+                <input name="email"  placeholder="Please enter your Email" class="input-field" type="text"/>
+            </div>
+           
+            <div>
+                <button class="full_button" type="submit" name="forgot">Send OTP</button>
+            </div>
+        </form>
     </div>
 
-    <nav class="navigation"> 
-        <ul>
-            <li><a href="#">Job Search</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Company Profile</a></li>
-        </ul>
-    </nav>
 
-    <div class="sign-in">
-        <a href="login.php">Sign In</a>
-    </div>
 
-    <div class="employer-site">
-        <a href="#">Employer Site</a>
-    </div>
-</header>
-
-<div class="form-container" id="resetForm">
-    <h2>Reset Password</h2>
-    <p class="message">Please enter your email address to verify is your own operation.</p>
-
-    <form id="reset-password-form">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <button type="button" onclick="sendResetLink()" id="confirmButton">Confirm</button>
-    </form>
-</div>
-<script src="https://smtpjs.com/v3/smtp.js"></script>
-<script>
-    function sendResetLink() {
-        var userEmail = document.getElementById("email").value;
-
-        if (validateEmail(userEmail)) {
-            document.getElementById("confirmButton").classList.add("button-clicked"); 
-            Email.send({
-                Host: "smtp.elasticemail.com",
-                Username: "1211202786@student.mmu.edu.my",
-                Password: "1A7A75F16100FF8A650865A7DF7FC1F180FB",
-                To: userEmail,
-                From: "1211202786@student.mmu.edu.my",
-                Subject: "Password Reset Link",
-                Body: "Your account is requesting to change the password. Please verify whether this is your own operation. If so, please click <a href='http://localhost/f/reset2.php'>here</a> to complete the password change."
-            }).then(
-                function (message) {
-                    if (message === "OK") {
-                        alert("Password reset link sent successfully!");
-                    } else {
-                        console.error("Failed to send email:", message);
-                        alert("Failed to send password reset link. Please try again later.");
-                    }
-                }
-            ).catch(
-                function (error) {
-                    console.error("Error:", error);
-                    alert("An error occurred while sending the email. Please try again later.");
-                }
-            );
-        } else {
-            alert("Please enter a valid email address.");
-        }
-    }
-
-    function validateEmail(email) {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
-    }
-</script>
-</body> 
+<footer>
+        <nav>
+            <ul>
+                <li><a href="aboutus.php">About Us</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
 </html>

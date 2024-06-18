@@ -126,11 +126,12 @@
                             <td class="colontd">:</td>
                             <td class="valuetd">********</td>
                             <td class="btntd">
-                                <button onclick="editpassword()" class="edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
+                                <form method="POST">
+                                    <button type="submit" name="editPassword" class="edit"><i class="fas fa-edit"></i></button>
+                                </form>
                             </td>
                         </tr>
+
 
                     </tbody>
                 </table>
@@ -200,32 +201,7 @@
             </div>
         </form>
     </div>
-    <div id="editpassword">
-        <form method="POST">
-            <div class="aform">
-                <div class="x" >
-                    <button type="button" onclick="closeeditpassword()" id="x">x</button>
-                </div>
-                
-                <h2>Edit Password</h2>
-                <br>
-                <div class="bform">
-                    <div class="label">
-                        <label >Password </label>
-                    </div>
-                        <input type="password"  name="pw" required><br>
-                </div>
-                <div class="bform">
-                    <div class="label">
-                        <label >Confirm Password </label>
-                    </div>
-                        <input type="password"  name="cpw" required><br>
-                </div>
-                <br>
-                <input type="submit" value="Edit" class="formbtn" name="editpassword">   
-            </div>
-        </form>
-    </div>
+    
     <?php
         if(isset($_POST['editfname']))
         {
@@ -269,45 +245,40 @@
                 <?php
             }
         }
-        if(isset($_POST['editpassword']))
+        if (isset($_POST['editPassword'])) 
         {
-            $pw = $_POST['pw'];
-            $cpw = $_POST['cpw'];
-            $hpw = password_hash($_POST["pw"], PASSWORD_DEFAULT);
-            if(strlen($pw) < 8)
+            echo "<script>console.log('Form submitted');</script>"; 
+            $otp = rand(100000, 999999);
+        
+            require "Mail/phpmailer/PHPMailerAutoload.php";
+            $mail = new PHPMailer;
+        
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 587;
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls';
+        
+            $mail->Username = 'www.jobhelper@gmail.com';
+            $mail->Password = '1234512345';
+        
+            $mail->setFrom('www.jobhelper@gmail.com', 'Password Reset');
+            $mail->addAddress($email);
+        
+            $mail->isHTML(true);
+            $mail->Subject = "Reset your password";
+            $mail->Body = "<p>Dear user, </p><h3>Your verify OTP code is $otp<br></h3>";
+        
+            if (!$mail->send()) 
             {
-                ?>
-                <script>
-                    alert("Unsucessful! The length for password must be at least 8 characters.");
-                    history.go(-1);
-                </script>
-                <?php
-            }
-            else if($pw !== $cpw)
+                echo "<script>alert('Fail to send OTP, please try again.');</script>";
+            } else 
             {
-                ?>
-                <script>
-                    alert("Unsucessful! The password doesn't match.");
-                    history.go(-1);
-                </script>
-                <?php
+                echo "<script>alert('OTP has been sent to $email'); window.location.replace('Atemplate.php');</script>";
             }
-            else
-            {
-                $result=mysqli_query($connect,"UPDATE admin SET admin_password = '$hpw' where admin_id = '$id'");
-                if($result)
-                {
-                    ?>
-                    <script>
-                        alert("Your password have been changed!");
-                        window.location.href = "Aprofile.php";
-                    </script>
-                    <?php
-                }
-            }
-
         }
         
+    
         ?>
 
 
@@ -354,14 +325,6 @@
     }
     function closeeditemail(){
         var div = document.getElementById("editemail");
-        div.style.display = "none";  
-    }
-    function editpassword(){
-        var div = document.getElementById("editpassword");
-        div.style.display = "block";  
-    }
-    function closeeditpassword(){
-        var div = document.getElementById("editpassword");
         div.style.display = "none";  
     }
 </script>

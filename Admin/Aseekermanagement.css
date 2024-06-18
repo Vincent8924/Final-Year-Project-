@@ -164,14 +164,15 @@ h1
 .Acontainer
 {
     border: #9e9e9e solid 2px;
-    margin: 20px;
+    margin: auto;
     border-width: thick;
     border-radius: 10px;
-    width: auto;
+    width: 95%;
     margin-bottom: 50px;
     background-color: #d4d4db;
-    max-height: 60vh;
+    max-height : 60vh;
     overflow-y: auto;
+    margin-top: 20px;
 }
 main {
     flex: 1;

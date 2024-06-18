@@ -38,7 +38,7 @@ $result = $connect->query($query);
 
 <header>
         <div class="logo">
-            <img src="new.jpg" alt="Company Logo">
+        <img src="../Final-Year-Project-/general_image/jobhelper_logo.png" alt="JobStreet Logo">
         </div>
         <nav class="navigation">
             <ul>

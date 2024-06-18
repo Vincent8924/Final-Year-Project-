@@ -1,31 +1,149 @@
 body {
-            
     font-family: 'Times New Roman', Times, serif;
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
 }
 
-header {
-    background-color: #ffffff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
+    header {
+        background-color: #ffffff;
+        padding: 10px 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .navigation {
+        margin-top: 20px;
+        font-size: 20px;
+        display: flex;
+        gap: 20px;
+    }
+
+    .navigation ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 20px;
+    }
+
+    .navigation ul li {
+        display: inline-block;
+    }
+
+    .navigation ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .navigation ul li a:hover {
+        color: #007bff;
+    }
+
+    .logo img {
+        height: 50px;
+        width: 50px;
+        margin-left: 30px;
+    }
+
+    #logout {
+        font-size: 15px;
+        width: 150px;
+        margin-right: 40px;
+        margin-top: 10px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+
+    #logout_photo {
+        width: 15px;
+    }
+
+    #page_logo {
+        width: 80px;
+        padding-top: 8px;
+    }
+
+#profile_photo_space {
+    text-align: center;
+    
+    
+}
+
+#profile_photo {
+    width:  200px;
+    border-radius: 5%;
+    border: 5px solid #007bff; /* Changed border color to match theme */
+    object-fit: cover;
+    display: inline-block; /* Center the image in the div */
+}
+
+.mid {
+    max-width: 600px;
+    margin: 60px auto; /* Adjusted margin to push content below the fixed header */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+.profile input[type="text"], .profile input[type="file"] {
     width: 100%;
-    top: 0;
-    z-index: 1000; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
 }
 
-.navigation {
-    margin-right: 50%;
-    margin-top: 20px;
-    font-size: 20px;
+.profile input[type="text"]:focus, .profile input[type="file"]:focus {
+    border-color: #007bff;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: white;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
-.navigation ul {
+footer nav ul {
+    font-family: 'Times New Roman', Times, serif;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -33,130 +151,52 @@ header {
     gap: 20px;
 }
 
-.navigation ul li {
-    display: inline-block;
-}
-
-.navigation ul li a {
+footer nav ul li a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    transition: color 0.3s;
+    transition: color 0.3s ease-in-out;
 }
 
-.navigation ul li a:hover {
-    color: #555;
-}
-
-.logo img {
-    height: 50px;
-    width: 50px;
-    margin-left: 30px;
-}
-
-#logout {
-    font-size: 20px;
-    width: 100px;
-    margin-top: -10px;
-}
-
-#logout
-{
-    font-size: 15px;
-    width: 150px;
-    margin-right:40px ;
-    margin-top: 10px;
-    border: none;
-}
-
-#logout_photo
-{
-    width: 15px; 
-    
+footer nav ul li a:hover {
+    color: #007bff;
 }
 
 
-#profile_photo_space {
+
+.form-upload {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+   
     text-align: center;
 }
 
-#profile_photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 2px solid #333;
-}
-
-.mid {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.profile input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.form-upload label {
+    display: block;
     margin-bottom: 10px;
-    box-sizing: border-box;
+    color: #333;
+    font-weight: bold;
 }
 
-button[type="submit"] {
-    background-color: #333;
-    color: white;
-    border: none;
+/* 隐藏原始的文件上传控件 */
+.form-upload input[type="file"] {
+    display: none;
+}
+
+/* 自定义的上传按钮样式 */
+.custom-file-upload {
+    display: inline-block;
     padding: 10px 20px;
-    border-radius: 5px;
     cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #555;
-}
-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form input[type="file"] {
-    display: block;
-    margin-bottom: 20px;
-}
-
-form .profile {
-    margin-bottom: 20px;
-}
-
-form .profile input[type="text"] {
-    width: calc(100% - 20px); /* Adjusting width for padding */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-form button[type="submit"] {
-    background-color: #333;
+    background-color: #007bff;
     color: white;
-    border: none;
-    padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
 }
 
-form button[type="submit"]:hover {
-    background-color: #555;
-}
-hr {
-    border: 0;
-    clear: both;
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #333;
-    margin: 20px 0;
+.custom-file-upload:hover {
+    background-color: #0056b3;
 }

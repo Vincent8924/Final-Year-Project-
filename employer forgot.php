@@ -35,15 +35,16 @@
             $mail->SMTPAuth=true;
             $mail->SMTPSecure='tls';
 
-            // h-hotel account
+            
             $mail->Username='lojinkai@gmail.com';
             $mail->Password='iesz ctny gnma ntqc';
 
-            // send by h-hotel email
+            
             $mail->setFrom('Jolp Help', 'Password Reset');
+            
             // get email from input
             $mail->addAddress($_POST["email"]);
-            //$mail->addReplyTo('lamkaizhe16@gmail.com');
+            
 
             // HTML body
             $mail->isHTML(true);
@@ -72,12 +73,12 @@
     <meta charset="UTF-8"/>
     <title>Reset Password | Job Help</title>
     <link rel="stylesheet" type="text/css" href="employer reset.css">
-    <link rel="icon" href="img/logo.png">
+    <link rel="icon" href="general_image/jobhelper_logo.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="general_image/jobhelper_logo.png" alt="JobStreet Logo">
         </div>
 
 

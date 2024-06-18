@@ -42,6 +42,7 @@
         </form>
     </header>
 
+    <div class="center-container">
     <?php
         $result = mysqli_query($connect, "SELECT * FROM post");
         while($row = mysqli_fetch_assoc($result))
@@ -77,6 +78,7 @@
     <?php
         }
     ?>
+    </div>
 
     <?php
         if (isset($_POST['delete_id'])) 

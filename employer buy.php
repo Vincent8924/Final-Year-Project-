@@ -156,15 +156,15 @@
                 $mail->SMTPAuth=true;
                 $mail->SMTPSecure='tls';
 
-                // h-hotel account
+               
                 $mail->Username='lojinkai@gmail.com';
                 $mail->Password='iesz ctny gnma ntqc';
 
-                // send by h-hotel email
+                
                 $mail->setFrom('Jolp Help', 'Password Reset');
                 // get email from input
                 $mail->addAddress($email);
-                //$mail->addReplyTo('lamkaizhe16@gmail.com');
+          
 
                 // HTML body
                 $mail->isHTML(true);

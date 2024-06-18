@@ -47,7 +47,7 @@ $jobseeker_id = isset($_SESSION['jobseeker_id']) ? $_SESSION['jobseeker_id'] : '
         </div>
 
         <div class="employer-site">
-            <a href="employer sign up.php">Employer Site</a>
+            <a href="employer index.php">Employer Site</a>
         </div>
     </header>
 

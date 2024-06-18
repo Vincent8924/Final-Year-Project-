@@ -79,7 +79,7 @@ session_start();
             <p id="heading">Verify OTP</p>
             <div class="field">
                 <span class="material-symbols-outlined"> OTP </span>
-                <input name="email"  placeholder="Please enter the otp " class="input-field" type="text"/>
+                <input name="otp_code"  placeholder="Please enter the otp " class="input-field" type="text"/>
             </div>
            
             <div>

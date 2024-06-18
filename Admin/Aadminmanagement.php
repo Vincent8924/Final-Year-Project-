@@ -9,12 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Management</title>
     <link rel="stylesheet" href="Aadminmanagement.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-<header class="header">
-        <h1>JobHelper</h1>
+    <header class="header">
+        <img src="../general_image/jobhelper_logo.png" class="logo">
         <div>
-            <a  class="AdminAcc" onclick="displaybar()">
+            <button class="AdminAcc" onclick="displaybar()">
                 <?php
                     $id = $_SESSION['id'];
 
@@ -25,14 +26,16 @@
                         $fname = $row["admin_fname"];
                     }
                 ?>
-                <?php echo"$fname"; ?>            
-            </a>
+                <i class="fa-solid fa-user"></i><?php echo"   $fname"; ?>            
+            </button>
         </div>
     </header>
     
     <div class="aAccBar" id="aAccBar">
         <div class="bAccBar">
-            <a href="Aprofile.php">Profile</a>
+            <form >
+                <input type="button" name="profile" value="Profile" onclick="goProfile()">
+            </form>
         </div>
         <div class="bAccBar">
             <form action="" method="POST" id="logout">
@@ -364,6 +367,10 @@
         {
             div.style.display = "block"; 
         }
+    }
+    function goProfile()
+    {
+        window.location.href = "Aprofile.php";
     }
 </script>
 

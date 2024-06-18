@@ -39,6 +39,7 @@ if(isset($_POST['logout'])) {
 
 <div class="content">
     <h1>Your Payment History</h1>
+    <br/><br/>
     <div class="table-container">
         <table>
             <tr>
@@ -80,8 +81,8 @@ if(isset($_POST['logout'])) {
 <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>

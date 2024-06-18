@@ -1,7 +1,5 @@
 body{
-    background-image: url('t.jpg');
-    background-size: 100% 150%;
-    background-repeat:no-repeat;
+
     font-family: 'Times New Roman', Times, serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -157,17 +155,17 @@ button {
 }
 
 #profile_photo_space {
-    border: 5px solid rgb(0, 0, 0);
-    width:  280px; /* 宽度设为固定的百分比 */
-   
-    display: flex; /* 使用 Flex 布局 */
-    /*/justify-content: center; /* 水平居中 */
+    text-align: center;
+    
+    
 }
 
 #profile_photo {
-    max-width: 100%;
-    max-height: 100%;
+    width:  200px;
+    border-radius: 5%;
+    border: 5px solid #007bff; /* Changed border color to match theme */
     object-fit: cover;
+    display: inline-block; /* Center the image in the div */
 }
 
 #subbody
@@ -206,4 +204,28 @@ footer nav ul li a {
 
 footer nav ul li a:hover {
     color: #555;
+}
+
+.mid p:empty::before {
+    content: 'none'; /* Display 'N/A' when there's no data */
+    color: black; /* Light grey color for placeholders */
+}
+
+
+.mid h2 {
+    font-size: 22px; /* Larger font size for headings */
+    color: #007bff; /* Brand color for headings */
+    margin-bottom: 10px; /* Spacing after headings */
+    display: flex;
+    align-items: center; /* Align icons with text */
+}
+
+.mid {
+    max-width: 600px;
+    margin: 60px auto; /* Adjusted margin to push content below the fixed header */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }

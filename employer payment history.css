@@ -1,7 +1,5 @@
 body {
-    background-image: url('i.jpg');
-   
-    background-size: 100% 160%;
+
     font-family: 'Times New Roman', Times, serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -91,31 +89,34 @@ button {
     background-color: #007bff;
 }
 
-.content {
-    margin-top: 100px;
-    padding: 20px;
-    width: 90%;
-    max-width: 1200px;
-    text-align: center;
-}
-
 h1 {
     font-size: 36px;
     color: #333;
     margin-bottom: 20px;
 }
 
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px; /* Adjust as needed */
+}
+
 .table-container {
-    max-height: 400px;
-    overflow-y: auto;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Adjust as needed for your design */
+    overflow-x: auto; /* Allows table to scroll on small screens */
 }
 
 table {
-width: 100%;
-border-collapse: collapse;
-border: 1px solid #000; /* Add a black border around the table */
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Adjust as needed */
+    border: #000  solid  1px;
 }
+
+
+
 th, td {
     padding: 15px;
     text-align: left;

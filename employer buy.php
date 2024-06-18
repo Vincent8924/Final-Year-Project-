@@ -120,11 +120,90 @@
             }
             $balance += $pt;
             mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
+
+            echo 
+            '<script>
+                alert("You are successfully buy this package");        
+            </script>';
+            
+
+            //send email
+            $e = mysqli_query($connect,"SELECT * FROM employer WHERE id = '$id'");
+            
+            $erow = mysqli_fetch_assoc($e);
+            $email = $erow['employer_email'];
+
+            $sql = mysqli_query($connect, "SELECT * FROM employer WHERE employer_email = '$email'");
+            $query = mysqli_num_rows($sql);
+            $fetch = mysqli_fetch_assoc($sql);
+
+            if(mysqli_num_rows($sql) <= 0){
+                ?>
+                <script>
+                    alert("<?php  echo "Sorry, failed to send receipt to your email "?>");
+                </script>
+                <?php
+            }else{
+
+
+
+                require "Mail/phpmailer/PHPMailerAutoload.php";
+                $mail = new PHPMailer;
+
+                $mail->isSMTP();
+                $mail->Host='smtp.gmail.com';
+                $mail->Port=587;
+                $mail->SMTPAuth=true;
+                $mail->SMTPSecure='tls';
+
+               
+                $mail->Username='lojinkai@gmail.com';
+                $mail->Password='iesz ctny gnma ntqc';
+
+                
+                $mail->setFrom('Jolp Help', 'Password Reset');
+                // get email from input
+                $mail->addAddress($email);
+          
+
+                // HTML body
+                $mail->isHTML(true);
+                $mail->Subject="Payment confirmed";
+                $mail->Body = 
+                "
+                <p>Dear customer, </p> 
+                <p>
+                    Thank you for your purchase on our website. We have received your payment via $method. 
+                    We hope you find the right employee through our website
+                    <br><br>
+                    Best wishes,
+                    <br><br>
+                    Jolp Help
+                </p>
+
+                ";
+
+
+                if(!$mail->send()){
+                    echo "<script>alert('Fail to send receipt.');</script>";
+                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                }else{
+                
+                    echo "<script>alert('Receipt sent to your email, $email');</script>";
+                }
+
+            
+            }
+            
             echo '<script>
-                alert("You are successfully buy this package");
+                
                 window.location = "employer packages.php";
             </script>';
-        } else {
+
+
+        } 
+        else 
+        {
             $msg = "Please fill all fields";
         }
     }
@@ -278,6 +357,12 @@
   
         return true;
     }
+
+    function userconfirmation()
+        {
+            answer = confirm("Do you want to log out?");
+            return answer;
+        }
     </script>
 
     <br><br><br><br>    
@@ -285,8 +370,8 @@
     <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>

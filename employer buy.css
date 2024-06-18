@@ -1,7 +1,5 @@
 body{
-    background-image: url('t.jpg');
-    background-size: 100% 150%;
-    background-repeat:no-repeat;
+
     font-family: 'Times New Roman', Times, serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -22,19 +20,6 @@ body{
 
 
 
-#logout {
-    font-size: 15px;
-    width: 150px;
-    margin-right: 40px;
-    margin-top: 10px;
-    border: none;
-}
-
-#logout_photo {
-    width: 15px;
-}
-
-
 header {
     background-color: #ffffff;
     padding: 10px 20px;
@@ -44,11 +29,11 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid #ccc; /* Add a 1px solid border to the bottom */
+    border-bottom: 1px solid #ccc; 
 }
 
 .navigation {
-
+    
     margin-top: 20px;
     font-size: 20px;
     display: flex;
@@ -78,6 +63,22 @@ header {
     color: #555;
 }
 
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+}
+
+#logout {
+    font-size: 20px;
+    background-color: #007bff;
+    margin-top: -10px;
+    font-size: 15px;
+    width: 150px;
+    margin-right: 40px;
+    margin-top: 10px;
+    border: none;
+}
 
 button {
     width: 100px;
@@ -281,59 +282,7 @@ select{
 
 
 
-header {
-    background-color: #ffffff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000; 
-}
 
-.navigation {
-    margin-right: 50%;
-    margin-top: 20px;
-    font-size: 20px;
-    display: flex;
-    gap: 20px;
-}
-
-.navigation ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
-}
-
-.navigation ul li {
-    display: inline-block;
-}
-
-.navigation ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.navigation ul li a:hover {
-    color: #555;
-}
-
-.logo img {
-    height: 50px;
-    width: 50px;
-    margin-left: 30px;
-}
-
-#logout {
-    font-size: 20px;
-    width: 100px;
-    margin-top: -10px;
-}
 .left 
 {
     float: left;
@@ -394,7 +343,7 @@ footer nav ul li a {
 
 footer nav ul li a:hover {
     color: #555;
-}
+
     font-size: 15px;
     width: 150px;
     height: 40px;

@@ -3,53 +3,55 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
 }
-
-
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2e2d2d;
-    color: #fff;
-    padding: 20px;
-}
-
-.header h1 {
-    margin: 0;
-}
-
-
-.AdminAcc {
-    color: white;
+    background-color: White;
+    color: #333;
     padding: 10px 20px;
+}
+.logo
+{
+    height: 50px;
+    width: 80px;
+    margin-left: 30px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.AdminAcc{
+    color: white;
+    background-color: #797979;
+    padding: 10px;
     text-align: center;
-    text-decoration: none;
-    font-size: 20px;
-    margin-left: 20px; 
-
+    margin-left: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    width: 130px;
+    height: 40px;
+    font-size: 15px;
 }
 
 .AdminAcc:hover{
-    color: orange;
-    font-size: 22px;
+    background-color: rgb(187, 180, 180);
 }
+
 .aAccBar
 {
     display: none;
     position: absolute;
     width: 125px;
-    top: 65px; 
-    right: 35px; 
-    background-color:  #2e2d2d; 
-    border: 1px solid #ccc; 
+    top: 70px; 
+    right: 20px; 
+    background-color:  white; 
+    border: 2px solid #8b8b8b; 
     padding: 10px; 
     border-radius: 5px;
     text-align: center;
@@ -57,7 +59,6 @@ body {
 }
 .aAccBar a
 {
-    color: #fff;
     text-decoration: none;
 }
 .aAccBar a:hover
@@ -68,26 +69,22 @@ body {
 {
     width: 90px;
     height: 25px;
-    color: #fff;
-    background-color:  #2e2d2d; 
+    background-color:  white; 
     font-weight: bold;
     border: none;
 }
 .aAccBar input:hover
 {
     color: #a8a8a8;
-    background-color:  #2e2d2d; 
 }
 
 
 .container {
     display: flex;
 }
-
-
 aside {
     width: 200px;
-    background-color: #a8a8a8;
+    background-color: rgb(200,200,200);
     color: #fff;
 }
 
@@ -118,9 +115,11 @@ aside nav ul li a:hover
     color: #56549b;
     font-size: 18px;
 }
-footer {
-    background-color: #333;
-    color: #fff;
+
+footer 
+{
+    background-color: white;
+    color: #2e2d2d;
     padding: 20px;
     text-align: center;
 }
@@ -178,7 +177,9 @@ h1
 }
 main {
     flex: 1;
-    min-height: 90vh;
+    height: 92vh;
+    max-height: 92vh;
+    overflow-y: auto;
 }
 .aform
 {

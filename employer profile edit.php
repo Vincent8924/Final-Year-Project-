@@ -6,9 +6,29 @@
         <title>
             Profile | Job Help
         </title>
-        <link rel="stylesheet" type="text/css" href="employer profile.css">
+        <link rel="stylesheet" type="text/css" href="employer profile edit.css">
         <link rel="icon" href="general_image/jobhelper_logo.png">
+
+
+        <script>
+
+
+            // Function to preview image before uploading
+            function previewImage(event) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var output = document.getElementById('profile_photo');
+                    output.src = reader.result;
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+</script>
+
+
     </head>
+
+
+
     <body>
     <br/> <br/>
     <?php
@@ -62,7 +82,7 @@
 
     <div id="profile_photo_space" >
     
-    <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($data['photo_data']); ?>" alt="Photo">
+    <img id="profile_photo" src="data:image/png;base64,<?php echo base64_encode($data['photo_data']); ?>" alt="Photo" >
     </div>
     
 
@@ -70,15 +90,23 @@
 
        
 
-    <br/><br/><br/>
+
     <div class="mid">
 
     <form  method="post" enctype="multipart/form-data">
-    <input type="file" name="photo" accept="image/*">
+   
+
+    <div class="form-upload">
+    <label for="photo" class="custom-file-upload">Upload your profile photo</label>
+
+    <input type="file" name="photo" id="photo" accept="image/*" onchange="previewImage(event)">
+    <span id="file-name"></span>
+
+</div>
 
 
 
-    <br/><br/><br/><br/>
+   
 
     <div class="profile">
     Employer/Company name 
@@ -86,7 +114,7 @@
     <input type="text" name="name" placeholder="<?php echo $data['name'] ?>" value="<?php echo $data['name'] ?>">
     </div>
 
-    <br/><br/>
+
 
     <div class="profile">
     Website 
@@ -94,7 +122,7 @@
     <input type="text" name="website" placeholder="<?php echo $data['website'] ?>" value="<?php echo $data['website'] ?>">
     </div>
 
-    <br/><br/>
+   
 
     <div class="profile">
     industry
@@ -102,7 +130,7 @@
     <input type="text" name="industry" placeholder="<?php echo $data['industry'] ?>" value="<?php echo $data['industry'] ?>">
     </div>
 
-    <br/><br/>
+   
 
     <div class="profile">
     Company Size
@@ -110,7 +138,7 @@
     <input type="text" name="size" placeholder="<?php echo $data['company_size'] ?>" value="<?php echo $data['company_size'] ?>">
     </div>
 
-    <br/><br/>
+    
 
     <div class="profile">
     Primary location
@@ -118,7 +146,7 @@
     <input type="text" name="location" placeholder="<?php echo $data['primary_location'] ?>" value="<?php echo $data['primary_location'] ?>">
     </div>
 
-    <br/><br/>
+    
 
     <div class="profile">
     Description
@@ -126,7 +154,7 @@
     <input type="text" name="description" placeholder="<?php echo $data['description'] ?>" value="<?php echo $data['description'] ?>">
     </div>
 
-    <br/><br/><br/><br/>
+    <br/><br/>
     <button type="submit" name="submit">Upload Profile</button>
 
     </form></div>
@@ -223,11 +251,20 @@ if(isset($_POST['submit'])) {
 <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>
+
+<script>
+    function userconfirmation()
+        {
+            answer = confirm("Do you want to log out?");
+            return answer;
+        }
+
+</script>
 
     </body>
 

@@ -6,13 +6,13 @@
             Sign up | Job Help
         </title>
         <link rel="stylesheet" type="text/css" href="employer sign up.css">
-        <link rel="icon" href="img/logo.png">
+        <link rel="icon" href="general_image/jobhelper_logo.png">
     </head>
     
     <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="general_image/jobhelper_logo.png" alt="JobStreet Logo">
         </div>
 
         
@@ -106,7 +106,7 @@
 
             <div class="field">
                 <span class="material-symbols-outlined"> Email </span>
-                <input name="email" autocomplete="off" placeholder="Please enter your Email" class="input-field" type="text"/>
+                <input type="email" name="email" autocomplete="off" placeholder="Please enter your Email" class="input-field" type="text"/>
             </div>
 
             <div class="field">
@@ -178,8 +178,8 @@
     <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>

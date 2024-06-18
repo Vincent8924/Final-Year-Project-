@@ -6,12 +6,12 @@
     <meta charset="UTF-8"/>
     <title>Login | Job Help</title>
     <link rel="stylesheet" type="text/css" href="employer login.css">
-    <link rel="icon" href="img/logo.png">
+    <link rel="icon" href="general_image/jobhelper_logo.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="JobStreet Logo">
+            <img src="general_image/jobhelper_logo.png" alt="JobStreet Logo">
         </div>
 
 
@@ -37,7 +37,7 @@
                 <button class="half_button" type="button" onclick="sign_up()">Sign Up</button>
             </div>
             <div>
-                <button class="full_button" name="forgot">Forgot Password</button>
+                <button class="full_button"type="button" onclick="forgot()">Forgot Password</button>
             </div>
         </form>
     </div>
@@ -67,14 +67,19 @@
         {
             window.location = "employer sign up.php";
         }
+
+        function forgot()
+        {
+            window.location = "employer forgot.php";
+        }
     </script>
 
 
-    <footer>
+<footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>

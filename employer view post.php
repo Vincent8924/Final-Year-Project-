@@ -42,6 +42,7 @@
         </form>
     </header>
 
+    <div class="center-container">
     <?php
         $result = mysqli_query($connect, "SELECT * FROM post");
         while($row = mysqli_fetch_assoc($result))
@@ -77,6 +78,7 @@
     <?php
         }
     ?>
+    </div>
 
     <?php
         if (isset($_POST['delete_id'])) 
@@ -148,6 +150,12 @@
             answer = confirm("Do you want to delete this post?");
             return answer;
         }
+
+        function userconfirmation()
+        {
+            answer = confirm("Do you want to log out?");
+            return answer;
+        }
     </script>
 
 
@@ -155,8 +163,8 @@
 <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>

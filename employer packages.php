@@ -54,13 +54,13 @@
 <br/><br/>
 
 
-    <br/><hr/><br/>
+    <br/><br/>
 
 
 
     <h1 class="center">Our packages</h1>
 
-    
+    <div class="center-container">
     <?php
     
     $result = mysqli_query($connect, "SELECT * FROM package WHERE package_sale_status = '1'");	
@@ -69,7 +69,7 @@
         
         ?>	
         <form  method="post">
-        <table border="0"   class="formBox">
+        <table  class="formBox">
         <tr>   
             <td rowspan="1">
                 
@@ -100,52 +100,7 @@
         <?php } ?>
 
 
-   
 
-
-    <?php
-    /*
-              if (isset($_POST['buy_package'])) 
-              {
-                $pt = $_POST['post_number'];
-                $price = $_POST['price'];
-                $pid = $_POST['pid'];
-                $id = $_REQUEST['id'];
-                $result = mysqli_query($connect, "SELECT balance FROM employer WHERE id = '$id'");
-                //select the row first
-
-
-                if ($result) 
-                {
-                    $row = mysqli_fetch_assoc($result);
-                    $balance = $row['balance'];
-                    mysqli_free_result($result);
-                }
-                //declare the $balance is the $row['balance']
-                
-                //after above step then can add number to balance 
-                    $balance += $pt ;
-                    
-            
-                    mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
-                    mysqli_query($connect,"  INSERT INTO sale 
-                    ( purchase_amount, payment_status, employer_id, package_id) 
-                    VALUES ('$price', 'Successful', $id, '$pid');")
-                    
-                    ?>
-                    
-                    <script>
-                       
-                        window.location = "employer packages.php?id=<?php echo urlencode($id);?>";
-
-                    </script>
-
-
-                    <?php
-                } 
-                */
-                ?>
-          
 
           <?php
     
@@ -170,6 +125,8 @@
                 } 
                 
                 ?>
+
+</div>
       
 
         <script>
@@ -182,18 +139,23 @@
         }
         return answer;
         }
+
+        function userconfirmation()
+        {
+            answer = confirm("Do you want to log out?");
+            return answer;
+        }
         </script>
 
 
 <footer>
         <nav>
             <ul>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="employer about us.php">About Us</a></li>
+                <li><a href="employer contact us.php">Contact Us</a></li>
             </ul>
         </nav>
     </footer>
-
 
     </body>
     </html>

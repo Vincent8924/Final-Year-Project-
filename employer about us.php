@@ -1,6 +1,6 @@
 <?php
     include("employer session.php");
-    include("dataconnection.php");
+    include('vdataconnection.php');
 
     $id = $_SESSION['id'];
                 
@@ -62,34 +62,40 @@
 <div class="additional-container">
     <h2>Our Team</h2>
     <div class="position-box">
-        <h1>Boss</h1>
-        <p>Description of the Big Boss here.</p>
+        <h1>Web Developer</h1>
+        <p> 
+            I am happy to develop this Job Help website to help employer can find a right employee in their businesses.
+        </p>
     </div>
 
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="about_us_img\jk.png" alt="Team Member">
         <p><b>Lo Jin Kai</b></p>
     </div>
 
     
     <div class="position-box">
-        <h1>Boss</h1>
-        <p>Description of the Big Boss here</p>
+        <h1>Web Developer</h1>
+        <p>
+            I am happy to develop and manage this Job Help website to help more people can find the right choice of them.
+        </p>
     </div>
 
   
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="about_us_img\v.jpg" alt="Team Member">
         <p><b>Vincent Tay Yong Jun</b></p>
     </div>
 
     <div class="position-box">
-        <h1>Boss</h1>
-        <p>Description of the Big Boss here.</p>
+        <h1>Web Developer</h1>
+        <p>
+            I am happy to develop this Job Help website to help other people can find a right job in their life.
+        </p>
     </div>
 
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="about_us_img\ch2.png" alt="Team Member">
         <p><b>Goh Cheng Hong</b></p>
     </div>
 

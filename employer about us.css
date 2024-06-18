@@ -195,6 +195,14 @@ button {
 .container h2 {
     text-align: center; 
     color: #333; 
+    
+}
+
+.container p {
+    text-align: center; 
+    color: #333; 
+    font-size: 25px;
+    
 }
 
 
@@ -226,6 +234,11 @@ box-shadow: 0 0 5px rgba(239, 237, 237, 0.1);
 text-align: center; 
 }
 
+.position-box p
+{
+    font-size: 20px;
+}
+
 .image-box {
     width: calc(20% - 20px);
     float: right; 
@@ -237,7 +250,7 @@ text-align: center;
 
 
 .image-box img {
-    max-width: 50%;
+    max-width: 63%;
     height: auto;
 }
 

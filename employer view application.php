@@ -299,7 +299,7 @@ while ($row = mysqli_fetch_assoc($all)) {
                 $name = $jobseeker_row['jobseeker_firstname'] . " " . $jobseeker_row['jobseeker_lastname'];
             }
 
-            $candidate = mysqli_query($connect, "SELECT * FROM `userprofile` WHERE UserID = '$candidate_id'");
+            $candidate = mysqli_query($connect, "SELECT * FROM `jobseekerprofile` WHERE jobseeker_id = '$candidate_id'");
 
             if ($candidate) {
                 $candidate_row = mysqli_fetch_assoc($candidate); 
@@ -416,7 +416,7 @@ while ($row = mysqli_fetch_assoc($all)) {
                 $name = $jobseeker_row['jobseeker_firstname'] . " " . $jobseeker_row['jobseeker_lastname'];
             }
 
-            $candidate = mysqli_query($connect, "SELECT * FROM `userprofile` WHERE UserID = '$candidate_id'");
+            $candidate = mysqli_query($connect, "SELECT * FROM `jobseekerprofile` WHERE jobseeker_id = '$candidate_id'");
 
             if ($candidate) {
                 $candidate_row = mysqli_fetch_assoc($candidate); 

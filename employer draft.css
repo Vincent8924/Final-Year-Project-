@@ -191,3 +191,14 @@ h1
 {
     margin-left: 40px;
 }
+
+
+.none_mid {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    
+
+    font-size: 25px; 
+    color: #333; 
+}

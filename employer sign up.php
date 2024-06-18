@@ -68,10 +68,10 @@
                 } else {
                     mysqli_query($connect, "INSERT INTO employer(employer_email,employer_name,`password`,`balance`) VALUES ('$email', '$name','$password','0')");
                     
-                    mysqli_query($connect, "INSERT INTO employer_profile(`employer_email`,`photo_name`,`photo_data`) SELECT text_data,file_name,photo_data FROM website_file");
+                    mysqli_query($connect, "INSERT INTO employer_profile(`profile_id`,`employer_email`,`name`) SELECT id,employer_email,employer_name FROM employer WHERE employer_email = '$email'");
     
     
-                    $result = mysqli_query($connect, "SELECT * FROM employer WHERE employer_email = '$email'");
+                   /* $result = mysqli_query($connect, "SELECT * FROM employer WHERE employer_email = '$email'");
                                     
     
                         if ($result) 
@@ -82,7 +82,7 @@
                         }
     
                                                                                     
-                    mysqli_query($connect, "UPDATE employer_profile SET profile_id = $id, employer_email = '$email',name = '$name' WHERE employer_email = 'none'");
+                    mysqli_query($connect, "UPDATE employer_profile SET profile_id = $id, employer_email = '$email',name = '$name' WHERE employer_email = 'none'");*/
                     ?>
                     <script type="text/javascript">
                         alert("Registration successful. You can now proceed to log in.");

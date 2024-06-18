@@ -27,6 +27,7 @@
                         $row = mysqli_fetch_assoc($result);
                         $fname = $row["admin_fname"];
                     }
+                    
                 ?>
                 <i class="fa-solid fa-user"></i><?php echo"   $fname"; ?>            
             </button>
@@ -75,10 +76,16 @@
                         $row = mysqli_fetch_assoc($result);
                         $total_sale = $row["total_sale"];
                     }
+                    $result = mysqli_query($connect,"SELECT SUM(purchase_amount) AS total_sale_amount    FROM sale");
+                    if($result)
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $total_sale_amount = $row["total_sale_amount"];
+                    }
                 ?>
                 <div class="amount">
                     <h1>
-                        <?php echo $total_sale?>
+                       RM <?php echo $total_sale_amount?>
                     </h1>
                 </div>
                 <h1>Sale</h1>
@@ -92,7 +99,6 @@
                                 <th>Time</th>
                                 <th>Buyer/Employer</th>
                                 <th>Package/Item</th>
-                                <th>Payment Status</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -122,7 +128,6 @@
                                         <td><?php echo $row["purchase_time"] ?></td>
                                         <td><?php echo $employer_name ?></td>
                                         <td><?php echo $package_name ?></td>
-                                        <td><?php echo $row["payment_status"] ?></td>
                                         <td class="view">
                                             <button type="button" onclick="view(<?php echo $row['sale_id']; ?>)">View</button>
                                         </td>

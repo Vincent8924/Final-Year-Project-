@@ -246,21 +246,20 @@
             }
         }
         if (isset($_POST['editPassword'])) 
-        {
-            echo "<script>console.log('Form submitted');</script>"; 
+        {   
             $otp = rand(100000, 999999);
-        
-            require "Mail/phpmailer/PHPMailerAutoload.php";
+
+            require "../Mail/phpmailer/PHPMailerAutoload.php";
             $mail = new PHPMailer;
-        
+            
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->Port = 587;
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'tls';
         
-            $mail->Username = 'www.jobhelper@gmail.com';
-            $mail->Password = '1234512345';
+            $mail->Username = getenv('SMTP_USERNAME') ?: 'www.jobhelper@gmail.com';
+            $mail->Password = getenv('SMTP_PASSWORD') ?: 'izva godc asun goxa';
         
             $mail->setFrom('www.jobhelper@gmail.com', 'Password Reset');
             $mail->addAddress($email);
@@ -274,6 +273,8 @@
                 echo "<script>alert('Fail to send OTP, please try again.');</script>";
             } else 
             {
+                $_SESSION['otp'] = $otp;
+                $_SESSION['email'] = $email;
                 echo "<script>alert('OTP has been sent to $email'); window.location.replace('Atemplate.php');</script>";
             }
         }

@@ -74,7 +74,7 @@
         `email` varchar(255) NOT NULL,
         `subject` varchar(255) NOT NULL,
         `message` text NOT NULL,
-        `package_sale_status` tinyint(1) DEFAULT 0,
+        `status` tinyint(1) DEFAULT 0,
         `request_time` datetime NOT NULL DEFAULT current_timestamp()
   );
   

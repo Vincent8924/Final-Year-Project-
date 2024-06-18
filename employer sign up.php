@@ -17,7 +17,7 @@
 
         
         <div class="jobseeker-site">
-            <a href="register.php">Jobseeker Site</a>
+            <a href="login.php">Jobseeker Site</a>
         </div>
     </header>
     
@@ -71,18 +71,7 @@
                     mysqli_query($connect, "INSERT INTO employer_profile(`profile_id`,`employer_email`,`name`) SELECT id,employer_email,employer_name FROM employer WHERE employer_email = '$email'");
     
     
-                   /* $result = mysqli_query($connect, "SELECT * FROM employer WHERE employer_email = '$email'");
-                                    
-    
-                        if ($result) 
-                        {
-                            $row = mysqli_fetch_assoc($result);
-                            $id = $row['id'];
-                            mysqli_free_result($result);
-                        }
-    
-                                                                                    
-                    mysqli_query($connect, "UPDATE employer_profile SET profile_id = $id, employer_email = '$email',name = '$name' WHERE employer_email = 'none'");*/
+                   
                     ?>
                     <script type="text/javascript">
                         alert("Registration successful. You can now proceed to log in.");

@@ -17,7 +17,7 @@
 
 
         <div class="jobseeker-site">
-            <a href="register.php">Jobseeker Site</a>
+            <a href="login.php">Jobseeker Site</a>
         </div>
     </header>
 

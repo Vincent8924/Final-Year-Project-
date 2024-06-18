@@ -60,7 +60,7 @@ if(isset($_POST['registerBtn'])) {
             <a href="login.php">Sign In</a>
         </div>
         <div class="employer-site">
-            <a href="employer sign up.php">Employer Site</a>
+            <a href="employer index.php">Employer Site</a>
         </div>
     </header>
     <div class="container">

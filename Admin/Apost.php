@@ -110,7 +110,6 @@
                             </h1>
                         </div>
                         <div>
-                            <img src="/Final-Year-Project-/uploads/jay.jpg">
                             <h2>
                             <?php
                                 echo $employer_name;

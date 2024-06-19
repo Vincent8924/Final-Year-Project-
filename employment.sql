@@ -6,16 +6,15 @@
   CREATE TABLE `post` (
         `post_id` int(11) NOT NULL,
         `poster_id` int(11) NOT NULL,
-        `job_name` varchar(200) NOT NULL,
+        `job_name` varchar(255) NOT NULL,
         `company_name` varchar(255) DEFAULT NULL,
         `logo` longblob DEFAULT NULL,
-        `category` varchar(200) DEFAULT NULL,
+        `category` varchar(255) DEFAULT NULL,
         `location` varchar(500) DEFAULT NULL,
-        `employment_type` varchar(200) NOT NULL,
-        `description` varchar(9999) DEFAULT NULL,
+        `employment_type` varchar(255) NOT NULL,
+        `description` text DEFAULT NULL,
         `salary` int(11) NOT NULL,
-        `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-        `favourite` enum('yes','no') DEFAULT 'no'
+        `created_at` timestamp NOT NULL DEFAULT current_timestamp()
     );
   
   CREATE TABLE drafts (
@@ -52,11 +51,11 @@
         `name` varchar(500),
         `photo_name` VARCHAR(500),
         `photo_data` LONGBLOB,
-        `website` varchar(1000),
-        `industry` varchar(1000),
+        `website` varchar(500),
+        `industry` varchar(500),
         `company_size` varchar(500),
-        `primary_location` varchar(1000),
-        `description` varchar(9999)
+        `primary_location` text,
+        `description` text
   );
 
   CREATE TABLE admin (
@@ -85,19 +84,6 @@
         `jobseeker_lastname` varchar(100) NOT NULL,
         `jobseeker_email` varchar(60) NOT NULL,
         `jobseeker_password` varchar(500) NOT NULL
-  );
-
-  CREATE TABLE `userprofile` 
-  (
-        `UserID` int(11) NOT NULL,
-        `ProfilePic` varchar(255) DEFAULT NULL,
-        `PersonalSummary` text DEFAULT NULL,
-        `Skills` varchar(100) DEFAULT NULL,
-        `work_experience` text DEFAULT NULL,
-        `Education` text DEFAULT NULL,
-        `language` varchar(255) DEFAULT NULL,
-        `jobseeker_email` varchar(255) DEFAULT NULL,
-        `resume` varchar(200) 
   );
 
   CREATE TABLE `applications` 
@@ -157,8 +143,8 @@
   CREATE TABLE wishlist 
    (
         `wishlist_id` int(11) NOT NULL,
-        `jobseeker_id` int(11) DEFAULT NULL,
-        `post_id` int(11) DEFAULT NULL,
+        `jobseeker_id` int(11) NOT NULL,
+        `post_id` int(11) NOT NULL,
         `date_added` timestamp NOT NULL DEFAULT current_timestamp
    );
 ---------------------------------------------------------------------------------------------------

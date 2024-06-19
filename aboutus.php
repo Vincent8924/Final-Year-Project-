@@ -93,7 +93,7 @@ if (isset($_SESSION['id'])) {
 
   
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="vincent.jpg" alt="Team Member">
         <p><b>Vincent Tay Yong Jun</b></p>
     </div>
 
@@ -103,7 +103,7 @@ if (isset($_SESSION['id'])) {
     </div>
 
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="goh.jpg" alt="Team Member">
         <p><b>Goh Cheng Hong</b></p>
     </div>
 

@@ -101,15 +101,24 @@
 
                 <br/><br/><br/><br/>
 
-                <script>
-                    function edit() {
-                        console.log("Edit function called.");
-                        window.location = "employer edit post.php?did=<?php echo $row['draft_id'];?>";
-                    }
-                </script>
+                <?php
 
-                <form method="post" action="">
-                    <button type="button" onclick="edit()">Edit</button>
+                if(isset($_POST['edit']))
+                {
+                    $did = $_POST['did'];
+                    ?>
+                    <script>
+                            window.location = "employer edit post.php?did=<?php echo $row['draft_id'];?>";
+                        
+                    </script>
+                <?php
+                }
+                
+                ?>
+
+                <form method="post">
+                    <button type="submit" name="edit">Edit</button>
+                    <input type="hidden" name="did" value="<?php echo $row['draft_id'];?>">
                     <button type="submit" name="delete_id" onclick="return confirmation();">Delete</button>
                     <input type="hidden" name="delete" value="<?php echo $row['draft_id']; ?>">
                     <button type="submit" name="post">Post</button>
@@ -164,19 +173,13 @@
 
             <br/><br/><br/><br/>
 
-            <script>
-                function edit_post() {
-                    console.log("Edit function called.");
-                    window.location = "employer edit post.php?did=<?php echo $row['post_id'];?>";
-                }
-            </script>
 
-            <form method="post" action="">
-                <button type="button" onclick="edit_post()">Edit</button>
+
+            <form method="post">
+                
                 <button type="submit" name="delete_post_id" onclick="return confirmation();">Delete</button>
                 <input type="hidden" name="delete_post" value="<?php echo $row['post_id']; ?>">
-                <button type="submit" name="save_as_draft">Save Draft</button>
-                <input type="hidden" name="pid" value="<?php echo $row['post_id']; ?>">
+               
             </form>
         </div>
     <?php

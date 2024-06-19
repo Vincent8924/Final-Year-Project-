@@ -73,7 +73,7 @@ session_start();
                     </script>
                     <?php
                 } else {
-                    $result = mysqli_query($connect, "UPDATE employer SET `password` = '$password' WHERE employer_email = '$email'");
+                    $result = mysqli_query($connect, "UPDATE jobseeker SET `jobseeker_password` = '$password' WHERE jobseeker_email = '$email'");
 
                     if($result)
                     {

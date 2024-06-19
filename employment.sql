@@ -201,19 +201,19 @@ INSERT INTO `sale` (`sale_id`, `purchase_amount`, `purchase_time`, `payment_stat
 
   INSERT INTO `employer` (`id`, `employer_email`, `employer_name`, `password`, `balance`) VALUES
   (1000001, 'lojinkai@gmail.com', 'lojinkai', '$2y$10$/WP5uqKhGm26cb9ETyzmu.FZDk8qH0Bn2gSBMbaM1NV90YbrCZCom', 0),
-  (1000002, 'jun892004@gmail.com', 'Vincent Tay', '$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe', 0);
-  (9, 'gch@gmail.com', 'goh goh', '$2y$10$bOP6ECIvoDwlP8vqe1IHVetEEakTNepr4bR8cuH6lE0JJh1T7/BoG', 0);
+  (1000002, 'jun892004@gmail.com', 'Vincent Tay', '$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe', 0),
+  (1000003, 'gch@gmail.com', 'goh goh', '$2y$10$bOP6ECIvoDwlP8vqe1IHVetEEakTNepr4bR8cuH6lE0JJh1T7/BoG', 0);
 
-  INSERT INTO `employer` (`id`, `employer_email`, `employer_name`, `password`, `balance`) VALUES (NULL, 'goh@gmail.com', 'Three Monkey Shop', 'asdfg12345', '200');
+
 
   INSERT INTO `employer_profile` (`profile_id`, `employer_email`, `name`, `photo_name`, `photo_data`, `website`, `industry`, `company_size`, `primary_location`, `description`) VALUES
   (1000001, 'lojinkai@gmail.com', 'lojinkai', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-  (1000002, 'jun892004@gmail.com', 'Vincent Tay', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+  (1000002, 'jun892004@gmail.com', 'Vincent Tay', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (1000003, 'gch@gmail.com', 'goh goh', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
-
-  INSERT INTO `drafts` (`draft_id`, `poster_id`, `job_name`, `company_name`, `logo`, `category`, `location`, `employment_type`, `description`, `salary`) VALUES
-  (1, 1000001, 'software development', 'mihoyo', NULL, 'Accounting', 'china', 'full time', 'looking for a talent with familiar Java programming language', 3000);
-  (10, 9, 'Three Monkey Shop', 'goh goh', NULL, 'Education & Traning', 'melaka', 'part time', 'help me to teach some student in class', 2000, '2024-06-19 10:53:17');
+  INSERT INTO `drafts` (`draft_id`, `poster_id`, `job_name`, `company_name`, `logo`, `category`, `location`, `employment_type`, `description`, `salary`,`created_at`) VALUES
+  (1, 1000001, 'software development', 'mihoyo', NULL, 'Accounting', 'china', 'full time', 'looking for a talent with familiar Java programming language', 3000,'2024-06-19 10:53:17'),
+  (2, 1000003, 'Three Monkey Shop', 'goh goh', NULL, 'Education & Traning', 'melaka', 'part time', 'help me to teach some student in class', 2000, '2024-06-19 10:53:17');
   
   INSERT INTO `post` (`post_id`, `poster_id`, `job_name`, `company_name`, `logo`, `category`, `location`, `employment_type`, `description`, `salary`) VALUES
   (1, 1000001, 'software development', 'mihoyo', NULL, 'Accounting', 'china', 'full time', 'looking for a talent with familiar Java programming language', 3000); 

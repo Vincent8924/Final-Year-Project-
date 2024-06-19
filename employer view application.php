@@ -256,36 +256,31 @@ while ($row = mysqli_fetch_assoc($all)) {
 
     <h3 class="mid_content">Your post <?php echo $post_id ?></h3>
 
+    <h2 class="mid_content">The candidate list apply for job of <?php echo $jname ?></h2>
+
+<table>
+    <tr>
+        <th>Candidate Name</th>
+        <th>Personal Summary</th>
+        <th>Skill</th>
+        <th>Work Experience</th>
+        <th>Education</th>
+        <th>Language</th>
+        <th>Status</th>
+        <th>Resume</th>
+        <th>Cover Letter</th>
+        <th>Action</th>
+    </tr>
+
     <?php
         $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Pending'");
 
 
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result))  {
             $candidate_id = $row['jobseeker_id'];
             $app_id = $row['id'];
             $status = $row['status'];
-    ?>
 
-
-    <h2 class="mid_content">The candidate list apply for job of <?php echo $jname ?></h2>
-
-    <table>
-        <tr>
-            <th>Candidate Name</th>
-            <th>Personal Summary</th>
-            <th>Skill</th>
-            <th>Work Experience</th>
-            <th>Education</th>
-            <th>Language</th>
-            <th>Status</th>
-            <th>Resume</th>
-            <th>Cover Letter</th>
-            <th>Action</th>
-        </tr>
-
-        <?php
-        
-            
 
             // 如果已经显示过这个人，就会跳过
             if (in_array($candidate_id, $displayed_candidates)) {

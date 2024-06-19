@@ -9,13 +9,28 @@
    
 </head>
 <body>
-    <header class="header">
-        <img src="general_image/jobhelper_logo.png" class="logo">
-        <div>
-            <a href="register.php">Register</a>
-            <a href="login.php">Log In</a>
+
+<header>
+        <div class="logo">
+        <img src="../Final-Year-Project-/general_image/jobhelper_logo.png" alt="JobStreet Logo">
+        </div>
+        <nav class="navigation">
+            <ul>
+            <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>  
+                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
+                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+                <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+   
+   
+            </ul>
+        </nav>
+        </div>
+
+        <div class="employer-site">
+            <a href="employer sign up.php">Employer Site</a>
         </div>
     </header>
+
     
     <div id="slideshow" class="index_container" >
         <img src="lo.jpg" class="active">
@@ -33,33 +48,34 @@
             1
             <br>
             <h3>
-                Create your
+                Create Your
                 <br>
-                free account
+                Free Account
             </h3>
             <br>
-            You will need to fill in some information for register an own account!
+            You will need to fill in some information to register your own account!
         </div>
         <div class="Bcontainer">
             2
             <br>
             <h3>
-                finding your favourite
+                Build
                 <br>
-                job post
+                Your Profile
             </h3>
             <br>
-            find the favourite job at the homepage and apply it!
+            Complete your profile and upload your resume!
         </div>
         <div class="Bcontainer">
             3
             <br>
             <h3>
-                
-               wait for the result
+                Find Your 
+                <br>
+                Favourite Job
             </h3>
             <br>
-            after apply,you just need to wait for the result for the company
+            Find your favorite job and apply for it!
         </div>
     </div>
 

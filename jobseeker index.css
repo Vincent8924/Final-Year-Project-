@@ -2,136 +2,166 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    
+    background-color: #f4f4f4;
 }
 
-.header {
+header {
+    background-color: white; 
+    padding: 5px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:white;
-    color: #333;
-    padding: 10px;
-    border-bottom: rgb(187, 180, 180) solid 3px;
 }
 
-.header a {
-    color: black;
-    padding: 5px;
-    text-align: center;
+.navigation {
+    display: inline-block;
+    margin-right: 65%;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.navigation ul li a {
     text-decoration: none;
-    font-size: 16px; 
-    margin-left: 20px;
-    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-size: 14px;
 }
 
-.header a:hover
-{
-    color: rgb(60, 60, 60);
-    font-size: 25px;
+.employer-site {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-left: 10px;
 }
 
-.logo
-{
-    width: 100px;
+.employer-site a {
+    text-decoration: none;
+    color: rgb(12, 12, 191);
+    font-size: 14px;
 }
+
+.employer-site:hover {
+    background-color: blue;
+}
+
+.employer-site:hover a {
+    color: white;
+}
+.logo {
+display: inline-block;
+}
+
+.logo img {
+height: 50px;
+}
+
 
 footer {
-    background-color: rgb(218, 211, 211);
-    color: #2e2d2d;
-    padding: 10px;
-    text-align: center;
-    border-top: rgb(187, 180, 180) solid 3px;
+background-color: white;
+color: #2e2d2d;
+padding: 10px;
+text-align: center;
 }
 
 .page
 {
-    font-size: 15px;
-    display: inline;
+font-size: 15px;
+display: inline;
 }
 .page a:hover{
-    color: orange;
-    font-size: 20px;
-    
+color: orange;
+font-size: 20px;
+
 }  
 
 .slogan {
-    font-size: 15px;
-    font-style: italic;
-    margin-left: 20px;
-    margin: auto;
+font-size: 15px;
+font-style: italic;
+margin-left: 20px;
+margin: auto;
 }
 .title {
-    font-size: 20px;
-    font-weight: bold;
+font-size: 20px;
+font-weight: bold;
 }
 
 .index_container img {
-    display: block;
-    height: 87.5vh;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+display: block;
+height: 87.5vh;
+width: 100%;
+margin-left: auto;
+margin-right: auto;
 }
 
 #slideshow img:not(.active) 
 {
-    display: none;
+display: none;
 }
 
 .slide 
 {
-    position: relative;
+position: relative;
 }
 
 .text 
 {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgb(90,90,90);
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
+position: absolute;
+bottom: 50px;
+left: 50%;
+transform: translateX(-50%);
+color: white;
+font-size: 24px;
+font-weight: bold;
+text-align: center;
 }
 .button 
 {
-    display: block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(218, 211, 211); 
-    color: rgb(123, 115, 115);
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    margin-top: 10px;
+display: block;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+background-color: rgb(218, 211, 211); 
+color: rgb(123, 115, 115);
+font-size: 14px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+margin-top: 10px;
 }
 
 .button:hover 
 {
-    background-color: rgb(49, 47, 47); 
+background-color: rgb(49, 47, 47); 
 }
 
 .Acontainer{
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+display: flex;
+justify-content: space-between;
+width: 70%;
+margin: auto;
+margin-top: 50px;
+margin-bottom: 50px;
 }
 .Bcontainer{
-    border: #11112025 solid 2px;
-    width: 250px;
-    height: 200px;
-    padding: 20px;
-    color: #52516e;
-    margin: 20px;
+border: #11112025 solid 2px;
+width: 250px;
+height: 200px;
+padding: 20px;
+color: #52516e;
+margin: 20px;
 }
 .Bcontainer h3{
-    font-size: 25px;
-    color: rgb(120,120,120);
+font-size: 25px;
+color: rgb(120,120,120);
 }

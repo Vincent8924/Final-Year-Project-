@@ -6,16 +6,15 @@
   CREATE TABLE `post` (
         `post_id` int(11) NOT NULL,
         `poster_id` int(11) NOT NULL,
-        `job_name` varchar(200) NOT NULL,
+        `job_name` varchar(255) NOT NULL,
         `company_name` varchar(255) DEFAULT NULL,
         `logo` longblob DEFAULT NULL,
-        `category` varchar(200) DEFAULT NULL,
+        `category` varchar(255) DEFAULT NULL,
         `location` varchar(500) DEFAULT NULL,
-        `employment_type` varchar(200) NOT NULL,
-        `description` varchar(9999) DEFAULT NULL,
+        `employment_type` varchar(255) NOT NULL,
+        `description` text DEFAULT NULL,
         `salary` int(11) NOT NULL,
-        `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-        `favourite` enum('yes','no') DEFAULT 'no'
+        `created_at` timestamp NOT NULL DEFAULT current_timestamp()
     );
   
   CREATE TABLE drafts (
@@ -52,11 +51,11 @@
         `name` varchar(500),
         `photo_name` VARCHAR(500),
         `photo_data` LONGBLOB,
-        `website` varchar(1000),
-        `industry` varchar(1000),
+        `website` varchar(500),
+        `industry` varchar(500),
         `company_size` varchar(500),
-        `primary_location` varchar(1000),
-        `description` varchar(9999)
+        `primary_location` text,
+        `description` text
   );
 
   CREATE TABLE admin (
@@ -85,19 +84,6 @@
         `jobseeker_lastname` varchar(100) NOT NULL,
         `jobseeker_email` varchar(60) NOT NULL,
         `jobseeker_password` varchar(500) NOT NULL
-  );
-
-  CREATE TABLE `userprofile` 
-  (
-        `UserID` int(11) NOT NULL,
-        `ProfilePic` varchar(255) DEFAULT NULL,
-        `PersonalSummary` text DEFAULT NULL,
-        `Skills` varchar(100) DEFAULT NULL,
-        `work_experience` text DEFAULT NULL,
-        `Education` text DEFAULT NULL,
-        `language` varchar(255) DEFAULT NULL,
-        `jobseeker_email` varchar(255) DEFAULT NULL,
-        `resume` varchar(200) 
   );
 
   CREATE TABLE `applications` 
@@ -157,8 +143,8 @@
   CREATE TABLE wishlist 
    (
         `wishlist_id` int(11) NOT NULL,
-        `jobseeker_id` int(11) DEFAULT NULL,
-        `post_id` int(11) DEFAULT NULL,
+        `jobseeker_id` int(11) NOT NULL,
+        `post_id` int(11) NOT NULL,
         `date_added` timestamp NOT NULL DEFAULT current_timestamp
    );
 ---------------------------------------------------------------------------------------------------
@@ -178,6 +164,7 @@ INSERT INTO `sale` (`sale_id`, `purchase_amount`, `purchase_time`, `payment_stat
 (300013, 49.99, '2024-06-07 13:49:18', 'Successful', 1000001, 200001, 'CIMB', 'kkkk', 2147483647, 2024, 6, 225),
 (300014, 49.99, '2024-06-07 13:50:23', 'Successful', 1000002, 200001, 'VISA', 'kkkk', 2147483647, 4444, 11, 444),
 (300015, 49.99, '2024-06-07 13:54:39', 'Successful', 1000002, 200001, 'Public bank', 'Vincent', 2147483647, 5555, 2, 555);
+
 
   INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin)    
   VALUES ( '100001', 'Vincent','Tay Yong Jun','jun892004@gmail.com','$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe','1');
@@ -215,6 +202,9 @@ INSERT INTO `sale` (`sale_id`, `purchase_amount`, `purchase_time`, `payment_stat
   INSERT INTO `employer` (`id`, `employer_email`, `employer_name`, `password`, `balance`) VALUES
   (1000001, 'lojinkai@gmail.com', 'lojinkai', '$2y$10$/WP5uqKhGm26cb9ETyzmu.FZDk8qH0Bn2gSBMbaM1NV90YbrCZCom', 0),
   (1000002, 'jun892004@gmail.com', 'Vincent Tay', '$2y$10$m6QE2naEwSese7DP8AyLE.dtm3pEeHTwEmG6zS3qv0uBiU1JKfrwe', 0);
+  (9, 'gch@gmail.com', 'goh goh', '$2y$10$bOP6ECIvoDwlP8vqe1IHVetEEakTNepr4bR8cuH6lE0JJh1T7/BoG', 0);
+
+  INSERT INTO `employer` (`id`, `employer_email`, `employer_name`, `password`, `balance`) VALUES (NULL, 'goh@gmail.com', 'Three Monkey Shop', 'asdfg12345', '200');
 
   INSERT INTO `employer_profile` (`profile_id`, `employer_email`, `name`, `photo_name`, `photo_data`, `website`, `industry`, `company_size`, `primary_location`, `description`) VALUES
   (1000001, 'lojinkai@gmail.com', 'lojinkai', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -223,7 +213,8 @@ INSERT INTO `sale` (`sale_id`, `purchase_amount`, `purchase_time`, `payment_stat
 
   INSERT INTO `drafts` (`draft_id`, `poster_id`, `job_name`, `company_name`, `logo`, `category`, `location`, `employment_type`, `description`, `salary`) VALUES
   (1, 1000001, 'software development', 'mihoyo', NULL, 'Accounting', 'china', 'full time', 'looking for a talent with familiar Java programming language', 3000);
-
+  (10, 9, 'Three Monkey Shop', 'goh goh', NULL, 'Education & Traning', 'melaka', 'part time', 'help me to teach some student in class', 2000, '2024-06-19 10:53:17');
+  
   INSERT INTO `post` (`post_id`, `poster_id`, `job_name`, `company_name`, `logo`, `category`, `location`, `employment_type`, `description`, `salary`) VALUES
   (1, 1000001, 'software development', 'mihoyo', NULL, 'Accounting', 'china', 'full time', 'looking for a talent with familiar Java programming language', 3000); 
 

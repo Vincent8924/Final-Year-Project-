@@ -76,8 +76,8 @@ if (isset($_SESSION['id'])) {
 <div class="additional-container">
     <h2>Our Team</h2>
     <div class="position-box">
-        <h1>Boss</h1>
-        <p>Description of the Big Boss here.</p>
+        <h1>CEO</h1>
+        <p>Lo Jin Kai, CEO of JobHelper, has over 20 years of experience in tech and recruitment. His vision and dedication have driven JobHelper's growth, making it a leading job search platform.</p>
     </div>
 
     <div class="image-box">
@@ -87,23 +87,23 @@ if (isset($_SESSION['id'])) {
 
     
     <div class="position-box">
-        <h1>Boss</h1>
-        <p>Description of the Big Boss here</p>
+        <h1>CTO</h1>
+        <p>CTO Vincent Tay leads JobHelper's technology. With expertise in AI and data analytics, he ensures the platform's cutting-edge performance and personalized user experiences.</p>
     </div>
 
   
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="vincent.jpg" alt="Team Member">
         <p><b>Vincent Tay Yong Jun</b></p>
     </div>
 
     <div class="position-box">
-        <h1>Boss</h1>
-        <p>Description of the Big Boss here.</p>
+        <h1>COO</h1>
+        <p>Goh Cheng Hong, COO of JobHelper, oversees daily operations with a focus on efficiency and reliability. His management skills ensure the company's smooth and successful functioning.</p>
     </div>
 
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="goh.jpg" alt="Team Member">
         <p><b>Goh Cheng Hong</b></p>
     </div>
 

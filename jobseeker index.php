@@ -33,33 +33,34 @@
             1
             <br>
             <h3>
-                Create your
+                Create Your
                 <br>
-                free account
+                Free Account
             </h3>
             <br>
-            You will need to fill in some information for register an own account!
+            You will need to fill in some information to register your own account!
         </div>
         <div class="Bcontainer">
             2
             <br>
             <h3>
-                finding your favourite
+                Build
                 <br>
-                job post
+                Your Profile
             </h3>
             <br>
-            find the favourite job at the homepage and apply it!
+            Complete your profile and upload your resume!
         </div>
         <div class="Bcontainer">
             3
             <br>
             <h3>
-                
-               wait for the result
+                Find Your 
+                <br>
+                Favourite Job
             </h3>
             <br>
-            after apply,you just need to wait for the result for the company
+            Find your favorite job and apply for it!
         </div>
     </div>
 

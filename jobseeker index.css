@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    
+    background-color: #f4f4f4;
 }
 
 .header {
@@ -12,7 +12,6 @@ body {
     background-color:white;
     color: #333;
     padding: 10px;
-    border-bottom: rgb(187, 180, 180) solid 3px;
 }
 
 .header a {
@@ -37,11 +36,10 @@ body {
 }
 
 footer {
-    background-color: rgb(218, 211, 211);
+    background-color: white;
     color: #2e2d2d;
     padding: 10px;
     text-align: center;
-    border-top: rgb(187, 180, 180) solid 3px;
 }
 
 .page
@@ -90,7 +88,7 @@ footer {
     bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
-    color: rgb(90,90,90);
+    color: white;
     font-size: 24px;
     font-weight: bold;
     text-align: center;

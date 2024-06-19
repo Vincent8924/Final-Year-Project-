@@ -93,7 +93,7 @@ if (!$result) {
     <div id="slideForm" class="slide-form">
     <button id="closeForm" class="close-form">&times;</button>
     <div id="formContent">
-        <!-- Form content will be populated by JavaScript -->
+      
     </div>
 </div>
     <script>
@@ -148,7 +148,7 @@ if (!$result) {
         if (xhr.status === 200) {
             document.getElementById('formContent').innerHTML = xhr.responseText;
             document.getElementById('slideForm').classList.add('open');
-            document.getElementById('slideForm').classList.remove('closed'); // Remove closed class
+            document.getElementById('slideForm').classList.remove('closed'); 
         } else {
             alert("An error occurred while fetching post details.");
         }
@@ -157,15 +157,15 @@ if (!$result) {
 }
 document.querySelectorAll('.jobPost img').forEach(logo => {
     logo.addEventListener('click', function(event) {
-        event.stopPropagation(); // Prevents the click event from propagating to parent elements
-        const postId = this.parentElement.id.split('_')[1]; // Get the postId from the parent element's id
+        event.stopPropagation(); 
+        const postId = this.parentElement.id.split('_')[1]; 
         showForm(postId);
     });
 });
 
     document.getElementById('closeForm').addEventListener('click', function() {
     document.getElementById('slideForm').classList.remove('open');
-    document.getElementById('slideForm').classList.add('closed'); // Add closed class
+    document.getElementById('slideForm').classList.add('closed'); 
 });
     </script>
     <footer>

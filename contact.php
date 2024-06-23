@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <header>
     <div class="logo">
-        <img src="new.jpg" alt="Company Logo">
+    <img src="../Final-Year-Project-/general_image/jobhelper_logo.png" alt="JobStreet Logo">
     </div>
 
     <nav class="navigation">
@@ -92,13 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="contact-info">
         <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> Melaka Raya, Melaka, Malaysia</p>
         <p><i class="fas fa-phone-alt"></i> <strong>Phone:</strong> 60-1155164811</p>
-        <p><i class="far fa-envelope"></i> <strong>Email:</strong> <a href="mailto:gohchenghong533@gmail.com">gohchenghong533@gmail.com</a></p>
+        <p><i class="far fa-envelope"></i> <strong>Email:</strong> <a href="mailto:gohchenghong533@gmail.com">www.jobhelper@gmail.com</a></p>
     </div>
 
     <div class="business-hours">
         <h3>Business Hours</h3>
-        <p><strong>Monday - Friday:</strong> [Opening Hours]</p>
-        <p><strong>Saturday - Sunday:</strong> [Opening Hours]</p>
+        <p><strong>Monday - Friday:</strong> 8am-10pm</p>
+        <p><strong>Saturday - Sunday:</strong> 8am-12pm</p>
         <p>*Please note that we are closed on public holidays.</p>
     </div>
 

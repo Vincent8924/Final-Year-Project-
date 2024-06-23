@@ -76,8 +76,13 @@ if (!$result) {
     <div id="jobPosts">
     <?php
    while ($row = $result->fetch_assoc()) {
+    $poster = ($row["poster_id"]);
     echo '<div class="jobPost" id="post_' . htmlspecialchars($row["post_id"]) . '">';
-    echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo" onclick="showForm(' . htmlspecialchars($row["post_id"]) . ')">';
+
+    $logogo = mysqli_query($connect,"SELECT * FROM employer_profile WHERE profile_id = '$poster'");
+    $logogo_row = mysqli_fetch_assoc($logogo);
+
+    echo '<img src="data:image/jpeg;base64,' . base64_encode($logogo_row["photo_data"]) . '" alt="logo" onclick="showForm(' . htmlspecialchars($row["post_id"]) . ')">';
     echo '<h2>' . htmlspecialchars($row["job_name"]) . '</h2>';
     echo '<p>'. htmlspecialchars($row["company_name"]) . '</p>'; 
     echo '<p class="category">Category: ' . htmlspecialchars($row["category"]) . '</p>';

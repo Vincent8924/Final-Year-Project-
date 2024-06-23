@@ -81,7 +81,7 @@ if (isset($_SESSION['id'])) {
     </div>
 
     <div class="image-box">
-        <img src="jay.jpg" alt="Team Member">
+        <img src="loo.jpg" alt="Team Member">
         <p><b>Lo Jin Kai</b></p>
     </div>
 

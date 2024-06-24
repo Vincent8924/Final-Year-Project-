@@ -74,8 +74,13 @@ if (isset($_SESSION['id'])) {
         <?php
         if (count($wishlist) > 0) {
             foreach ($wishlist as $post) {
+                $poster = ($post["poster_id"]);
                 echo '<div class="jobPost" id="post_' . htmlspecialchars($post["post_id"]) . '">';
-                echo '<img src="data:image/jpeg;base64,' . base64_encode($post["logo"]) . '" alt="logo">';
+
+                $logogo = mysqli_query($connect,"SELECT * FROM employer_profile WHERE profile_id = '$poster'");
+                $logogo_row = mysqli_fetch_assoc($logogo);
+
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($logogo_row["photo_data"]) . '" alt="logo">';
                 echo '<h2>' . htmlspecialchars($post["company_name"]) . '</h2>';
                 echo '<p>' . htmlspecialchars($post["job_name"]) . '</p>';
                 echo '<p class="category">Category: ' . htmlspecialchars($post["category"]) . '</p>';

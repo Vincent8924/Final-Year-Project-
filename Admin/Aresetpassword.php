@@ -1,6 +1,7 @@
 <?php 
     include("../Admin/Adataconnection.php");
-    session_start();
+    include("../Admin/Asession.php");
+    include("../Admin/Acheckreset.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,10 +63,12 @@
                 $result = mysqli_query($connect,"UPDATE admin SET admin_password='$hpw' WHERE admin_email='$email'");
                 ?>
                 <script>
-                    alert("Your email have been changed successfully.");
+                    alert("Your password have been changed successfully.");
                     window.location.href = "Aprofile.php";
                 </script>
+                
                 <?php
+                unset($_SESSION['startreset']);
             }
             
         }

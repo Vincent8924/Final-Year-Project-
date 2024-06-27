@@ -20,7 +20,7 @@
         <div>
             <button class="AdminAcc" onclick="displaybar()">
                 <?php
-                    $id = $_SESSION['id'];
+                    $id = $_SESSION['adminid'];
 
                     $result = mysqli_query($connect,"SELECT * FROM admin where admin_id='$id'");
                     if($result)
@@ -249,6 +249,7 @@
         if (isset($_POST['editPassword']))  
         {   
             session_start();
+            $_SESSION['startreset'] = 1;
             $otp = rand(100000, 999999);
 
             require "../Mail\phpmailer/PHPMailerAutoload.php";

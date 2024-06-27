@@ -1,6 +1,7 @@
 <?php 
     include("../Admin/Adataconnection.php");
-    session_start();
+    include("../Admin/Asession.php");
+    include("../Admin/Acheckreset.php");
 ?>
 <!DOCTYPE html>
 <html>

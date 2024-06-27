@@ -3,9 +3,9 @@ include("../Admin/Adataconnection.php");
 
 session_start();
 
-if (isset($_SESSION['id'])) 
+if (isset($_SESSION['adminid'])) 
 {
-    $id = $_SESSION['id'];
+    $id = $_SESSION['adminid'];
 
     $result = mysqli_query($connect, "SELECT * FROM admin WHERE admin_id = '$id'");
     

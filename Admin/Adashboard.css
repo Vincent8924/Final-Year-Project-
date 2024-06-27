@@ -106,17 +106,12 @@ aside nav ul li {
     border-bottom: 2px solid ;
 }
 aside nav ul li a#now{
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 20px;
 }
 aside nav ul li a {
-    color: #fff;
+    color: #6b6b6b;
     text-decoration: none;
-    text-shadow: 
-        -0.5px -0.5px 0 #000,  
-         0.5px -0.5px 0 #000,
-        -0.5px  0.5px 0 #000,
-         0.5px  0.5px 0 #000;
 }
 aside nav ul li a:hover
 {

@@ -106,11 +106,11 @@ aside nav ul li {
     border-bottom: 2px solid ;
 }
 aside nav ul li a#now{
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 20px;
 }
 aside nav ul li a {
-    color: #fff;
+    color: #6b6b6b;
     text-decoration: none;
 }
 aside nav ul li a:hover
@@ -294,8 +294,8 @@ footer {
     display: none;
     position: absolute;
     background-color: #f4f4f4;
-    top: 25vh;
-    left: 30%;
+    top: 15%;
+    left: 35%;
     border: solid #2e2d2d;
     border-radius: 5px;
     width: 80vh;
@@ -318,6 +318,7 @@ footer {
 
 .aform
 {
+    width: auto;
     margin: 20px;
 }
 .aform h2
@@ -332,14 +333,11 @@ footer {
     height: 150px;
 }
 
-.bbform
-{
-    width: 90%;
-    margin-left: 10vh;
-}
 
 .bform
 {
+    width: 90%;
+    margin: auto;
     display: flex;
     margin-bottom: 10px;
 }

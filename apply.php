@@ -76,10 +76,13 @@ if(isset($_GET['post_id'])) {
     if($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
         $companyName = $row['company_name'];
-        $logo = $row['logo'];
+        $poster = $row['poster_id'];
         $description = $row['description']; 
         $job = $row['job_name'];
     }
+
+    $logogo = mysqli_query($connect,"SELECT * FROM employer_profile WHERE profile_id = '$poster'");
+    $logogo_row = mysqli_fetch_assoc($logogo);
 }
 ?>
 <!DOCTYPE html>
@@ -119,7 +122,7 @@ if(isset($_GET['post_id'])) {
 </header>
 
 <div id="applyForm">
-<?php echo '<img src="data:image/jpeg;base64,' . base64_encode($row["logo"]) . '" alt="logo" style="height: 150px; margin-bottom: 20px;">'; ?>
+<?php echo '<img src="data:image/jpeg;base64,' . base64_encode($logogo_row["photo_data"]) . '" alt="logo" style="height: 150px; margin-bottom: 20px;">'; ?>
     <h2>Apply for <?php echo  $job  ?></h2>
     <p><?php echo $description ?></p>
     <form enctype="multipart/form-data" method="post">

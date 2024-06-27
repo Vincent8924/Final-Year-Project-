@@ -20,8 +20,7 @@ session_start();
            </script>
            <?php
         }else{
-           // mysqli_query($connect, "UPDATE login SET status = 1 WHERE email = '$email'");
-
+           
             
 
             ?>
@@ -39,23 +38,23 @@ session_start();
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
 
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
+   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Fonts -->
+  
    
 
     <link rel="stylesheet" type="text/css" href="reset.css">
 
     <link rel="icon" href="general_image/jobhelper_logo.png">
 
-    <!-- Bootstrap CSS -->
+  
     
 
     <title>Reset Password | Job Help</title>
@@ -70,7 +69,7 @@ session_start();
 
 
         <div class="jobseeker-site">
-            <a href="employer sign up.php">Employer site Site</a>
+            <a href="employer index.php">Employer Site</a>
         </div>
     </header>
 

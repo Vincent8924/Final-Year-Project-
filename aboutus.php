@@ -57,7 +57,7 @@ if (isset($_SESSION['id'])) {
    
 
     <div class="employer-site">
-        <a href="employer sign up.php">Employer Site</a>
+        <a href="employer index.php">Employer Site</a>
     </div>
 </header>
 

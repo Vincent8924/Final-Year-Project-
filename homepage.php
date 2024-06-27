@@ -63,7 +63,7 @@ if (!$result) {
 </div>
         </div>
         <div class="employer-site">
-            <a href="employer sign up.php">Employer Site</a>
+            <a href="employer index.php">Employer Site</a>
         </div>
     </header>
     <div id="searchContainer">

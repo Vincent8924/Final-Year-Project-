@@ -2,8 +2,6 @@
 
 session_start();
 
-//echo $_SESSION['email'];
-//for test
 ?>
 <html>
     <head>
@@ -23,7 +21,7 @@ session_start();
 
         
         <div class="jobseeker-site">
-            <a href="employer sign up.php">Employer Site</a>
+            <a href="employer index.php">Employer Site</a>
         </div>
     </header>
     

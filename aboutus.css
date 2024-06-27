@@ -1,13 +1,14 @@
 header {
-    background-color: white;
+    background-color: white; 
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .navigation {
     display: inline-block;
-    margin-left: 20px;
+    margin-right: 40%;
 }
 
 .navigation ul {
@@ -23,34 +24,9 @@ header {
 
 .navigation ul li a {
     text-decoration: none;
-    color: #333; 
-    font-weight: bold; 
-    transition: color 0.3s; 
-}
-
-.navigation ul li a:hover {
-    color: #555; 
-}
-.user-info {
-    display: inline-block;
-    padding: 8px 16px;
-    border: 2px solid green;
-    border-radius: 5px;
-    margin-left: 50px;
-}
-
-.user-info p {
-    margin: 0;
+    color: #333;
     font-weight: bold;
-    color: green;
-}
-
-.user-info:hover {
-    background-color: green;
-}
-
-.user-info:hover p {
-    color: white;
+    transition: color 0.3s;
 }
 
 
@@ -80,36 +56,34 @@ header {
 }
 
 .logo img {
-    height: 50px; 
+    height: 50px;
 }
 
-.navigation {
-    font-family: 'Times New Roman', Times, serif;
+.user-info {
     display: inline-block;
-    margin-right: 50%; 
+    padding: 8px 16px;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-left: 50px;
 }
 
-.navigation ul {
-    list-style-type: none;
-    padding: 0;
+.user-info p {
     margin: 0;
+    font-weight: bold;
+    color: green;
 }
 
-.navigation ul li {
-    display: inline-block;
-    margin-right: 20px;
+.user-info:hover {
+    background-color: green;
 }
 
-
-
-.employer-site {
-    display: inline-block;
+.user-info:hover p {
+    color: white;
 }
-
 body {
     padding: 0;
     margin: 0;
-    font-family: Arial, sans-serif; 
+    font-family: 'Times New Roman', Times, serif; 
     line-height: 1.6; 
 }
 

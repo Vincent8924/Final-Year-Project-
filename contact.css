@@ -1,6 +1,5 @@
-
 header {
-    background-color: white;
+    background-color: white; 
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -9,7 +8,7 @@ header {
 
 .navigation {
     display: inline-block;
-    margin-right: 50%;
+    margin-right: 40%;
 }
 
 .navigation ul {
@@ -29,58 +28,6 @@ header {
     font-weight: bold;
     transition: color 0.3s;
 }
-
-.navigation ul li a:hover {
-    color: #555;
-}
-
-.employer-site {
-    display: inline-block;
-    padding: 8px 16px;
-    border: 2px solid blue; 
-    border-radius: 5px; 
-}
-
-
-.employer-site a {
-    text-decoration: none;
-    color: rgb(12, 12, 191); 
-}
-
-
-.employer-site:hover {
-    background-color: blue; 
-}
-
-
-.employer-site:hover a {
-    color: white; 
-}
-
-.logo {
-    display: inline-block;
-}
-
-.logo img {
-    height: 50px; 
-}
-
-.navigation {
-    display: inline-block;
-    margin-left: 20px; 
-}
-
-.navigation ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.navigation ul li {
-    display: inline-block;
-    margin-right: 20px;
-}
-
 
 
 .employer-site {
@@ -104,6 +51,14 @@ header {
     color: white;
 }
 
+.logo {
+    display: inline-block;
+}
+
+.logo img {
+    height: 50px;
+}
+
 .user-info {
     display: inline-block;
     padding: 8px 16px;
@@ -125,7 +80,6 @@ header {
 .user-info:hover p {
     color: white;
 }
-
 
 
 body {

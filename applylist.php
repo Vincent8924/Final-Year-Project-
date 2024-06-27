@@ -37,33 +37,30 @@ $result = $connect->query($query);
 <body>
 
 <header>
-        <div class="logo">
+    <div class="logo">
         <img src="../Final-Year-Project-/general_image/jobhelper_logo.png" alt="JobStreet Logo">
-        </div>
-        <nav class="navigation">
-            <ul>
+    </div>
+    <nav class="navigation">
+        <ul>
             <li><a href="homepage.php?email=<?php echo urlencode($_SESSION['id']); ?>">Homepage</a></li>  
-                <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
-                <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
-                <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
-              
-            </ul>
-        </nav>
-        <div class="user-info" id="logoutBtn">
-    <?php
-    if (isset($firstName)) {
-        echo '<p>Welcome, ' . $firstName . '</p>';
-    }
-    ?>
-</div>
-        
-        <div class="employer-site">
-            <a href="employer index.php">Employer Site</a>
-        </div>
-    </header>
-    
+            <li><a href="jobsave.php?email=<?php echo urlencode($_SESSION['id']); ?>">Job Save</a></li>
+            <li><a href="profile.php?email=<?php echo urlencode($_SESSION['id']); ?>">Profile</a></li>
+            <li><a href="applylist.php?email=<?php echo urlencode($_SESSION['id']); ?>">Apply list</a></li>
+        </ul>
+    </nav>
+    <div class="user-info" id="logoutBtn">
+        <?php
+        if (isset($firstName)) {
+            echo '<p>Welcome, ' . $firstName . '</p>';
+        }
+        ?>
+    </div>
+    <div class="employer-site">
+        <a href="employer index.php">Employer Site</a>
+    </div>
+</header>
 
-<main style="display: flex; justify-content: center;margin-top:5%;">
+<main style="display: flex; justify-content: center; margin-top: 5%;">
     <table border="1" style="width: 80%; max-width: 1000px;">
         <thead>
             <tr>
@@ -75,53 +72,44 @@ $result = $connect->query($query);
         </thead>
         <tbody>
             <?php
-                $result = mysqli_query($connect, "SELECT * FROM applications where jobseeker_id=$id;");  
+                $result = mysqli_query($connect, "SELECT * FROM applications WHERE jobseeker_id='$id'");  
                 $i = 1;
-                while($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $postid = $row["post_id"];
+                    $status = $row["status"];
                     
-                        $Eid= $row["poster_id"];
-                        $postid = $row["post_id"];
-                        $status = $row["status"];
-                        if(isset($Eid))
-                        {
-                            $result = mysqli_query($connect, "SELECT * FROM employer where id=$Eid;");
-                            $row = mysqli_fetch_assoc($result);
-                            $Ename= $row["employer_name"];
+                    if (isset($postid)) {
+                        $postResult = mysqli_query($connect, "SELECT company_name, job_name FROM post WHERE post_id='$postid'");
+                        if ($postRow = mysqli_fetch_assoc($postResult)) {
+                            $Ename = $postRow["company_name"];
+                            $Jname = $postRow["job_name"];
                         }
+                    }
 
-                        if(isset($postid))
-                        {
-                            $result = mysqli_query($connect, "SELECT * FROM post where post_id=$postid;");
-                            $row = mysqli_fetch_assoc($result);
-                            $Jname= $row["job_name"];
-                        }
+                    echo "<tr>";
+                    echo "<td>$i</td>";
+                    echo "<td>$Ename</td>";
+                    echo "<td>$Jname</td>";
+                    echo "<td>$status</td>";
+                    echo "</tr>";
 
-                        echo "<tr>";
-                        echo "<td>$i</td>";
-                        echo "<td>$Ename</td>";
-                        echo "<td>$Jname</td>";
-                        echo "<td>$status</td>";
-                        echo "</tr>";
-
-                        $i++;
+                    $i++;
                 }
             ?>
         </tbody>
     </table>
 </main>
 
-
 <footer>
     <nav>
         <ul>
-        <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
-        <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact</a></li>
-         
+            <li><a href="aboutus.php?email=<?php echo urlencode($_SESSION['id']); ?>">About us</a></li>
+            <li><a href="contact.php?email=<?php echo urlencode($_SESSION['id']); ?>">Contact</a></li>
         </ul>
     </nav>
 </footer>
 <script>
-     document.getElementById('logoutBtn').addEventListener('click', function() {
+    document.getElementById('logoutBtn').addEventListener('click', function() {
         var confirmLogout = confirm('Are you sure you want to logout?');
         if (confirmLogout) {
             window.location.href = 'login.php';
@@ -130,4 +118,4 @@ $result = $connect->query($query);
 </script>
 
 </body>
-</html
+</html>

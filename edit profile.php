@@ -118,7 +118,7 @@ if (isset($_POST['save_profile'])) {
         ?>
     </div>
     <div class="employer-site">
-        <a href="employer sign up.php">Employer Site</a>
+        <a href="employer index.php">Employer Site</a>
     </div>
 </header>
 

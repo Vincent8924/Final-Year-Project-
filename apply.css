@@ -7,94 +7,87 @@ background-color: #f5f5f5;
 }
 
 header {
-background-color: white;
-padding: 10px 20px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white; 
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navigation {
-display: inline-block;
-margin-right: 55%;
+    display: inline-block;
+    margin-right: 40%;
 }
 
 .navigation ul {
-list-style-type: none;
-padding: 0;
-margin: 0;
-display: flex;
-gap: 20px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .navigation ul li {
-display: inline-block;
+    display: inline-block;
+    margin-right: 20px;
 }
 
 .navigation ul li a {
-text-decoration: none;
-color: #333;
-font-weight: bold;
-transition: color 0.3s;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-.navigation ul li a:hover {
-color: #555;
-}
 
 .employer-site {
-display: inline-block;
-padding: 8px 16px;
-border: 2px solid blue;
-border-radius: 5px;
-margin-left: 20px;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-left: 20px;
 }
 
 .employer-site a {
-text-decoration: none;
-color: blue;
-font-weight: bold;
+    text-decoration: none;
+    color: rgb(12, 12, 191);
 }
 
 .employer-site:hover {
-background-color: blue;
+    background-color: blue;
 }
 
 .employer-site:hover a {
-color: white;
+    color: white;
 }
 
 .logo {
-display: inline-block;
+    display: inline-block;
 }
 
 .logo img {
-height: 50px;
+    height: 50px;
 }
 
 .user-info {
-display: inline-block;
-padding: 8px 16px;
-border: 2px solid green;
-border-radius: 5px;
-margin-left: 80px;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-left: 50px;
 }
 
 .user-info p {
-margin: 0;
-font-weight: bold;
-color: green;
+    margin: 0;
+    font-weight: bold;
+    color: green;
 }
 
 .user-info:hover {
-background-color: green;
+    background-color: green;
 }
 
 .user-info:hover p {
-color: white;
+    color: white;
 }
-
 
 #applyForm {
 background-color: rgba(255, 255, 255, 0.8); /* White background with 80% opacity */

@@ -33,6 +33,7 @@ $result = $connect->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="applylist.css">
     <title>Your Page Title</title>
+
 </head>
 <body>
 
@@ -60,8 +61,8 @@ $result = $connect->query($query);
     </div>
 </header>
 
-<main style="display: flex; justify-content: center; margin-top: 5%;">
-    <table border="1" style="width: 80%; max-width: 1000px;">
+<main style="display: flex; justify-content: center;">
+    <table border="1">
         <thead>
             <tr>
                 <th>Apply No</th>

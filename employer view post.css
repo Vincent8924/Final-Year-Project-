@@ -189,3 +189,10 @@ footer nav ul li a:hover {
     margin-right: 40px;
     margin-top: 50px;
 }
+
+.formbox img
+{
+    height: 15%;
+    border-radius: 5px 5px 0 0;
+
+}

@@ -84,7 +84,7 @@
             {
                 ?>
                     <div id="profile_photo_space" >
-                        <img id="profile_photo" >
+                    <img id="profile_photo" src="img\default.png">
                     </div>
                 <?php
             }
@@ -196,16 +196,9 @@ if(isset($_POST['submit'])) {
     $location = $_POST['location'];
     $des = $_POST['description'];
 
-    
-    //$fileData = file_get_contents($fileTmpName);
- 
-    
-    //mysqli_query($connect, "DELETE FROM employer_profile WHERE employer_email = '$email'");
+    mysqli_query($connect,"UPDATE employer SET `employer_name` = '$name' WHERE id = '$id'");
 
 
-
-    //$stmt = mysqli_prepare($connect, "INSERT INTO employer_profile (employer_email,photo_name, photo_data) VALUES (?, ?, ?)");
-    //mysqli_stmt_bind_param($stmt, "sss", $email, $fileName, $fileData);
 
     if(empty($fileTmpName))
     {

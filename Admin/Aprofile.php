@@ -195,7 +195,7 @@
                     <div class="label">
                         <label >Email </label>
                     </div>
-                        <input type="text" value="<?php echo"$email"?>" name="email" required><br>
+                        <input type="email" value="<?php echo"$email"?>" name="email" required><br>
                 </div>
                 <br>
                 <input type="submit" value="Edit" class="formbtn" name="editemail">   

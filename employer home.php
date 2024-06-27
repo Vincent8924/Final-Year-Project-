@@ -58,7 +58,7 @@
 
    
 <br/><br/>
-<form class="formBox" name="addnewpost" method="post">
+<form class="formBox" name="addnewpost" method="post" >
     <h1>Lets make a new post now and fill in the information</h1>
     <br/>
     <h2>Job name?</h2>
@@ -110,8 +110,8 @@
                 <h2>Employment type?</h2>
                 <input type="text" class="field" placeholder="What employment type you need?" name="employment_type">
                 
-                <h2>Salary?</h2>
-                <input type="text" class="field" placeholder="How much salary you can pay for this job?" name="salary">
+                <h2>Salary? (RM)</h2>
+                <input type="number" class="field" placeholder="How much salary you can pay for this job?" name="salary">
 
                 <h2>Description?</h2>
                 <input type="text" class="field" placeholder="How about this job?" name="description">
@@ -137,12 +137,11 @@
 
             $result = mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
                 
-                if ($result) 
-                {
-                    $row = mysqli_fetch_assoc($result);
-                    $em_name = $row['employer_name'];
-                    mysqli_free_result($result);
-                }
+              
+            $row = mysqli_fetch_assoc($result);
+            $em_name = $row['employer_name'];
+            mysqli_free_result($result);
+                
         
 
            
@@ -153,8 +152,14 @@
                 </script>
                 <?php
             } 
-        
-           
+            elseif($salary < 0)
+            {
+                ?>
+                <script>
+                    alert("Please enter valid salary.");
+                </script>
+                <?php
+            }
             else
             {
             mysqli_query($connect, "INSERT INTO `drafts` (`poster_id`,`company_name`,job_name,`category`,`location`,employment_type,`description`,salary) 
@@ -195,5 +200,8 @@
             answer = confirm("Do you want to log out?");
             return answer;
         }
+
+
+
     </script>
 </html>

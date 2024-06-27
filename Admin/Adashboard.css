@@ -98,8 +98,8 @@ aside h2 {
 
 aside nav ul {
     list-style-type: none;
+    
 }
-
 aside nav ul li {
     padding: 10px 20px;
     border: #fff;
@@ -112,13 +112,21 @@ aside nav ul li a#now{
 aside nav ul li a {
     color: #fff;
     text-decoration: none;
+    text-shadow: 
+        -0.5px -0.5px 0 #000,  
+         0.5px -0.5px 0 #000,
+        -0.5px  0.5px 0 #000,
+         0.5px  0.5px 0 #000;
 }
 aside nav ul li a:hover
 {
     color: #56549b;
     font-size: 18px;
 }
-
+.menu
+{
+    text-shadow: #2e2d2d 2px;
+}
 
 main {
     flex: 1;

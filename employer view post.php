@@ -47,8 +47,26 @@
         $result = mysqli_query($connect, "SELECT * FROM post");
         while($row = mysqli_fetch_assoc($result))
         {
+            $poster = ($row["poster_id"]);
+   
+
+    $logogo = mysqli_query($connect,"SELECT * FROM employer_profile WHERE profile_id = '$poster'");
+    $logogo_row = mysqli_fetch_assoc($logogo);
+
+    
     ?>	
         <div class="formbox">
+            <?php 
+            if(!empty($logogo_row["photo_data"]))
+            {
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($logogo_row["photo_data"]) . '" alt="logo" ">';
+            }
+            else
+            {
+                echo '<img src="img\default.png">';
+            }
+            ?>
+        
             <h2>Post ID</h2>
             <?php echo $row['post_id']?>
 

@@ -6,7 +6,7 @@
     <title>Hiring With Us!</title>
     <link rel="stylesheet" href="employer index.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+    <link rel="icon" href="general_image/jobhelper_logo.png">
 </head>
 <body>
     <header class="header">
@@ -14,6 +14,7 @@
         <div>
             <a href="employer sign up.php">Register</a>
             <a href="employer login.php">Log In</a>
+            <a href="index.php">Jobseeker side</a>
         </div>
     </header>
     

@@ -161,7 +161,7 @@
     ?>
         <div class="formbox">
             <div class="details">
-                <p>Drafts ID: <?php echo $row['post_id']; ?></p>
+                <p>Post ID: <?php echo $row['post_id']; ?></p>
                 <p><strong>Job name:</strong> <?php echo $row['job_name']; ?></p>
                 <p><strong>Company/Employer name:</strong> <?php echo $row['company_name']; ?></p>
                 <p><strong>Job type:</strong> <?php echo $row['category']; ?></p>
@@ -215,6 +215,25 @@
         if (isset($_POST['post'])) {
             $pid = $_POST['pid'];
 
+            $posted = mysqli_query($connect, "SELECT * FROM post WHERE post_id = '$pid'");
+
+            if(mysqli_num_rows($posted) > 0)
+            {
+                ?>
+                <script>
+                    alert("This post already existt!");
+                    window.location = "employer drafts.php";
+    
+                </script>
+    
+                <?php
+            }
+            else
+            {
+            
+            
+
+
             $result = mysqli_query($connect, "SELECT * FROM employer WHERE id = '$id'");
 
             if ($result) {
@@ -245,13 +264,17 @@
                 mysqli_query($connect, "UPDATE employer SET balance = '$balance' WHERE id = '$id'");
                 mysqli_query($connect, "INSERT INTO post(`post_id`,`poster_id`,job_name,`company_name`,`category`,`location`,employment_type,`description`,salary)
                 SELECT `draft_id`,`poster_id`,job_name,`company_name`,`category`,`location`,employment_type,`description`,salary FROM drafts WHERE draft_id = '$pid'");
-            }
+            
+                    
+
+        
+        }
     ?>
         <script>
             window.location = "employer drafts.php";
         </script>
     <?php
-        }
+        }}
     ?>
 
     <script>

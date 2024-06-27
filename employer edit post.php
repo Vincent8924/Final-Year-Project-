@@ -46,7 +46,7 @@
   
     <br/><br/> <br/><br/> <br/><br/>
 
-    <h1 class="h1_center">Edit your post</h1>
+    <h1 class="h1_center">Edit your draft</h1>
         <br/><br/>
         <form class="formBox" name="addnewpost" method="post">
             

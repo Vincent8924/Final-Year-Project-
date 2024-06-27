@@ -246,6 +246,7 @@
         <form method="post" onsubmit="return validateForm()">
 
             <div class="formBox">
+                <!--
                 <div id="slideshow" class="container">
                     <h3>Card Accepted:</h3>
                     <br/>
@@ -255,16 +256,29 @@
                         <img src="img\Paypal.png">
                         <img src="img\visa.png">          
                     </div>
+
                 </div>
+                -->
                 <br/>
+                <label for="bank">Bank</label>
                 <select class="select" name="method" required>
                     <option value="" selected hidden>Select Your Bank </option>
-                    <option value="Public bank">Public bank</option> 
-                    <option value="CIMB">CIMB</option> 
-                    <option value="Ambank">Ambank</option> 
                     <option value="Maybank">Maybank</option> 
-                 
-                    
+                    <option value="Affin Bank">Affin Bank</option> 
+                    <option value="Alliance Bank">Alliance Bank</option> 
+                    <option value="Ambank">Ambank</option> 
+                    <option value="Bank Islam">Bank Islam</option> 
+                    <option value="Bank Rakyat">Bank Rakyat</option> 
+                    <option value="Bank Muamalat">Bank Muamalat</option> 
+                    <option value="BSN">BSN</option> 
+                    <option value="CIMB">CIMB</option> 
+                    <option value="Hong Leong Bank">Hong Leong Bank</option> 
+                    <option value="HSBC Bank">HSBC Bank</option> 
+                    <option value="KFH">KFH</option> 
+                    <option value="OCBC Bank">OCBC Bank</option> 
+                    <option value="Public bank">Public bank</option> 
+                    <option value="RHB Bank">RHB Bank</option> 
+                    <option value="UOB Bank">UOB Bank</option>                     
                 </select>
                 
                 <div class="row50">
@@ -277,7 +291,7 @@
 
                 <div class="inputBox">
                     <label for="card_number">Card Number</label>
-                    <input type="text" name="card_number" placeholder="Enter your Card 16 Number">
+                    <input type="number" name="card_number" placeholder="Enter your Card 16 Number">
                     <span class="text-danger"><?php if(!empty($card_number_error)){echo $card_number_error;}?></span>
                 </div>
 

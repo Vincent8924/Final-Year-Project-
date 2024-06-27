@@ -119,7 +119,7 @@
         `package_id` int(6) NOT NULL,
         `bank` varchar(100) DEFAULT NULL,
         `card_name` varchar(200) DEFAULT NULL,
-        `card_number` int(11) DEFAULT NULL,
+        `card_number` varchar(16) NULL,
         `card_expire_year` int(11) DEFAULT NULL,
         `card_expire_month` int(11) DEFAULT NULL,
         `card_cvv` int(11) DEFAULT NULL
@@ -149,9 +149,9 @@
    );
 ---------------------------------------------------------------------------------------------------
 INSERT INTO `sale` (`sale_id`, `purchase_amount`, `purchase_time`, `payment_status`, `employer_id`, `package_id`, `bank`, `card_name`, `card_number`, `card_expire_year`, `card_expire_month`, `card_cvv`) VALUES
-(300002, 49.99, '2024-05-28 17:03:20', 'Successful', 1000002, 200001, 'CIMB', 'Vincent', 2147483647, 2024, 6, 123),
-(300003, 49.99, '2024-05-28 17:05:38', 'Successful', 1000002, 200001, 'MASTER CARD', 'Vincent', 2147483647, 2, 2, 213),
-(300004, 129.99, '2024-05-28 17:40:07', 'Successful', 1000002, 200002, 'PAYPAL', 'Vincent', 2147483647, 2, 2, 133);
+(300002, 49.99, '2024-05-28 17:03:20', 'Successful', 1000002, 200001, 'CIMB', 'Vincent',2147483647123568, 2024, 6, 123),
+(300003, 49.99, '2024-05-28 17:05:38', 'Successful', 1000002, 200001, 'MASTER CARD', 'Vincent',1234567887654321, 2, 2, 213),
+(300004, 129.99, '2024-05-28 17:40:07', 'Successful', 1000002, 200002, 'Ambank', 'Vincent',1234567812345678, 2, 2, 133);
 
 
   INSERT INTO admin(admin_id,admin_fname, admin_lname, admin_email,admin_password,superadmin)    

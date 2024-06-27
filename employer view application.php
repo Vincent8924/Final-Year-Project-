@@ -177,7 +177,7 @@ if(isset($_POST['accept']))
 
     ?>
     <script>
-        alert("Reject successfully!");
+        alert("Accept successfully!");
         window.location = "employer view application.php";
     </script>
 
@@ -217,7 +217,7 @@ if(isset($_POST['accept']))
 
 
 <?php
-$all = mysqli_query($connect, "SELECT DISTINCT post_id FROM `applications` WHERE poster_id = '$id'");
+$all = mysqli_query($connect, "SELECT DISTINCT post_id FROM `applications` WHERE `poster_id` = '$id' AND `status` != 'Failed'");
 
         if(mysqli_num_rows($all) > 0)
         {
@@ -245,16 +245,31 @@ while ($row = mysqli_fetch_assoc($all)) {
     $post_id = $row['post_id'];
 
     $job = mysqli_query($connect, "SELECT * FROM `post` WHERE post_id = '$post_id'");
-    if ($job) {
-        $job_row = mysqli_fetch_assoc($job);
-        $jname = $job_row['job_name'];
-    }
+   
+        if ($job) {
+            $job_row = mysqli_fetch_assoc($job);
+            if(!empty($job_row['job_name']))
+                {
+                    $jname = $job_row['job_name'];
+                }
+            
+        }
 
-    // 用于跟踪已经显示过的 jobseeker_id
-    $displayed_candidates = array();
+        // 用于跟踪已经显示过的 jobseeker_id
+        $displayed_candidates = array();
+        $displayed_candidates_accept = array();
+
+        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' AND `status` = 'Pending'");
+        
     ?>
-
+    
     <h3 class="mid_content">Your post <?php echo $post_id ?></h3>
+
+    <?php
+        if(mysqli_num_rows($result) != 0)
+        {
+
+    ?>
 
     <h2 class="mid_content">The candidate list apply for job of <?php echo $jname ?></h2>
 
@@ -273,7 +288,8 @@ while ($row = mysqli_fetch_assoc($all)) {
     </tr>
 
     <?php
-        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Pending'");
+        }
+        
 
 
         while ($row = mysqli_fetch_assoc($result))  {
@@ -298,22 +314,117 @@ while ($row = mysqli_fetch_assoc($all)) {
 
             if ($candidate) {
                 $candidate_row = mysqli_fetch_assoc($candidate); 
-                $ps = $candidate_row['PersonalSummary'];
-                $skill = $candidate_row['Skills'];
-                $ex = $candidate_row['work_experience'];
-                $education = $candidate_row['Education'];
-                $language = $candidate_row['language'];
+                if(!empty($candidate_row['PersonalSummary']))
+                {
+                    $ps = $candidate_row['PersonalSummary'];
+                }
+                if(!empty($candidate_row['Skills']))
+                {
+                    $skill = $candidate_row['Skills'];
+                }
+                if(!empty($candidate_row['work_experience']))
+                {
+                    $ex = $candidate_row['work_experience'];
+                }
+                if(!empty($candidate_row['Education']))
+                {
+                    $education = $candidate_row['Education'];
+                }
+                if(!empty($candidate_row['language']))
+                {
+                    $language = $candidate_row['language'];
+                }
+                
 
             }
             ?>
             <tr>
-                <td><?php echo $name ?></td>
-                <td><?php echo $ps ?></td>
-                <td><?php echo $skill ?></td>
-                <td><?php echo $ex ?></td>
-                <td><?php echo $education ?></td>
-                <td><?php echo $language ?></td>
-                <td><?php echo $status ?></td>
+                <td>
+                    <?php 
+                        if (!empty($name)) 
+                        { 
+                            echo $name; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($ps)) 
+                        { 
+                            echo $ps; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($skill)) 
+                        { 
+                            echo $skill; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($ex)) 
+                        { 
+                            echo $ex; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($education)) 
+                        { 
+                            echo $education; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($language)) 
+                        { 
+                            echo $language; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($status)) 
+                        { 
+                            echo $status; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+            
+
                 <td>
                     <form method="post">
                         <button type="submit" name="view_resume">
@@ -365,24 +476,20 @@ while ($row = mysqli_fetch_assoc($all)) {
             // 将已经显示过的 jobseeker_id 添加到数组中
             $displayed_candidates[] = $candidate_id;
         }
+
+        $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Successful'");
+        if(mysqli_num_rows($result) != 0)
+        {
+
         ?>
 
     </table>
 
         <!--这里开始是看accept的-->
-
-        <?php
-            $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Successful'");
-            while ($row = mysqli_fetch_assoc($result)) {
-                $candidate_id = $row['jobseeker_id'];
-                $app_id = $row['id'];
-                $status = $row['status'];
-        ?>
         
-    
-    <h2 class="mid_content">The candidate list you accept to apply for job of <?php echo $jname ?></h2>
-
-    <table>
+        <h2 class="mid_content">The candidate list you accept to apply for job of <?php if(!empty($jname)){ echo $jname; } ?></h2>
+        
+        <table>
         <tr>
             <th>Candidate Name</th>
             <th>Personal Summary</th>
@@ -394,43 +501,147 @@ while ($row = mysqli_fetch_assoc($all)) {
             <th>Resume</th>
             <th>Cover Letter</th>
         </tr>
-
-        <?php
         
-            
+        <?php
+        }
+            $result = mysqli_query($connect, "SELECT * FROM `applications` WHERE post_id = '$post_id' and `status` = 'Successful'");
+            while ($row = mysqli_fetch_assoc($result)) {
+                $accept_candidate_id = $row['jobseeker_id'];
+                $app_id = $row['id'];
+                $status = $row['status'];
+     
 
             // 如果已经显示过这个人，就会跳过
-            if (in_array($candidate_id, $displayed_candidates)) {
+            if (in_array($accept_candidate_id, $displayed_candidates_accept)) {
                 continue;
             }
+            
 
-            $jobseeker = mysqli_query($connect, "SELECT * FROM `jobseeker` WHERE jobseeker_id = '$candidate_id'");
+            $jobseeker = mysqli_query($connect, "SELECT * FROM `jobseeker` WHERE jobseeker_id = '$accept_candidate_id'");
 
             if ($jobseeker) {
                 $jobseeker_row = mysqli_fetch_assoc($jobseeker);
-                $name = $jobseeker_row['jobseeker_firstname'] . " " . $jobseeker_row['jobseeker_lastname'];
+                
+                if(!empty($jobseeker_row['jobseeker_firstname']) && !empty($jobseeker_row['jobseeker_lastname']))
+                {
+                    $name = $jobseeker_row['jobseeker_firstname'] . " " . $jobseeker_row['jobseeker_lastname'];
+                }
             }
 
-            $candidate = mysqli_query($connect, "SELECT * FROM `jobseekerprofile` WHERE jobseeker_id = '$candidate_id'");
+            $candidate = mysqli_query($connect, "SELECT * FROM `jobseekerprofile` WHERE jobseeker_id = '$accept_candidate_id'");
 
             if ($candidate) {
                 $candidate_row = mysqli_fetch_assoc($candidate); 
-                $ps = $candidate_row['PersonalSummary'];
-                $skill = $candidate_row['Skills'];
-                $ex = $candidate_row['work_experience'];
-                $education = $candidate_row['Education'];
-                $language = $candidate_row['language'];
+                if(!empty($candidate_row['PersonalSummary']))
+                {
+                    $ps = $candidate_row['PersonalSummary'];
+                }
+                if(!empty($candidate_row['Skills']))
+                {
+                    $skill = $candidate_row['Skills'];
+                }
+                if(!empty($candidate_row['work_experience']))
+                {
+                    $ex = $candidate_row['work_experience'];
+                }
+                if(!empty($candidate_row['Education']))
+                {
+                    $education = $candidate_row['Education'];
+                }
+                if(!empty($candidate_row['language']))
+                {
+                    $language = $candidate_row['language'];
+                }
+
 
             }
             ?>
             <tr>
-                <td><?php echo $name ?></td>
-                <td><?php echo $ps ?></td>
-                <td><?php echo $skill ?></td>
-                <td><?php echo $ex ?></td>
-                <td><?php echo $education ?></td>
-                <td><?php echo $language ?></td>
-                <td><?php echo $status ?></td>
+            <td>
+                    <?php 
+                        if (!empty($name)) 
+                        { 
+                            echo $name; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($ps)) 
+                        { 
+                            echo $ps; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($skill)) 
+                        { 
+                            echo $skill; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($ex)) 
+                        { 
+                            echo $ex; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($education)) 
+                        { 
+                            echo $education; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($language)) 
+                        { 
+                            echo $language; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                        if (!empty($status)) 
+                        { 
+                            echo $status; 
+                        }
+                        else
+                        {
+                            echo "None";
+                        }
+                    ?>
+                </td>
+
                 <td>
                     <form method="post">
                         <button type="submit" name="view_resume">
@@ -466,7 +677,8 @@ while ($row = mysqli_fetch_assoc($all)) {
             </tr>
             <?php
             // 将已经显示过的 jobseeker_id 添加到数组中
-            $displayed_candidates[] = $candidate_id;
+            $displayed_candidates_accept[] = $accept_candidate_id;
+             
         }
         ?>
 

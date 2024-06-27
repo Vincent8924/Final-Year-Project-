@@ -17,7 +17,7 @@
 
         
         <div class="jobseeker-site">
-            <a href="login.php">Jobseeker Site</a>
+            <a href="index.php">Jobseeker Site</a>
         </div>
     </header>
     
@@ -164,14 +164,7 @@
 
 
     </script>
-    <footer>
-        <nav>
-            <ul>
-                <li><a href="employer about us.php">About Us</a></li>
-                <li><a href="employer contact us.php">Contact Us</a></li>
-            </ul>
-        </nav>
-    </footer>
+
 </body>
     
 
